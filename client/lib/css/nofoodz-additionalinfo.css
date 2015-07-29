@@ -1,0 +1,50 @@
+div.nofoodz-additionalinfo {
+	margin-top: 20px;
+}
+
+div.nofoodz-additionalinfo .info-header {
+	color: #800000;
+	font-weight: 700;
+	font-size: 18px;
+}
+
+div.nofoodz-additionalinfo .display-section {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+div.nofoodz-additionalinfo .btn.edit {
+	background: #255DAF;
+	color: #FFFFFF;
+	text-shadow: initial;
+	opacity: .8;
+	font-weight: normal;
+	font-size: 14px;
+	float: right;
+}
+
+div.nofoodz-additionalinfo .btn.edit:hover {
+	opacity: 1;
+}
+
+div.nofoodz-additionalinfo .btn span.glyphicon {
+	margin-right: 3px;
+}
+
+div.nofoodz-additionalinfo .save-section {
+	text-align: right;
+}
+
+div.nofoodz-additionalinfo .save-section .alert {
+	text-align: left;
+	padding: 5px 15px;
+}
+
+div.nofoodz-additionalinfo button:first-child {
+	margin-right: 5px;
+}
+
+div.nofoodz-additionalinfo ul.column {
+	list-style: none;
+}

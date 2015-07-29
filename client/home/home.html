@@ -1,0 +1,29 @@
+<template name="home">
+	<div name="homeDiv" id="homeDiv">
+		<h1>NoFoodz</h1>
+		<div>
+			A simple guide to a world of food
+		</div>
+		<div>
+			<div id="search-btn-group" class="input-group">
+				<div id="home-searchtype" class="input-group-btn">
+	    		<button  class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+	    			<span class="home-searchval">Food</span>
+	    			<span class="caret"></span>
+	    		</button>
+	    		<ul class="dropdown-menu" role="menu">
+	    			<li><a>Food</a></li>
+	    			<li><a>Brand</a></li>
+	    			<li><a>People</a></li>
+	    			<!--<li><a>Cuisine</a></li>-->
+	    		</ul>
+	    	</div>
+	    	<input name="home-search" id="home-search" type="text" placeholder="Start searching for food" class="form-control">
+	    	<span class="input-group-btn">
+	    		<button id="home-searchgo" class="btn btn-default glyphicon glyphicon-search"></button>
+				</span>
+			</div>
+		</div>
+	</div>
+	{{> search}}
+</template>

@@ -1,0 +1,77 @@
+<template name="foods">
+
+	<div class="side-section left hidden-xs hidden-sm" >
+	
+		<div id="foods-nav" class="nofoods-pagenav floating position">
+			<ul class="nav nav-list">
+				<li class="nav-header food-name nofoodz-header">Name</li>
+				<li class=""><a href="#brand-foods">Top</a><span class="glyphicon glyphicon-chevron-left"></span></li>
+				<li class=""><a href="#brand-foods">Images</a></li>
+				<li class=""><a href="#brand-foods">Comments</a></li>
+    		<li class="nav-header">Options</li>
+    		{{#if currentUser}}
+					<li class=""><a class="button report" item-id="{{id}}" item-type="{{type}}">Report</a></li>
+				{{/if}}
+    	</ul>
+		</div>	
+	
+	</div>
+
+	<div class="content middle" >
+		<h3 class="pagetitle" >{{type}}</h3>
+		<div class="contentbody">
+			<span class="food-name name"></span><span class="wishstar" title="Click to add to wishlist"></span>
+			<div class="image">Reserved for Image</div>
+			<span class="brand"></span>		
+			<label class="inputlabel" >Rating</label>
+				<div class="ratingDiv">
+				</div>
+			<span class="totalRating"></span><span class="ratingdivider">(</span><span class="totalCount"></span><span class="ratingdivider">)</span>
+
+			<label class="foods-locationlabel" >Locations</label>
+			<span class="foods-location">None Available</span>
+
+			<div id="infoDiv">
+					
+			</div>			
+			
+		</div>
+	
+		<div class="images" >
+		 	<h3 class="pagetitle" >Images</h3>
+			<div class="contentbody">
+				<div class="upload" >
+					<label for="foods-fileupload" class="uploadlabel">Choose a picture to upload...</label>
+					<input id="foods-fileupload" type="file" style="display: none;" />
+				</div>
+				<div id="blueimp-gallery" class="blueimp-gallery">
+	    		<div class="slides"></div>
+	    		<h3 class="title"></h3>
+	    		<a class="prev">‹</a>
+	    		<a class="next">›</a>
+	    		<a class="close">×</a>
+	    		<a class="play-pause"></a>
+	    		<ol class="indicator"></ol>
+				</div>
+				<img src="/backgrounds/newyork_background.png" alt="img" class="mainimage">
+				<div id="gallerylinks" style="display: none;">
+				</div>
+				<div class="imagesbutton show">
+					<span>Show More Images</span>
+				</div>
+			</div>
+		</div>
+		<!-- Comments may be added at a later date.
+		<div class="comments" >
+		 	<h3 class="pagetitle" >Comments</h3>
+			<div class="contentbody">
+				Some comments here
+			</div>
+		</div>
+		-->
+		
+	</div>
+	
+	<div class="side-section right hidden-xs hidden-sm" ></div>
+	
+</template>

@@ -1,0 +1,55 @@
+#homeDiv {
+	background: #FFF;
+	padding-top: 125px;
+	padding-bottom: 20px;
+	width: 100%;
+	text-align: center;
+}
+
+#homeDiv h1 {
+	color: #DAA520;
+	font-weight: 700;
+}
+
+#homeDiv>div {
+	padding-top: 25px;
+	text-align: center;
+}
+
+#home-searchtype {
+	text-align: left;
+}
+
+#home-searchtype>a {
+	text-align: left;
+}
+
+#home-searchtype ul {
+	width: auto;
+}
+
+#home-searchtype ul li a {
+	cursor: pointer;
+}
+
+#home-searchtype span.home-searchval {
+	width: 50px;
+	display: inline-block;
+}
+
+#search-btn-group {
+	max-width:550px;
+	margin: auto;
+}
+
+#home-searchgo {
+	margin-top: -1px;
+}
+
+#searchResults {
+	width: 100%;
+	margin: 0 auto;
+ 	overflow: hidden;
+ 	background: #FFF;
+}
+
