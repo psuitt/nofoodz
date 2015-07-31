@@ -1,66 +1,74 @@
 <template name="mainLayout">
-	<head>
-		<title>NoFoodz: A Food Rating</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
-		<meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk" />
-	</head>
-	<nav id="menu" class="navbar navbar-default" role="navigation">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed hidden-md hidden-lg" data-toggle="collapse" data-target="#menu-navbar">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand logo" href="/">NoFoodz</a>
-	    </div>
-			<div class="collapse navbar-collapse" id="menu-navbar">
-	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="/explore" >Explore</a></li>
-	        {{#if currentUser}}
-	        <li><a href='/myfoods'>MyFoodz</a></li>
-	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add <span class="caret"></span></a>
-	          <ul class="dropdown-menu" role="menu">
-	          	<li><a href='/food/add'>Add</a></li>
-	            <li><a href='/food/addrecipe'>Add a Recipe</a></li>
-	          </ul>
-	        </li>
-	        {{/if}}
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li class="text-center"><div class="searchbar"><input type="text" /></div></li>
-	        {{#if currentUser}}
-	        <li>
-						<span id="notifications" class="glyphicon glyphicon-flag"></span>
-						<ul id="notificationsList">
-						</ul>
-					</li>
-					{{/if}}
-					<li>
-						<div id="loginDiv">
-							<ul id="loginList">
-							{{> loginButtons align="right"}}
-							</ul>
-						</div>					
-					</li>
-	      </ul>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-	<div id="header">
-	</div>
-	<div id="subMenu">
-		<div id="subMenuContent"></div>
-	</div>
-	<div id="mainContent" class="container-fluid default">
-  	{{> yield}}
-	</div>
-	{{> report}}
-	<footer> 
-		{{> yield region='footer'}}
-	</footer>
+    <head>
+        <title>NoFoodz: A Food Rating</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
+        <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+        <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
+        <meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk"/>
+    </head>
+    <nav id="menu" class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed hidden-md hidden-lg" data-toggle="collapse"
+                        data-target="#menu-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" href="/">NoFoodz | alpha</a>
+            </div>
+            <div class="collapse navbar-collapse" id="menu-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/explore">Explore</a></li>
+                    {{#if currentUser}}
+                        <li><a href='/myfoods'>MyFoodz</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href='/food/add'>Add</a></li>
+                                <li><a href='/food/addrecipe'>Add a Recipe</a></li>
+                            </ul>
+                        </li>
+                    {{/if}}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="text-center">
+                        <div class="searchbar"><input type="text"/></div>
+                    </li>
+                    {{#if currentUser}}
+                        <li>
+                            <span id="notifications" class="glyphicon glyphicon-flag"></span>
+                            <ul id="notificationsList">
+                            </ul>
+                        </li>
+                    {{/if}}
+                    <li>
+                        <div id="loginDiv"><!--
+                         --><button id="menu-login-button">Login</button>
+                            {{> login }}
+                            {{> register }}
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div id="header">
+    </div>
+    <div id="subMenu">
+        <div id="subMenuContent"></div>
+    </div>
+    <div id="mainContent" class="container-fluid default">
+        {{> yield}}
+    </div>
+    {{> report}}
+    <footer>
+        {{> yield region='footer'}}
+    </footer>
 </template>

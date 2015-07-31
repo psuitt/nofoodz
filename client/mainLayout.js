@@ -19,8 +19,8 @@ setPath = function () {
 
 Template.mainLayout.events({
 	'click #login-buttons-password'	: function(event, templ) {
-			var email = t.find('#login-email').value, 
-					password = t.find('#login-password').value;
+			var email = templ.find('#login-email').value,
+				password = templ.find('#login-password').value;
 			
 			Meteor.loginWithPassword(
 				email.toLowerCase(), 

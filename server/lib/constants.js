@@ -25,7 +25,8 @@ NoFoodz.consts.filters = {
 };
 
 NoFoodz.consts.admin = {
-	SUPER : 'S'
+	SUPER : 'S',
+	MOD : 'M'
 };
 	
 NoFoodz.consts.db = {

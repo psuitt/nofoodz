@@ -5,7 +5,8 @@ html {
 }
 
 body {
-	font-family: 'Lato', helvetica, sans-serif;
+    /*font-family: 'Lato', helvetica, sans-serif;*/
+	font-family: 'Varela Round', sans-serif;
 	min-height:100%;
 	height: auto;
 	margin: 0;
@@ -170,8 +171,6 @@ div.alertmessage {
 #mainContent {
 	min-height: 600px;
 	height: auto;
-	background: rgb(245,245,245);/* rgb(240,248,255); Alice Blue */
-	/*background-image: url('/backgrounds/denver_colorado.png');*/
 	background-repeat: repeat-y;
 	background-attachment: fixed;
 	background-position: center center;
@@ -179,11 +178,6 @@ div.alertmessage {
 	text-align: center;
 	overflow: hidden;
 }
-
-#mainContent.white {
-	background: #FFF;
-}
-
 div.content {
 	display: inline-block;
 	background: #FFF;
@@ -285,9 +279,9 @@ footer {
 }
 
 /* MENU */
-#menu .logo {
+.logo {
 	font-weight: bold;
-	color: #DAA520;
+	color: #4CAF50 !important;
 }
 
 span.logo a,
@@ -303,10 +297,20 @@ span.logo a:hover {
 	width: 100%;
 	padding: 0;
 	margin: 0;
-	background: rgb(245,245,245);
+	background: rgba(255, 255, 255, .9);
 	overflow: visible;
 	z-index: 500;
-	border-radius: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+#menu .navbar-header button.navbar-toggle {
+    border-color: #424242;
 }
 
 #menu .navbar-header button.navbar-toggle,
@@ -315,16 +319,30 @@ span.logo a:hover {
 }
 
 #menu .navbar-header button.navbar-toggle span.icon-bar {
-	background: #255DAF;
+	background: #4CAF50;
 }
 
 #menu .nav > li > a {
 	padding: 15px;
-	color: #255DAF;
+	color: #E91E63;
+    font-size: 16px;
+    font-weight: bold;
+    font-variant: small-caps;
+    background-color: white;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#menu .nav > li.active > a {
+    color: #FFFFFF;
+    background-color: #E91E63;
 }
 
 #menu-navbar {
 	overflow: visible;
+    border: 0;
 }
 
 #menu-navbar li.text-center {
@@ -332,64 +350,24 @@ span.logo a:hover {
 }
 
 #loginDiv {
-	margin-left: 10px;
+    height: 50px;
 }
 
-#loginDiv>div {
-	display: inline-block;
+#menu-login-button {
+    color: #4CAF50;
+    background: #FFFFFF;
+    padding: 5px 16px;
+    border: 2px solid #4CAF50;
+    margin: -21px 0 auto 20px;
+    vertical-align: middle;
+    font-weight: bold;
+    position: relative;
+    top: 50%;
 }
 
-#loginDiv .login-link-text {
-	text-decoration:none;
-	font-weight: bold;
-}
-
-#menu-logindiv {
-	vertical-align: top;
-	overflow: visible;
-	height: auto;
-}
-
-#menu-navbar.collapse.in #login-dropdown-list {
-	top: 40px;
-	left: 0;
-	right: auto;
-}
-
-#loginList {
-	display:inline-block;
-	display: table-cell;
-	list-style: none;
-	height:45px;
-	margin: 0;
-  vertical-align: middle;
-}
-
-#loginList li {
-	height: 45px;
-	line-height: 45px;
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
-#loginList li.dropdown>a {
-	font-weight: 700;
-}
-
-#loginList li.dropdown.open,
-#loginList li.dropdown.open>a {
-	color: #FFFFFF;
-	background-color: #255DAF;
-}
-
-#loginList li.dropdown>a:hover {
-	text-decoration: none;
-}
-
-#loginList .dropdown-menu {
-	left: auto;
-	top: 42px;
-	right: 0;
+#menu-login-button:hover {
+    color: #FFFFFF;
+    background: #4CAF50;
 }
 
 #notifications {
@@ -504,16 +482,17 @@ div.searchbar button {
 	border-radius: 0;
 	border: 0;
 	padding: 4px 8px;
-	background: #DAA520;
+    color: #424242;
+	background: white;
 }
 
 div.searchbar button.go {
-	color:	#FFFFFF;
+	color:	#424242;
 }
 
 div.searchbar button:hover {
-	background: #255DAF;
 	color: white;
+    background: #424242;
 }
 
 /* Header */

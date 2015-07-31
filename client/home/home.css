@@ -1,5 +1,4 @@
 #homeDiv {
-	background: #FFF;
 	padding-top: 125px;
 	padding-bottom: 20px;
 	width: 100%;
@@ -7,8 +6,11 @@
 }
 
 #homeDiv h1 {
-	color: #DAA520;
 	font-weight: 700;
+}
+
+#home-introduction {
+	color: #FFFFFF;
 }
 
 #homeDiv>div {
