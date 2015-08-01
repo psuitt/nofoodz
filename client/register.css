@@ -1,4 +1,18 @@
-#register-form {
+#register_form {
+    display: none;
     position: fixed;
-    top: 50%;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 25px 75px 50px 50px;
+    background: #FFFFFF;
+    -webkit-box-shadow: -5px 0 5px #424242;
+    -moz-box-shadow: -5px 0 5px #424242;
+    box-shadow: 1px 0 5px #424242;
+    display: none;
+}
+
+#register_form h3 {
+    color: #E91E63;
+    margin-bottom: 50px;
 }

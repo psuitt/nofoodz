@@ -168,6 +168,25 @@ div.alertmessage {
 	z-index: 100;
 }
 
+button.simple {
+    color: #424242;
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+button.simple:hover {
+    color: #E91E63;
+    border: 0;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+/* Page construction */
+
 #mainContent {
 	min-height: 600px;
 	height: auto;
@@ -280,8 +299,9 @@ footer {
 
 /* MENU */
 .logo {
+    font-family: 'VT323';
 	font-weight: bold;
-	color: #4CAF50 !important;
+    color: #E91E63 !important;
 }
 
 span.logo a,
@@ -309,6 +329,10 @@ span.logo a:hover {
     border-radius: 0;
 }
 
+#menu .navbar-brand {
+    letter-spacing: 5px;
+}
+
 #menu .navbar-header button.navbar-toggle {
     border-color: #424242;
 }
@@ -328,7 +352,6 @@ span.logo a:hover {
     font-size: 16px;
     font-weight: bold;
     font-variant: small-caps;
-    background-color: white;
     background-image: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -336,8 +359,8 @@ span.logo a:hover {
 }
 
 #menu .nav > li.active > a {
-    color: #FFFFFF;
-    background-color: #E91E63;
+    padding-bottom: 8px;
+    border-bottom: 3px solid;
 }
 
 #menu-navbar {
@@ -353,11 +376,7 @@ span.logo a:hover {
     height: 50px;
 }
 
-#menu-login-button {
-    color: #4CAF50;
-    background: #FFFFFF;
-    padding: 5px 16px;
-    border: 2px solid #4CAF50;
+#menu_login_button {
     margin: -21px 0 auto 20px;
     vertical-align: middle;
     font-weight: bold;
@@ -365,7 +384,14 @@ span.logo a:hover {
     top: 50%;
 }
 
-#menu-login-button:hover {
+.green-button {
+    color: #4CAF50;
+    background: #FFFFFF;
+    padding: 5px 16px;
+    border: 2px solid #4CAF50;
+}
+
+.green-button:hover {
     color: #FFFFFF;
     background: #4CAF50;
 }

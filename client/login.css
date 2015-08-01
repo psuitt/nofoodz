@@ -1,4 +1,34 @@
-#login-form {
+#login_form {
     position: fixed;
-    top: 50%;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 25px 75px 50px 50px;
+    background: #FFFFFF;
+    -webkit-box-shadow: -5px 0 5px #424242;
+    -moz-box-shadow: -5px 0 5px #424242;
+    box-shadow: 1px 0 5px #424242;
+    display: none;
+}
+
+#login_close {
+    float: right;
+    margin-right: -50px
+}
+
+#login_form h3 {
+    color: #E91E63;
+    margin-bottom: 50px;
+}
+
+#login_email {
+    margin-bottom: 20px;
+}
+
+#login_button {
+    margin-top: 50px;
+}
+
+#login_create_new_user {
+    margin-top: 20px;
 }
