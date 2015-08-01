@@ -16,3 +16,16 @@
     color: #E91E63;
     margin-bottom: 50px;
 }
+
+#account_username,
+#account_email {
+    margin-bottom: 20px;
+}
+
+#create_account {
+    margin-top: 50px;
+}
+
+#register_cancel {
+    margin-top: 20px;
+}
