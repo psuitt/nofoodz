@@ -1,26 +1,26 @@
 setPath = function () {
 	var path = window.location.pathname,
-			last = false;
-	
-	$('#links ul.menu li').removeClass('selected');
-	
-	$('#links ul.menu li>a').each(function() {
-		
-		if (path.indexOf($(this).attr('href')) != -1) {
+		last = false;
+
+	$('#menu ul.nav.navbar-nav li').removeClass('active');
+
+	$('#menu ul.nav.navbar-nav li>a').each(function () {
+
+		if (path && path.indexOf($(this).attr('href')) != -1) {
 			last = $(this).parent();		
 		}	
 		
 	});
 	
 	if (last) {
-		last.delay(2000).addClass('selected');	
+		last.delay(2000).addClass('active');
 	}
 }
 
 Template.mainLayout.events({
 	'click #login-buttons-password'	: function(event, templ) {
-			var email = t.find('#login-email').value, 
-					password = t.find('#login-password').value;
+			var email = templ.find('#login-email').value,
+				password = templ.find('#login-password').value;
 			
 			Meteor.loginWithPassword(
 				email.toLowerCase(), 

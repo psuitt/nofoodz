@@ -1,0 +1,34 @@
+#register_form {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 25px 75px 50px 50px;
+    background: #FFFFFF;
+    -webkit-box-shadow: -5px 0 5px #424242;
+    -moz-box-shadow: -5px 0 5px #424242;
+    box-shadow: 1px 0 5px #424242;
+    display: none;
+}
+
+#register_close {
+    float: right;
+    margin-right: -50px
+}
+
+
+#register_form h3 {
+    color: #E91E63;
+    margin-bottom: 30px;
+}
+
+#register_username,
+#register_email,
+#register_password {
+    margin-bottom: 15px;
+}
+
+#register_cancel {
+    margin-top: 20px;
+}
