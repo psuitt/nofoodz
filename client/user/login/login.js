@@ -31,13 +31,15 @@ Template.login.events({
         $('#login_form').toggle(false);
         $('#register_form').toggle(true);
 
+        t.$('.error-message').text('');
+
         return false;
     },
 
     'submit #login_form': function (e, t) {
         e.preventDefault();
         // retrieve the input field values
-        var email = t.find('#login_email').value,
+        var email = t.find('#login_email').value.toLocaleLowerCase(),
             password = t.find('#login_password').value;
 
         // Trim and validate your fields here.... 
@@ -47,11 +49,9 @@ Template.login.events({
         Meteor.loginWithPassword(email, password, function (err) {
             if (err) {
                 // Inform the user that account creation failed
-                alert(err);
+                t.$('.error-message').text('Invalid login');
             } else {
-                // Success. Account has been created and the user
-                // has logged in successfully.
-                alert('Success!');
+                t.find('#login_close').click();
             }
         });
         return false;

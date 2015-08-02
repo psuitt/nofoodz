@@ -185,6 +185,13 @@ button.simple:hover {
     box-shadow: none;
 }
 
+.error-message {
+    width: 175px;
+    margin-top: 15px;
+    height: 65px;
+    color: #F44336;
+}
+
 /* Page construction */
 
 #mainContent {
@@ -333,13 +340,22 @@ span.logo a:hover {
     letter-spacing: 5px;
 }
 
+#menu .navbar-brand .sub-title {
+    color: #424242;
+}
+
 #menu .navbar-header button.navbar-toggle {
     border-color: #424242;
 }
 
 #menu .navbar-header button.navbar-toggle,
 #menu .navbar-header button.navbar-toggle:hover {
+    color: #4CAF50;
 	background: #FFFFFF;
+    border: 2px solid #4CAF50;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 #menu .navbar-header button.navbar-toggle span.icon-bar {
@@ -356,6 +372,10 @@ span.logo a:hover {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+#menu .nav > li > a:hover {
+    color: #424242;
 }
 
 #menu .nav > li.active > a {
@@ -395,6 +415,8 @@ span.logo a:hover {
     color: #FFFFFF;
     background: #4CAF50;
 }
+
+/* Notifications */
 
 #notifications {
 	text-align: center;

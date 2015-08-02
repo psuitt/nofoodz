@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" href="/">NoFoodz | alpha</a>
+                <a class="navbar-brand logo" href="/">NoFoodz <span class="sub-title">| alpha</span></a>
             </div>
             <div class="collapse navbar-collapse" id="menu-navbar">
                 <ul class="nav navbar-nav">
@@ -49,6 +49,9 @@
                         </li>
                         <li>
                             <button id="menu-login-button">Logout</button>
+                            <div id="loginDiv">
+                                {{> user }}
+                            </div>
                         </li>
                     {{/if}}
                     <li>

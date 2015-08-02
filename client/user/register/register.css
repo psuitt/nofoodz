@@ -1,4 +1,5 @@
-#login_form {
+#register_form {
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -11,24 +12,23 @@
     display: none;
 }
 
-#login_close {
+#register_close {
     float: right;
     margin-right: -50px
 }
 
-#login_form h3 {
+
+#register_form h3 {
     color: #E91E63;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
-#login_email {
-    margin-bottom: 20px;
+#register_username,
+#register_email,
+#register_password {
+    margin-bottom: 15px;
 }
 
-#login_button {
-    margin-top: 50px;
-}
-
-#login_create_new_user {
+#register_cancel {
     margin-top: 20px;
 }
