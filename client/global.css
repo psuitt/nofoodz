@@ -192,7 +192,31 @@ button.simple:hover {
     color: #F44336;
 }
 
+.no-border {
+    border: none;
+}
+
+.no-box-shadow {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 /* Page construction */
+
+.side-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 25px 75px 50px 25px;
+    background: #FFFFFF;
+    -webkit-box-shadow: -5px 0 5px #424242;
+    -moz-box-shadow: -5px 0 5px #424242;
+    box-shadow: 1px 0 5px #424242;
+    display: none;
+}
 
 #mainContent {
 	min-height: 600px;
@@ -362,7 +386,7 @@ span.logo a:hover {
 	background: #4CAF50;
 }
 
-#menu .nav > li > a {
+#menu .menu-link {
 	padding: 15px;
 	color: #E91E63;
     font-size: 16px;
@@ -372,10 +396,13 @@ span.logo a:hover {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+    text-decoration: none;
 }
 
-#menu .nav > li > a:hover {
+#menu .menu-link:hover {
     color: #424242;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 #menu .nav > li.active > a {
@@ -396,7 +423,7 @@ span.logo a:hover {
     height: 50px;
 }
 
-#menu_login_button {
+.menu-button {
     margin: -21px 0 auto 20px;
     vertical-align: middle;
     font-weight: bold;
@@ -419,10 +446,10 @@ span.logo a:hover {
 /* Notifications */
 
 #notifications {
+    top: 0;
 	text-align: center;
 	font-size: 18px;
-	color: #222222;
-	font-weight: 700;
+    color: #424242;
 	cursor: pointer;
 	vertical-align: top;
 	padding: 0 5px;
@@ -432,28 +459,26 @@ span.logo a:hover {
 }
 
 #notifications.new {
-	color: #800000;
+    color: #4CAF50;
 }
 
 #notifications.open {
 	color: #FFFFFF;
-	background-color: #255DAF;
+    background-color: #4CAF50;
 }
 
 #notifications:hover {
-	color: #800000;
+    color: #424242;
 }
 
 #notificationsList {
 	width: 400px;
 	display: none;
 	position: absolute;
-	background: rgb(245,245,245);
+    background: #4CAF50;
 	border-top: 0;
-	top:51px;
+    top: 50px;
 	right: 0;
-	border: 3px solid #255DAF;
-	border-top: 0;
 	list-style: none;
 	z-index: 100;
 }
@@ -470,8 +495,7 @@ span.logo a:hover {
 }
 
 #notificationsList li.title {
-	color: #800000;	
-	font-weight: 700;
+    color: #FFFFFF;
 	font-size: 16px;
 	padding: 5px;
 }

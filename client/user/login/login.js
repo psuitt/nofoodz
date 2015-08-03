@@ -1,6 +1,6 @@
 Template.login.events({
 
-    'click #menu_login_button': function (e, t) {
+    'click #login_menu_button': function (e, t) {
 
         e.preventDefault();
 

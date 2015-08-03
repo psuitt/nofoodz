@@ -18,16 +18,6 @@ setPath = function () {
 }
 
 Template.mainLayout.events({
-	'click #login-buttons-password'	: function(event, templ) {
-			var email = templ.find('#login-email').value,
-				password = templ.find('#login-password').value;
-			
-			Meteor.loginWithPassword(
-				email.toLowerCase(), 
-				password, 
-				function(errorObject) {});
-		}
-
 
 }); 
 
@@ -47,10 +37,6 @@ Template.mainLayout.rendered = function() {
 			$('#notificationsList').removeClass('open');
 		}
 	
-	});
-	
-	$(document).on('keyup blur', '#login-username-or-email', function(event) {
-		this.value = this.value.toLowerCase();	
 	});
 	
 };

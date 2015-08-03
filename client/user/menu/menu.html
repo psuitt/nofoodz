@@ -1,0 +1,21 @@
+<template name="menu">
+    <button id="menu_open_button" class="menu-button green-button">{{usernameShort}}</button>
+    <div id="menu_user_menu" class="side-menu">
+        <button id="menu_close" class="btn btn-default simple glyphicon glyphicon-menu-right"></button>
+        <h3>{{username}}</h3>
+        <ul>
+            <li><a class="menu-link" href='/myfoods'>MyFoodz</a></li>
+            <li class="dropdown">
+                <a href="#" class="menu-link dropdown-toggle" data-toggle="dropdown">Add <span
+                        class="caret"></span></a>
+                <ul class="dropdown-menu no-border no-box-shadow" role="menu">
+                    <li><a class="menu-link" href='/food/add'>Add</a></li>
+                    <li><a class="menu-link" href='/food/addrecipe'>Add a Recipe</a></li>
+                </ul>
+            </li>
+            <li>
+                <button id="menu_login_button" class="green-button">Logout</button>
+            </li>
+        </ul>
+    </div>
+</template>
