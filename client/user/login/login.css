@@ -1,14 +1,4 @@
 #login_form {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    padding: 25px 75px 50px 50px;
-    background: #FFFFFF;
-    -webkit-box-shadow: -5px 0 5px #424242;
-    -moz-box-shadow: -5px 0 5px #424242;
-    box-shadow: 1px 0 5px #424242;
-    display: none;
 }
 
 #login_close {
