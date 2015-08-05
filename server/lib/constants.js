@@ -7,8 +7,8 @@ NoFoodz.consts = {};
 NoFoodz.consts.urls = {
 	FOOD : '/pages/food/',
 	DRINK : '/pages/drink/',
-	BRAND : '/brand/page/',
-	PEOPLE : '/people/page/'
+	BRAND : '/pages/brand/',
+	PEOPLE : '/users/people/'
 };
 
 NoFoodz.consts.flags = {

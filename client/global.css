@@ -23,7 +23,13 @@ label {
 
 /* BOOTSTRAP OVERRIDE */
 a {
-	color: #255DAF;
+	color: #E91E63;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #424242;
+    background-color: transparent;
 }
 
 /* BOOTSTRAP - Navigation */
@@ -35,14 +41,14 @@ a {
 	display: block;
 	padding: 3px 15px;
 	font-weight: bold;
-	color: #999999;
+	color: #424242;
 }
 
 .nav > li.nav-header.nofoodz-header {
-	color: #DAA520;
+	color: #E91E63;
 	font-size: 16px;
 	text-transform: none;
-	border-bottom: 2px solid;
+	border-bottom: 2px solid #424242;
 }
 
 .nav > li > a {
@@ -52,20 +58,20 @@ a {
 .nav-pills > .active > a, 
 .nav-pills > .active > a:hover, 
 .nav-pills > .active > a:focus {
-	color: #ffffff;
 	background-color: #255DAF;
 }
 
 .nav > li > a:hover,
 .nav > li > a:focus {
-	background-color: #AAAAAA;
+	color: #424242;
+    background: transparent;
 }
 
 .nav-list > .active > a,
 .nav-list > .active > a:hover,
 .nav-list > .active > a:focus {
-	color: #ffffff;
-	background-color: #255DAF;
+	border-right: 2px solid #E91E63;
+    padding-right: 13px;
 }
 
 div.nofoods-pagenav {
@@ -209,6 +215,7 @@ button.simple:hover {
     position: fixed;
     top: 0;
     right: 0;
+	min-width: 250px;
     height: 100%;
     padding: 25px 75px 50px 25px;
     background: #FFFFFF;
@@ -408,6 +415,7 @@ span.logo a:hover {
 #menu .nav > li.active > a {
     padding-bottom: 8px;
     border-bottom: 3px solid;
+    background-color: transparent;
 }
 
 #menu-navbar {
@@ -513,7 +521,9 @@ span.logo a:hover {
 /* MAIN SEARCH */
 
 #menu div.searchbar {
-	margin:8px 0 0 0;
+	margin:0;
+    height: 50px;
+    line-height: 50px;
 	color: white;
 }
 
@@ -522,15 +532,11 @@ div.searchbar span {
 }
 
 div.searchbar div.btn-group>a {
-	height: 28px;
-	border-right: 0;
-	-webkit-border-top-right-radius: 0;
-	-webkit-border-bottom-right-radius: 0;
-	-moz-border-radius-topright: 0;
-	-moz-border-radius-bottomright: 0;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border: 0;
+	height: 30px;
+    border-color: #424242;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 	padding: 2px 12px;
 }
 
@@ -539,27 +545,27 @@ div.searchbar input {
 	margin-bottom: 0;
 	border-right: 0;
 	border-left: 0;
+    border-color: #424242;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-	border: 0;
 	width: 250px;
-	height: 28px;
+	height: 30px;
 }
 
 div.searchbar button {
-	border-left: 0;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-	border: 0;
 	padding: 4px 8px;
     color: #424242;
 	background: white;
 }
 
 div.searchbar button.go {
+    top: 0;
 	color:	#424242;
+    border-color: #424242;
 }
 
 div.searchbar button:hover {
@@ -662,19 +668,6 @@ div.myfoods a.name {
 
 div.myfoods.rating {
 	cursor: default;
-}
-
-input.save {
-	color: white;
-	background: #800000;
-	border: 1px solid;
-	border-radius: 5px;
-	font-weight: bold;
-	padding: 3px 7px;
-}
-
-input.save:hover {
-	background: #255DAF;
 }
 
 /* Report Dialog */

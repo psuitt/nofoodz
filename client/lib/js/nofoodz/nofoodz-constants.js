@@ -5,8 +5,9 @@ NoFoodz.consts = function() {
 	var _urls = {
 		FOOD : '/pages/food/',
 		DRINK : '/pages/drink/',
-		BRAND : '/brand/page/',
-		PEOPLE : '/people/page/'
+		BRAND : '/pages/brand/',
+		PEOPLE : '/users/people/',
+		ADD : '/pages/add/'
 	};
 
 	return {
