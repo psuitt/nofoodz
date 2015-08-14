@@ -72,7 +72,7 @@ Router.map(function () {
 
     this.route('add', {
         path: '/pages/add/:brand_id?',
-        template: 'foodsAdd',
+        template: 'foodsadd',
         layoutTemplate: 'mainLayout',
         yieldTemplates: {
             'footer': {to: 'footer'}

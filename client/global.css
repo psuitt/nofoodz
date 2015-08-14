@@ -18,6 +18,7 @@ ul {
 
 input,
 label {
+	color: #424242;
 	display: block;
 }
 
@@ -444,20 +445,81 @@ span.logo a:hover {
     background: #FFFFFF;
     padding: 5px 16px;
     border: 2px solid #4CAF50;
+    text-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .green-button:hover {
     color: #FFFFFF;
     background: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.blue-button {
+    color: #2196F3;
+    background: #FFFFFF;
+    padding: 5px 16px;
+    border: 2px solid #2196F3;
+    text-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.blue-button.invert {
+    color: #424242;
+    background: #FFFFFF;
+    border: 2px solid #424242;
+}
+
+.blue-button:hover {
+    color: #FFFFFF;
+    background: #2196F3;
+    border-color: #2196F3;
+}
+
+.blue-button.invert:hover {
+    color: #FFFFFF;
+    background: #424242;
+    border-color: #424242;
+}
+
+.blue-button.selected,
+.blue-button.selected:hover {
+    color: #FFFFFF;
+    background: #424242;
+    padding: 5px 16px;
+    border: 2px solid #424242;
+}
+
+.blue-button.invert.selected,
+.blue-button.invert.selected:hover {
+    color: #FFFFFF;
+    background: #2196F3;
+    padding: 5px 16px;
+    border: 2px solid #2196F3;
+}
+
+.button-icon {
+    top: 0;
+    text-align: center;
+    font-size: 18px;
+    color: #424242;
+    cursor: pointer;
+    display: inline-block;
 }
 
 /* Notifications */
 
 #notifications {
-    top: 0;
-	text-align: center;
-	font-size: 18px;
-    color: #424242;
 	cursor: pointer;
 	vertical-align: top;
 	padding: 0 5px;
