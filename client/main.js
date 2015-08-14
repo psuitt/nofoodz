@@ -161,7 +161,16 @@ Router.map(function () {
 			this.next();
     }
 	});
-	
+
+	this.route('wsie', {
+		path: '/wsie',
+		template: 'wsie',
+		layoutTemplate: 'mainLayout',
+		yieldTemplates: {
+			'footer': {to: 'footer'}
+		}
+	});
+
 	this.route('peoplesPage', {
     path: '/people/page/:username',
     template: 'people',
