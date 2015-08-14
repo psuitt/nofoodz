@@ -8,12 +8,7 @@ span.rating.selected {
 }
 
 #foodsadd-typeselect .btn {
-	width:75px;
-}
-
-#foodsadd-typeselect .btn.selected {
-	color: #FFFFFF;
-	background: #255DAF;
+	width:100px;
 }
 
 #foodsadd-name,

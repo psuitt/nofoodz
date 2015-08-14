@@ -3,12 +3,12 @@ var placeauto,
 		nofoodsRating,
 		brand_id = false;
 		
-Template.foodsAdd.destroyed = function () {
+Template.foodsadd.destroyed = function () {
 	// reset brand id.	
 	brand_id = false
 };
 
-Template.foodsAdd.rendered = function() {
+Template.foodsadd.rendered = function() {
 	
 	if (!Meteor.userId()) {
 		Router.go('home');
@@ -55,7 +55,7 @@ Template.foodsAdd.rendered = function() {
 
 };
 
-Template.foodsAdd.events({
+Template.foodsadd.events({
 	'click #save': function (event, template) {
 		var type = $('#foodsadd-typeselect .btn.selected').attr("value"),
 				name = template.find("#foodsadd-name").value,

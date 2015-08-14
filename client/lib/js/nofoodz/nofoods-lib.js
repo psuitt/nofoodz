@@ -35,7 +35,7 @@ NoFoods.lib = function() {
 		},
 		
 		createBrandLink: function(id, name) {
-			return $('<a></a>').attr('href', '/brand/page/' + id).html(name);
+			return $('<a></a>').attr('href', NoFoodz.consts.urls.BRAND + id).html(name);
 		}
 		
 	};
