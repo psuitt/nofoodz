@@ -38,6 +38,8 @@ Template.mainLayout.rendered = function() {
 		}
 	
 	});
+
+	$('[data-toggle=\'dropdown\']').dropdown();
 	
 };
 

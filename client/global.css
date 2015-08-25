@@ -22,6 +22,10 @@ label {
 	display: block;
 }
 
+input {
+	padding: 2px 6px;
+}
+
 /* BOOTSTRAP OVERRIDE */
 a {
 	color: #E91E63;
@@ -31,6 +35,7 @@ a {
 a:hover {
     color: #424242;
     background-color: transparent;
+	text-decoration: none;
 }
 
 /* BOOTSTRAP - Navigation */
@@ -440,6 +445,8 @@ span.logo a:hover {
     top: 50%;
 }
 
+/* Buttons */
+
 .green-button {
     color: #4CAF50;
     background: #FFFFFF;
@@ -460,7 +467,8 @@ span.logo a:hover {
     border-color: #4CAF50;
 }
 
-.blue-button {
+.blue-button,
+.blue-button:focus {
     color: #2196F3;
     background: #FFFFFF;
     padding: 5px 16px;
@@ -508,6 +516,48 @@ span.logo a:hover {
     border: 2px solid #2196F3;
 }
 
+.red-button,
+.red-button:focus {
+	color: #F44336;
+	background: #FFFFFF;
+	padding: 5px 16px;
+	border: 2px solid #F44336;
+	text-shadow: none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.red-button:hover {
+	color: #FFFFFF;
+	background: #F44336;
+	border-color: #F44336;
+}
+
+.pink-button,
+.pink-button:focus {
+	color: #E91E63;
+	background: #FFFFFF;
+	padding: 5px 16px;
+	border: 2px solid #E91E63;
+	text-shadow: none;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.pink-button:hover {
+	color: #FFFFFF;
+	background: #E91E63;
+	border-color: #E91E63;
+}
+
 .button-icon {
     top: 0;
     text-align: center;
@@ -515,6 +565,36 @@ span.logo a:hover {
     color: #424242;
     cursor: pointer;
     display: inline-block;
+}
+
+button span.button-icon {
+	top: -2px;
+	text-align: center;
+	font-size: 14px;
+	color: inherit;
+	padding: 0;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+/* Tags */
+
+.bootstrap-tagsinput {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.bootstrap-tagsinput .nofoodz-tag {
+	color: #E91E63;
+	background: #FFFFFF;
+	border: 2px solid #E91E63;
+	padding: 2px 4px;
+	font-weight: bold;
+}
+
+.bootstrap-tagsinput input {
+	min-width: 100px;
 }
 
 /* Notifications */

@@ -26,10 +26,12 @@ NoFoodz.consts.filters = {
 
 NoFoodz.consts.admin = {
 	SUPER : 'S',
+	// Roles
+	NORMAL: 'N',
 	MOD : 'M'
 };
 	
 NoFoodz.consts.db = {
 	FOOD : 'food',
 	DRINK : 'drink'
-};	
+};

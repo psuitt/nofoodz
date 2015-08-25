@@ -1,37 +1,76 @@
 span.rating {
-	cursor:pointer;
+    cursor: pointer;
 }
 
 span.rating.selected {
-	color:red;
-	font-weight:bold;
+    color: red;
+    font-weight: bold;
 }
 
-#foodsadd-typeselect .btn {
-	width:100px;
+.subcontent.s #foodsadd_multiple_div {
+    display: none;
 }
 
-#foodsadd-name,
-#foodsadd-brand {
-	width: 250px;
+.subcontent.m #foodsadd_single_div {
+    display: none;
 }
 
+#foodsadd_numberselect .btn,
+#foodsadd_typeselect .btn {
+    width: 100px;
+    margin-right: 5px;
+}
+
+#foodsadd_name,
+#foodsadd_brand {
+    width: 250px;
+}
+
+.foodsadd-brand-input,
+.foodsadd-name-input,
+.foodsadd-add-name,
+.foodsadd-add-item,
+.foodsadd-brand-remove,
+.foodsadd-remove,
+.bootstrap-tagsinput,
 div.input-spacing,
-#foodsadd-name,
-#foodsadd-brand {
-	margin-bottom: 15px;
+#foodsadd_name,
+#foodsadd_brand {
+    margin-bottom: 15px;
 }
 
-#foodsadd-drinkType {
+.foodsadd-brand-input,
+.foodsadd-name-input,
+.bootstrap-tagsinput {
+    width: 300px;
+}
 
+.foodsadd-brand-remove,
+.foodsadd-remove {
+    margin: auto 0 auto 50px;
+    vertical-align: middle;
+}
+
+.foodsadd-add-item,
+#foodsadd_add_brand {
+    display: block;
+}
+
+/* Adding multiples */
+.foodsadd-group label {
+    display: block;
+}
+
+.foodsadd-group input {
+    display: inline-block;
 }
 
 #foodsadd-map {
-	height: 300px;
-	width: 550px;
+    height: 300px;
+    width: 550px;
 }
 
 #save {
-	margin-top: 15px;
-	display: block;
+    margin-top: 15px;
+    display: block;
 }

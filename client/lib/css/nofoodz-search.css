@@ -12,6 +12,9 @@
 .nofoodssearch.type > a:hover {
     color: #ffffff;
     background: #424242;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .nofoodssearch.type ul {

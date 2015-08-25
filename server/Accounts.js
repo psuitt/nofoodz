@@ -35,7 +35,8 @@ Accounts.validateNewUser(function (user) {
 });
 
 Accounts.onCreateUser(function(options, user) {
-	user.active = true;	
+	user.active = true;
+	user.roles = [];
 	user.profile = {
 		bonusHearts: 10,
 		date: new Date(),
