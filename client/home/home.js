@@ -32,9 +32,11 @@ Template.home.events = {
 };
 
 var doSearch = function(search) {
-	var val = $('#home-searchtype .home-searchval').html().toLowerCase();
-	if (val) {
-		//$('#searchResults').attr("src", '/search/' + val + '/' + search);
-		DoSearch(val, search);
+	var type = $('#home-searchtype .home-searchval').html().toLowerCase();
+	if (type) {
+		Router.go('results', {
+			type: type,
+			search: search
+		});
 	}	
 };

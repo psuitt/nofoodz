@@ -60,41 +60,13 @@ Template.foodsadd.rendered = function () {
 
 Template.foodsadd.events({
     'click #save': function (event, template) {
-        /*
-         var type = $('#foodsadd_typeselect .btn.selected').attr('value'),
-         name = template.find('#foodsadd_name').value,
-         brand = template.find('#foodsadd_brand').value,
-         brandId = $('#foodsadd_brand').data('brand_id'),
-         rating = nofoodsRating.getValue();
 
-         var data = {
-         rating: rating,
-         name: name,
-         brand: brand,
-         type: type.toLowerCase()
-         };
-
-         if (brand_id) {
-         data.brand_id = brand_id;
-         } else if (brandId) {
-         data.brand_id = brandId;
-         }
-
-         createFood(data, function (response) {
-
-         if (response.error) {
-         $(".page-message.message").addClass("alert alert-danger").html(response.error.reason);
-         } else {
-         Router.go('foods', {_id: response.id, type: type.toLowerCase()});
-         }
-
-         });*/
         var data = getData(template);
 
-        Meteor.call('createProducts', {data: data}, function (e) {
-            var response = {};
-            response.error = e;
-            saveFinished(response);
+        Meteor.call('createProducts', data, function (error, result) {
+            var response = _.extend({}, result);
+            response.error = error;
+            saveFinished(response, data[0].type);
         });
 
     },
@@ -159,12 +131,14 @@ Template.foodsadd.events({
 
 });
 
-var saveFinished = function (response) {
+var saveFinished = function (response, type) {
 
     if (response.error) {
-        $(".page-message.message").addClass("alert alert-danger").html(response.error.reason);
+        $('.page-message.message').addClass('alert alert-danger').html(response.error.reason);
+    } else if (response._id) {
+        Router.go('foods', {_id: response._id, type: type.toLowerCase()});
     } else {
-        Router.go('foods', {_id: response.id, type: type.toLowerCase()});
+        $('.page-message.message').addClass('alert alert-success').html('Successfully added');
     }
 
 };
@@ -225,6 +199,8 @@ var getData = function (template) {
             break;
 
     }
+
+    return data;
 
 };
 

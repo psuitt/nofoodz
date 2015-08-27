@@ -43,15 +43,47 @@ PageNumber = Match.Where(function (x) {
 
 ProductsArrayCheck = Match.Where(function (products) {
     check(products, Array);
-    for (var product in products) {
+    _.each(products, function (product) {
+        console.log(product);
+        check(product, ProductsCheck);
+    });
+    return products.length >= 0;
+});
 
+ProductsCheck = Match.Where(function (product) {
+    check(product, Object);
+    check(product, {
+        brand: NonEmptyStringNoSpecialCharacters,
+        type: TypeCheck,
+        items: ItemsArrayCheck
+    });
+    return true;
+});
+
+ItemsArrayCheck = Match.Where(function (items) {
+    check(items, Array);
+    _.each(items, function (item) {
+        check(item, ItemsCheck);
+    });
+    return items.length >= 0;
+});
+
+ItemsCheck = Match.Where(function (item) {
+    check(item, Object);
+    check(item.name, NonEmptyStringNoSpecialCharacters);
+    check(item.tags, Array);
+    check(item.rating, Match.Optional(Number));
+    if (item.rating) {
+        check(item.rating, RatingCheck);
     }
-    return x < 101 && x > 0;
+
+    return true;
 });
 
 TypeCheck = Match.Where(function (x) {
     check(x, String);
-    return x.toLowerCase() === "food" || x.toLowerCase() === "brand";
+    var type = x.toLowerCase();
+    return type === NoFoodz.consts.db.FOOD || type === NoFoodz.consts.db.BRAND || type === NoFoodz.consts.db.PRODUCT;
 });
 
 NullCheck = Match.Where(function (x) {
