@@ -12,6 +12,10 @@ Template.menu.helpers({
     }
 });
 
+Template.menu.rendered = function () {
+    $('#menu_user_menu [data-toggle=\'dropdown\']').dropdown();
+};
+
 Template.menu.events({
 
     'click #menu_open_button': function (e, t) {

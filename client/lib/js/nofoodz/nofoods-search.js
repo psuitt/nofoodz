@@ -75,7 +75,7 @@
             var val = self.val().trim(),
                 type = _searchTypeMainDisplayText.html().toLowerCase();
             if (val.length > 0) {
-                Router.go('results', {
+                Router.go('find', {
                     type: type,
                     search: val
                 });

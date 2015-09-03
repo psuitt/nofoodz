@@ -39,7 +39,7 @@ Template.mainLayout.rendered = function() {
 	
 	});
 
-	$('[data-toggle=\'dropdown\']').dropdown();
+	$('#menu [data-toggle=\'dropdown\']').dropdown();
 	
 };
 

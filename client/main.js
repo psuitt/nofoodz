@@ -28,33 +28,15 @@ Router.map(function () {
         layoutTemplate: 'mainLayout'
     });
 
-    this.route('searchResultsEmpty', {
-        path: '/search/:type/',
-        template: 'search',
-        layoutTemplate: '',
-        onBeforeAction: function () {
-            PARAMS = this.params;
-        }
-    });
-
-    this.route('searchResults', {
-        path: '/search/:type/:search',
-        template: 'search',
-        layoutTemplate: '',
-        onBeforeAction: function () {
-            PARAMS = this.params;
-        }
-    });
-
-    this.route('results', {
-        path: '/results/:type/:search',
-        template: 'results',
+    this.route('find', {
+        path: '/find/:type/:search',
+        template: 'find',
         layoutTemplate: 'mainLayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
         onAfterAction: function () {
-            DoSearchFlag && DoSearch(this.params.type, this.params.search);
+            Search(this.params.type, this.params.search);
         },
         data: function () {
             return this.params;

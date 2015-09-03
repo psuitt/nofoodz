@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 8/25/2015.
  */
-Food = function (name, brandId, brandName, keywords, tags, user) {
+Food = function (name, brandId, brandName, keywords, tags, user, rating) {
 
     this.name = name;
     this.brand_id = brandId;
@@ -10,8 +10,8 @@ Food = function (name, brandId, brandName, keywords, tags, user) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
-    this.rating_calc = 0;
-    this.ratingcount_calc = 0;
+    this.rating_calc = rating ? rating : 0;
+    this.ratingcount_calc = rating ? 1 : 0;
     this.date = Date.now();
 
 };
@@ -44,17 +44,19 @@ Food.prototype.find = function (filter) {
 
     } else {
 
-        this._id = product._id;
-        this.name = product.name;
-        this.brand_id = product.brand_id;
-        this.brand_view = product.brand_view;
-        this.keywords = product.keywords;
-        this.tags = product.tags;
-        this.user_id = product.user_id;
-        this.rating_calc = product.rating_calc;
-        this.ratingcount_calc = product.ratingcount_calc;
-        this.date = product.date;
+        this._id = food._id;
+        this.name = food.name;
+        this.brand_id = food.brand_id;
+        this.brand_view = food.brand_view;
+        this.keywords = food.keywords;
+        this.tags = food.tags;
+        this.user_id = food.user_id;
+        this.rating_calc = food.rating_calc;
+        this.ratingcount_calc = food.ratingcount_calc;
+        this.date = food.date;
 
     }
+
+    return food;
 
 };

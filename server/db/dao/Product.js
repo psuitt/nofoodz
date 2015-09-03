@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 8/25/2015.
  */
-Product = function (name, brandId, brandName, keywords, tags, user) {
+Product = function (name, brandId, brandName, keywords, tags, user, rating) {
 
     this.name = name;
     this.brand_id = brandId;
@@ -10,8 +10,8 @@ Product = function (name, brandId, brandName, keywords, tags, user) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
-    this.rating_calc = 0;
-    this.ratingcount_calc = 0;
+    this.rating_calc = rating ? rating : 0;
+    this.ratingcount_calc = rating ? 1 : 0;
     this.date = Date.now();
 
 };
@@ -56,5 +56,7 @@ Product.prototype.find = function (filter) {
         this.date = product.date;
 
     }
+
+    return product;
 
 };

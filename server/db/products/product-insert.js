@@ -61,7 +61,7 @@ Meteor.methods({
 
 var insertFood = function (brand, item, keywords, userId) {
 
-    var foodDao = new Food(item.name, brand._id, brand.brand, keywords, item.tags, userId);
+    var foodDao = new Food(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
     foodDao.insert();
 
     if (item.rating) {
@@ -76,7 +76,7 @@ var insertFood = function (brand, item, keywords, userId) {
 
 var insertDrink = function (brand, item, keywords, userId) {
 
-    var drinkDao = new Drink(item.name, brand._id, brand.brand, keywords, item.tags, userId);
+    var drinkDao = new Drink(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
     drinkDao.insert();
 
     if (item.rating) {
@@ -91,7 +91,7 @@ var insertDrink = function (brand, item, keywords, userId) {
 
 var insertProduct = function (brand, item, keywords, userId) {
 
-    var productDao = new Product(item.name, brand._id, brand.brand, keywords, item.tags, userId);
+    var productDao = new Product(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
     productDao.insert();
 
     if (item.rating) {

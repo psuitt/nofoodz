@@ -37,3 +37,28 @@ Rating.prototype.insert = function () {
     db.insert(ratingObj);
 
 };
+
+Rating.prototype.findByUser = function () {
+
+    var query = {
+        user_id: this.userId,
+    };
+
+    if (this.food_id) {
+        query.food_id = this.food_id;
+        db = Ratings;
+    } else if (this.drink_id) {
+        query.drink_id = this.drink_id;
+        db = Ratings;
+    } else if (this.product_id) {
+        query.product_id = this.product_id;
+        db = ProductsRatings;
+    } else {
+        throw new Meteor.Error(500, 'A type is required to do a rating insert.');
+    }
+
+    var rating = Ratings.findOne(query, {fields: {rating: 1}});
+
+    return rating;
+
+};

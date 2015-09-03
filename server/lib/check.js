@@ -83,7 +83,7 @@ ItemsCheck = Match.Where(function (item) {
 TypeCheck = Match.Where(function (x) {
     check(x, String);
     var type = x.toLowerCase();
-    return type === NoFoodz.consts.db.FOOD || type === NoFoodz.consts.db.BRAND || type === NoFoodz.consts.db.PRODUCT;
+    return type === NoFoodz.consts.db.FOOD || type === NoFoodz.consts.db.DRINK || type === NoFoodz.consts.db.BRAND || type === NoFoodz.consts.db.PRODUCT;
 });
 
 NullCheck = Match.Where(function (x) {
