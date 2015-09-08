@@ -14,10 +14,9 @@ var done = function (err, data) {
     var item = data.item;
 
     $('.food-name').html(item.name);
-    $('.brand').html(NoFoods.lib.createBrandLink(item.brand_id, item.brand_view));
+    $('.brand').html(NoFoods.widgetlib.createBrandLink(item.brand_id, item.brand_view));
     $('.totalRating').html(item.rating_calc);
     $('.totalCount').html(item.ratingcount_calc);
-    $('.foods-location').html(item.address_view);
 
     if (item.flags && item.flags.indexOf(NoFoodz.consts.flags.REPORTED) !== -1)
         $('.button.report').addClass('reported')
@@ -70,16 +69,16 @@ var reload = function (response) {
 
 Template.foods.rendered = function () {
 
+    var data = this.data;
+
     var obj = {
-        _id: PARAMS._id,
-        type: PARAMS.type
+        _id: data._id,
+        type: data.type
     };
 
-    if (PARAMS.type === NoFoodz.consts.FOOD) {
-        updateMethod = UpdateFood;
+    if (data.type === NoFoodz.consts.FOOD) {
         idField = 'food_id';
     } else {
-        updateMethod = UpdateDrink;
         idField = 'drink_id';
     }
 
@@ -91,10 +90,16 @@ Template.foods.rendered = function () {
 
             var options = {
                 rating: rating,
-                _id: PARAMS._id
+                _id: data._id,
+                type: data.type
             };
 
-            updateMethod(options, reload);
+            Meteor.call('updateRating', options, function (err, data) {
+                var response = {};
+                response.error = err;
+                response.data = data;
+                reload(response);
+            });
 
         }
     });
@@ -109,34 +114,6 @@ Template.foods.rendered = function () {
         Meteor.call('addToWishList', options);
 
         $('.wishstar').toggleClass('x100', true);
-    });
-
-    document.getElementById('gallerylinks').onclick = function (event) {
-        event = event || window.event;
-        var target = event.target || event.srcElement,
-            link = target.src ? target.parentNode : target,
-            options = {
-                fullScreen: false,
-                index: link,
-                event: event
-            },
-            links = this.getElementsByTagName('a');
-        blueimp.Gallery(links, options);
-    };
-
-    $('div.content.images').removeClass('hidden');
-
-    $('div.imagesbutton').click(function () {
-        var o = $(this);
-        if (o.hasClass('show')) {
-            o.removeClass('show');
-            o.find("span").html('Hide Images');
-            $('#gallerylinks').show(400);
-        } else {
-            o.addClass('show');
-            o.find('span').html('Show More Images');
-            $('#gallerylinks').hide(400);
-        }
     });
 
 };

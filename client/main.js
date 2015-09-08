@@ -100,14 +100,10 @@ Router.map(function () {
             'footer': {to: 'footer'}
         },
         onBeforeAction: function () {
-            PARAMS = this.params;
             this.next();
         },
         data: function () {
-            return {
-                id: this.params._id,
-                type: this.params.type.substring(0, 1).toUpperCase() + this.params.type.substring(1)
-            };
+            return this.params;
         }
     });
 

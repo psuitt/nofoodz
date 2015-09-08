@@ -130,6 +130,10 @@ NoFoods.widgetlib = function() {
 			return searchType;
 		
 		},
+
+		createBrandLink: function (id, name) {
+			return $('<a class=\'brand\'></a>').attr('href', NoFoodz.consts.urls.BRAND + id).html(name);
+		}
 		
 	};
 

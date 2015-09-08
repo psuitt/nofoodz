@@ -63,7 +63,7 @@ Template.foodsadd.events({
 
         var data = getData(template);
 
-        Meteor.call('createProducts', data, function (error, result) {
+        Meteor.call('createItems', data, function (error, result) {
             var response = _.extend({}, result);
             response.error = error;
             saveFinished(response, data[0].type);

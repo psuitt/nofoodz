@@ -7,6 +7,53 @@ Rating = function (rating, userId) {
     this.user_id = userId;
     this._id = Random.id();
     this.date = Date.now();
+    this.food_id = false;
+    this.drink_id = false;
+    this.product_id = false;
+
+};
+
+Rating.prototype.updateFields = function (rating) {
+
+    if (rating) {
+        for (var field in this) {
+            if (rating.hasOwnProperty(field)) {
+                this[field] = rating[field];
+            }
+        }
+    }
+
+};
+
+Rating.prototype.findByUser = function (filter) {
+
+    var query = {
+        user_id: this.user_id
+    };
+
+    if (!this.user_id) {
+        throw new Meteor.Error(500, 'A user id is required to do a rating insert.');
+    }
+
+    if (this.food_id) {
+        query.food_id = this.food_id;
+        db = Ratings;
+    } else if (this.drink_id) {
+        query.drink_id = this.drink_id;
+        db = Ratings;
+    } else if (this.product_id) {
+        query.product_id = this.product_id;
+        db = ProductsRatings;
+    } else {
+        throw new Meteor.Error(500, 'A type id is required to do a rating insert.');
+    }
+
+    var rating = Ratings.findOne(query, filter);
+
+    // update the data to the current new data.
+    this.updateFields(rating);
+
+    return rating;
 
 };
 
@@ -29,7 +76,6 @@ Rating.prototype.insert = function () {
     } else if (this.product_id) {
         ratingObj.product_id = this.product_id;
         db = ProductsRatings;
-
     } else {
         throw new Meteor.Error(500, 'A type is required to do a rating insert.');
     }
@@ -38,27 +84,33 @@ Rating.prototype.insert = function () {
 
 };
 
-Rating.prototype.findByUser = function () {
+Rating.prototype.upsert = function () {
 
-    var query = {
-        user_id: this.userId,
-    };
+    var rating = this.findByUser();
 
-    if (this.food_id) {
-        query.food_id = this.food_id;
-        db = Ratings;
-    } else if (this.drink_id) {
-        query.drink_id = this.drink_id;
-        db = Ratings;
-    } else if (this.product_id) {
-        query.product_id = this.product_id;
-        db = ProductsRatings;
+    if (rating) {
+
+        var db = null;
+
+        if (this.food_id) {
+            db = Ratings;
+        } else if (this.drink_id) {
+            db = Ratings;
+        } else if (this.product_id) {
+            db = ProductsRatings;
+        } else {
+            throw new Meteor.Error(500, 'A type is required to do a rating insert.');
+        }
+
+        db.update({_id: rating._id}, {
+            $set: {
+                rating: this.rating,
+                date: this.date
+            }
+        });
+
     } else {
-        throw new Meteor.Error(500, 'A type is required to do a rating insert.');
+        this.call.insert(this);
     }
-
-    var rating = Ratings.findOne(query, {fields: {rating: 1}});
-
-    return rating;
 
 };

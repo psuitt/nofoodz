@@ -3,7 +3,7 @@
  */
 Meteor.methods({
 
-    createProducts: function (products) {
+    createItems: function (products) {
 
         var response = {};
 

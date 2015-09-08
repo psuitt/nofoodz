@@ -19,6 +19,8 @@ Meteor.methods({
 
         filter = _.extend(filter, NoFoodz.consts.filters.HIDDEN_FOODS);
 
+        console.log('Starting search.');
+        console.log('Item is a ' + options.type);
         switch (options.type) {
             case NoFoodz.consts.db.FOOD:
                 response.item = Foods.findOne(query, filter);
@@ -40,11 +42,16 @@ Meteor.methods({
                 var product = new Product();
                 product._id = options._id;
                 response.item = product.find(filter);
-                if (this.userId)
+
+                console.log(response.item);
+
+                if (this.userId) {
                     var rating = new Rating();
-                rating.product_id = options._id;
-                rating.user_id = this.userId;
-                response.userRating = rating.findByUser({fields: {rating: 1}});
+                    rating.product_id = options._id;
+                    rating.user_id = this.userId;
+                    response.userRating = rating.findByUser({fields: {rating: 1}});
+                }
+
                 break;
             default:
                 throw new Meteor.Error(501, "The server does not support this functionality");

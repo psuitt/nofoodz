@@ -5,7 +5,8 @@
 (function ($) {
     $.fn.nofoodsrating = function (options) {
 
-        var self = this;
+        var self = this,
+            removeButton;
 
         var _options = {
             hearts: 5,
@@ -15,6 +16,7 @@
         if (options)
             _options = $.extend(_options, options);
 
+
         self.addClass('ratingDiv');
 
         for (var i = 0; i < _options.hearts; i += 1) {
@@ -23,6 +25,16 @@
             if (i > 4)
                 heart.addClass('dashed');
             self.append(heart);
+        }
+
+        if (_options.select) {
+            removeButton = $('<button></button>');
+            removeButton.addClass('remove button-icon btn btn-default simple glyphicon glyphicon-remove');
+            self.append(removeButton);
+            removeButton.bind('click', function () {
+                self.find('span.rating').removeClass('x10 x20 x30 x40 x50 x60 x70 x80 x90 x100 blue');
+                _options.select(0);
+            });
         }
 
         self.find('span.rating').bind('click', function () {

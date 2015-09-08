@@ -32,10 +32,6 @@ NoFoods.lib = function() {
 			}
 			
 			return time.join('');
-		},
-		
-		createBrandLink: function(id, name) {
-			return $('<a></a>').attr('href', NoFoodz.consts.urls.BRAND + id).html(name);
 		}
 		
 	};
