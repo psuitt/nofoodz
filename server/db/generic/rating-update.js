@@ -11,6 +11,8 @@ Meteor.methods({
             _id: NonEmptyString
         });
 
+        console.log(options);
+
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
@@ -35,18 +37,15 @@ Meteor.methods({
         var ratingDiff = options.rating,
             countDiff = 1;
 
+        // Set the rating for updating
+        rating.rating = options.rating;
+        // Update the rating
+        rating.upsert();
+
         if (!userRating) {
 
             if (options.rating === 6)
                 Meteor.users.update({_id: this.userId}, {$inc: {"profile.bonusHearts": -1}});
-
-            var rating_Id = NoFoodz.rating.create({
-                _id: Random.id(),
-                drink_id: options._id,
-                user_id: this.userId,
-                rating: options.rating,
-                date: Date.now()
-            });
 
         } else {
 
@@ -59,38 +58,31 @@ Meteor.methods({
             } else if (userRating.rating !== 6 && options.rating === 6) {
                 Meteor.users.update({_id: this.userId}, {$inc: {"profile.bonusHearts": -1}});
             }
-            NoFoodz.rating.updateOne(userRating, {$set: {rating: options.rating, date: Date.now()}}, this.userId);
+
         }
 
         //Recalculate Rating total
-        var drink = Drinks.findOne({_id: options._id}),
-            total = 0;
+        var func = NoFoodz.db.typeToDao(options.type),
+            itemDao = new func();
 
-        if (!drink.ratingtotal_calc) {
-            total = drink.rating_calc * drink.ratingcount_calc;
-        } else {
-            total = drink.ratingtotal_calc;
-        }
+        console.log('Item Dao ' + EJSON.stringify(itemDao));
+
+        itemDao._id = options._id;
+
+        var item = itemDao.find(),
+            total = item.ratingtotal_calc;
+
+        console.log('Item Dao ' + EJSON.stringify(itemDao));
 
         total += ratingDiff;
-        count = drink.ratingcount_calc + countDiff
+        count = item.ratingcount_calc + countDiff;
 
-        var avg = (total / parseFloat(count)).toFixed(2);
+        itemDao.ratingtotal_calc = total;
+        itemDao.ratingcount_calc = count;
 
-        if (avg.lastIndexOf('0') === 3) {
-            avg = avg.substring(0, 3);
-            avg = avg.replace('.0', '');
-        }
+        itemDao.updateRating();
 
-        Drinks.update(options._id, {
-            $set: {
-                rating_calc: avg,
-                ratingtotal_calc: total,
-                ratingcount_calc: count
-            }
-        });
-
-        return {rating_calc: avg, ratingcount_calc: count};
+        return {ratingtotal_calc: itemDao.ratingtotal_calc, ratingcount_calc: itemDao.ratingcount_calc};
 
     }
 

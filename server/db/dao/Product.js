@@ -10,8 +10,10 @@ Product = function (name, brandId, brandName, keywords, tags, user, rating) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
-    this.rating_calc = rating ? rating : 0;
+    // Calculated total number of raters
     this.ratingcount_calc = rating ? 1 : 0;
+    // Calculated sum of all ratings
+    this.ratingtotal_calc = rating ? rating : 0;
     this.date = Date.now();
 
 };
@@ -25,38 +27,52 @@ Product.prototype.insert = function () {
         brand_view: this.brand_view,
         keywords: this.keywords,
         tags: this.tags,
-        rating_calc: this.rating_calc,
         ratingcount_calc: this.ratingcount_calc,
+        ratingtotal_calc: this.ratingtotal_calc,
         user_id: this.user_id,
         date: this.date
     });
 
 };
 
+Product.prototype.updateRating = function () {
+
+    Products.update(this._id, {
+        $set: {
+            ratingtotal_calc: this.ratingtotal_calc,
+            ratingcount_calc: this.ratingcount_calc
+        }
+    });
+
+};
+
+Product.prototype.updateFields = function (dao) {
+
+    if (dao) {
+        for (var field in this) {
+            if (dao.hasOwnProperty(field)) {
+                this[field] = dao[field];
+            }
+        }
+    }
+
+};
+
 Product.prototype.find = function (filter) {
 
-    var product = Products.findOne({_id: this._id}, filter);
+    var item = Products.findOne({_id: this._id}, filter);
 
-    if (!product) {
+    if (!item) {
 
         // Not found reset the id
         this._id = -1;
 
     } else {
 
-        this._id = product._id;
-        this.name = product.name;
-        this.brand_id = product.brand_id;
-        this.brand_view = product.brand_view;
-        this.keywords = product.keywords;
-        this.tags = product.tags;
-        this.user_id = product.user_id;
-        this.rating_calc = product.rating_calc;
-        this.ratingcount_calc = product.ratingcount_calc;
-        this.date = product.date;
+        this.updateFields(item);
 
     }
 
-    return product;
+    return item;
 
 };

@@ -12,10 +12,16 @@ var done = function (err, data) {
     }
 
     var item = data.item;
+    var avg = (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2);
+
+    if (avg.lastIndexOf('0') === 3) {
+        avg = avg.substring(0, 3);
+        avg = avg.replace('.0', '');
+    }
 
     $('.food-name').html(item.name);
     $('.brand').html(NoFoods.widgetlib.createBrandLink(item.brand_id, item.brand_view));
-    $('.totalRating').html(item.rating_calc);
+    $('.totalRating').html(avg);
     $('.totalCount').html(item.ratingcount_calc);
 
     if (item.flags && item.flags.indexOf(NoFoodz.consts.flags.REPORTED) !== -1)
@@ -26,7 +32,7 @@ var done = function (err, data) {
     if (data.userRating) {
         nofoodsRating.setUserValue(data.userRating.rating);
     } else {
-        nofoodsRating.setValue(item.rating_calc);
+        nofoodsRating.setValue(avg);
     }
 
     loadUserData();
@@ -61,8 +67,13 @@ var loadUserData = function () {
 };
 
 var reload = function (response) {
+    var avg = (response.data.ratingtotal_calc / parseFloat(response.data.ratingcount_calc)).toFixed(2);
 
-    $('.totalRating').html(response.data.rating_calc);
+    if (avg.lastIndexOf('0') === 3) {
+        avg = avg.substring(0, 3);
+        avg = avg.replace('.0', '');
+    }
+    $('.totalRating').html(avg);
     $('.totalCount').html(response.data.ratingcount_calc);
 
 };

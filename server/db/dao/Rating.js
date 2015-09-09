@@ -25,7 +25,7 @@ Rating.prototype.updateFields = function (rating) {
 
 };
 
-Rating.prototype.findByUser = function (filter) {
+Rating.prototype.findByUser = function (filter, skipSet) {
 
     var query = {
         user_id: this.user_id
@@ -37,21 +37,25 @@ Rating.prototype.findByUser = function (filter) {
 
     if (this.food_id) {
         query.food_id = this.food_id;
-        db = Ratings;
+        db = FoodRatings;
     } else if (this.drink_id) {
         query.drink_id = this.drink_id;
-        db = Ratings;
+        db = DrinkRatings;
     } else if (this.product_id) {
         query.product_id = this.product_id;
-        db = ProductsRatings;
+        db = ProductRatings;
     } else {
         throw new Meteor.Error(500, 'A type id is required to do a rating insert.');
     }
 
-    var rating = Ratings.findOne(query, filter);
+    console.log('Rating query ' + EJSON.stringify(query));
+    var rating = db.findOne(query, filter);
 
     // update the data to the current new data.
-    this.updateFields(rating);
+    if (!skipSet)
+        this.updateFields(rating);
+
+    console.log('Rating found ' + EJSON.stringify(rating));
 
     return rating;
 
@@ -69,35 +73,39 @@ Rating.prototype.insert = function () {
 
     if (this.food_id) {
         ratingObj.food_id = this.food_id;
-        db = Ratings;
+        db = FoodRatings;
     } else if (this.drink_id) {
         ratingObj.drink_id = this.drink_id;
-        db = Ratings;
+        db = DrinkRatings;
     } else if (this.product_id) {
         ratingObj.product_id = this.product_id;
-        db = ProductsRatings;
+        db = ProductRatings;
     } else {
         throw new Meteor.Error(500, 'A type is required to do a rating insert.');
     }
 
-    db.insert(ratingObj);
+    console.log('Inserting new rating ' + EJSON.stringify(ratingObj));
+    return db.insert(ratingObj);
 
 };
 
 Rating.prototype.upsert = function () {
 
-    var rating = this.findByUser();
+    var rating = this.findByUser({}, true);
 
     if (rating) {
+
+        console.log('Updating rating ' + EJSON.stringify(rating));
+        console.log('Updating rating updated to ' + EJSON.stringify(this));
 
         var db = null;
 
         if (this.food_id) {
-            db = Ratings;
+            db = FoodRatings;
         } else if (this.drink_id) {
-            db = Ratings;
+            db = DrinkRatings;
         } else if (this.product_id) {
-            db = ProductsRatings;
+            db = ProductRatings;
         } else {
             throw new Meteor.Error(500, 'A type is required to do a rating insert.');
         }
@@ -105,12 +113,12 @@ Rating.prototype.upsert = function () {
         db.update({_id: rating._id}, {
             $set: {
                 rating: this.rating,
-                date: this.date
+                date: Date.now()
             }
         });
 
     } else {
-        this.call.insert(this);
+        this.insert.call(this);
     }
 
 };

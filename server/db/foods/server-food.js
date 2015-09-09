@@ -1,50 +1,22 @@
 /**
- * Created by Sora on 7/28/2015.
+ * Created by Sora on 9/8/2015.
  */
-// Start the collection
-Products = new Meteor.Collection("products");
+Foods = new Meteor.Collection("foods");
 
-// Set up permissions for the collection
-Products.allow({
-    insert: function () {
+Foods.allow({
+    insert: function (userId, food) {
         return false;
     },
-    update: function () {
+    update: function (userId, food) {
         return false;
     },
-    remove: function () {
+    remove: function (userId, food) {
+        // not possibly yet
         return false;
     }
 });
 
-Products.deny({
-    insert: function () {
-        return true;
-    },
-    update: function () {
-        return true;
-    },
-    remove: function () {
-        return true;
-    }
-});
-
-ProductRatings = new Meteor.Collection("product_ratings");
-
-// Set up permissions for the collection
-ProductRatings.allow({
-    insert: function () {
-        return false;
-    },
-    update: function () {
-        return false;
-    },
-    remove: function () {
-        return false;
-    }
-});
-
-ProductRatings.deny({
+Foods.deny({
     insert: function () {
         return true;
     },
@@ -56,3 +28,29 @@ ProductRatings.deny({
     }
 });
 
+FoodRatings = new Meteor.Collection("food_ratings");
+
+FoodRatings.allow({
+    insert: function (userId, food) {
+        return false;
+    },
+    update: function (userId, food) {
+        return false;
+    },
+    remove: function (userId, food) {
+        // not possibly yet
+        return false;
+    }
+});
+
+FoodRatings.deny({
+    insert: function () {
+        return true;
+    },
+    update: function () {
+        return true;
+    },
+    remove: function () {
+        return true;
+    }
+});

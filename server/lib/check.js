@@ -23,7 +23,7 @@ NonEmptyString = Match.Where(function (x) {
 
 RatingCheck = Match.Where(function (x) {
     check(x, Number);
-    return x === 1 || x === 2 || x === 3 || x === 4 || x === 5 || x === 6;
+    return x === 0 || x === 1 || x === 2 || x === 3 || x === 4 || x === 5 || x === 6;
 });
 
 FoodTypeCheck = Match.Where(function (x) {

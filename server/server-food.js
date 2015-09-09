@@ -1,29 +1,3 @@
-Foods.allow({
-    insert: function (userId, food) {
-        return false;
-    },
-    update: function (userId, food) {
-        return false;
-    },
-    remove: function (userId, food) {
-        // not possibly yet
-        return false;
-    }
-});
-
-Drinks.allow({
-    insert: function (userId, food) {
-        return false;
-    },
-    update: function (userId, food) {
-        return false;
-    },
-    remove: function (userId, food) {
-        // not possibly yet
-        return false;
-    }
-});
-
 Meteor.methods({
 
     updateFood: function (options) {

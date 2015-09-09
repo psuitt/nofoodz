@@ -10,8 +10,8 @@ Food = function (name, brandId, brandName, keywords, tags, user, rating) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
-    this.rating_calc = rating ? rating : 0;
     this.ratingcount_calc = rating ? 1 : 0;
+    this.ratingtotal_calc = 0;
     this.date = Date.now();
 
 };
@@ -25,8 +25,8 @@ Food.prototype.insert = function () {
         brand_view: this.brand_view,
         keywords: this.keywords,
         tags: this.tags,
-        rating_calc: this.rating_calc,
         ratingcount_calc: this.ratingcount_calc,
+        ratingtotal_calc: this.ratingtotal_calc,
         user_id: this.user_id,
         date: this.date
     });
