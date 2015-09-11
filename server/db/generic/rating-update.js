@@ -16,13 +16,7 @@ Meteor.methods({
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
-        var rating = new Rating(options.rating, this.userId);
-
-        // Set the rating id
-        rating[options.type.toLowerCase() + '_id'] = options._id;
-
-        var userRating = rating.findByUser(),
-            user = Meteor.users.findOne({_id: this.userId}),
+        var user = Meteor.users.findOne({_id: this.userId}),
             bonusHearts = user.profile.bonusHearts;
 
         if (!user.profile.bonusHearts) {
@@ -37,10 +31,16 @@ Meteor.methods({
         var ratingDiff = options.rating,
             countDiff = 1;
 
+        var rating = new Rating(options.rating, this.userId);
+
+        // Set the rating id
+        rating[options.type.toLowerCase() + '_id'] = options._id;
         // Set the rating for updating
         rating.rating = options.rating;
+
         // Update the rating
-        rating.upsert();
+        var upsertObj = rating.upsert(),
+            userRating = upsertObj.previous;
 
         if (!userRating) {
 
@@ -65,22 +65,40 @@ Meteor.methods({
         var func = NoFoodz.db.typeToDao(options.type),
             itemDao = new func();
 
-        console.log('Item Dao ' + EJSON.stringify(itemDao));
-
         itemDao._id = options._id;
 
         var item = itemDao.find(),
-            total = item.ratingtotal_calc;
+            total = item.ratingtotal_calc,
+            count = item.ratingcount_calc + countDiff;
 
         console.log('Item Dao ' + EJSON.stringify(itemDao));
 
-        total += ratingDiff;
-        count = item.ratingcount_calc + countDiff;
+        if (count > 1) {
 
-        itemDao.ratingtotal_calc = total;
-        itemDao.ratingcount_calc = count;
+            total += ratingDiff;
+            itemDao.ratingtotal_calc = total;
+            itemDao.ratingcount_calc = count;
+
+        } else {
+            itemDao.ratingtotal_calc = options.rating;
+            itemDao.ratingcount_calc = 1;
+        }
 
         itemDao.updateRating();
+
+        if (upsertObj.isInsert) {
+            var notification = {
+                _id: options._id,
+                type: options.type,
+                user_id: this.userId,
+                rating: options.rating
+            };
+            Meteor.call('createNotification', notification, function (err, data) {
+                if (err) {
+                    console.log('Notification failed ' + EJSON.stringify(notification) + ' err: ' + err);
+                }
+            });
+        }
 
         return {ratingtotal_calc: itemDao.ratingtotal_calc, ratingcount_calc: itemDao.ratingcount_calc};
 

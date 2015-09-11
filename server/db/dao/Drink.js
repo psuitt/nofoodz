@@ -10,9 +10,10 @@ Drink = function (name, brandId, brandName, keywords, tags, user, rating) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
-    this.rating_calc = rating ? rating : 0;
+    // Calculated total number of raters
     this.ratingcount_calc = rating ? 1 : 0;
-    this.ratingtotal_calc = 0;
+    // Calculated sum of all ratings
+    this.ratingtotal_calc = rating ? rating : 0;
     this.date = Date.now();
 
 };
@@ -26,7 +27,6 @@ Drink.prototype.insert = function () {
         brand_view: this.brand_view,
         keywords: this.keywords,
         tags: this.tags,
-        rating_calc: this.rating_calc,
         ratingcount_calc: this.ratingcount_calc,
         ratingtotal_calc: this.ratingtotal_calc,
         user_id: this.user_id,
@@ -35,31 +35,44 @@ Drink.prototype.insert = function () {
 
 };
 
+Drink.prototype.updateRating = function () {
+
+    Products.update(this._id, {
+        $set: {
+            ratingtotal_calc: this.ratingtotal_calc,
+            ratingcount_calc: this.ratingcount_calc
+        }
+    });
+
+};
+
+Drink.prototype.updateFields = function (dao) {
+
+    if (dao) {
+        for (var field in this) {
+            if (dao.hasOwnProperty(field)) {
+                this[field] = dao[field];
+            }
+        }
+    }
+
+};
+
 Drink.prototype.find = function (filter) {
 
-    var drink = Drinks.findOne({_id: this._id}, filter);
+    var item = Drinks.findOne({_id: this._id}, filter);
 
-    if (!drink) {
+    if (!item) {
 
         // Not found reset the id
         this._id = -1;
 
     } else {
 
-        this._id = drink._id;
-        this.name = drink.name;
-        this.brand_id = drink.brand_id;
-        this.brand_view = drink.brand_view;
-        this.keywords = drink.keywords;
-        this.tags = drink.tags;
-        this.user_id = drink.user_id;
-        this.rating_calc = drink.rating_calc;
-        this.ratingcount_calc = drink.ratingcount_calc;
-        this.date = drink.date;
+        this.updateFields(item);
 
     }
 
-    return drink;
+    return item;
 
 };
-

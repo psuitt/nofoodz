@@ -30,10 +30,14 @@ NoFoodz.notifications = function () {
 			item = Foods.findOne( { _id: this.food_id}, filter );
 			href = NoFoodz.consts.urls.FOOD;
 			href += this.food_id;
-		} else {
+		} else if (this.drink_id) {
 			item = Drinks.findOne( { _id: this.drink_id}, filter );
 			href = NoFoodz.consts.urls.DRINK;
-			href += this.drink_id;	
+			href += this.drink_id;
+		} else {
+			item = Products.findOne({_id: this.product_id}, filter);
+			href = NoFoodz.consts.urls.PRODUCT;
+			href += this.product_id;
 		}
 		
 		var message = '';

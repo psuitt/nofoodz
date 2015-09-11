@@ -25,7 +25,8 @@ Meteor.methods({
             var food_ids = [];
 
             response = {
-                ratings: []
+                ratings: [],
+                foods: []
             };
 
             if (!options.count) {
@@ -33,14 +34,14 @@ Meteor.methods({
                 filter.skip = PAGE_LIMIT * (page - 1);
                 filter.limit = PAGE_LIMIT;
 
-                Ratings.find(query, filter).forEach(function (rating) {
+                FoodRatings.find(query, filter).forEach(function (rating) {
                     food_ids.push(rating.food_id);
                     response.ratings.push(rating);
                 });
 
             } else {
 
-                var results = Ratings.find(query, filter).fetch();
+                var results = FoodRatings.find(query, filter).fetch();
 
                 // set the total count.
                 response.count = results.length;
@@ -112,7 +113,8 @@ Meteor.methods({
             var drink_ids = [];
 
             response = {
-                ratings: []
+                ratings: [],
+                drinks: []
             };
 
             if (!options.count) {
@@ -120,14 +122,14 @@ Meteor.methods({
                 filter.skip = PAGE_LIMIT * (page - 1);
                 filter.limit = PAGE_LIMIT;
 
-                Ratings.find(query, filter).forEach(function (rating) {
+                DrinkRatings.find(query, filter).forEach(function (rating) {
                     drink_ids.push(rating.drink_id);
                     response.ratings.push(rating);
                 });
 
             } else {
 
-                var results = Ratings.find(query, filter).fetch();
+                var results = DrinkRatings.find(query, filter).fetch();
 
                 // set the total count.
                 response.count = results.length;

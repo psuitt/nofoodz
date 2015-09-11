@@ -92,6 +92,7 @@ Meteor.methods({
         };
 
         var findOne = Meteor.users.findOne(query);
+        var user = Meteor.users.findOne({_id: this.userId});
 
         if (!findOne) {
 
@@ -105,7 +106,8 @@ Meteor.methods({
         }
 
         var notification = {
-            user_id: this.userId
+            user_id: this.userId,
+            username: user.username
         };
 
         Meteor.users.update({username: options.username}, {$addToSet: {"notifications": notification}});
@@ -200,7 +202,6 @@ Meteor.methods({
 
             if (drink_ids.length > 0) {
                 var drinksQuery = addSearch({_id: {$in: drink_ids}}, options);
-                ;
                 response.drinks = Drinks.find(drinksQuery).fetch();
             }
 

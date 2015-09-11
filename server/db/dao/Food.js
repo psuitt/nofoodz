@@ -10,8 +10,10 @@ Food = function (name, brandId, brandName, keywords, tags, user, rating) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
+    // Calculated total number of raters
     this.ratingcount_calc = rating ? 1 : 0;
-    this.ratingtotal_calc = 0;
+    // Calculated sum of all ratings
+    this.ratingtotal_calc = rating ? rating : 0;
     this.date = Date.now();
 
 };
@@ -33,30 +35,44 @@ Food.prototype.insert = function () {
 
 };
 
+Food.prototype.updateRating = function () {
+
+    Products.update(this._id, {
+        $set: {
+            ratingtotal_calc: this.ratingtotal_calc,
+            ratingcount_calc: this.ratingcount_calc
+        }
+    });
+
+};
+
+Food.prototype.updateFields = function (dao) {
+
+    if (dao) {
+        for (var field in this) {
+            if (dao.hasOwnProperty(field)) {
+                this[field] = dao[field];
+            }
+        }
+    }
+
+};
+
 Food.prototype.find = function (filter) {
 
-    var food = Foods.findOne({_id: this._id}, filter);
+    var item = Foods.findOne({_id: this._id}, filter);
 
-    if (!food) {
+    if (!item) {
 
         // Not found reset the id
         this._id = -1;
 
     } else {
 
-        this._id = food._id;
-        this.name = food.name;
-        this.brand_id = food.brand_id;
-        this.brand_view = food.brand_view;
-        this.keywords = food.keywords;
-        this.tags = food.tags;
-        this.user_id = food.user_id;
-        this.rating_calc = food.rating_calc;
-        this.ratingcount_calc = food.ratingcount_calc;
-        this.date = food.date;
+        this.updateFields(item);
 
     }
 
-    return food;
+    return item;
 
 };

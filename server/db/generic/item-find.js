@@ -23,31 +23,20 @@ Meteor.methods({
         console.log('Item is a ' + options.type);
         switch (options.type) {
             case NoFoodz.consts.db.FOOD:
-                response.item = Foods.findOne(query, filter);
-                if (this.userId)
-                    response.userRating = Ratings.findOne({
-                        user_id: this.userId,
-                        food_id: options._id
-                    }, {fields: {rating: 1}});
-                break;
             case NoFoodz.consts.db.DRINK:
-                response.item = Drinks.findOne(query, filter);
-                if (this.userId)
-                    response.userRating = Ratings.findOne({
-                        user_id: this.userId,
-                        drink_id: options._id
-                    }, {fields: {rating: 1}});
-                break;
             case NoFoodz.consts.db.PRODUCT:
-                var product = new Product();
-                product._id = options._id;
-                response.item = product.find(filter);
+                var func = NoFoodz.db.typeToDao(options.type),
+                    itemDao = new func();
+
+                itemDao._id = options._id;
+
+                response.item = itemDao.find(filter);
 
                 console.log(response.item);
 
                 if (this.userId) {
                     var rating = new Rating();
-                    rating.product_id = options._id;
+                    rating[options.type.toLowerCase() + '_id'] = options._id;
                     rating.user_id = this.userId;
                     response.userRating = rating.findByUser({fields: {rating: 1}});
                 }

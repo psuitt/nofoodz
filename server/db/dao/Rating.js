@@ -85,13 +85,15 @@ Rating.prototype.insert = function () {
     }
 
     console.log('Inserting new rating ' + EJSON.stringify(ratingObj));
+
     return db.insert(ratingObj);
 
 };
 
 Rating.prototype.upsert = function () {
 
-    var rating = this.findByUser({}, true);
+    var rating = this.findByUser({}, true),
+        returnedObj = {previous: rating};
 
     if (rating) {
 
@@ -116,9 +118,15 @@ Rating.prototype.upsert = function () {
                 date: Date.now()
             }
         });
+        returnedObj.isInsert = false;
 
     } else {
+
+        returnedObj.isInsert = true;
         this.insert.call(this);
+
     }
+
+    return returnedObj;
 
 };
