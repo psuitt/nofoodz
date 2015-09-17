@@ -54,6 +54,14 @@ div.myrating>span {
 	font-size: 18px;
 }
 
+#myfoods-profile label {
+	margin-top: 10px;
+}
+
+#myfoods-save {
+	margin-top: 50px;
+}
+
 #myfoods_wishlist {
 	display: block;
 }

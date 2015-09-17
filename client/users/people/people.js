@@ -1,31 +1,35 @@
-var userDataSub,
-		currentUser_id;
+var currentUser_id;
 		
 Template.people.destroyed = function () {
-	userDataSub && userDataSub.stop();
 };		
 
 Template.people.rendered = function() {
-	
-	userDataSub = Meteor.subscribe('users_searchexact', PARAMS.username, function() {
-		// This will contains your user info and the searched.
-		var user = Meteor.users.findOne({username: PARAMS.username});
-		
-		var displayName = user.profile.name ? user.profile.name : user.username;	
-		
-		$('.people-name').html(displayName);		
-		
-		findUserRatings(user);
-		
-		$('span.wishstar').on('click', function() {
-			Meteor.call('addToLinks', {username: PARAMS.username});
-			$(".wishstar").toggleClass("x100", true);		
-		});
-		
-		loadUserData();
-		
-		NoFoods.widgetlib.floatMenu($('#people-nav'));
-		
+
+	var data = this.data;
+
+	Meteor.call('findUser', {username: data.username}, function (err, response) {
+
+		if (!err && response) {
+
+			var user = response;
+
+			var displayName = user.profile.name ? user.profile.name : user.username;
+
+			$('.people-name').html(displayName);
+
+			findUserRatings(user);
+
+			$('span.wishstar').on('click', function () {
+				Meteor.call('addToLinks', {username: data.username});
+				$(".wishstar").toggleClass("x100", true);
+			});
+
+			loadUserData(user.username);
+
+			NoFoods.widgetlib.floatMenu($('#people-nav'));
+
+		}
+
 	});
 	
 	$('div.nofoods-pagenav a').click(function(e) {
@@ -35,7 +39,7 @@ Template.people.rendered = function() {
 
 };
 
-var loadUserData = function() {
+var loadUserData = function (username) {
 
 	var user = Meteor.user();
 
@@ -43,7 +47,7 @@ var loadUserData = function() {
 
 		if (user.profile.links) {
 			for (var i = 0, l = user.profile.links.length; i < l; i += 1) {
-				if (user.profile.links[i].username === PARAMS.username) {
+				if (user.profile.links[i].username === username) {
 					$(".wishstar").toggleClass("x100", true);
 					break;
 				}

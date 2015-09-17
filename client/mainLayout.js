@@ -61,7 +61,7 @@ var loadNotifications = function() {
 								span = $('<span></span>');
 								
 						li.html(notification.message);
-						span.html(NoFoods.lib.formatDateTime(notification.date));						
+						span.html(NoFoods.lib.formatDate(notification.date));
 						
 						li.prepend(span);
 						$('#notificationsList').append(li);

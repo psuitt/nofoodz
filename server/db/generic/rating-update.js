@@ -11,9 +11,11 @@ Meteor.methods({
             _id: NonEmptyString
         });
 
+        var currentUserId = this.userId;
+
         console.log(options);
 
-        if (!this.userId)
+        if (!currentUserId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var user = Meteor.users.findOne({_id: this.userId}),
@@ -29,7 +31,7 @@ Meteor.methods({
         }
 
         var ratingDiff = options.rating,
-            countDiff = 1;
+            countDiff = options.rating > 0 ? 1 : 0;
 
         var rating = new Rating(options.rating, this.userId);
 
@@ -59,6 +61,12 @@ Meteor.methods({
                 Meteor.users.update({_id: this.userId}, {$inc: {"profile.bonusHearts": -1}});
             }
 
+            if (userRating.rating > 0 && options.rating == 0) {
+                countDiff = -1;
+            } else if (userRating.rating === 0 && options.rating > 0) {
+                countDiff = 1;
+            }
+
         }
 
         //Recalculate Rating total
@@ -68,12 +76,12 @@ Meteor.methods({
         itemDao._id = options._id;
 
         var item = itemDao.find(),
-            total = item.ratingtotal_calc,
+            total = item.ratingtotal_calc ? item.ratingtotal_calc : 0,
             count = item.ratingcount_calc + countDiff;
 
         console.log('Item Dao ' + EJSON.stringify(itemDao));
 
-        if (count > 1) {
+        if (count > 0) {
 
             total += ratingDiff;
             itemDao.ratingtotal_calc = total;
@@ -90,7 +98,7 @@ Meteor.methods({
             var notification = {
                 _id: options._id,
                 type: options.type,
-                user_id: this.userId,
+                user_id: currentUserId,
                 rating: options.rating
             };
             Meteor.call('createNotification', notification, function (err, data) {

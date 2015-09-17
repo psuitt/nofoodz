@@ -5,8 +5,7 @@
 }
 
 #findContent {
-    max-width: 1000px;
-    min-width: 70%;
+    width: 100%;
     text-align: left;
     display: inline-block;
     overflow: hidden;

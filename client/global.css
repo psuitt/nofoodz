@@ -147,11 +147,11 @@ div.pageheader {
     margin-bottom: 20px;
     font-size: 30px;
     font-weight: 700;
-    border-bottom: 1px solid #424242;
+    border-bottom: 2px solid #424242;
 }
 
-h3.pagetitle.username {
-    color: #FFFFFF;
+h3.pagetitle.no-border {
+    border: none;
 }
 
 h3.pagetitle span.wishstar {
@@ -186,13 +186,25 @@ button.simple {
     box-shadow: none;
 }
 
+button.simple:focus {
+    color: #E91E63 !important;
+    border: 0 !important;
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+button.simple:visited,
+button.simple:active,
 button.simple:hover {
-    color: #E91E63;
-    border: 0;
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+    color: #E91E63 !important;
+    border: 0 !important;
+    outline: none !important;
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .error-message {
@@ -606,7 +618,7 @@ button span.button-icon {
 #notifications {
     cursor: pointer;
     vertical-align: top;
-    padding: 0 5px;
+    padding: 0 8px 0 8px;
     margin: 0 0 0 10px;
     line-height: 50px;
     display: inline-block;
@@ -618,7 +630,7 @@ button span.button-icon {
 
 #notifications.open {
     color: #FFFFFF;
-    background-color: #4CAF50;
+    background: #4CAF50;
 }
 
 #notifications:hover {
@@ -629,8 +641,7 @@ button span.button-icon {
     width: 400px;
     display: none;
     position: absolute;
-    background: #4CAF50;
-    border-top: 0;
+    border: 2px solid #4CAF50;
     top: 50px;
     right: 0;
     list-style: none;
@@ -644,20 +655,21 @@ button span.button-icon {
 #notificationsList li {
     display: block;
     text-align: left;
-    padding: 5px 25px 5px 15px;
+    padding: 5px 25px 5px 5px;
     font-size: 14px;
 }
 
 #notificationsList li.title {
-    color: #FFFFFF;
+    color: #4CAF50;
     font-size: 16px;
+    font-weight: bold;
     padding: 5px;
 }
 
 #notificationsList li span {
-    color: #255DAF;
+    color: #795548;
     font-weight: 500;
-    margin-right: 5px;
+    margin-right: 15px;
 }
 
 #login-buttons {
@@ -861,36 +873,35 @@ div.pagingdiv.no-border {
 }
 
 div.pagingdiv span {
-    color: #FFFFFF;
+    color: #E91E63;
     top: 0;
     line-height: 25px;
-    min-width: 25px;
-    padding: 2px 5px;
+    min-width: 30px;
+    padding: 3px 5px;
     cursor: pointer;
     margin: 5px;
     font-size: 14px;
     font-weight: bold;
     display: inline-block;
-    background-color: #800000;
-    border: 1px solid #222222;
+    background-color: #FFFFFF;
+    border: 2px solid #E91E63;
     text-align: center;
+    vertical-align: top;
 }
 
 div.pagingdiv span:hover {
-    background-color: #255DAF;
-    box-shadow: 0 0 5px 2px #255DAF;
-    -moz-box-shadow: 0 0 5px #255DAF;
-    -webkit-box-shadow: 0 0 5px #255DAF;
+    color: #FFFFFF;
+    background-color: #E91E63;
 }
 
 div.pagingdiv span.left.arrow {
-    margin-right: 10px;
+    margin-right: 15px;
     margin-left: 0;
 }
 
 div.pagingdiv span.right.arrow {
     margin-right: 0;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 div.pagingdiv span.first.arrow {
@@ -903,16 +914,22 @@ div.pagingdiv span.last.arrow {
     margin-left: 5px;
 }
 
-div.pagingdiv span.arrow.disabled {
+div.pagingdiv span.arrow.disabled,
+div.pagingdiv span.arrow.disabled:hover {
+    color: #FFFFFF;
     background-color: #424242;
+    border-color: #424242;
     cursor: default;
+}
+
+div.pagingdiv span.paging {
+    min-width: 35px;
 }
 
 div.pagingdiv span.paging.current {
     color: #FFFFFF;
-    background-color: #255DAF;
-    padding: 4px;
-    margin: 3px;
+    background-color: #2196F3;
+    border-color: #2196F3;
 }
 
 /* LABELS */

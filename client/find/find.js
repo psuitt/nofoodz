@@ -9,9 +9,6 @@ var results = false,
 Template.find.rendered = function () {
 
     var data = this.data;
-    $('#menu span.nofoodssearch.text').text(data.type);
-    $('#menu .nofoodssearch input').val(data.search);
-    Search(data.type, data.search);
 
 };
 
@@ -19,6 +16,9 @@ Search = function (type, search) {
 
     if (!type || !search)
         return;
+
+    $('#menu span.nofoodssearch.text').text(type.substring(0, 1).toUpperCase() + type.substring(1));
+    $('#menu .nofoodssearch input').val(search);
 
     $('div.loading').removeClass('hide');
 
@@ -89,6 +89,8 @@ var doSearch = function (search, type) {
 
                 }
 
+            } else {
+                $('#findResultsCount').html('No results found');
             }
 
         }
@@ -122,51 +124,53 @@ var doSearchPeople = function (search) {
     var htmlBuilder = [];
 
     $('#findContent').html('');
+    $('#findResults').html('');
 
-    Meteor.subscribe('users_search', search, function () {
-        var results = Meteor.users.find({}),
-            count = results.count() - 1,
-            user_id = Meteor.userId();
+    var obj = {
+        'username': search
+    };
 
-        if (count < 1) {
+    Meteor.call('findUsers', obj, function (err, response) {
 
-            $('#search-peoplelink').html("People (" + 0 + ")");
-            $('#search-people').html("<div class='resultsTotals'>No results found</div>");
+        if (!err) {
 
-        } else {
+            if (response.data) {
 
-            if (count < 19) {
-                $('#search-peoplelink').html("People (" + count + ")");
-            } else {
-                $('#search-peoplelink').html("People (20+)");
+                var count = response.data.length;
+
+                results = response.data;
+
+                if (count < 20) {
+                    $('#findResultsCount').html(count + ' results found');
+                } else {
+                    $('#findResultsCount').html('20+ results found');
+                }
+
+                _.each(response.data, function (value, key) {
+
+                    var div = $('<div></div>'),
+                    //icon = $('<span>NO IMAGE AVAILABLE</span>'),
+                        name = $('<span></span>'),
+                        aName = $("<a target='_top'></a>");
+
+                    div.addClass('item');
+                    //icon.addClass('itemIcon');
+                    name.addClass('itemName');
+
+                    aName.attr('href', NoFoodz.consts.urls.PEOPLE + value.username);
+                    aName.html(value.username);
+
+                    name.append(aName);
+                    //div.append(icon);
+                    div.append(name);
+                    $('#findResults').append(div);
+
+                });
+
             }
-
-            $('#search-people').html("<div class='resultsTotals'>" + count + " results found</div>");
-
-            results.forEach(function (user) {
-                var div = $('<div></div>'),
-                //icon = $('<span>NO IMAGE AVAILABLE</span>'),
-                    name = $('<span></span>'),
-                    aName = $("<a target='_top'></a>");
-
-                div.addClass('item');
-                //icon.addClass('itemIcon');
-                name.addClass('itemName');
-
-                aName.attr('href', NoFoodz.consts.urls.PEOPLE + user.username);
-                aName.html(user.username);
-
-                name.append(aName);
-                //div.append(icon);
-                div.append(name);
-                user_id !== user._id && $('#search-people').append(div);
-            });
-
         }
 
         $('div.loading').addClass('hide');
-        $('#resultsDiv').show();
-        $('#search-people').removeClass('hide');
 
     });
 
@@ -179,7 +183,8 @@ var getSearchRow = function (link, item) {
         brand = $('<span></span>'),
         rating = $('<span></span>'),
         aName = $("<a target='_top'></a>"),
-        aBrand = $("<a class='brand' target='_top'></a>");
+        aBrand = $("<a class='brand' target='_top'></a>"),
+        ratingValue = item.ratingtotal_calc / item.ratingcount_calc;
 
     div.addClass('item');
     name.addClass('itemName');
@@ -192,8 +197,8 @@ var getSearchRow = function (link, item) {
     aBrand.attr('href', NoFoodz.consts.urls.BRAND + item.brand_id);
     aBrand.html(item.brand_view);
 
-    rating.attr('title', item.rating_calc)
-    var i = (Math.round((item.rating_calc * 2)) * 10).toString();
+    rating.attr('title', ratingValue)
+    var i = (Math.round((ratingValue * 2)) * 10).toString();
 
     rating.addClass('rating');
     rating.addClass('x' + i);

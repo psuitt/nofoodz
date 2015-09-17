@@ -15,7 +15,8 @@ Meteor.methods({
                 name: 1,
                 brand_id: 1,
                 brand_view: 1,
-                rating_calc: 1
+                ratingtotal_calc: 1,
+                ratingcount_calc: 1
             }
         };
 
@@ -82,7 +83,8 @@ Meteor.methods({
                 name: 1,
                 brand_id: 1,
                 brand_view: 1,
-                rating_calc: 1
+                ratingtotal_calc: 1,
+                ratingcount_calc: 1
             }
         };
 

@@ -137,8 +137,10 @@ Router.map(function () {
             'footer': {to: 'footer'}
         },
         onBeforeAction: function () {
-            PARAMS = this.params;
             this.next();
+        },
+        data: function () {
+            return this.params;
         }
     });
 
