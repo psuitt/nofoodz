@@ -31,5 +31,20 @@ NoFoodz.utils.db = {
                 break;
         }
 
+    },
+
+    getCommentsDB: function (type) {
+
+        switch (type.toLowerCase()) {
+            case NoFoodz.consts.db.FOOD:
+                return FoodComments;
+            case NoFoodz.consts.db.DRINK:
+                return DrinkComments;
+            case NoFoodz.consts.db.PRODUCT:
+                return ProductComments;
+            default:
+                break;
+        }
+
     }
 };
