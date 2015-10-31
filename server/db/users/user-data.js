@@ -2,8 +2,6 @@ Meteor.methods({
 
     userData: function () {
 
-        console.log('Fetching simple user data. [UserId=' + this.userId + ']');
-
         if (!this.userId)
             throw new Meteor.Error(403, 'You must be logged in');
 
@@ -24,8 +22,6 @@ Meteor.methods({
     },
 
     userDataSimple: function () {
-
-        console.log('Fetching simple user data. [UserId=' + this.userId + ']');
 
         if (!this.userId)
             throw new Meteor.Error(403, 'You must be logged in');
