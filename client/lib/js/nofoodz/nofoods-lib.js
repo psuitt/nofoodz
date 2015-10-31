@@ -2,7 +2,7 @@ NoFoods = typeof NoFoods === 'undefined' ? {} : NoFoods;
 
 NoFoods.lib = function() {
 
-	var MAX_PAGE_AMOUNT = 3;
+	var MAX_PAGE_AMOUNT = 15;
 
 	return {
 		

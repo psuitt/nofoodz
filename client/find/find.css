@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 
-#findContent div.item:not(:last-child) {
+#findContent div.item {
     margin-bottom: 20px;
 }
 

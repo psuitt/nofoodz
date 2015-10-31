@@ -1,8 +1,9 @@
 Meteor.methods({
 
     updateProfile: function (options) {
+
         check(options, {
-            name: Match.Optional(NonEmptyString)
+            name: Match.Optional(NonEmptyStringNoSpecialCharacters)
         });
 
         if (!this.userId)
@@ -24,30 +25,21 @@ Meteor.methods({
 
         check(options, {
             food_id: Match.Optional(NonEmptyString),
-            drink_id: Match.Optional(NonEmptyString)
+            drink_id: Match.Optional(NonEmptyString),
+            product_id: Match.Optional(NonEmptyString)
         });
 
         if (!this.userId)
             throw new Meteor.Error(403, "You must be logged in");
 
-        var query = {
-            _id: this.userId,
-            "profile.wishlist.food_id": options.food_id,
-            "profile.wishlist.drink_id": options.drink_id
+        var wish = {
+            food_id: options.food_id ? options.food_id : "",
+            drink_id: options.drink_id ? options.drink_id : "",
+            product_id: options.product_id ? options.product_id : "",
+            date: Date.now()
         };
 
-        var findOne = Meteor.users.findOne(query);
-
-        if (!findOne) {
-
-            var wish = {
-                food_id: options.food_id,
-                drink_id: options.drink_id,
-                date: Date.now()
-            };
-
-            Meteor.users.update({_id: this.userId}, {$addToSet: {"profile.wishlist": wish}});
-        }
+        Meteor.users.update({_id: this.userId}, {$addToSet: {"profile.wishlist": wish}});
 
     },
 
@@ -55,13 +47,14 @@ Meteor.methods({
 
         check(options, {
             food_id: Match.Optional(NonEmptyString),
-            drink_id: Match.Optional(NonEmptyString)
+            drink_id: Match.Optional(NonEmptyString),
+            product_id: Match.Optional(NonEmptyString)
         });
 
         if (!this.userId)
             throw new Meteor.Error(403, "You must be logged in");
 
-        if (!options.food_id && !options.drink_id)
+        if (!options.food_id && !options.drink_id && !options.product_id)
             throw new Meteor.Error(500, "A food or drink must be removed from the wishlist");
 
 
@@ -69,8 +62,10 @@ Meteor.methods({
 
         if (options.food_id) {
             toRemove.food_id = options.food_id;
-        } else {
+        } else if (options.drink_id) {
             toRemove.drink_id = options.drink_id;
+        } else {
+            toRemove.product_id = options.product_id;
         }
 
         Meteor.users.update({_id: this.userId}, {$pull: {"profile.wishlist": toRemove}});

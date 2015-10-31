@@ -63,22 +63,19 @@ NoFoods.widgetlib = function() {
 					brand = $("<span class='brand myfoods'></span>"),
 					brandLink = $("<a></a>"),
 					ratingSpan = $("<span class='rating'></span>"),
-					ratingNumber = $("<span class='ratingNum'></span>"),
 					toAdd = null;
 			
 			name.addClass("lower");
 		
 			var i = (Math.round((rating.rating * 2))*10).toString();
-			
-			ratingNumber.html(rating.rating);
-			ratingSpan.addClass('x' + i);	
+
+			ratingSpan.addClass('x' + i).text(rating.rating);
 		
 			name.append(nameLink);
 			brand.append(brandLink);
 			div.append(name);
 			div.append(brand);
-			div.append(ratingSpan);	
-			div.append(ratingNumber);
+			div.append(ratingSpan);
 			
 			return div;
 		

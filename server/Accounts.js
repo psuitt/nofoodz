@@ -1,6 +1,6 @@
 Accounts.config({
     sendVerificationEmail: true,
-    loginExpirationInDays: 2
+    loginExpirationInDays: 20
 });
 
 // Validate username, sending a specific error message on failure.

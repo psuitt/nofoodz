@@ -37,7 +37,7 @@ Drink.prototype.insert = function () {
 
 Drink.prototype.updateRating = function () {
 
-    Products.update(this._id, {
+    Drinks.update(this._id, {
         $set: {
             ratingtotal_calc: this.ratingtotal_calc,
             ratingcount_calc: this.ratingcount_calc
