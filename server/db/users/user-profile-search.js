@@ -6,7 +6,7 @@ Meteor.methods({
     findUser: function (options) {
 
         check(options, {
-            username: String
+            username: NonEmptyStringNoSpaceCharacters
         });
 
         var query = {
@@ -29,7 +29,7 @@ Meteor.methods({
         console.log(options);
 
         check(options, {
-            username: String
+            username: NonEmptyStringNoSpaceCharacters
         });
 
         var response = {

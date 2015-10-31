@@ -21,11 +21,6 @@ Meteor.methods({
         var user = Meteor.users.findOne({_id: this.userId}),
             bonusHearts = user.profile.bonusHearts;
 
-        if (!user.profile.bonusHearts) {
-            Meteor.users.update({_id: this.userId}, {$set: {"profile.bonusHearts": 10}});
-            bonusHearts = 10;
-        }
-
         if (bonusHearts < 1 && options.rating > 5) {
             throw new Meteor.Error(500, "You can not rate this above a 5");
         }
@@ -87,6 +82,9 @@ Meteor.methods({
             itemDao.ratingtotal_calc = total;
             itemDao.ratingcount_calc = count;
 
+        } else if (options.rating === 0) {
+            itemDao.ratingtotal_calc = options.rating;
+            itemDao.ratingcount_calc = 0;
         } else {
             itemDao.ratingtotal_calc = options.rating;
             itemDao.ratingcount_calc = 1;

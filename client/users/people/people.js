@@ -1,11 +1,32 @@
-var currentUser_id;
-		
 Template.people.destroyed = function () {
 };		
 
 Template.people.rendered = function() {
 
 	var data = this.data;
+
+	var currentUser = Meteor.call('userDataSimple', function (err, currentUser) {
+
+		if (!err && currentUser) {
+
+			if (!currentUser || data.username === currentUser.username) {
+				$('span.wishstar').hide();
+			}
+
+		}
+
+		loadUser(data, currentUser);
+
+	});
+
+	$('div.nofoods-pagenav a').click(function(e) {
+		e.preventDefault();	
+		$(this).tab('show');	
+	}); 
+
+};
+
+var loadUser = function (data, currentUser) {
 
 	Meteor.call('findUser', {username: data.username}, function (err, response) {
 
@@ -24,30 +45,23 @@ Template.people.rendered = function() {
 				$(".wishstar").toggleClass("x100", true);
 			});
 
-			loadUserData(user.username);
+			loadUserData(currentUser, user.username);
 
-			NoFoods.widgetlib.floatMenu($('#people-nav'));
+			NoFoods.widgetlib.floatMenu($('#people_nav'));
 
 		}
 
 	});
-	
-	$('div.nofoods-pagenav a').click(function(e) {
-		e.preventDefault();	
-		$(this).tab('show');	
-	}); 
 
 };
 
-var loadUserData = function (username) {
+var loadUserData = function (currentUser, username) {
 
-	var user = Meteor.user();
+	if (currentUser && currentUser.profile) {
 
-	if (user.profile) {
-
-		if (user.profile.links) {
-			for (var i = 0, l = user.profile.links.length; i < l; i += 1) {
-				if (user.profile.links[i].username === username) {
+		if (currentUser.profile.links) {
+			for (var i = 0, l = currentUser.profile.links.length; i < l; i += 1) {
+				if (currentUser.profile.links[i].username === username) {
 					$(".wishstar").toggleClass("x100", true);
 					break;
 				}
@@ -60,104 +74,79 @@ var loadUserData = function (username) {
 
 var findUserRatings = function(user) {
 
-	currentUser_id = user._id;
-
-	getFoodsPage(1, false, true);
-	getDrinksPage(1, false, true);
+	getFoodsPage(false, 1, true);
+	getDrinksPage(false, 1, true);
+	getProductsPage(false, 1, true);
 
 };
 
-var getFoodsPage = function(page, obj, count) {
-	
-	var obj = { 
-		page: page,
-		user_id: currentUser_id 
-	};
-	
-	if (count) 
-		obj.count = true;
-	
-	Meteor.call('getUserFoodRatings', obj, function(err, data) {
-		
-		if (!err) {
-			
-			var fDiv = $("#people-foodsList");
-			
-			fDiv.html("");
-			
-			for (var i = 0, len = data.ratings.length; i < len; i += 1) {
-				var rating = data.ratings[i],
-						div = NoFoods.widgetlib.createRatingDiv(rating);
-				div.addClass(rating.food_id);
-				fDiv.append(div);
-			}		
-			
-			for (var f = 0, len = data.foods.length; f < len; f += 1) {
-				var food = data.foods[f];
-				$("." + food._id + " .name a").attr('href', NoFoodz.consts.urls.FOOD + food._id).html(food.name);
-				$("." + food._id + " .brand a").attr('href', NoFoodz.consts.urls.BRAND + food.brand_id).html(food.brand_view);
-			}		
-			
-			if (len === 0) {
-				fDiv.append("No ratings found");			
-			}
-			
-			if (count) {
-				$("#people-foods .people-paging").nofoodspaging({
-					max: data.count / data.maxPageSize,
-					select: getFoodsPage
-				});			
-			}	
-			
-		}
-		
-  });
+var getFoodsPage = function (data, page, count) {
+
+	getGenericPage(getProductsPage, data, page, count, 'FOOD');
+
 };
 
-var getDrinksPage = function(page, obj, count) {
-	
-	var obj = { 
-		page: page,
-		user_id: currentUser_id 
-	};	
-	
-	if (count) 
+var getDrinksPage = function (data, page, count) {
+
+	getGenericPage(getProductsPage, data, page, count, 'DRINK');
+
+};
+
+var getProductsPage = function (data, page, count) {
+
+	getGenericPage(getProductsPage, data, page, count, 'PRODUCT');
+
+};
+
+var getGenericPage = function (func, data, page, count, type, search) {
+
+	var obj = {
+			'page': page,
+			'type': type
+		},
+		t = type.toLowerCase();
+
+	if (search)
+		obj['search'] = search;
+	if (count)
 		obj.count = true;
-	
-	Meteor.call('getUserDrinkRatings', obj, function(err, data) {
-		
-		if (!err) {
-			
-			var dDiv = $("#people-drinksList");
-			
-			dDiv.html("");
-			
-			for (var i = 0, len = data.ratings.length; i < len; i += 1) {
-				var rating = data.ratings[i],
-						div = NoFoods.widgetlib.createRatingDiv(rating);
-				div.addClass(rating.drink_id);
-				dDiv.append(div);
-			}		
-			
-			for (var f = 0, len = data.drinks.length; f < len; f += 1) {
-				var drink = data.drinks[f];
-				$("." + drink._id + " .name a").attr('href', NoFoodz.consts.urls.DRINK + drink._id).html(drink.name);
-				$("." + drink._id + " .brand a").attr('href', NoFoodz.consts.urls.BRAND + drink.brand_id).html(drink.brand_view);
-			}	
-			
-			if (len === 0) {
-				dDiv.append("No ratings found");			
+
+	Meteor.call('getUserRatings', obj, function (err, data) {
+
+		if (!err && data.items) {
+
+			var itemDiv = $('#people_ratings' + t);
+
+			itemDiv.html('');
+
+			var len = data.items.length;
+
+			if (len !== 0) {
+
+				_.each(data.ratings, function (rating, index, list) {
+					var div = NoFoods.widgetlib.createRatingDiv(rating);
+					div.addClass(rating[t + '_id']);
+					itemDiv.append(div);
+				});
+
+				_.each(data.items, function (item, index, list) {
+					$('.' + item._id + ' .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
+					$('.' + item._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+				});
+
+			} else {
+				itemDiv.append('No ratings found');
 			}
-			
+
 			if (count) {
-				$("#people-drinks .people-paging").nofoodspaging({
+				$('#people_' + t + ' .myfoods-paging').nofoodspaging({
 					max: data.count / data.maxPageSize,
-					select: getDrinksPage
-				});			
-			}			
-			
+					select: func
+				});
+			}
+
 		}
-		
-  });
-	
+
+	});
+
 };

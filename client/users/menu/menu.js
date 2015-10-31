@@ -4,7 +4,7 @@
 Template.menu.helpers({
     username: function () {
         var user = Meteor.user();
-        return  user.username.substring(0, 1).toUpperCase() + user.username.substring(1);
+        return user.username.substring(0, 1).toUpperCase() + user.username.substring(1);
     },
     usernameShort: function () {
         var user = Meteor.user();

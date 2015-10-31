@@ -160,7 +160,7 @@ h3.pagetitle span.wishstar {
 }
 
 h4.section-title {
-    color: #008000;
+    color: #4CAF50;
     font-size: 22px;
     border-bottom: 1px dashed;
 }
@@ -170,41 +170,30 @@ div.page-message {
 }
 
 div.alertmessage {
-    top: 50px;
+    top: 0;
     left: 0;
     width: 100%;
     display: none;
     position: fixed;
-    z-index: 100;
+    z-index: 1000;
 }
 
-button.simple {
-    color: #424242;
-    border: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+.alert-success {
+    background: #FFFFFF;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
-button.simple:focus {
-    color: #E91E63 !important;
-    border: 0 !important;
-    background-color: transparent !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-}
-
-button.simple:visited,
-button.simple:active,
-button.simple:hover {
-    color: #E91E63 !important;
-    border: 0 !important;
-    outline: none !important;
-    background-color: transparent !important;
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
+.alert-danger {
+    background: #FFFFFF;
+    border: 2px solid #F44336;
+    color: #F44336;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .error-message {
@@ -593,6 +582,41 @@ button span.button-icon {
     vertical-align: middle;
 }
 
+button.simple {
+    color: #424242;
+    font-size: 18px;
+    padding: 4px 10px;
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+button.simple:focus {
+    color: #E91E63 !important;
+    border: 0 !important;
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+button.simple:visited,
+button.simple:active,
+button.simple:hover {
+    color: #E91E63 !important;
+    border: 0 !important;
+    outline: none !important;
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+button.simple.blue-button {
+    color: #2196F3 !important;
+}
+
 /* Tags */
 
 .bootstrap-tagsinput {
@@ -669,7 +693,7 @@ button span.button-icon {
 #notificationsList li span {
     color: #795548;
     font-weight: 500;
-    margin-right: 15px;
+    margin: 0 15px;
 }
 
 #login-buttons {
@@ -792,7 +816,7 @@ span.wishstar.x100 {
 }
 
 span.date {
-    color: #800000;
+    color: #795548;
 }
 
 div.loading {
@@ -1008,6 +1032,7 @@ span.rating {
     background-repeat: no-repeat;
     margin-left: 0;
     margin-right: 4px;
+    text-align: center;
 }
 
 span.rating.dashed {

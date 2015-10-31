@@ -38,12 +38,13 @@ var done = function (err, data) {
     loadUserData();
 
     // Create the additional info div with the items data
+    /*
     $('#infoDiv').nofoodzadditionalinfo({
         _id: item._id,
         type: PARAMS.type,
         info: item.info,
         update: item.user_id === Meteor.user()._id
-    });
+     });*/
 
 };
 
@@ -89,8 +90,10 @@ Template.foods.rendered = function () {
 
     if (data.type === NoFoodz.consts.FOOD) {
         idField = 'food_id';
-    } else {
+    } else if (data.type === NoFoodz.consts.DRINK) {
         idField = 'drink_id';
+    } else {
+        idField = 'product_id';
     }
 
     Meteor.call('getItemById', obj, done);
@@ -120,7 +123,7 @@ Template.foods.rendered = function () {
     $('span.wishstar').on('click', function () {
         var options = {};
 
-        options[idField] = PARAMS._id;
+        options[idField] = data._id;
 
         Meteor.call('addToWishList', options);
 
