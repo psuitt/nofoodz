@@ -5,7 +5,7 @@ Template.people.rendered = function() {
 
 	var data = this.data;
 
-	var currentUser = Meteor.call('userDataSimple', function (err, currentUser) {
+	Meteor.call('userDataSimple', function (err, currentUser) {
 
 		if (!err && currentUser) {
 

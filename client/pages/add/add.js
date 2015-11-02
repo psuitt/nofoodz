@@ -17,6 +17,16 @@ Template.foodsadd.rendered = function () {
 
     var data = this.data;
 
+    Meteor.call('userDataSimple', function (err, currentUser) {
+
+        if (err || !currentUser.admin) {
+
+            $('#foodsadd_numberselect').hide();
+
+        }
+
+    });
+
     // reset brand id.
     brand_id = false
 

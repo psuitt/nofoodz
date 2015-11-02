@@ -12,17 +12,11 @@ var done = function (err, data) {
     }
 
     var item = data.item;
-    var avg = (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2);
 
-    if (avg.lastIndexOf('0') === 3) {
-        avg = avg.substring(0, 3);
-        avg = avg.replace('.0', '');
-    }
+    reloadRating(item);
 
     $('.food-name').html(item.name);
     $('.brand').html(NoFoods.widgetlib.createBrandLink(item.brand_id, item.brand_view));
-    $('.totalRating').html(avg);
-    $('.totalCount').html(item.ratingcount_calc);
 
     if (item.flags && item.flags.indexOf(NoFoodz.consts.flags.REPORTED) !== -1)
         $('.button.report').addClass('reported')
@@ -67,15 +61,17 @@ var loadUserData = function () {
 
 };
 
-var reload = function (response) {
-    var avg = (response.data.ratingtotal_calc / parseFloat(response.data.ratingcount_calc)).toFixed(2);
+var reloadRating = function (item) {
 
-    if (avg.lastIndexOf('0') === 3) {
+    var avg = item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0;
+
+    if (avg != 0 && avg.lastIndexOf('0') === 3) {
         avg = avg.substring(0, 3);
         avg = avg.replace('.0', '');
     }
+
     $('.totalRating').html(avg);
-    $('.totalCount').html(response.data.ratingcount_calc);
+    $('.totalCount').html(item.ratingcount_calc);
 
 };
 
@@ -109,10 +105,7 @@ Template.foods.rendered = function () {
             };
 
             Meteor.call('updateRating', options, function (err, data) {
-                var response = {};
-                response.error = err;
-                response.data = data;
-                reload(response);
+                reloadRating(data);
             });
 
         }

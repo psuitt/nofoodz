@@ -34,5 +34,6 @@ NoFoodz.consts.admin = {
 NoFoodz.consts.db = {
     FOOD: 'food',
     DRINK: 'drink',
-    PRODUCT: 'product'
+    PRODUCT: 'product',
+    BRAND: 'brand'
 };
