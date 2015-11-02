@@ -12,3 +12,10 @@ Html
 This will be the location of the web services.
 
 To set the meteor Mongo_Url local dev: export MONGO_URL=mongodb://localhost:27017/your_db
+
+#DB Indexes
+db.getCollection('brands').ensureIndex({'name' : 'text'});
+db.getCollection('foods').ensureIndex({'name' : 'text'});
+db.getCollection('drinks').ensureIndex({'name' : 'text'});
+db.getCollection('products').ensureIndex({'name' : 'text'});
+
