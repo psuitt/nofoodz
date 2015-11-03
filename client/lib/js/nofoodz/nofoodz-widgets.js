@@ -84,7 +84,7 @@ NoFoods.widgetlib = function() {
 		createHeart: function(val, count) {
 
 			var div = $("<div class='ratingDiv'></div>")
-					span = $('<span></span>');
+			span = $('<span data-toggle=\'tooltip\' data-placement=\'top\' ></span>');
 			
 			var i = (Math.round((parseFloat(val) * 2))*10).toString();
 			
@@ -99,7 +99,6 @@ NoFoods.widgetlib = function() {
 				totalSpan.html(count);	
 				div.append(totalSpan);		
 			}
-			
 			
 			return div;
 		

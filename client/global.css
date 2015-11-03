@@ -791,6 +791,16 @@ div.searchbar button:hover {
 
 /* GLOBAL COLORS */
 
+.item-color,
+.item-color > a {
+    color: #4CAF50 !important;
+}
+
+.brand-color,
+.brand-color > a {
+    color: #795548 !important;
+}
+
 a.brand {
     color: #795548;
 }
@@ -861,7 +871,7 @@ div.myfoods.rating {
 /* Report Dialog */
 .modal-header.warning {
     color: #FFFFFF;
-    background: #DAA520;
+    background: #F44336;
     font-weight: 700;
     -webkit-border-top-left-radius: 6px;
     -webkit-border-top-right-radius: 6px;

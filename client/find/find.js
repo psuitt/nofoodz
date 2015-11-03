@@ -127,7 +127,7 @@ var getSearchRow = function (link, item) {
         rating = $('<span></span>'),
         aName = $("<a target='_top'></a>"),
         aBrand = $("<a class='brand' target='_top'></a>"),
-        ratingValue = item.ratingtotal_calc / item.ratingcount_calc;
+        ratingValue = item.ratingtotal_calc > 0 ? item.ratingtotal_calc / item.ratingcount_calc : 0;
 
     div.addClass('item');
     name.addClass('itemName');

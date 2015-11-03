@@ -10,6 +10,7 @@ Rating = function (rating, userId) {
     this.food_id = false;
     this.drink_id = false;
     this.product_id = false;
+    this.random = Math.random();
 
 };
 
@@ -68,7 +69,8 @@ Rating.prototype.insert = function () {
         _id: this._id,
         user_id: this.user_id,
         rating: this.rating,
-        date: this.date
+        date: this.date,
+        random: this.random
     };
 
     if (this.food_id) {
@@ -115,7 +117,8 @@ Rating.prototype.upsert = function () {
         db.update({_id: rating._id}, {
             $set: {
                 rating: this.rating,
-                date: Date.now()
+                date: Date.now(),
+                random: Math.random()
             }
         });
         returnedObj.isInsert = false;

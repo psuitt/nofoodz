@@ -20,8 +20,8 @@ var addReportDialog = function() {
 	  button = $(this);
 	
 	});
-	
-	$('#report-button').click(function() {
+
+	$('#report_button').click(function () {
 		
 		if (!button) {
 			return;

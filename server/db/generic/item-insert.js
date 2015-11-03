@@ -5,9 +5,10 @@ Meteor.methods({
 
     createItems: function (products) {
 
-        var response = {};
+        var response = {},
+            userId = this.userId;
 
-        if (!this.userId)
+        if (!userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
         if (NoFoodz.utils.user.isMod(Meteor.user()))
             throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
@@ -16,7 +17,7 @@ Meteor.methods({
 
         _.each(products, function (brand) {
 
-            var brandDao = new Brand(brand.brand, this.userId, false, false),
+            var brandDao = new Brand(brand.brand, userId, false, false),
                 insertFunction;
 
             brandDao.insert();
@@ -43,7 +44,7 @@ Meteor.methods({
 
                 Meteor.call('validate', keywords);
 
-                insertFunction(brand, item, keywords, this.userId);
+                insertFunction(brand, item, keywords, userId);
 
             });
 
@@ -80,7 +81,7 @@ var insertDrink = function (brand, item, keywords, userId) {
     drinkDao.insert();
 
     if (item.rating) {
-        var ratingDao = new Rating(item.rating, this.userId);
+        var ratingDao = new Rating(item.rating, userId);
         ratingDao.drink_id = drinkDao._id;
         ratingDao.insert();
     }
@@ -95,7 +96,7 @@ var insertProduct = function (brand, item, keywords, userId) {
     productDao.insert();
 
     if (item.rating) {
-        var ratingDao = new Rating(item.rating, this.userId);
+        var ratingDao = new Rating(item.rating, userId);
         ratingDao.product_id = productDao._id;
         ratingDao.insert();
     }

@@ -13,7 +13,7 @@ var done = function (err, data) {
 
     var item = data.item;
 
-    reloadRating(item);
+    var avg = reloadRating(item);
 
     $('.food-name').html(item.name);
     $('.brand').html(NoFoods.widgetlib.createBrandLink(item.brand_id, item.brand_view));
@@ -29,7 +29,7 @@ var done = function (err, data) {
         nofoodsRating.setValue(avg);
     }
 
-    loadUserData();
+    loadUserData(item._id);
 
     // Create the additional info div with the items data
     /*
@@ -42,7 +42,7 @@ var done = function (err, data) {
 
 };
 
-var loadUserData = function () {
+var loadUserData = function (id) {
 
     var user = Meteor.user();
 
@@ -50,7 +50,7 @@ var loadUserData = function () {
 
         if (user.profile.wishlist) {
             for (var i = 0, l = user.profile.wishlist.length; i < l; i += 1) {
-                if (user.profile.wishlist[i][idField] === PARAMS._id) {
+                if (user.profile.wishlist[i][idField] === id) {
                     $('.wishstar').toggleClass('x100', true);
                     break;
                 }
@@ -72,6 +72,8 @@ var reloadRating = function (item) {
 
     $('.totalRating').html(avg);
     $('.totalCount').html(item.ratingcount_calc);
+
+    return avg;
 
 };
 

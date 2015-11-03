@@ -1,17 +1,28 @@
 <template name="explore">
-	<div class="content">
-		<h3 class="pagetitle" >Explore</h3>
-		<div id="explore-worldmap" style="width: 100%; height: 400px;" ></div>
-		<div class="subcontent">
-			<div id="explore-info" style="width: 100%; height: auto; overflow:hidden; " >
-				<h4>World</h4>
-				<div class="explore-options">
-					<a class="top foods" datatype="food" sub="foods_toprated" >Top 25 Foods</a>
-					<a class="top drinks" datatype="drink" sub="drinks_toprated" >Top 25 Drinks</a>
-					<a class="top users">Top 25 Users</a>
-				</div>
-				<div id="explore-content" ></div>
-			</div>
-		</div>
-	</div>
+    <div class="content">
+        <h3 class="pagetitle">Explore</h3>
+
+        <div id="explore-worldmap" style="width: 100%; height: 400px;"></div>
+        <div class="subcontent">
+            <div id="explore-info" style="width: 100%; height: auto; overflow:hidden; ">
+                <h4>World</h4>
+
+                <div class="explore-options">
+                    <button type="button" class="top foods btn btn-default blue-button invert"
+                            datatype="food">
+                        Top 25 Foods
+                    </button>
+                    <button type="button" class="top drinks btn btn-default blue-button invert"
+                            datatype="drink">
+                        Top 25 Drinks
+                    </button>
+                    <button type="button" class="top products btn btn-default blue-button invert"
+                            datatype="product">
+                        Top 25 Products
+                    </button>
+                </div>
+                <div id="explore-content"></div>
+            </div>
+        </div>
+    </div>
 </template>

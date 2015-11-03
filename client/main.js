@@ -84,11 +84,10 @@ Router.map(function () {
             'footer': {to: 'footer'}
         },
         onBeforeAction: function () {
-            PARAMS = this.params;
             this.next();
         },
         data: function () {
-            return {brand_id: this.params._id};
+            return this.params;
         }
     });
 
