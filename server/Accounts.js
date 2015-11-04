@@ -21,7 +21,7 @@ Accounts.validateNewUser(function (user) {
     }
 
     if (user.username && user.username.length > 3 && user.username.length < 16) {
-        check(user.username, NonEmptyStringNoSpaceCharacters);
+        check(user.username, UsernameCharacters);
         // Lower case only.
         user.username = user.username.toLowerCase();
         Statistics.update(

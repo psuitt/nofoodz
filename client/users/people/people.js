@@ -1,152 +1,154 @@
 Template.people.destroyed = function () {
-};		
+};
 
-Template.people.rendered = function() {
+Template.people.rendered = function () {
 
-	var data = this.data;
+    var data = this.data;
 
-	Meteor.call('userDataSimple', function (err, currentUser) {
+    Meteor.call('userDataSimple', function (err, currentUser) {
 
-		if (!err && currentUser) {
+        if (!err && currentUser) {
 
-			if (!currentUser || data.username === currentUser.username) {
-				$('span.wishstar').hide();
-			}
+            if (!currentUser || data.username === currentUser.username) {
+                $('span.wishstar').hide();
+            }
 
-		}
+            loadUserData(currentUser, data.username);
 
-		loadUser(data, currentUser);
+        }
 
-	});
+    });
 
-	$('div.nofoods-pagenav a').click(function(e) {
-		e.preventDefault();	
-		$(this).tab('show');	
-	}); 
+    $('span.wishstar').on('click', function () {
+        Meteor.call('addToLinks', {username: data.username});
+        $(".wishstar").toggleClass("x100", true);
+    });
+
+
+    NoFoods.widgetlib.floatMenu($('#people_nav'));
+
+    loadUser(data);
+
+    $('div.nofoods-pagenav a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
 
 };
 
-var loadUser = function (data, currentUser) {
+var loadUser = function (data) {
 
-	Meteor.call('findUser', {username: data.username}, function (err, response) {
+    Meteor.call('findUser', {username: data.username}, function (err, response) {
 
-		if (!err && response) {
+        if (!err && response) {
 
-			var user = response;
+            var user = response;
 
-			var displayName = user.profile.name ? user.profile.name : user.username;
+            var displayName = user.profile.name ? user.profile.name : user.username;
 
-			$('.people-name').html(displayName);
+            $('.people-name').html(displayName);
 
-			findUserRatings(user);
+            findUserRatings(user);
 
-			$('span.wishstar').on('click', function () {
-				Meteor.call('addToLinks', {username: data.username});
-				$(".wishstar").toggleClass("x100", true);
-			});
+        }
 
-			loadUserData(currentUser, user.username);
-
-			NoFoods.widgetlib.floatMenu($('#people_nav'));
-
-		}
-
-	});
+    });
 
 };
 
 var loadUserData = function (currentUser, username) {
 
-	if (currentUser && currentUser.profile) {
+    if (currentUser && currentUser.profile) {
 
-		if (currentUser.profile.links) {
-			for (var i = 0, l = currentUser.profile.links.length; i < l; i += 1) {
-				if (currentUser.profile.links[i].username === username) {
-					$(".wishstar").toggleClass("x100", true);
-					break;
-				}
-			}
-		}
+        if (currentUser.profile.links) {
+            for (var i = 0, l = currentUser.profile.links.length; i < l; i += 1) {
+                if (currentUser.profile.links[i].username === username) {
+                    $(".wishstar").toggleClass("x100", true);
+                    break;
+                }
+            }
+        }
 
-	}
+    }
 
 }
 
-var findUserRatings = function(user) {
+var findUserRatings = function (user) {
 
-	getFoodsPage(false, 1, true);
-	getDrinksPage(false, 1, true);
-	getProductsPage(false, 1, true);
-
-};
-
-var getFoodsPage = function (data, page, count) {
-
-	getGenericPage(getProductsPage, data, page, count, 'FOOD');
+    getFoodsPage(user, 1, true);
+    getDrinksPage(user, 1, true);
+    getProductsPage(user, 1, true);
 
 };
 
-var getDrinksPage = function (data, page, count) {
+var getFoodsPage = function (pagingObj, page, count) {
 
-	getGenericPage(getProductsPage, data, page, count, 'DRINK');
-
-};
-
-var getProductsPage = function (data, page, count) {
-
-	getGenericPage(getProductsPage, data, page, count, 'PRODUCT');
+    getGenericPage(getProductsPage, pagingObj, page, count, 'FOOD');
 
 };
 
-var getGenericPage = function (func, data, page, count, type, search) {
+var getDrinksPage = function (pagingObj, page, count) {
 
-	var obj = {
-			'page': page,
-			'type': type
-		},
-		t = type.toLowerCase();
+    getGenericPage(getProductsPage, pagingObj, page, count, 'DRINK');
 
-	if (search)
-		obj['search'] = search;
-	if (count)
-		obj.count = true;
+};
 
-	Meteor.call('getUserRatings', obj, function (err, data) {
+var getProductsPage = function (pagingObj, page, count) {
 
-		if (!err && data.items) {
+    getGenericPage(getProductsPage, pagingObj, page, count, 'PRODUCT');
 
-			var itemDiv = $('#people_ratings' + t);
+};
 
-			itemDiv.html('');
+var getGenericPage = function (func, pagingObj, page, count, type, search) {
 
-			var len = data.items.length;
+    var obj = {
+            'page': page,
+            'type': type.toLowerCase(),
+            'user_id': pagingObj._id
+        },
+        t = type.toLowerCase();
 
-			if (len !== 0) {
+    if (search)
+        obj['search'] = search;
+    if (count)
+        obj.count = true;
 
-				_.each(data.ratings, function (rating, index, list) {
-					var div = NoFoods.widgetlib.createRatingDiv(rating);
-					div.addClass(rating[t + '_id']);
-					itemDiv.append(div);
-				});
+    Meteor.call('getUserRatings', obj, function (err, data) {
 
-				_.each(data.items, function (item, index, list) {
-					$('.' + item._id + ' .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
-					$('.' + item._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-				});
+        if (!err && data.items) {
 
-			} else {
-				itemDiv.append('No ratings found');
-			}
+            var itemDiv = $('#people_ratings' + t);
 
-			if (count) {
-				$('#people_' + t + ' .myfoods-paging').nofoodspaging({
-					max: data.count / data.maxPageSize,
-					select: func
-				});
-			}
+            itemDiv.html('');
 
-		}
+            var len = data.items.length;
 
-	});
+            if (len !== 0) {
+
+                _.each(data.ratings, function (rating, index, list) {
+                    var div = NoFoods.widgetlib.createRatingDiv(rating);
+                    div.attr(t, rating.item_id);
+                    itemDiv.append(div);
+                });
+
+                _.each(data.items, function (item, index, list) {
+                    $('[' + t + '=\'' + item._id + '\'] .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
+                    $('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                });
+
+            } else {
+                itemDiv.append('No ratings found');
+            }
+
+            if (count) {
+                $('#people_' + t + ' .myfoods-paging').nofoodspaging({
+                    max: data.count / data.maxPageSize,
+                    select: func
+                });
+            }
+
+        }
+
+    });
 
 };

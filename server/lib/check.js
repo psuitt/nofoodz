@@ -16,6 +16,11 @@ NonEmptyStringNoSpecialCharacters = Match.Where(function (x) {
     return x.trim().length !== 0 && LETTER_NUMBER_REGEX.test(x);
 });
 
+UsernameCharacters = Match.Where(function (x) {
+    check(x, String);
+    return x.trim().length !== 0 && LETTER_NUMBER_REGEX.test(x);
+});
+
 NonEmptyString = Match.Where(function (x) {
     check(x, String);
     return x.length !== 0;

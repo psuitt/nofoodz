@@ -50,7 +50,7 @@ Meteor.methods({
 
         if (rating) {
             var itemDb = NoFoodz.db.typeToDb(t);
-            response.item = itemDb.findOne({_id: rating[t + '_id']}, {
+            response.item = itemDb.findOne({_id: rating.item_id}, {
                 fields: {
                     _id: 1,
                     name: 1,

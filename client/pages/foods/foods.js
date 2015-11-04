@@ -1,6 +1,5 @@
 var nofoodsRating,
-    idField,
-    updateMethod;
+    idField;
 
 Template.foods.destroyed = function () {
 };
@@ -123,6 +122,16 @@ Template.foods.rendered = function () {
         Meteor.call('addToWishList', options);
 
         $('.wishstar').toggleClass('x100', true);
+    });
+
+    $('.food-menu-link').on('click', function (e) {
+        var self = $(this);
+        e.preventDefault();
+        $('#foods-nav li').removeClass('active');
+        self.parent().addClass('active');
+        $('html, body').animate({
+            scrollTop: $(self.attr('link')).offset().top - $('#menu').height()
+        }, 300);
     });
 
 };

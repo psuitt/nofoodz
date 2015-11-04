@@ -28,10 +28,10 @@ Meteor.methods({
         var ratingDiff = options.rating,
             countDiff = options.rating > 0 ? 1 : 0;
 
-        var rating = new Rating(options.rating, this.userId);
+        var rating = new Rating(options.rating, this.userId, options.type);
 
         // Set the rating id
-        rating[options.type.toLowerCase() + '_id'] = options._id;
+        rating.item_id = options._id;
         // Set the rating for updating
         rating.rating = options.rating;
 

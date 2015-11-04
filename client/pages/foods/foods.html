@@ -4,9 +4,8 @@
         <div id="foods-nav" class="nofoods-pagenav floating position">
             <ul class="nav nav-list">
                 <li class="nav-header food-name nofoodz-header">Name</li>
-                <li class=""><a href="#brand-foods">Description</a><span
-                        class="glyphicon glyphicon-chevron-left"></span></li>
-                <li class=""><a href="#brand-foods">Comments</a></li>
+                <li class="active"><a href="#" link="#foods_bodydiv" class="food-menu-link">Description</a></li>
+                <li class=""><a href="#" link="#foods_commentsdiv" class="food-menu-link">Comments</a></li>
                 <li class="nav-header">Options</li>
                 {{#if currentUser}}
                     <li class=""><a class="button report" item-id="{{id}}" item-type="{{type}}">Report</a></li>
@@ -16,7 +15,7 @@
 
     </div>
     <div class="content middle">
-        <div class="contentbody">
+        <div id="foods_bodydiv" class="contentbody">
             <span class="item-color food-name name"></span><span class="wishstar"
                                                                  title="Click to add to wishlist"></span>
             <span class="brand brand-color"></span>
@@ -28,10 +27,13 @@
             <div id="infoDiv"></div>
 
         </div>
-        <div class="comments">
+        <div id="foods_commentsdiv" class="comments">
             <h3 class="pagetitle">Comments</h3>
 
             <div class="contentbody">
+                <input type="text"/>
+                <input type="text"/>
+                <input type="text"/>
             </div>
         </div>
     </div>

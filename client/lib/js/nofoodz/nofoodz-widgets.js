@@ -58,9 +58,9 @@ NoFoods.widgetlib = function() {
 		createRatingDiv: function(rating) {
 
 			var div = $("<div class='myrating myfoods'></div>"),
-					name = $("<span class='name myfoods'></span>"),
+					name = $("<span class='name myfoods item-color'></span>"),
 					nameLink = $("<a></a>"),
-					brand = $("<span class='brand myfoods'></span>"),
+					brand = $("<span class='brand myfoods brand-color'></span>"),
 					brandLink = $("<a></a>"),
 					ratingSpan = $("<span class='rating'></span>"),
 					toAdd = null;
@@ -96,7 +96,7 @@ NoFoods.widgetlib = function() {
 			
 			if(count) {
 				var totalSpan =  $("<span class='totalRating'></span>");
-				totalSpan.html(count);	
+				totalSpan.text('(' + count + ')');
 				div.append(totalSpan);		
 			}
 			

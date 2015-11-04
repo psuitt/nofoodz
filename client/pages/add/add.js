@@ -1,11 +1,8 @@
 var placeauto,
     map,
-    nofoodsRating,
-    brand_id = false;
+    nofoodsRating;
 
 Template.foodsadd.destroyed = function () {
-    // reset brand id.
-    brand_id = false
 };
 
 Template.foodsadd.rendered = function () {
@@ -27,9 +24,6 @@ Template.foodsadd.rendered = function () {
 
     });
 
-    // reset brand id.
-    brand_id = false
-
     setPath();
 
     nofoodsRating = $('div.ratingDiv').nofoodsrating();
@@ -46,7 +40,7 @@ Template.foodsadd.rendered = function () {
                 var brand = data.brand;
 
                 if (brand) {
-                    $('#foodsadd-brand').attr("disabled", "disabled").val(brand.name);
+                    $('#foodsadd_brand').attr("disabled", "disabled").val(brand.name);
                 } else {
                     brand_id = false;
                     //$('#foodsadd-brand').nofoodsautocomplete();

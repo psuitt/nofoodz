@@ -195,25 +195,25 @@ var loadLinks = function (links) {
 
 };
 
-var getFoodsPage = function (data, page, count) {
+var getFoodsPage = function (pagingObj, page, count) {
 
-    getGenericPage(getProductsPage, data, page, count, 'FOOD');
-
-};
-
-var getDrinksPage = function (data, page, count) {
-
-    getGenericPage(getProductsPage, data, page, count, 'DRINK');
+    getGenericPage(getProductsPage, pagingObj, page, count, 'FOOD');
 
 };
 
-var getProductsPage = function (data, page, count) {
+var getDrinksPage = function (pagingObj, page, count) {
 
-    getGenericPage(getProductsPage, data, page, count, 'PRODUCT');
+    getGenericPage(getProductsPage, pagingObj, page, count, 'DRINK');
 
 };
 
-var getGenericPage = function (func, data, page, count, type, search) {
+var getProductsPage = function (pagingObj, page, count) {
+
+    getGenericPage(getProductsPage, pagingObj, page, count, 'PRODUCT');
+
+};
+
+var getGenericPage = function (func, pagingObj, page, count, type, search) {
 
     var obj = {
             'page': page,
@@ -240,13 +240,13 @@ var getGenericPage = function (func, data, page, count, type, search) {
 
                 _.each(data.ratings, function (rating, index, list) {
                     var div = NoFoods.widgetlib.createRatingDiv(rating);
-                    div.addClass(rating[t + '_id']);
+                    div.attr(t, rating.item_id);
                     itemDiv.append(div);
                 });
 
                 _.each(data.items, function (item, index, list) {
-                    $('.' + item._id + ' .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
-                    $('.' + item._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                    $('[' + t + '=\'' + item._id + '\'] .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
+                    $('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
                 });
 
             } else {

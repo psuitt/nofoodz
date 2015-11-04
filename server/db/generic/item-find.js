@@ -36,7 +36,8 @@ Meteor.methods({
 
                 if (this.userId) {
                     var rating = new Rating();
-                    rating[options.type.toLowerCase() + '_id'] = options._id;
+                    rating.item_id = options._id;
+                    rating.type = options.type.toLowerCase();
                     rating.user_id = this.userId;
                     response.userRating = rating.findByUser({fields: {rating: 1}});
                 }
