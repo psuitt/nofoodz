@@ -12,9 +12,3 @@ Words.allow({
     return false;
   }
 });
-
-Meteor.methods({
-
-
-
-});

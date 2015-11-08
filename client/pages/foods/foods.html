@@ -27,13 +27,21 @@
             <div id="infoDiv"></div>
 
         </div>
-        <div id="foods_commentsdiv" class="comments">
-            <h3 class="pagetitle">Comments</h3>
-
+        <div id="foods_commentsdiv" class="comments no-user-rating no-comments comment-mode">
             <div class="contentbody">
-                <input type="text"/>
-                <input type="text"/>
-                <input type="text"/>
+                <h3 class="pagetitle">Comments</h3>
+
+                <div id="foods_comments" class="half"></div>
+                <div id="foods_commentsinputs">
+                    <span class="foods-comment"></span>
+                    <span class="foods-comment"></span>
+                    <span class="foods-comment"></span>
+                    <input type="text" class="foods-comment-input"/>
+                    <input type="text" class="foods-comment-input"/>
+                    <input type="text" class="foods-comment-input"/>
+                    <button id="foods_editcomments" class="btn btn-default simple glyphicon glyphicon-edit"></button>
+                </div>
+                <input id="foods_comment" type="button" class="green-button" value="Comment"/>
             </div>
         </div>
     </div>

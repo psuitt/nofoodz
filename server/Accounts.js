@@ -24,7 +24,7 @@ Accounts.validateNewUser(function (user) {
         check(user.username, UsernameCharacters);
         // Lower case only.
         user.username = user.username.toLowerCase();
-        Statistics.update(
+        Statistics.upsert(
             {_type: 'usercount'},
             {$inc: {count: 1}}
         );

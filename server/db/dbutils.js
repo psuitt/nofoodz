@@ -60,7 +60,7 @@ NoFoodz.db = function () {
             return db;
         },
 
-        getCommentsDB: function (type) {
+        typeToCommentsDB: function (type) {
 
             switch (type.toLowerCase()) {
                 case NoFoodz.consts.db.FOOD:

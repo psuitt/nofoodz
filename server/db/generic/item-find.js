@@ -39,7 +39,7 @@ Meteor.methods({
                     rating.item_id = options._id;
                     rating.type = options.type.toLowerCase();
                     rating.user_id = this.userId;
-                    response.userRating = rating.findByUser({fields: {rating: 1}});
+                    response.userRating = rating.findByUser({fields: {rating: 1, comments: 1}});
                 }
 
                 break;

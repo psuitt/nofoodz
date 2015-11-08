@@ -5,20 +5,6 @@ Template.people.rendered = function () {
 
     var data = this.data;
 
-    Meteor.call('userDataSimple', function (err, currentUser) {
-
-        if (!err && currentUser) {
-
-            if (!currentUser || data.username === currentUser.username) {
-                $('span.wishstar').hide();
-            }
-
-            loadUserData(currentUser, data.username);
-
-        }
-
-    });
-
     $('span.wishstar').on('click', function () {
         Meteor.call('addToLinks', {username: data.username});
         $(".wishstar").toggleClass("x100", true);
@@ -50,28 +36,32 @@ var loadUser = function (data) {
 
             findUserRatings(user);
 
+            loadFollowingFlag(user._id, user.username)
+
         }
 
     });
 
 };
 
-var loadUserData = function (currentUser, username) {
+var loadFollowingFlag = function (user_id, username) {
 
-    if (currentUser && currentUser.profile) {
+    var obj = {
+        user_id: user_id,
+        username: username
+    };
 
-        if (currentUser.profile.links) {
-            for (var i = 0, l = currentUser.profile.links.length; i < l; i += 1) {
-                if (currentUser.profile.links[i].username === username) {
-                    $(".wishstar").toggleClass("x100", true);
-                    break;
-                }
-            }
+    Meteor.call('isFollowing', obj, function (err, response) {
+
+        if (!err && response) {
+
+            $(".wishstar").toggleClass("x100", true);
+
         }
 
-    }
+    });
 
-}
+};
 
 var findUserRatings = function (user) {
 

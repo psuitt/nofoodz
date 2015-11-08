@@ -1,7 +1,125 @@
 var nofoodsRating,
-    idField;
+    idField,
+    screenData;
+
+
+Template.foods.events({
+
+    'click #foods_comment': function (event, template) {
+
+        var comments = [];
+
+        $('.foods-comment-input').each(function () {
+            var val = $(this).val();
+            if (val)
+                comments.push(val);
+        });
+
+        var obj = {
+            item_id: screenData._id,
+            type: screenData.type,
+            comments: comments
+        };
+
+        Meteor.call('updateComments', obj, function (err) {
+
+            if (!err) {
+                NoFoodz.alert.msg('success', 'Save was successful!');
+                updateComments(comments);
+            } else {
+                NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
+            }
+
+        });
+
+    },
+
+    'click #foods_editcomments': function (event, template) {
+
+        $('#foods_commentsdiv').toggleClass('comment-mode').toggleClass('display-mode');
+
+    }
+});
 
 Template.foods.destroyed = function () {
+};
+
+Template.foods.rendered = function () {
+
+    screenData = this.data;
+
+    var obj = {
+        _id: screenData._id,
+        type: screenData.type
+    };
+
+    if (screenData.type === NoFoodz.consts.FOOD) {
+        idField = 'food_id';
+    } else if (screenData.type === NoFoodz.consts.DRINK) {
+        idField = 'drink_id';
+    } else {
+        idField = 'product_id';
+    }
+
+    Meteor.call('getItemById', obj, done);
+    Meteor.call('findCommentsForItem', {
+        item_id: screenData._id,
+        type: screenData.type
+    }, loadComments);
+
+    nofoodsRating = $('div.ratingDiv').nofoodsrating({
+        hearts: 6,
+        select: function (rating) {
+
+            var options = {
+                rating: rating,
+                _id: screenData._id,
+                type: screenData.type
+            };
+
+            Meteor.call('updateRating', options, function (err, data) {
+
+                if (!err) {
+                    reloadRating(data);
+                    $('#foods_commentsdiv').removeClass('no-user-rating');
+                }
+
+            });
+
+        }
+    });
+
+    NoFoods.widgetlib.floatMenu($('#foods-nav'));
+
+    $('span.wishstar').on('click', function () {
+        var options = {};
+
+        options[idField] = screenData._id;
+
+        Meteor.call('addToWishList', options);
+
+        $('.wishstar').toggleClass('x100', true);
+    });
+
+    $('.food-menu-link').on('click', function (e) {
+        var self = $(this);
+        e.preventDefault();
+        $('#foods-nav li').removeClass('active');
+        self.parent().addClass('active');
+        var height = $(self.attr('link')).offset().top - $('#menu').height(),
+            currentHeight = $('body').scrollTop(),
+            max = $(document).height() - $(window).height();
+
+        if ((currentHeight !== max && height > currentHeight)
+            || (height < currentHeight)) {
+            $('body').animate({
+                scrollTop: height
+            }, 300);
+        }
+
+        return false;
+    });
+
 };
 
 var done = function (err, data) {
@@ -24,6 +142,9 @@ var done = function (err, data) {
 
     if (data.userRating) {
         nofoodsRating.setUserValue(data.userRating.rating);
+        var comments = data.userRating.comments;
+        updateComments(comments);
+        $('#foods_commentsdiv').removeClass('no-user-rating');
     } else {
         nofoodsRating.setValue(avg);
     }
@@ -32,12 +153,33 @@ var done = function (err, data) {
 
     // Create the additional info div with the items data
     /*
-    $('#infoDiv').nofoodzadditionalinfo({
-        _id: item._id,
-        type: PARAMS.type,
-        info: item.info,
-        update: item.user_id === Meteor.user()._id
+     $('#infoDiv').nofoodzadditionalinfo({
+     _id: item._id,
+     type: PARAMS.type,
+     info: item.info,
+     update: item.user_id === Meteor.user()._id
      });*/
+
+};
+
+var updateComments = function (comments) {
+
+    if (comments && comments.length > 0) {
+
+        $('#foods_commentsdiv').removeClass('comment-mode no-comments').addClass('display-mode');
+
+        var inputs = $('.foods-comment-input');
+        var spans = $('.foods-comment');
+
+        inputs.eq(0).val(comments[0]).attr('default', comments[0]);
+        inputs.eq(1).val(comments[1]).attr('default', comments[1]);
+        inputs.eq(2).val(comments[2]).attr('default', comments[2]);
+
+        spans.eq(0).text(comments[0]).attr('default', comments[0]);
+        spans.eq(1).text(comments[1]).attr('default', comments[1]);
+        spans.eq(2).text(comments[2]).attr('default', comments[2]);
+
+    }
 
 };
 
@@ -76,62 +218,27 @@ var reloadRating = function (item) {
 
 };
 
-Template.foods.rendered = function () {
+var loadComments = function (err, response) {
 
-    var data = this.data;
+    $('#foods_comments').jQCloud([{text: 'Empty Comments', weight: 1}], {
+        height: 300
+    });
 
-    var obj = {
-        _id: data._id,
-        type: data.type
-    };
+    if (!err && response.length > 0) {
 
-    if (data.type === NoFoodz.consts.FOOD) {
-        idField = 'food_id';
-    } else if (data.type === NoFoodz.consts.DRINK) {
-        idField = 'drink_id';
-    } else {
-        idField = 'product_id';
-    }
+        var words = [];
 
-    Meteor.call('getItemById', obj, done);
+        _.each(response, function (comment, index) {
 
-    nofoodsRating = $('div.ratingDiv').nofoodsrating({
-        hearts: 6,
-        select: function (rating) {
-
-            var options = {
-                rating: rating,
-                _id: data._id,
-                type: data.type
-            };
-
-            Meteor.call('updateRating', options, function (err, data) {
-                reloadRating(data);
+            words.push({
+                text: comment.comment,
+                weight: comment.value
             });
 
-        }
-    });
+        });
 
-    NoFoods.widgetlib.floatMenu($('#foods-nav'));
+        $('#foods_comments').jQCloud('update', words);
 
-    $('span.wishstar').on('click', function () {
-        var options = {};
+    }
 
-        options[idField] = data._id;
-
-        Meteor.call('addToWishList', options);
-
-        $('.wishstar').toggleClass('x100', true);
-    });
-
-    $('.food-menu-link').on('click', function (e) {
-        var self = $(this);
-        e.preventDefault();
-        $('#foods-nav li').removeClass('active');
-        self.parent().addClass('active');
-        $('html, body').animate({
-            scrollTop: $(self.attr('link')).offset().top - $('#menu').height()
-        }, 300);
-    });
-
-};
+}

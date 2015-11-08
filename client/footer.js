@@ -1,13 +1,9 @@
 Template.footer.rendered = function() {
-		
-	var statsSub = Meteor.subscribe('statistics_users', function() {
-		
-		var stat = Statistics.findOne({});
 
-		if (stat)
-			$('#footer .totalusers').html("Total Users " + stat.count);
-		
-		statsSub.stop();
+	Meteor.call('getUserCount', function (err, response) {
+
+		if (!err)
+			$('#footer .totalusers').html("Total Users " + response);
 		
 	});	
 	

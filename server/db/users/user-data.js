@@ -33,8 +33,7 @@ Meteor.methods({
         var filter = {
             fields: {
                 admin: 1,
-                username: 1,
-                'profile.links': 1
+                username: 1
             }
         };
 

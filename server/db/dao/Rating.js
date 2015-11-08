@@ -10,6 +10,7 @@ Rating = function (rating, userId, type) {
     this.item_id = false;
     this.type = type;
     this.random = Math.random();
+    this.comments = [];
 
 };
 
@@ -27,22 +28,14 @@ Rating.prototype.updateFields = function (rating) {
 
 Rating.prototype.findByUser = function (filter, skipSet) {
 
-    if (!this.user_id) {
-        throw new Meteor.Error(500, 'A user id is required to do a rating insert.');
-    }
+    Validator.validate(this, 'user_id', 'item_id', 'type');
 
     var query = {
         user_id: this.user_id,
         item_id: this.item_id
     };
 
-    var db;
-
-    if (this.type) {
-        db = NoFoodz.db.typeToRatingsDb(this.type);
-    } else {
-        throw new Meteor.Error(500, 'A type id is required to do a rating insert.');
-    }
+    var db = NoFoodz.db.typeToRatingsDb(this.type);
 
     console.log('Rating query ' + EJSON.stringify(query));
     var rating = db.findOne(query, filter);
@@ -66,7 +59,8 @@ Rating.prototype.insert = function () {
         item_id: this.item_id,
         rating: this.rating,
         date: this.date,
-        random: this.random
+        random: this.random,
+        comments: this.comments
     };
 
     if (this.type) {
@@ -102,8 +96,7 @@ Rating.prototype.upsert = function () {
         db.update({_id: rating._id}, {
             $set: {
                 rating: this.rating,
-                date: Date.now(),
-                random: Math.random()
+                date: Date.now()
             }
         });
         returnedObj.isInsert = false;
@@ -116,5 +109,20 @@ Rating.prototype.upsert = function () {
     }
 
     return returnedObj;
+
+};
+
+Rating.prototype.updateComments = function () {
+
+    Validator.validate(this, '_id', 'type', 'comments');
+
+    var db = NoFoodz.db.typeToRatingsDb(this.type);
+
+    db.update({_id: this._id}, {
+        $set: {
+            comments: this.comments,
+            date: Date.now()
+        }
+    });
 
 };
