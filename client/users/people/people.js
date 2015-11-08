@@ -5,12 +5,6 @@ Template.people.rendered = function () {
 
     var data = this.data;
 
-    $('span.wishstar').on('click', function () {
-        Meteor.call('addToLinks', {username: data.username});
-        $(".wishstar").toggleClass("x100", true);
-    });
-
-
     NoFoods.widgetlib.floatMenu($('#people_nav'));
 
     loadUser(data);
@@ -36,7 +30,12 @@ var loadUser = function (data) {
 
             findUserRatings(user);
 
-            loadFollowingFlag(user._id, user.username)
+            loadFollowingFlag(user._id)
+
+            $('span.wishstar').on('click', function () {
+                Meteor.call('follow', {user_id: user._id, username: data.username});
+                $(".wishstar").toggleClass("x100", true);
+            });
 
         }
 
@@ -44,11 +43,10 @@ var loadUser = function (data) {
 
 };
 
-var loadFollowingFlag = function (user_id, username) {
+var loadFollowingFlag = function (user_id) {
 
     var obj = {
-        user_id: user_id,
-        username: username
+        user_id: user_id
     };
 
     Meteor.call('isFollowing', obj, function (err, response) {

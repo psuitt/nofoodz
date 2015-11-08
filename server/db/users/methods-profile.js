@@ -72,57 +72,6 @@ Meteor.methods({
 
     },
 
-    addToLinks: function (options) {
-
-        check(options, {
-            username: NonEmptyString
-        });
-
-        if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in to perform this function");
-
-        var query = {
-            _id: this.userId,
-            "profile.links.username": options.username
-        };
-
-        var findOne = Meteor.users.findOne(query);
-        var user = Meteor.users.findOne({_id: this.userId});
-
-        if (!findOne) {
-
-            var link = {
-                username: options.username,
-                date: Date.now()
-            };
-
-            Meteor.users.update({_id: this.userId}, {$push: {"profile.links": link}});
-
-        }
-
-        var notification = {
-            user_id: this.userId,
-            username: user.username
-        };
-
-        Meteor.users.update({username: options.username}, {$addToSet: {"notifications": notification}});
-
-    },
-
-    removeFromLinks: function (options) {
-
-        check(options, {
-            username: NonEmptyString
-        });
-
-        if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in to perform this function");
-
-        Meteor.users.update({_id: this.userId}, {$pull: {"profile.links": {username: options.username}}});
-        Meteor.users.update({username: options.username}, {$pull: {"notifications": {user_id: this.userId}}});
-
-    },
-
     getUserWishlist: function (options) {
 
         check(options, {

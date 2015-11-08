@@ -13,17 +13,22 @@ Meteor.methods({
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
+        var userId = this.userId;
+        var user = Meteor.user();
+        var username = user.username;
+
         var query = {
             user_id: options.user_id,
-            follower_id: this.userId
+            follower_id: userId
         };
 
         var follower = {
             $set: {
                 user_id: options.user_id,
-                follower_id: this.userId,
+                follower_id: userId,
                 username: options.username,
-                followername: this.user().username,
+                followername: username,
+                notify: true,
                 date: Date.now()
             }
         };

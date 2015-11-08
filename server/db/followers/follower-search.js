@@ -12,14 +12,20 @@ Meteor.methods({
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
+        var userId = this.userId;
+
         var query = {
             user_id: options.user_id,
-            follower_id: this.userId
+            follower_id: userId
         };
 
         var following = Followers.findOne(query);
 
-        return following && following._id;
+        if (following && following._id) {
+            return true;
+        }
+
+        return false;
 
     },
 
@@ -28,8 +34,10 @@ Meteor.methods({
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
+        var userId = this.userId;
+
         var query = {
-            user_id: this.userId
+            user_id: userId
         };
 
         var filter = {
@@ -39,17 +47,19 @@ Meteor.methods({
             }
         }
 
-        var following = Followers.find(query, filter).fetch();
+        return Followers.find(query, filter).fetch();
 
     },
 
-    getFollowing: function (options) {
+    getFollowing: function () {
 
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
+        var userId = this.userId;
+
         var query = {
-            follower_id: this.userId
+            follower_id: userId
         };
 
         var filter = {
@@ -59,7 +69,7 @@ Meteor.methods({
             }
         }
 
-        var following = Followers.find(query, filter).fetch();
+        return Followers.find(query, filter).fetch();
     }
 
 });

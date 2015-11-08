@@ -1,5 +1,11 @@
 var foodSearch,
-    drinkSearch;
+    drinkSearch,
+    followersFirstLoad = true,
+    followingFirstLoad = true;
+
+var PROFILE = 1;
+var FOLLOWING = 7;
+var FOLLOWERS = 8;
 
 Template.myfoods.events({
 
@@ -51,7 +57,25 @@ Template.myfoods.rendered = function () {
         e.preventDefault();
         $(this).tab('show');
         var index = $(this).parent().index();
-        $('#myfoods_edit').toggle(index === 1);
+
+        switch (index) {
+            case FOLLOWING:
+                if (followingFirstLoad) {
+                    loadFollowing();
+                    followingFirstLoad = false;
+                }
+                break;
+            case FOLLOWERS:
+                if (followersFirstLoad) {
+                    loadFollowers();
+                    followersFirstLoad = false;
+                }
+                break;
+            default:
+                $('#myfoods_edit').toggle(index === PROFILE);
+                break;
+        }
+
     });
 
     NoFoods.widgetlib.staticOffCanvasMenu($('#myfoods-nav'));
@@ -69,7 +93,6 @@ Template.myfoods.rendered = function () {
                 $('#myfoods_name_input').val(user.profile.name);
                 $('#myfoods-joined').html('Joined ' + NoFoods.lib.formatDate(user.profile.date));
                 $('#myfoods_bonus').html(user.profile.bonusHearts);
-                loadLinks(user.profile.links);
 
                 if (user.admin === NoFoodz.consts.flags.ADMIN_SUPER) {
                     var adminHeader = $('<li class=\'nav-header\'>Admin</li>');
@@ -100,8 +123,8 @@ Template.myfoods.rendered = function () {
         e.preventDefault();
     });
 
-    $('#myfoods-links').on('click', 'a.remove', function (e) {
-        Meteor.call('removeFromLinks', {username: $(this).data('username')});
+    $('#myfoods_following').on('click', 'a.remove', function (e) {
+        Meteor.call('unfollow', {user_id: $(this).data('user_id')});
         $(this).parent().remove();
         e.preventDefault();
     });
@@ -155,43 +178,79 @@ var loadRatings = function () {
 
 };
 
-var loadLinks = function (links) {
+var loadFollowing = function () {
 
-    var contentDiv = $('#myfoods-links');
+    var contentDiv = $('#myfoods_following');
 
     contentDiv.html('');
 
-    if (links) {
+    Meteor.call('getFollowing', function (err, response) {
 
-        for (var i = 0, l = links.length; i < l; i += 1) {
+        if (!err && response.length > 0) {
 
-            var div = $('<div class=\'myrating myfoods\'></div>');
-            var title = $('<a class=\'name myfoods\'></a>');
-            var removeLink = $('<a class=\'remove myfoods\' href=\'#\'>Unfollow</a>');
-            var username = links[i].username;
+            _.each(response, function (following, index) {
 
-            if (!username)
-                continue;
+                var div = $('<div class=\'myrating myfoods\'></div>');
+                var title = $('<a class=\'name myfoods\'></a>');
+                var removeLink = $('<a class=\'remove myfoods\' href=\'#\'>Unfollow</a>');
+                var username = following.username;
 
-            title.addClass('lower');
+                title.addClass('lower');
 
-            title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
-            title.html(username);
+                title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
+                title.html(username);
 
-            removeLink.data('username', username);
+                removeLink.data('user_id', following.user_id);
 
-            div.append(title);
-            div.append(removeLink);
+                div.append(title);
+                div.append(removeLink);
 
-            // Reverse the order they were added.
-            contentDiv.prepend(div);
+                // Reverse the order they were added.
+                contentDiv.prepend(div);
 
+            });
+
+        } else {
+            contentDiv.append('No followed users found');
         }
 
-    } else {
-        contentDiv.append('No links found');
-    }
+    });
 
+};
+
+var loadFollowers = function () {
+
+    var contentDiv = $('#myfoods_followers');
+
+    contentDiv.html('');
+
+    Meteor.call('getFollowers', function (err, response) {
+
+        if (!err && response.length > 0) {
+
+            _.each(response, function (follower, index) {
+
+                var div = $('<div class=\'myrating myfoods\'></div>');
+                var title = $('<a class=\'name myfoods\'></a>');
+                var username = follower.followername;
+
+                title.addClass('lower');
+
+                title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
+                title.html(username);
+
+                div.append(title);
+
+                // Reverse the order they were added.
+                contentDiv.prepend(div);
+
+            });
+
+        } else {
+            contentDiv.append('No followers found');
+        }
+
+    });
 
 };
 

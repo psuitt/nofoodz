@@ -19,8 +19,6 @@ Meteor.methods({
 
         filter = _.extend(filter, NoFoodz.consts.filters.HIDDEN_FOODS);
 
-        console.log('Starting search.');
-        console.log('Item is a ' + options.type);
         switch (options.type) {
             case NoFoodz.consts.db.FOOD:
             case NoFoodz.consts.db.DRINK:
