@@ -25,7 +25,7 @@ NoFoodz.utils = {
 NoFoodz.utils.user = {
 
 	isAdmin: function (user) {
-		return user.admin && user.admin === NoFoodz.consts.admin.SUPER;
+		return user.roles && user.roles.indexOf(NoFoodz.consts.admin.SUPER) > -1;
 	},
 
 	isMod: function (user) {

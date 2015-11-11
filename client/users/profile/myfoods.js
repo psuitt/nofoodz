@@ -94,7 +94,7 @@ Template.myfoods.rendered = function () {
                 $('#myfoods-joined').html('Joined ' + NoFoods.lib.formatDate(user.profile.date));
                 $('#myfoods_bonus').html(user.profile.bonusHearts);
 
-                if (user.admin === NoFoodz.consts.flags.ADMIN_SUPER) {
+                if (NoFoodz.client.permissions.isAdmin(user)) {
                     var adminHeader = $('<li class=\'nav-header\'>Admin</li>');
                     var admin = $('<li class=\'\'><a href=\'/admin\'>Admin</a></li>');
                     var adminReported = $('<li class=\'\'><a href=\'/admin/reported\'>Reported</a></li>');
@@ -191,8 +191,8 @@ var loadFollowing = function () {
             _.each(response, function (following, index) {
 
                 var div = $('<div class=\'myrating myfoods\'></div>');
-                var title = $('<a class=\'name myfoods\'></a>');
-                var removeLink = $('<a class=\'remove myfoods\' href=\'#\'>Unfollow</a>');
+                var title = $('<a class=\'name myfoods user-color\'></a>');
+                var removeLink = $('<a class=\'remove myfoods remove-color\' href=\'#\'>Unfollow</a>');
                 var username = following.username;
 
                 title.addClass('lower');
@@ -231,7 +231,7 @@ var loadFollowers = function () {
             _.each(response, function (follower, index) {
 
                 var div = $('<div class=\'myrating myfoods\'></div>');
-                var title = $('<a class=\'name myfoods\'></a>');
+                var title = $('<a class=\'name myfoods user-color\'></a>');
                 var username = follower.followername;
 
                 title.addClass('lower');
@@ -351,9 +351,9 @@ var getWishlistPage = function (data, page, count) {
                 for (var i = 0, l = wishlist.length; i < l; i += 1) {
 
                     var div = $('<div class=\'myrating myfoods\'></div>');
-                    var title = $('<span class=\'name myfoods\'><a></a></span>');
-                    var brand = $('<span class=\'brand myfoods\'><a></a></span>');
-                    var removeLink = $('<a class=\'remove myfoods\' href=\'#\'>Remove</a>');
+                    var title = $('<span class=\'name myfoods item-color\'><a></a></span>');
+                    var brand = $('<span class=\'brand myfoods brand-color\'><a></a></span>');
+                    var removeLink = $('<a class=\'remove myfoods remove-color\' href=\'#\'>Remove</a>');
 
                     title.addClass('lower');
 

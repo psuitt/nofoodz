@@ -30,8 +30,6 @@ Meteor.methods({
 
                 response.item = itemDao.find(filter);
 
-                console.log(response.item);
-
                 if (this.userId) {
                     var rating = new Rating();
                     rating.item_id = options._id;

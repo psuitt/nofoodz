@@ -10,32 +10,32 @@ Meteor.methods({
 
         if (!userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
-        if (NoFoodz.utils.user.isMod(Meteor.user()))
-            throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+
+        var user = Meteor.users.findOne({_id: userId}, {fields: {
+            roles: 1
+        }});
 
         check(products, ProductsArrayCheck);
 
+        if (!NoFoodz.utils.user.isMod(user) && products.length > 1)
+            throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+        if (!NoFoodz.utils.user.isNormalUser(user))
+            throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+
         _.each(products, function (brand) {
 
-            var brandDao = new Brand(brand.brand, userId, false, false),
-                insertFunction;
+            if (brand.brand_id) {
 
-            brandDao.insert();
+                brand._id = brand.brand_id;
 
-            brand._id = brandDao._id;
+            } else {
 
-            switch (brand.type.toLowerCase()) {
-                case NoFoodz.consts.db.FOOD:
-                    insertFunction = insertFood;
-                    break;
-                case NoFoodz.consts.db.DRINK:
-                    insertFunction = insertDrink;
-                    break;
-                case NoFoodz.consts.db.PRODUCT:
-                    insertFunction = insertProduct;
-                    break;
-                default:
-                    break;
+                var brandDao = new Brand(brand.brand, userId, false, false);
+
+                brandDao.insert();
+
+                brand._id = brandDao._id;
+
             }
 
             _.each(brand.items, function (item) {
@@ -44,7 +44,17 @@ Meteor.methods({
 
                 Meteor.call('validate', keywords);
 
-                insertFunction(brand, item, keywords, userId);
+                var func = NoFoodz.db.typeToDao(brand.type);
+                var dao = new func(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
+                dao.insert();
+
+                if (item.rating) {
+                    var ratingDao = new Rating(item.rating, userId, brand.type);
+                    ratingDao.item_id = dao._id;
+                    ratingDao.insert();
+                }
+
+                item._id = dao._id;
 
             });
 
@@ -59,48 +69,3 @@ Meteor.methods({
     }
 
 });
-
-var insertFood = function (brand, item, keywords, userId) {
-
-    var foodDao = new Food(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
-    foodDao.insert();
-
-    if (item.rating) {
-        var ratingDao = new Rating(item.rating, userId);
-        ratingDao.food_id = foodDao._id;
-        ratingDao.insert();
-    }
-
-    item._id = foodDao._id;
-
-};
-
-var insertDrink = function (brand, item, keywords, userId) {
-
-    var drinkDao = new Drink(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
-    drinkDao.insert();
-
-    if (item.rating) {
-        var ratingDao = new Rating(item.rating, userId);
-        ratingDao.drink_id = drinkDao._id;
-        ratingDao.insert();
-    }
-
-    item._id = drinkDao._id;
-
-};
-
-var insertProduct = function (brand, item, keywords, userId) {
-
-    var productDao = new Product(item.name, brand._id, brand.brand, keywords, item.tags, userId, item.rating);
-    productDao.insert();
-
-    if (item.rating) {
-        var ratingDao = new Rating(item.rating, userId);
-        ratingDao.product_id = productDao._id;
-        ratingDao.insert();
-    }
-
-    item._id = productDao._id;
-
-};

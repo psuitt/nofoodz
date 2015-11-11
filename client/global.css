@@ -325,7 +325,7 @@ footer {
 #footer {
     width: 100%;
     text-align: right;
-    color: #DAA520;
+    color: #FFC107;
     background: #222222;
     display: block;
     padding: 5px 2%;
@@ -337,7 +337,8 @@ footer {
 
 #footer .totalusers {
     margin-right: 50px;
-    color: #0088cc;
+    color: #2196F3;
+    float: left;
 }
 
 /* MENU */
@@ -798,6 +799,16 @@ div.searchbar button:hover {
 .brand-color,
 .brand-color > a {
     color: #795548 !important;
+}
+
+.remove-color,
+.remove-color > a {
+    color: #F44336;
+}
+
+.user-color,
+.user-color > a {
+    color: #2196F3;
 }
 
 a.brand {

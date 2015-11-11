@@ -49,7 +49,6 @@ PageNumber = Match.Where(function (x) {
 ProductsArrayCheck = Match.Where(function (products) {
     check(products, Array);
     _.each(products, function (product) {
-        console.log(product);
         check(product, ProductsCheck);
     });
     return products.length >= 0;
@@ -59,6 +58,7 @@ ProductsCheck = Match.Where(function (product) {
     check(product, Object);
     check(product, {
         brand: NonEmptyStringNoSpecialCharacters,
+        brand_id: Match.Optional(NonEmptyStringNoSpaceCharacters),
         type: TypeCheck,
         items: ItemsArrayCheck
     });

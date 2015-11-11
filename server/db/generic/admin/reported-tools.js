@@ -14,7 +14,7 @@ Meteor.methods({
 
         var user = Meteor.user();
 
-        if (!user.admin || user.admin !== NoFoodz.consts.admin.SUPER)
+        if (!NoFoodz.utils.user.isAdmin(user))
             throw new Meteor.Error(403, NoFoodz.messages.errors.ADMIN_TYPE);
 
         var query = {
@@ -59,7 +59,7 @@ Meteor.methods({
 
         var user = Meteor.user();
 
-        if (!user.admin || user.admin !== NoFoodz.consts.admin.SUPER)
+        if (!NoFoodz.utils.user.isAdmin(user))
             throw new Meteor.Error(403, NoFoodz.messages.errors.ADMIN_TYPE);
 
         for (var i = 0, len = options.items.length; i < len; i += 1) {

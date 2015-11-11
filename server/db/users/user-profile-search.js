@@ -26,8 +26,6 @@ Meteor.methods({
 
     findUsers: function (options) {
 
-        console.log(options);
-
         check(options, {
             username: NonEmptyStringNoSpaceCharacters
         });

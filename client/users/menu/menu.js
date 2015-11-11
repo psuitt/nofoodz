@@ -3,7 +3,12 @@
  */
 Template.menu.helpers({
     username: function () {
+
         var user = Meteor.user();
+
+        if (user.profile.name) {
+            return user.profile.name;
+        }
         return user.username.substring(0, 1).toUpperCase() + user.username.substring(1);
     },
     usernameShort: function () {
@@ -13,7 +18,18 @@ Template.menu.helpers({
 });
 
 Template.menu.rendered = function () {
-    $('#menu_user_menu [data-toggle=\'dropdown\']').dropdown();
+
+    Meteor.call('userDataSimple', function (err, currentUser) {
+
+        if (err  || !NoFoodz.client.permissions.addAccess(currentUser)) {
+            $('#menu_addbutton').hide();
+        }
+
+    });
+
+    $('#menu_user_menu [data-toggle=\'dropdown\']').dropdown().on('click', function () {
+        $(this).parent().toggleClass('dropup');
+    });
 };
 
 Template.menu.events({

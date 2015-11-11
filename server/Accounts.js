@@ -22,10 +22,8 @@ Accounts.validateNewUser(function (user) {
 
     if (user.username && user.username.length > 3 && user.username.length < 16) {
         check(user.username, UsernameCharacters);
-        // Lower case only.
-        user.username = user.username.toLowerCase();
         Statistics.upsert(
-            {_type: 'usercount'},
+            {_type: NoFoodz.consts.statistics.USER_COUNT},
             {$inc: {count: 1}}
         );
         return true;
@@ -36,13 +34,14 @@ Accounts.validateNewUser(function (user) {
 
 Accounts.onCreateUser(function (options, user) {
     user.active = true;
-    user.roles = [];
+    user.roles = [NoFoodz.consts.admin.NORMAL];
     user.profile = {
         name: options.username,
         bonusHearts: 10,
-        date: new Date(),
-        achievements: [NoFoods.achievements.updateAchievement('NEW').updates[0].updated]
+        date: new Date()
     };
+    // Lower case only.
+    user.username = user.username.toLowerCase();
     return user;
 });
 
@@ -51,7 +50,7 @@ Accounts.onCreateUser(function (options, user) {
 Accounts.emailTemplates.siteName = 'NoFoodz';
 Accounts.emailTemplates.from = 'NoFoodz Accounts <accounts@nofoodz.com>';
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
-    return 'Welcome to No-Foods, ' + user.profile.username;
+    return 'Welcome to NoFoodz, ' + user.profile.username;
 };
 
 Accounts.emailTemplates.enrollAccount.text = function (user, url) {

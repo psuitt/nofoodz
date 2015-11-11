@@ -37,7 +37,8 @@ span.foods-comment {
 }
 
 #foods_commentsinputs {
-    margin-bottom: 100px;
+    padding: 50px 5px 50px 5px;
+    border: 4px dashed #4CAF50;
 }
 
 #foods_editcomments {

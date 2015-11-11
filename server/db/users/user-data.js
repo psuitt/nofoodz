@@ -11,7 +11,7 @@ Meteor.methods({
 
         var filter = {
             fields: {
-                admin: 1,
+                roles: 1,
                 username: 1,
                 profile: 1
             }
@@ -32,7 +32,7 @@ Meteor.methods({
 
         var filter = {
             fields: {
-                admin: 1,
+                roles: 1,
                 username: 1
             }
         };

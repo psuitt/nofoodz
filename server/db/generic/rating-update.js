@@ -13,15 +13,20 @@ Meteor.methods({
 
         var currentUserId = this.userId;
 
-        console.log(options);
-
         if (!currentUserId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
+        var user = Meteor.users.findOne({_id: this.userId}, {fields: {
+            roles: 1,
+            "profile.bonusHearts": 1
+        }});
+
+        if (!NoFoodz.utils.user.isNormalUser(user))
+            throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+
         if (options.rating > 5) {
 
-            var user = Meteor.users.findOne({_id: this.userId}),
-                bonusHearts = user.profile.bonusHearts;
+            var bonusHearts = user.profile.bonusHearts;
 
             if (bonusHearts < 1) {
                 throw new Meteor.Error(500, "You can not rate this above a 5");
@@ -77,8 +82,6 @@ Meteor.methods({
         var item = itemDao.find(),
             total = item.ratingtotal_calc ? item.ratingtotal_calc : 0,
             count = item.ratingcount_calc + countDiff;
-
-        console.log('Item Dao ' + EJSON.stringify(itemDao));
 
         if (count > 0) {
 

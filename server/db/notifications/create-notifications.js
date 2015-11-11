@@ -5,8 +5,6 @@ Meteor.methods({
 
     createNotification: function (notification) {
 
-        console.log(notification);
-
         check(notification, {
             user_id: NonEmptyStringNoSpaceCharacters,
             rating: RatingCheck,

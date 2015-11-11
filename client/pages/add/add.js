@@ -1,6 +1,4 @@
-var placeauto,
-    map,
-    nofoodsRating;
+var nofoodsRating;
 
 Template.foodsadd.destroyed = function () {
 };
@@ -16,9 +14,10 @@ Template.foodsadd.rendered = function () {
 
     Meteor.call('userDataSimple', function (err, currentUser) {
 
-        if (err || !currentUser.admin) {
+        if (!err) {
 
-            $('#foodsadd_numberselect').hide();
+            if (NoFoodz.client.permissions.createMultiple(currentUser))
+                $('#foodsadd_numberselect').removeClass('hide');
 
         }
 
@@ -29,7 +28,7 @@ Template.foodsadd.rendered = function () {
     nofoodsRating = $('div.ratingDiv').nofoodsrating();
 
     if (data && data.brand_id) {
-        brand_id = data.brand_id;
+
         var obj = {
             brand_id: data.brand_id
         };
@@ -40,25 +39,18 @@ Template.foodsadd.rendered = function () {
                 var brand = data.brand;
 
                 if (brand) {
-                    $('#foodsadd_brand').attr("disabled", "disabled").val(brand.name);
-                } else {
-                    brand_id = false;
-                    //$('#foodsadd-brand').nofoodsautocomplete();
+                    $('#foodsadd_brand').attr("disabled", "disabled").val(brand.name).data('brand_id', brand._id);
                 }
 
             }
 
         });
 
-    } else {
-        //$('#foodsadd-brand').nofoodsautocomplete();
     }
 
     $('[data-role=\'tagsinput\']').tagsinput({
         tagClass: 'nofoodz-tag'
     });
-
-    //addLocation(); LOCATION
 
 };
 
@@ -163,6 +155,7 @@ var getData = function (template) {
 
             data.push({
                 brand: brand,
+                brand_id: brandId,
                 type: type.toLowerCase(),
                 items: [{
                     name: name,

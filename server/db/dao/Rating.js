@@ -37,14 +37,11 @@ Rating.prototype.findByUser = function (filter, skipSet) {
 
     var db = NoFoodz.db.typeToRatingsDb(this.type);
 
-    console.log('Rating query ' + EJSON.stringify(query));
     var rating = db.findOne(query, filter);
 
     // update the data to the current new data.
     if (!skipSet)
         this.updateFields(rating);
-
-    console.log('Rating found ' + EJSON.stringify(rating));
 
     return rating;
 
@@ -69,8 +66,6 @@ Rating.prototype.insert = function () {
         throw new Meteor.Error(500, 'A type id is required to do a rating insert.');
     }
 
-    console.log('Inserting new rating ' + EJSON.stringify(ratingObj));
-
     return db.insert(ratingObj);
 
 };
@@ -81,9 +76,6 @@ Rating.prototype.upsert = function () {
         returnedObj = {previous: rating};
 
     if (rating) {
-
-        console.log('Updating rating ' + EJSON.stringify(rating));
-        console.log('Updating rating updated to ' + EJSON.stringify(this));
 
         var db = null;
 

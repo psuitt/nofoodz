@@ -25,6 +25,7 @@
 
 #myfoods-pages a.remove {
     margin-left: 10px;
+    font-weight: bold;
 }
 
 #myfoods-pages h3 {
@@ -62,7 +63,9 @@ div.myrating > span {
 
 #myfoods_edit {
     margin: auto;
-    vertical-align: middle;
+    vertical-align: baseline;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 #myfoods_name {
