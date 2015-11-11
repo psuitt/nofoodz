@@ -58,27 +58,24 @@ NoFoods.widgetlib = function() {
 		createRatingDiv: function(rating) {
 
 			var div = $("<div class='myrating myfoods'></div>"),
-					name = $("<span class='name myfoods'></span>"),
+					name = $("<span class='name myfoods item-color'></span>"),
 					nameLink = $("<a></a>"),
-					brand = $("<span class='brand myfoods'></span>"),
+					brand = $("<span class='brand myfoods brand-color'></span>"),
 					brandLink = $("<a></a>"),
 					ratingSpan = $("<span class='rating'></span>"),
-					ratingNumber = $("<span class='ratingNum'></span>"),
 					toAdd = null;
 			
 			name.addClass("lower");
 		
 			var i = (Math.round((rating.rating * 2))*10).toString();
-			
-			ratingNumber.html(rating.rating);
-			ratingSpan.addClass('x' + i);	
+
+			ratingSpan.addClass('x' + i).text(rating.rating);
 		
 			name.append(nameLink);
 			brand.append(brandLink);
 			div.append(name);
 			div.append(brand);
-			div.append(ratingSpan);	
-			div.append(ratingNumber);
+			div.append(ratingSpan);
 			
 			return div;
 		
@@ -87,7 +84,7 @@ NoFoods.widgetlib = function() {
 		createHeart: function(val, count) {
 
 			var div = $("<div class='ratingDiv'></div>")
-					span = $('<span></span>');
+			span = $('<span data-toggle=\'tooltip\' data-placement=\'top\' ></span>');
 			
 			var i = (Math.round((parseFloat(val) * 2))*10).toString();
 			
@@ -99,10 +96,9 @@ NoFoods.widgetlib = function() {
 			
 			if(count) {
 				var totalSpan =  $("<span class='totalRating'></span>");
-				totalSpan.html(count);	
+				totalSpan.text('(' + count + ')');
 				div.append(totalSpan);		
 			}
-			
 			
 			return div;
 		
@@ -130,6 +126,10 @@ NoFoods.widgetlib = function() {
 			return searchType;
 		
 		},
+
+		createBrandLink: function (id, name) {
+			return $('<a class=\'brand\'></a>').attr('href', NoFoodz.consts.urls.BRAND + id).html(name);
+		}
 		
 	};
 

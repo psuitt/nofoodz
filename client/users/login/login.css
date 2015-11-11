@@ -1,0 +1,20 @@
+#login_form {
+}
+
+#login_close {
+    float: right;
+    margin-right: -50px
+}
+
+#login_form h3 {
+    color: #E91E63;
+    margin-bottom: 30px;
+}
+
+#login_email {
+    margin-bottom: 15px;
+}
+
+#login_create_new_user {
+    margin-top: 20px;
+}

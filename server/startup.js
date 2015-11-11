@@ -14,7 +14,6 @@ Meteor.startup(function () {
 		*/
 		
 	/*setUpStatistics();*/
-		
 	runBatchFixes();
  		
 });

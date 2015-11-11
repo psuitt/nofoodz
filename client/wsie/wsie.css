@@ -1,0 +1,18 @@
+#wsie_info {
+    min-height: 400px;
+    text-align: center;
+}
+
+#wsie_resultbrand {
+    font-size: 50px;
+}
+
+#wsie_result {
+    font-size: 40px;
+}
+
+#wsie_random {
+    display: block;
+    font-size: 70px;
+    margin: 100px auto auto auto;
+}

@@ -1,0 +1,44 @@
+<template name="foodsadd">
+    <div class="content middle">
+        <h3 class="pagetitle">Add Food or Drink</h3>
+
+        <div class="subcontent s">
+            <div class="page-message message"></div>
+            <div id="foodsadd_numberselect" class="input-spacing hide">
+                <button type="button" id="foodsadd_single" class="btn btn-default blue-button invert selected"
+                        value="s">Single
+                </button>
+                <button type="button" id="foodsadd_multiple" class="btn btn-default blue-button invert"
+                        value="m">Multiple
+                </button>
+            </div>
+            <div id="foodsadd_typeselect" class="input-spacing">
+                <button type="button" id="foodsadd_food" class="btn btn-default blue-button invert selected"
+                        value="Food">Food
+                </button>
+                <button type="button" id="foodsadd_drink" class="btn btn-default blue-button invert" value="Drink">
+                    Drink
+                </button>
+                <button type="button" id="foodsadd_product" class="btn btn-default blue-button invert" value="Product">
+                    Product
+                </button>
+            </div>
+            <div id="foodsadd_single_div">
+                <label for="foodsadd-brand">Brand</label><input id="foodsadd_brand" type="text" class="typeahead"
+                                                                placeholder="Brand, Company, Restaurant..."/>
+                <label for="foodsadd-name">Name</label><input id="foodsadd_name" type="text"
+                                                              placeholder="Name, Beef, ect..."/>
+                <label>Rating</label>
+
+                <div class="ratingDiv">
+                </div>
+            </div>
+            <div id="foodsadd_multiple_div">
+                <button type="button" id="foodsadd_add_brand" class="btn btn-default blue-button"><span
+                        class="button-icon glyphicon glyphicon-plus"></span>Brand
+                </button>
+            </div>
+            <input id="save" type="button" class="green-button" value="Save"/>
+        </div>
+    </div>
+</template>

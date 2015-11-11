@@ -1,9 +1,8 @@
 <template name="home">
 	<div name="homeDiv" id="homeDiv">
 		<h1 class="logo" >NoFoodz</h1>
-		<div id="home-introduction">
-			A simple guide to a world of food
-		</div>
+
+        <div id="home-introduction">An easy way to share & rate products with friends and family</div>
 		<div>
 			<div id="search-btn-group" class="input-group">
 				<div id="home-searchtype" class="input-group-btn">
@@ -18,12 +17,12 @@
 	    			<li><a>People</a></li>
 	    		</ul>
 	    	</div>
-	    	<input name="home-search" id="home-search" type="text" placeholder="Start searching for food" class="form-control">
+                <input name="home-search" id="home-search" type="text" placeholder="Start searching for things"
+                       class="form-control">
 	    	<span class="input-group-btn">
 	    		<button id="home-searchgo" class="btn btn-default glyphicon glyphicon-search"></button>
 				</span>
 			</div>
 		</div>
 	</div>
-	{{> search}}
 </template>

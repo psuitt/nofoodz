@@ -12,7 +12,8 @@
 
 		var _options = {
 			max: 0,
-			select: false
+			select: false,
+			data: {}
 		};	
 		
 		if (options)
@@ -20,10 +21,10 @@
 			
 		_options.max = Math.round(_options.max);
 
-		var firstArrow = $("<span class='first arrow' title='First Page'>&#60;&#60;</span>"),
-				leftArrow = $("<span class='left arrow disabled' title='Page Left'>&#60;</span>"),
-				rightArrow = $("<span class='right arrow' title='Page Right'>&#62;</span>"),
-				lastArrow = $("<span class='last arrow' title='Last Page'>&#62;&#62;</span>"),
+		var firstArrow = $("<span class='first arrow glyphicon glyphicon-step-backward' title='First Page'></span>"),
+			leftArrow = $("<span class='left arrow disabled glyphicon glyphicon-chevron-left' title='Page Left'></span>"),
+			rightArrow = $("<span class='right arrow glyphicon glyphicon-chevron-right' title='Page Right'></span>"),
+			lastArrow = $("<span class='last arrow glyphicon glyphicon-step-forward' title='Last Page'></span>"),
 				lastPage = MAX_PAGE_AMOUNT,
 				maxVal = _options.max;
 				
@@ -164,7 +165,7 @@
 				self.find('span.current').removeClass('current'); 
 				$(this).addClass('current');
 				_recenterNumbers(parseInt($(this).html(), 10));
-				_options.select(parseInt($(this).html(), 10));			
+				_options.select.call(_options.data, parseInt($(this).html(), 10));
 			});
 			
 			firstArrow.on("click", function() {
@@ -185,8 +186,8 @@
 						maxVal = parseInt(_options.max, 10);
 				if (maxVal > lastVal)
 					rightArrow.removeClass('disabled');
-				
-				_options.select(1);	
+
+				_options.select.call(_options.data, 1);
 							
 			});	
 			
@@ -213,8 +214,8 @@
 						firstVal = parseInt(first.html(), 10);
 				if (firstVal > 1)
 					leftArrow.removeClass('disabled');
-				
-				_options.select(maxVal);
+
+				_options.select.call(_options.data, maxVal);
 				
 			});
 			

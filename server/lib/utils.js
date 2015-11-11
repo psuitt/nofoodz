@@ -20,4 +20,20 @@ NoFoodz.utils = {
 		return uniqueArray;
 	}
 
-}
+};
+
+NoFoodz.utils.user = {
+
+	isAdmin: function (user) {
+		return user.roles && user.roles.indexOf(NoFoodz.consts.admin.SUPER) > -1;
+	},
+
+	isMod: function (user) {
+		return user.roles && user.roles.indexOf(NoFoodz.consts.admin.MOD) > -1;
+	},
+
+	isNormalUser: function (user) {
+		return user.roles && user.roles.indexOf(NoFoodz.consts.admin.NORMAL) > -1;
+	},
+
+};

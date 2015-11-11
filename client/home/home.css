@@ -6,11 +6,14 @@
 }
 
 #homeDiv h1 {
-	font-weight: 700;
+	font-weight: 200;
+	font-size: 100px;
+	letter-spacing: 15px;
+	text-shadow: 5px 2px rgba(0, 0, 0, .2);
 }
 
 #home-introduction {
-	color: #FFFFFF;
+	color: #424242;
 }
 
 #homeDiv>div {
@@ -35,7 +38,7 @@
 }
 
 #home-searchtype span.home-searchval {
-	width: 50px;
+	width: 55px;
 	display: inline-block;
 }
 

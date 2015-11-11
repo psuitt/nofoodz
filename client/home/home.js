@@ -7,6 +7,8 @@ Template.home.rendered = function() {
 		
 	$('#mainContent').addClass('white');
 	$('#header').addClass('hidden');
+
+	$('#mainContent [data-toggle=\'dropdown\']').dropdown();
 	
 };
 	
@@ -32,9 +34,11 @@ Template.home.events = {
 };
 
 var doSearch = function(search) {
-	var val = $('#home-searchtype .home-searchval').html().toLowerCase();
-	if (val) {
-		//$('#searchResults').attr("src", '/search/' + val + '/' + search);
-		DoSearch(val, search);
+	var type = $('#home-searchtype .home-searchval').html().toLowerCase();
+	if (type) {
+		Router.go('find', {
+			type: type,
+			search: search
+		});
 	}	
 };

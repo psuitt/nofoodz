@@ -1,10 +1,8 @@
 MAP_DATA = {};
-var statsSub,
-		activeSub;
+var statsSub;
 
 Template.explore.destroyed = function() {
 	statsSub && statsSub.stop();
-	activeSub && activeSub.stop();
 };
 
 Template.explore.rendered = function() {
@@ -28,9 +26,9 @@ Template.explore.rendered = function() {
 	});
 	
 	initMap();
-	
-	$('.explore-options').on('click', 'a', menuClick);
-	$('.explore-options a').eq(0).click();
+
+    $('.explore-options').on('click', 'button', menuClick);
+    $('.explore-options button').eq(0).click();
 		
 };
 
@@ -78,61 +76,59 @@ var initMap = function () {
 var menuClick = function() {
 	
 	var self = $(this),
-			dataType = self.attr('datatype'),
-			sub = self.attr('sub');
+        dataType = self.attr('datatype');
 	
 	var tempScrollTop = $(window).scrollTop();
 
 	$('#explore-content').html('');
-	$('.explore-options a').removeClass('selected');
+    $('.explore-options button').removeClass('selected');
 	self.addClass('selected');
-	
-	if (!dataType || !sub) 
+
+    if (!dataType)
 		return;
-		
-	var collection = false;		
-		
-	switch(dataType) {
-		case 'food':
-			collection = Foods;
-			break;
-		case 'drink':
-			collection = Drinks;
-			break;
-		default:
-			return;	
-	
-	}
-	
+
 	var list = $('<ol><ol>');
-	
-	activeSub = Meteor.subscribe(sub, function() {
-		
-		collection.find({}).forEach(function(item) {
-			var listItem = $("<li></li>");
-			var div = $("<div class='myrating myfoods'></div>");
-			var title = $("<span class='name myfoods'><a></a></span>");
-			var brand = $("<span class='brand myfoods'><a></a></span>");
 
-			title.addClass("lower");									
-				
-			div.append(title);
-			div.append(brand);
-			div.append(NoFoods.widgetlib.createHeart(item.rating_calc, item.ratingcount_calc));
+    Meteor.call('itemTopRatedSearch', {type: dataType}, function (err, response) {
 
-			title.find('a').attr('href', NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
-			brand.find('a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-		
-			listItem.append(div);
-			list.append(listItem);
-					
-		});
-		
+        if (!err && response) {
+
+            _.each(response, function (item, index) {
+
+                var listItem = $("<li></li>");
+                var div = $("<div class='myrating myfoods'></div>");
+                var title = $("<span class='name item-color myfoods'><a></a></span>");
+                var brand = $("<span class='brand brand-color myfoods'><a></a></span>");
+
+                title.addClass("lower");
+
+                div.append(title);
+                div.append(brand);
+
+                var avg = item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0;
+
+                if (avg != 0 && avg.lastIndexOf('0') === 3) {
+                    avg = avg.substring(0, 3);
+                    avg = avg.replace('.0', '');
+                }
+
+                div.append(NoFoods.widgetlib.createHeart(avg, item.ratingcount_calc));
+
+                title.find('a').attr('href', NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
+                brand.find('a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+
+                listItem.append(div);
+                list.append(listItem);
+
+            });
+
+        }
+
 		$('#explore-content').append(list);
-		
-		$(window).scrollTop(tempScrollTop);
-		
-		activeSub.stop();
+
+        $(window).scrollTop(tempScrollTop);
+
+        $('[data-toggle=\'tooltip\']').tooltip();
 
 	});
 

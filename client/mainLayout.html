@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
         <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
         <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>-->
         <meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk"/>
     </head>
@@ -17,42 +18,38 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" href="/">NoFoodz | alpha</a>
+                <a class="navbar-brand logo" href="/">NoFoodz<span class="title-separator"> | </span><span
+                        class="sub-title">alpha</span></a>
             </div>
             <div class="collapse navbar-collapse" id="menu-navbar">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/explore">Explore</a></li>
-                    {{#if currentUser}}
-                        <li><a href='/myfoods'>MyFoodz</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add <span
-                                    class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href='/food/add'>Add</a></li>
-                                <li><a href='/food/addrecipe'>Add a Recipe</a></li>
-                            </ul>
-                        </li>
-                    {{/if}}
+                    <li><a class="menu-link" href="/explore">Explore</a></li>
+                    <li><a class="menu-link" href="/wsie">What should I Eat?</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="text-center">
                         <div class="searchbar"><input type="text"/></div>
                     </li>
                     {{#if currentUser}}
+                        <li><!--
+                         --><span id="notifications" class="button-icon glyphicon glyphicon-flag"></span><!--
+                         -->
+                            <ul id="notificationsList"></ul>
+                            <!--
+                                                 --></li>
                         <li>
-                            <span id="notifications" class="glyphicon glyphicon-flag"></span>
-                            <ul id="notificationsList">
-                            </ul>
+                            <div id="loginDiv">
+                                {{> menu }}
+                            </div>
+                        </li>
+                    {{else}}
+                        <li>
+                            <div id="loginDiv">
+                                {{> login }}
+                                {{> register }}
+                            </div>
                         </li>
                     {{/if}}
-                    <li>
-                        <div id="loginDiv"><!--
-                         --><button id="menu-login-button">Login</button>
-                            {{> login }}
-                            {{> register }}
-
-                        </div>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -68,6 +65,7 @@
         {{> yield}}
     </div>
     {{> report}}
+    <div class="alertmessage alert alert-success">Success message test!</div>
     <footer>
         {{> yield region='footer'}}
     </footer>

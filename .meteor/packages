@@ -15,3 +15,5 @@ underscore
 iron:router
 
 accounts-base
+ajduke:bootstrap-tagsinput
+standard-minifiers

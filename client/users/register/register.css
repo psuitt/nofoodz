@@ -1,0 +1,23 @@
+#register_form {
+}
+
+#register_close {
+    float: right;
+    margin-right: -50px
+}
+
+
+#register_form h3 {
+    color: #E91E63;
+    margin-bottom: 30px;
+}
+
+#register_username,
+#register_email,
+#register_password {
+    margin-bottom: 15px;
+}
+
+#register_cancel {
+    margin-top: 20px;
+}

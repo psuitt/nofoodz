@@ -2,7 +2,7 @@ NoFoods = typeof NoFoods === 'undefined' ? {} : NoFoods;
 
 NoFoods.lib = function() {
 
-	var MAX_PAGE_AMOUNT = 3;
+	var MAX_PAGE_AMOUNT = 15;
 
 	return {
 		
@@ -32,10 +32,6 @@ NoFoods.lib = function() {
 			}
 			
 			return time.join('');
-		},
-		
-		createBrandLink: function(id, name) {
-			return $('<a></a>').attr('href', '/brand/page/' + id).html(name);
 		}
 		
 	};

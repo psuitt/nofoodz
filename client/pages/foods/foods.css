@@ -1,0 +1,51 @@
+#foods_bodydiv {
+    min-height: 200px;
+}
+
+#foods_commentsinputs {
+    text-align: center;
+}
+
+#foods_comments {
+    text-align: center;
+}
+
+#foods_commentsdiv.no-user-rating .foods-comment-input,
+#foods_commentsdiv.no-user-rating span.foods-comment,
+#foods_commentsdiv.no-user-rating #foods_editcomments,
+#foods_commentsdiv.no-user-rating #foods_comment,
+#foods_commentsdiv.no-comments #foods_editcomments,
+#foods_commentsdiv.comment-mode span.foods-comment,
+#foods_commentsdiv.display-mode input.foods-comment-input,
+#foods_commentsdiv.display-mode #foods_comment {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input.foods-comment-input {
+    width: 180px;
+    display: inline-block;
+    margin: auto 10px;
+    vertical-align: middle;
+}
+
+span.foods-comment {
+    font-size: 18px;
+    margin: auto 20px;
+    vertical-align: middle;
+}
+
+#foods_commentsinputs {
+    padding: 50px 5px 50px 5px;
+    border: 4px dashed #4CAF50;
+}
+
+#foods_editcomments {
+    margin: auto;
+    vertical-align: middle;
+}
+
+#foods_comment {
+    float: right;
+}
