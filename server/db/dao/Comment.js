@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 8/25/2015.
  */
-Comment = function (item_id, type, comment) {
+Comment = function (item_id, type, comment, user) {
 
     this._id = Random.id();
     // Id of the product or food
@@ -10,6 +10,7 @@ Comment = function (item_id, type, comment) {
     this.type = type;
     // Comments array
     this.comment = comment;
+    this.user_id = user;
     // How many times this was listed
     this.value = 1;
     this.date = Date.now();
@@ -34,7 +35,7 @@ Comment.prototype.findByUser = function (filter, skipSet) {
     var query = {
         item_id: this.item_id,
         type: this.type,
-        comment: this.comment
+        comment: {$regex: new RegExp(this.comment, "i")}
     };
 
     Validator.validate(this, 'item_id', 'type', 'comment');
@@ -60,6 +61,7 @@ Comment.prototype.insert = function () {
         type: this.type,
         comment: this.comment,
         value: this.value,
+        user_id: this.user_id,
         date: this.date,
         random: this.random
     };

@@ -30,12 +30,7 @@ var loadUser = function (data) {
 
             findUserRatings(user);
 
-            loadFollowingFlag(user._id)
-
-            $('span.wishstar').on('click', function () {
-                Meteor.call('follow', {user_id: user._id, username: data.username});
-                $(".wishstar").toggleClass("x100", true);
-            });
+            loadFollowingFlag(user._id, data.username);
 
         }
 
@@ -43,7 +38,7 @@ var loadUser = function (data) {
 
 };
 
-var loadFollowingFlag = function (user_id) {
+var loadFollowingFlag = function (user_id, username) {
 
     var obj = {
         user_id: user_id
@@ -55,6 +50,13 @@ var loadFollowingFlag = function (user_id) {
 
             $(".wishstar").toggleClass("x100", true);
 
+        } else if (err) {
+            $('span.wishstar').hide();
+        } else {
+            $('span.wishstar').on('click', function () {
+                Meteor.call('follow', {user_id: user_id, username: username});
+                $(".wishstar").toggleClass("x100", true);
+            });
         }
 
     });

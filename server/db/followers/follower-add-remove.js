@@ -35,6 +35,17 @@ Meteor.methods({
 
         Followers.upsert(query, follower);
 
+        var notification = {
+            user_id: options.user_id,
+            followername: username
+        };
+
+        Meteor.call('createFollowNotification', notification, function (err, data) {
+            if (err) {
+                console.log('Notification failed ' + EJSON.stringify(notification) + ' err: ' + err);
+            }
+        });
+
     },
 
     unfollow: function (options) {

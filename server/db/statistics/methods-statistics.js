@@ -13,7 +13,7 @@ Meteor.methods({
 
     addRating: function (options) {
         if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in");
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         check(options, {
             ratingcount: Number,
@@ -26,7 +26,7 @@ Meteor.methods({
     addCountry: function (options) {
 
         if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in");
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         check(options, {
             country: NonEmptyString,

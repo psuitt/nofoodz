@@ -31,7 +31,7 @@ Template.myfoods.events({
             if (!err) {
                 NoFoodz.alert.msg('success', 'Save was successful!');
             } else {
-                NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
+                NoFoodz.alert.msg('danger', err);
             }
 
         });

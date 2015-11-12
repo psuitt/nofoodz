@@ -3,7 +3,7 @@ Meteor.methods({
     userData: function () {
 
         if (!this.userId)
-            throw new Meteor.Error(403, 'You must be logged in');
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var query = {
             _id: this.userId
@@ -24,7 +24,7 @@ Meteor.methods({
     userDataSimple: function () {
 
         if (!this.userId)
-            throw new Meteor.Error(403, 'You must be logged in');
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var query = {
             _id: this.userId

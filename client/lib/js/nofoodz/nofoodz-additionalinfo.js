@@ -150,7 +150,7 @@
 			info: _options.info
 		};
 		
-		Meteor.call('updateFoodDrinkInfo', obj, _saveComplete);
+		//Meteor.call('updateFoodDrinkInfo', obj, _saveComplete);
 		
 	};
 	

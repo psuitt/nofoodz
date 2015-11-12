@@ -41,7 +41,8 @@ Meteor.methods({
             comments: CommentsCheck
         });
 
-        var userRating = new Rating(0, this.userId);
+        var userId = this.userId;
+        var userRating = new Rating(0, userId);
 
         userRating.item_id = options.item_id;
         userRating.type = options.type;
@@ -78,6 +79,7 @@ Meteor.methods({
                     commentDao.item_id = options.item_id;
                     commentDao.type = options.type;
                     commentDao.comment = comment;
+                    commentDao.user_id = userId;
 
                     commentDao.upsert();
 
