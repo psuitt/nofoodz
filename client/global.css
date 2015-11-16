@@ -315,32 +315,6 @@ div.content > h3 {
     margin-top: 0px;
 }
 
-/* FOOTER */
-
-footer {
-    position: absolute;
-    width: 100%;
-}
-
-#footer {
-    width: 100%;
-    text-align: right;
-    color: #FFC107;
-    background: #222222;
-    display: block;
-    padding: 5px 2%;
-    margin-top: 0;
-    position: absolute;
-    bottom: 0;
-    margin-top: 15px;
-}
-
-#footer .totalusers {
-    margin-right: 50px;
-    color: #2196F3;
-    float: left;
-}
-
 /* MENU */
 .logo {
     font-family: 'VT323';

@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/11/2015.
  */
-var USER_REGEX = /^[0-9a-z][0-9a-z_]+[0-9a-z]$/i;
+var USER_REGEX = /^[0-9a-z_\.@\-~]+$/i;
 
 UsernameCharacters = Match.Where(function (x) {
     check(x, String);

@@ -36,25 +36,39 @@ Template.login.events({
         return false;
     },
 
-    'submit #login_form': function (e, t) {
-        e.preventDefault();
-        // retrieve the input field values
-        var email = t.find('#login_email').value.toLocaleLowerCase(),
-            password = t.find('#login_password').value;
+    'keypress #login_email': function (evt, template) {
+        if (evt.which === 13) {
+            submit(evt, template);
+        }
+    },
 
-        // Trim and validate your fields here.... 
+    'keypress #login_password': function (evt, template) {
+        if (evt.which === 13) {
+            submit(evt, template);
+        }
+    },
 
-        // If validation passes, supply the appropriate fields to the
-        // Meteor.loginWithPassword() function.
-        Meteor.loginWithPassword(email, password, function (err) {
-            if (err) {
-                // Inform the user that account creation failed
-                t.$('.error-message').text('Invalid login');
-            } else {
-                t.find('#login_close').click();
-            }
-        });
-        return false;
-    }
+    'submit #login_form': submit
 
 });
+
+var submit = function (e, t) {
+    e.preventDefault();
+    // retrieve the input field values
+    var email = t.find('#login_email').value.toLocaleLowerCase(),
+        password = t.find('#login_password').value;
+
+    // Trim and validate your fields here....
+
+    // If validation passes, supply the appropriate fields to the
+    // Meteor.loginWithPassword() function.
+    Meteor.loginWithPassword(email, password, function (err) {
+        if (err) {
+            // Inform the user that account creation failed
+            t.$('.error-message').text('Invalid login');
+        } else {
+            t.find('#login_close').click();
+        }
+    });
+    return false;
+};

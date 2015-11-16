@@ -23,15 +23,25 @@ Template.mainLayout.rendered = function () {
 
     $('.searchbar input').nofoodssearch();
 
-    $(document).on('click', '#notifications', function () {
+    // Hide listener
+    $('body').on('click', function (e) {
+        //$('#menu_close').click();
+        if ($(e.target).closest("#notificationsList").length === 0 && $(e.target).closest("#notifications").length === 0 && $('#notifications').hasClass('open')) {
+            $('#notifications').removeClass('open');
+            $('#notificationsList').removeClass('open');
+        }
+    });
+
+    $(document).on('click', '#notifications', function (event) {
+
+        event.stopPropagation();
 
         if (!$(this).hasClass('open')) {
             $(this).addClass('open');
-            $('#notificationsList').html('');
-            $('#notificationsList').addClass('open');
+            $('#notificationsList').html('').addClass('open');
             loadNotifications();
         } else {
-            $(this).removeClass('open')
+            $(this).removeClass('open');
             $('#notificationsList').removeClass('open');
         }
 

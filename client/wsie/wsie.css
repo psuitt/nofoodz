@@ -5,14 +5,24 @@
 
 #wsie_resultbrand {
     font-size: 50px;
+    min-height: 71px;
 }
 
 #wsie_result {
     font-size: 40px;
+    min-height: 57px;
 }
 
 #wsie_random {
     display: block;
     font-size: 70px;
     margin: 100px auto auto auto;
+}
+
+#wsie_random.loading {
+    width: 90px;
+    height: 108px;
+    background-image: url('ajax-loader.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
 }

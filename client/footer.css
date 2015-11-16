@@ -1,0 +1,30 @@
+/* FOOTER */
+
+footer {
+    position: absolute;
+    width: 100%;
+}
+
+#footer {
+    width: 100%;
+    color: #FFC107;
+    background: #222222;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+
+.footer-list {
+    display: inline-block;
+    min-height: 50px;
+    width: 25%;
+    padding: 20px 20px;
+    margin: 0;
+    list-style: none;
+    vertical-align: top;
+}
+
+.footer-list li {
+    display: block;
+}
