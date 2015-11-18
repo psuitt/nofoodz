@@ -15,7 +15,7 @@
     left: 0;
     list-style: none;
     display: block;
-    min-width: 0;
+    min-width: 100%;
 }
 
 #menu_user_menu ul li {
