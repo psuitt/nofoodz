@@ -1,7 +1,6 @@
 /* FOOTER */
 
 footer {
-    position: absolute;
     width: 100%;
 }
 
@@ -10,8 +9,6 @@ footer {
     color: #FFC107;
     background: #222222;
     display: block;
-    position: absolute;
-    bottom: 0;
     text-align: center;
 }
 
