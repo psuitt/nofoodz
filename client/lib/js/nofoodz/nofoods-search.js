@@ -63,7 +63,7 @@
 
         });
 
-        _goButton.bind('click', function () {
+        _goButton.on('click', function () {
             go();
         });
 

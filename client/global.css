@@ -800,10 +800,12 @@ div.nofoods-autocomplete.message {
 
 div.ratingDiv {
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 div.ratingDiv span.rating {
     vertical-align: middle;
+    cursor: default;
 }
 
 span.rating {
@@ -957,4 +959,13 @@ span.rating.dashed.tempx100 {
 
 input[type='text'].form-control.inline {
     display: inline-block;
+}
+
+@media only screen and (max-width: 766px) {
+
+    div.content {
+        min-width: 0;
+        width: 100%;
+    }
+
 }

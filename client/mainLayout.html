@@ -1,4 +1,4 @@
-<template name="mainLayout">
+<template name="mainlayout">
     <head>
         <title>NoFoodz: A Food Rating</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,26 +17,73 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand logo" href="/">NoFoodz<span class="title-separator"> | </span><span
-                        class="sub-title">alpha</span></a>
+                </button><!--
+                {{#if currentUser}}<button id="menu_notificationsbutton" class="btn btn-default simple glyphicon glyphicon-flag hidden-md hidden-lg"></button>{{/if}}
+             -->
+                <button id="menu_searchbutton"
+                        class="btn btn-default simple glyphicon glyphicon-search hidden-md hidden-lg"></button>
+                <a class="navbar-brand logo" href="/">NoFoodz<span
+                        class="title-separator hidden-xs hidden-sm"> | </span><span
+                        class="sub-title  hidden-xs hidden-sm">alpha</span></a>
             </div>
-            <div class="collapse navbar-collapse" id="menu-navbar">
-                <ul class="nav navbar-nav">
-                    <li><a class="menu-link" href="/explore">Explore</a></li>
-                    <li><a class="menu-link" href="/wsie">What should I Eat?</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="text-center">
-                        <div class="searchbar"><input type="text"/></div>
+            <div class="collapse navbar-collapse navbar-right" id="menu-navbar">
+                <ul class="nav navbar-nav primary-nav">
+                    <li class="close-nav"><a href="#">Close</a></li>
+                    <li class="has-children"><a class="menu-link" href="#">Links</a>
+                        <ul class="menu-secondary-nav is-hidden">
+                            <li class="close-nav"><a href="#">Close</a></li>
+                            <li class="back"><a class="menu-link" href="#">Links</a></li>
+                            <li class="has-children">
+                                <a class="menu-link menu-header" href="#">Random</a>
+                                <ul class="is-hidden">
+                                    <li class="close-nav"><a href="#">Close</a></li>
+                                    <li class="back"><a class="menu-link" href="#">Random</a></li>
+                                    <li><a class="menu-link" href="/explore">Explore</a></li>
+                                    <li><a class="menu-link" href="/wsie">What should I Eat?</a></li>
+                                </ul>
+                            </li>
+                            <li class="has-children">
+                                <a class="menu-link menu-header" href="#">Top</a>
+                                <ul class="is-hidden">
+                                    <li class="close-nav"><a href="#">Close</a></li>
+                                    <li class="back"><a class="menu-link" href="#">Top</a></li>
+                                    <li class="has-children"><a class="menu-link" href="#">Gaming</a>
+                                        <ul class="is-hidden">
+                                            <li class="close-nav"><a href="#">Close</a></li>
+                                            <li class="back"><a class="menu-link" href="#">Gaming</a></li>
+                                            <li class="has-children"><a class="menu-link" href="#">Peripherals</a>
+                                                <ul class="is-hidden">
+                                                    <li class="close-nav"><a href="#">Close</a></li>
+                                                    <li class="back"><a class="menu-link" href="#">Peripherals</a></li>
+                                                    <li><a class="menu-link"
+                                                           href="{{pathFor route='top.gaming' data=getData  query='tags=gaming,peripheral,mouse&type=product&title=mice'}}">Mice</a>
+                                                    </li>
+                                                    <li><a class="menu-link"
+                                                           href="{{pathFor route='top.gaming' data=getData  query='tags=gaming,peripheral,mouse,wireless&type=product&title=wireless%20mice'}}">Wireless
+                                                        Mice</a></li>
+                                                    <li><a class="menu-link"
+                                                           href="{{pathFor route='top.gaming' data=getData  query='tags=gaming,peripheral,keyboard&type=product&title=keyboards'}}">Keyboards</a>
+                                                    </li>
+                                                    <li><a class="menu-link"
+                                                           href="{{pathFor route='top.gaming' data=getData  query='tags=gaming,peripheral,headset&type=product&title=headsets'}}">Headsets</a>
+                                                    </li>
+                                                    <li><a class="menu-link"
+                                                           href="{{pathFor route='top.gaming' data=getData  query='tags=gaming,peripheral,headset,wireless&type=product&title=wireless%20headsets'}}">Wireless
+                                                        Headsets</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     {{#if currentUser}}
-                        <li><!--
-                         --><span id="notifications" class="button-icon glyphicon glyphicon-flag"></span><!--
-                         -->
-                            <ul id="notificationsList"></ul>
-                            <!--
-                                                 --></li>
+                        <li class="text-center hidden-xs hidden-sm"><!--
+                     --><span id="notifications" class="button-icon glyphicon glyphicon-flag"></span><!--
+                     -->
+                            <ul id="notificationsList"></ul><!--
+                 --></li>
                         <li>
                             <div id="loginDiv">
                                 {{> menu }}
@@ -54,12 +101,10 @@
             </div>
             <!-- /.navbar-collapse -->
         </div>
+        <div id="header_searchdiv" class="searchbar"><input type="text"/></div>
         <!-- /.container-fluid -->
     </nav>
     <div id="header">
-    </div>
-    <div id="subMenu">
-        <div id="subMenuContent"></div>
     </div>
     <div id="mainContent" class="container-fluid default">
         {{> yield}}

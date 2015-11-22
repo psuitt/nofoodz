@@ -138,7 +138,6 @@ div.searchbar button:hover {
     height: 50px;
     float: right;
     margin: auto;
-    padding: 15px 10px;
 }
 
 .navbar-default .navbar-nav a.menu-link,
@@ -155,7 +154,7 @@ div.searchbar button:hover {
     text-decoration: none;
 }
 
-.navbar-default .navbar-nav .menu-link:hover:not([href="#"]) {
+.navbar-default .navbar-nav .menu-link:hover:not('.menu-header') {
     color: #424242;
     text-decoration: none;
     background-color: transparent;
@@ -349,7 +348,7 @@ div.searchbar button:hover {
         display: none;
     }
 
-    .navbar-default .navbar-nav .menu-secondary-nav .menu-link[href="#"] {
+    .navbar-default .navbar-nav .menu-secondary-nav .menu-link.menu-header {
         cursor: default;
     }
 
@@ -403,11 +402,11 @@ div.searchbar button:hover {
         margin-top: 25px;
     }
 
-    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul > li > a.menu-link {
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul a.menu-link {
         color: #424242;
     }
 
-    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul > li > a.menu-link:hover {
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul a.menu-link:hover {
         color: #E91E63;
     }
 

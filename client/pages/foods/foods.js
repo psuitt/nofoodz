@@ -125,7 +125,7 @@ Template.foods.rendered = function () {
 var done = function (err, data) {
 
     if (err || !data || !data.item) {
-        Router.go('/404');
+        Router.go('error.404');
     }
 
     var item = data.item;

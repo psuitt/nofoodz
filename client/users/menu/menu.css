@@ -1,6 +1,7 @@
 #menu_user_menu {
     min-width: 260px;
     max-width: 100%;
+    z-index: 100;
 }
 
 #menu_user_menu h3 {

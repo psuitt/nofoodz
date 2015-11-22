@@ -4,8 +4,6 @@ Template.wsie.destroyed = function() {
 
 Template.wsie.rendered = function() {
 
-    setPath();
-
     $('#wsie_random').on('click', doRandom);
 
 };

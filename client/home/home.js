@@ -1,9 +1,7 @@
 Template.home.rendered = function() {
 		
 	$('#login .logo').hide();
-	$('#login .searchbar').hide();		
-		
-	setPath();
+	$('#login .searchbar').hide();
 		
 	$('#mainContent').addClass('white');
 	$('#header').addClass('hidden');

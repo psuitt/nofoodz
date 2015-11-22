@@ -1,6 +1,7 @@
 #register_form {
     min-width: 260px;
     max-width: 100%;
+    z-index: 100;
 }
 
 #register_close {

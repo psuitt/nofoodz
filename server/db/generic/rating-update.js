@@ -97,6 +97,7 @@ Meteor.methods({
             itemDao.ratingcount_calc = 1;
         }
 
+        itemDao.rating = NoFoodz.utils.calculateRating(itemDao);
         itemDao.updateRating();
 
         if (upsertObj.isInsert) {

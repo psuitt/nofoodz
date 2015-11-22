@@ -1,93 +1,67 @@
-MAP_DATA = {};
-var statsSub;
+Template.explore.destroyed = function () {
 
-Template.explore.destroyed = function() {
-	statsSub && statsSub.stop();
 };
 
-Template.explore.rendered = function() {
-	
-	setPath();
-	
-	statsSub = Meteor.subscribe('statistics_country', function() {
-		
-		Statistics.find({}).forEach(function(stat) {
-			
-			var div = $("<div></div>");
-			div.html(stat.country + " Foods and Drinks: " + stat.length);
-			$("div.contents").append(div);
-			
-			MAP_DATA[stat.countrycode] = {
-				numberofitems: stat.length		
-			};
-			
-		});
-		
-	});
-	
-	initMap();
+Template.explore.rendered = function () {
+
+    initMap();
 
     $('.explore-options').on('click', 'button', menuClick);
     $('.explore-options button').eq(0).click();
-		
+
 };
 
 var initMap = function () {
-	
-	var map = 'world_en';
-	
-	if (typeof PARAMS != "undefined") {
-		if (PARAMS && PARAMS.maptype && PARAMS.maptype.length > 0) {
-			map = PARAMS.maptype + '_en';
-		}	
-	}
 
-	$("#explore-worldmap").vectorMap({
-		map: map,
-		backgroundColor: '#a5bfdd',
-		borderColor: '#818181',
-		borderOpacity: 0.25,
-		borderWidth: 1,
-		color: '#f4f3f0',
-		enableZoom: true,
-		hoverColor: '#c9dfaf',
-		hoverOpacity: null,
-		normalizeFunction: 'linear',
-		scaleColors: ['#b6d6ff', '#005ace'],
-		selectedColor: '#c9dfaf',
-		selectedRegion: null,
-		showTooltip: true,
-	  onLabelShow: function(element, label, code) {
-	  	
-	  	if (MAP_DATA[code.toUpperCase()]) {
-	  		label.append("</br>Foods and Drinks: " + MAP_DATA[code.toUpperCase()].numberofitems);
-	  	}
-	  
-	  },
-		onRegionClick: function(element, code, region) {
-			//$("#explore-info h4").html(region);
-			//$("#explore-content").html("");
-			//MAP_DATA[code.toUpperCase()] && $("#explore-content").html("Total Foods and Drinks: " + MAP_DATA[code.toUpperCase()].numberofitems);
-	  }
-	});
-	
+    var map = 'world_en';
+
+    if (typeof PARAMS != "undefined") {
+        if (PARAMS && PARAMS.maptype && PARAMS.maptype.length > 0) {
+            map = PARAMS.maptype + '_en';
+        }
+    }
+
+    $("#explore-worldmap").vectorMap({
+        map: map,
+        backgroundColor: '#a5bfdd',
+        borderColor: '#818181',
+        borderOpacity: 0.25,
+        borderWidth: 1,
+        color: '#f4f3f0',
+        enableZoom: true,
+        hoverColor: '#c9dfaf',
+        hoverOpacity: null,
+        normalizeFunction: 'linear',
+        scaleColors: ['#b6d6ff', '#005ace'],
+        selectedColor: '#c9dfaf',
+        selectedRegion: null,
+        showTooltip: true,
+        onLabelShow: function (element, label, code) {
+
+
+        },
+        onRegionClick: function (element, code, region) {
+
+        }
+    });
+
 };
 
-var menuClick = function() {
-	
-	var self = $(this),
-        dataType = self.attr('datatype');
-	
-	var tempScrollTop = $(window).scrollTop();
+var menuClick = function () {
 
-	$('#explore-content').html('');
+    var self = $(this),
+        dataType = self.attr('datatype');
+
+    var tempScrollTop = $(window).scrollTop();
+
+    $('#explore-content').html('');
     $('.explore-options button').removeClass('selected');
-	self.addClass('selected');
+    self.addClass('selected');
 
     if (!dataType)
-		return;
+        return;
 
-	var list = $('<ol><ol>');
+    var list = $('<ol><ol>');
 
     Meteor.call('itemTopRatedSearch', {type: dataType}, function (err, response) {
 
@@ -124,12 +98,12 @@ var menuClick = function() {
 
         }
 
-		$('#explore-content').append(list);
+        $('#explore-content').append(list);
 
         $(window).scrollTop(tempScrollTop);
 
         $('[data-toggle=\'tooltip\']').tooltip();
 
-	});
+    });
 
 };

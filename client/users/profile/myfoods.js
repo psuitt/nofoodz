@@ -51,8 +51,6 @@ Template.myfoods.rendered = function () {
         return;
     }
 
-    setPath();
-
     $('#myfoods-nav a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');

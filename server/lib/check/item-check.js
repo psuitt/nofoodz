@@ -38,13 +38,25 @@ ItemsArrayCheck = Match.Where(function (items) {
 ItemsCheck = Match.Where(function (item) {
     check(item, Object);
     check(item.name, ItemNameCheck);
-    check(item.tags, Array);
+    check(item.tags, TagsArrayCheck);
     check(item.rating, Match.Optional(Number));
     if (item.rating) {
         check(item.rating, RatingCheck);
     }
 
     return true;
+});
+
+TagsArrayCheck = Match.Where(function (items) {
+    check(items, Array);
+    _.each(items, function (item) {
+        check(item, LowerCaseCheck);
+    });
+    return items.length >= 0;
+});
+
+LowerCaseCheck = Match.Where(function (s) {
+    return s.toLowerCase() === s;
 });
 
 RatingCheck = Match.Where(function (x) {

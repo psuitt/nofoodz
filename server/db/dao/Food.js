@@ -10,6 +10,7 @@ Food = function (name, brandId, brandName, keywords, tags, user, rating) {
     this.tags = tags;
     this.user_id = user;
     this._id = Random.id();
+    this.rating = rating ? 1 : 0;
     // Calculated total number of raters
     this.ratingcount_calc = rating ? 1 : 0;
     // Calculated sum of all ratings
@@ -27,6 +28,7 @@ Food.prototype.insert = function () {
         brand_view: this.brand_view,
         keywords: this.keywords,
         tags: this.tags,
+        rating: this.rating,
         ratingcount_calc: this.ratingcount_calc,
         ratingtotal_calc: this.ratingtotal_calc,
         user_id: this.user_id,
@@ -39,6 +41,7 @@ Food.prototype.updateRating = function () {
 
     Foods.update(this._id, {
         $set: {
+            rating: this.rating,
             ratingtotal_calc: this.ratingtotal_calc,
             ratingcount_calc: this.ratingcount_calc
         }
