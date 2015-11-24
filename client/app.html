@@ -37,7 +37,7 @@
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
                                 <li><a class="menu-link" href="/explore">Explore</a></li>
-                                <li><a class="menu-link" href="/wsie">What should I Eat?</a></li>
+                                <li><a class="menu-link" [router-link]="['/Wsie']">What should I Eat?</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
@@ -103,16 +103,13 @@
     <div id="footer">
         <ul class="footer-list">
             <li></li>
-        </ul><!--
-     -->
+        </ul>
         <ul class="footer-list">
             <li></li>
-        </ul><!--
-     -->
+        </ul>
         <ul class="footer-list">
             <li></li>
-        </ul><!--
-     -->
+        </ul>
         <ul class="footer-list">
             <li class='totalusers'>{{numberOfUsers}}</li>
             <li>Version alpha-1.0.0</li>

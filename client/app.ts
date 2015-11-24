@@ -22,8 +22,9 @@ import {Wsie} from "./wsie/wsie";
 })
 
 @RouteConfig([
-    {path: '/', redirectTo: '/home'},
-    {path: '/home', as: 'Home', component: Home},
+    //{path: '/', redirectTo: '/home'},
+    //{path: '/home', as: 'Home', component: Home},
+    {path: '/', as: 'Home', component: Home},
     {path: '/wsie', as: 'Wsie', component: Wsie}
 ])
 
@@ -41,6 +42,13 @@ class MainLayout {
                 variable = "Total Users " + response;
 
         });
+
+        //$('.searchbar input').nofoodssearch();
+
+    }
+
+    onActivate() {
+        return true;
     }
 
 }

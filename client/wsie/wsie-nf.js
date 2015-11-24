@@ -1,17 +1,3 @@
-Template.wsie.destroyed = function() {
-
-};
-
-Template.wsie.rendered = function() {
-
-    $('#wsie_random').on('click', doRandom);
-
-};
-
-Template.wsie.events({
-
-});
-
 var doRandom = function () {
 
     $('#wsie_random').off('click').removeClass('glyphicon glyphicon-gift').addClass('loading');
@@ -45,3 +31,5 @@ var startItem = function (name) {
 var addListener = function () {
     $('#wsie_random').on('click', doRandom).removeClass('loading').addClass('glyphicon glyphicon-gift');
 };
+
+$(document).on('click', '#wsie_random', doRandom);

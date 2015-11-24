@@ -3,10 +3,10 @@
  */
 
 
-$('.searchbar input').nofoodssearch();
+
 
 // Hide listener
-$('body').on('click', function (e) {
+$(document).on('click', 'body', function (e) {
     //$('#menu_close').click();
     if ($(e.target).closest('#notificationsList').length === 0
         && $(e.target).closest('#notifications').length === 0
@@ -82,9 +82,9 @@ var loadNotifications = function () {
 
 var addListeners = function () {
 
-    $('.close-nav').on('click', closeAll);
+    $(document).on('click', '.close-nav', closeAll);
 
-    $('.has-children').children('a').on('click', function (event) {
+    $(document).on('click', '.has-children a', function (event) {
         event.preventDefault();
 
         var selected = $(this);
@@ -99,15 +99,15 @@ var addListeners = function () {
         //toggleSearch('close');
     });
 
-    $('.back').on('click', function () {
+    $(document).on('click', '.back', function () {
         $(this).parent('ul').addClass('is-hidden').parent('.has-children').parent('ul').removeClass('moves-out');
     });
 
-    $('#menu_searchbutton').on('click', function () {
+    $(document).on('click', '#menu_searchbutton', function () {
         $('#header_searchdiv').toggleClass('is-visible');
     });
 
-    $('.menu-secondary-nav .menu-link').on('click', function (event) {
+    $(document).on('click', '.menu-secondary-nav .menu-link', function (event) {
         if (this.href.indexOf('#') === -1) {
             closeAll();
             return;
