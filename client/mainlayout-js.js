@@ -1,46 +1,38 @@
-Template.mainlayout.events({});
+$('.searchbar input').nofoodssearch();
 
-Template.mainlayout.rendered = function () {
+// Hide listener
+$('body').on('click', function (e) {
+    //$('#menu_close').click();
+    if ($(e.target).closest('#notificationsList').length === 0
+        && $(e.target).closest('#notifications').length === 0
+        && $('#notifications').hasClass('open')) {
+        $('#notifications').removeClass('open');
+        $('#notificationsList').removeClass('open');
+    }
 
-    $('.searchbar input').nofoodssearch();
+    if ($(e.target).closest('.menu-secondary-nav').length === 0
+        && $(e.target).closest('.primary-nav').length === 0) {
+        closeNav();
+    }
 
-    // Hide listener
-    $('body').on('click', function (e) {
-        //$('#menu_close').click();
-        if ($(e.target).closest('#notificationsList').length === 0
-            && $(e.target).closest('#notifications').length === 0
-            && $('#notifications').hasClass('open')) {
-            $('#notifications').removeClass('open');
-            $('#notificationsList').removeClass('open');
-        }
+});
 
-        if ($(e.target).closest('.menu-secondary-nav').length === 0
-            && $(e.target).closest('.primary-nav').length === 0) {
-            closeNav();
-        }
+$(document).on('click', '#notifications', function (event) {
 
-    });
+    event.stopPropagation();
 
-    $(document).on('click', '#notifications', function (event) {
+    if (!$(this).hasClass('open')) {
+        $(this).addClass('open');
+        $('#notificationsList').html('').addClass('open');
+        loadNotifications();
+    } else {
+        $(this).removeClass('open');
+        $('#notificationsList').removeClass('open');
+    }
 
-        event.stopPropagation();
+});
 
-        if (!$(this).hasClass('open')) {
-            $(this).addClass('open');
-            $('#notificationsList').html('').addClass('open');
-            loadNotifications();
-        } else {
-            $(this).removeClass('open');
-            $('#notificationsList').removeClass('open');
-        }
-
-    });
-
-    $('#menu [data-toggle=\'dropdown\']').dropdown();
-
-    addListeners();
-
-};
+$('#menu [data-toggle=\'dropdown\']').dropdown();
 
 var loadNotifications = function () {
 
@@ -167,3 +159,5 @@ var closeMenu = function () {
     return false;
 
 };
+
+addListeners();
