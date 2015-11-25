@@ -32,4 +32,5 @@ var addListener = function () {
     $('#wsie_random').on('click', doRandom).removeClass('loading').addClass('glyphicon glyphicon-gift');
 };
 
+/** Listeners */
 $(document).on('click', '#wsie_random', doRandom);

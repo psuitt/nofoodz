@@ -1,52 +1,3 @@
-Template.explore.destroyed = function () {
-
-};
-
-Template.explore.rendered = function () {
-
-    initMap();
-
-    $('.explore-options').on('click', 'button', menuClick);
-    $('.explore-options button').eq(0).click();
-
-};
-
-var initMap = function () {
-
-    var map = 'world_en';
-
-    if (typeof PARAMS != "undefined") {
-        if (PARAMS && PARAMS.maptype && PARAMS.maptype.length > 0) {
-            map = PARAMS.maptype + '_en';
-        }
-    }
-
-    $("#explore-worldmap").vectorMap({
-        map: map,
-        backgroundColor: '#a5bfdd',
-        borderColor: '#818181',
-        borderOpacity: 0.25,
-        borderWidth: 1,
-        color: '#f4f3f0',
-        enableZoom: true,
-        hoverColor: '#c9dfaf',
-        hoverOpacity: null,
-        normalizeFunction: 'linear',
-        scaleColors: ['#b6d6ff', '#005ace'],
-        selectedColor: '#c9dfaf',
-        selectedRegion: null,
-        showTooltip: true,
-        onLabelShow: function (element, label, code) {
-
-
-        },
-        onRegionClick: function (element, code, region) {
-
-        }
-    });
-
-};
-
 var menuClick = function () {
 
     var self = $(this),
@@ -107,3 +58,7 @@ var menuClick = function () {
     });
 
 };
+
+/** Listeners */
+$(document).on('click', '.explore-options button', menuClick);
+

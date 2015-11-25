@@ -36,7 +36,7 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
-                                <li><a class="menu-link" href="/explore">Explore</a></li>
+                                <li><a class="menu-link" [router-link]="['/Explore']">Explore</a></li>
                                 <li><a class="menu-link" [router-link]="['/Wsie']">What should I Eat?</a></li>
                             </ul>
                         </li>
@@ -111,7 +111,7 @@
             <li></li>
         </ul>
         <ul class="footer-list">
-            <li class='totalusers'>{{numberOfUsers}}</li>
+            <li id='totalusers'></li>
             <li>Version alpha-1.0.0</li>
             <li>Copyright &copy; 2015 &middot; All Rights Reserved &middot;</li>
         </ul>

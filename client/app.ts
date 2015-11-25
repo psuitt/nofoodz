@@ -11,6 +11,10 @@ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'a
 
 import {Home} from "client/home/home";
 import {Wsie} from "./wsie/wsie";
+import {Explore} from "./explore/explore";
+import {Find} from "./find/find";
+
+declare var jQuery:any;
 
 @Component({
     selector: 'app'
@@ -25,25 +29,25 @@ import {Wsie} from "./wsie/wsie";
     //{path: '/', redirectTo: '/home'},
     //{path: '/home', as: 'Home', component: Home},
     {path: '/', as: 'Home', component: Home},
-    {path: '/wsie', as: 'Wsie', component: Wsie}
+    {path: '/wsie', as: 'Wsie', component: Wsie},
+    {path: '/explore', as: 'Explore', component: Explore},
+    {path: '/find/:type/:search', as: 'Find', component: Find}
 ])
 
 class MainLayout {
 
-    numberOfUsers:string;
-
     constructor() {
-
-        var variable = this.numberOfUsers;
 
         Meteor.call('getUserCount', function (err, response) {
 
             if (!err)
-                variable = "Total Users " + response;
+                jQuery('#totalusers').text('Total Users ' + response);
 
         });
 
-        //$('.searchbar input').nofoodssearch();
+        jQuery('.searchbar input').nofoodssearch();
+
+        jQuery('#menu [data-toggle=\'dropdown\']').dropdown();
 
     }
 

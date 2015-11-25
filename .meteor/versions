@@ -65,7 +65,7 @@ srp@1.0.4
 standard-minifiers@1.0.2
 systemjs:systemjs@0.18.4
 tracker@1.0.9
-twbs:bootstrap@3.3.5
+twbs:bootstrap@3.3.6
 ui@1.0.8
 underscore@1.0.4
 urigo:angular2-meteor@0.2.7
