@@ -1,18 +1,5 @@
 #register_form {
-    min-width: 260px;
-    max-width: 100%;
-    z-index: 100;
-}
-
-#register_close {
-    float: right;
-    margin-right: -50px
-}
-
-
-#register_form h3 {
-    color: #E91E63;
-    margin-bottom: 30px;
+    padding-left: 15px;
 }
 
 #register_username {

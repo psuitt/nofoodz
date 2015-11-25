@@ -353,7 +353,7 @@ div.searchbar button:hover {
     }
 
     .navbar-default .navbar-nav.nav .menu-secondary-nav > li {
-        height: 340px;
+        min-height: 340px;
         width: 23%;
         float: left;
         margin-right: 2.66%;

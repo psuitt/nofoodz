@@ -33,7 +33,8 @@ Meteor.methods({
         var filter = {
             fields: {
                 roles: 1,
-                username: 1
+                username: 1,
+                "profile.name": 1
             }
         };
 

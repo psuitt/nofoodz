@@ -1,10 +1,10 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {FORM_DIRECTIVES, Component, View} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 
 import {RouterLink, RouteParams} from 'angular2/router';
 
-import {MeteorComponent} from 'angular2-meteor';
+import {bootstrap} from 'angular2-meteor';
 
 declare var jQuery:any;
 declare var _:any;
