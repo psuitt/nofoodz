@@ -1,6 +1,8 @@
-NoFoods = typeof NoFoods === 'undefined' ? {} : NoFoods;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoods.widgetlib = function() {
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
+
+Client.NoFoodz.widgetlib = function () {
 	
 	var _floatMenu = function(div) {
 	

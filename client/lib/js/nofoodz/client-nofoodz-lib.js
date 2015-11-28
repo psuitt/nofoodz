@@ -1,6 +1,8 @@
-NoFoods = typeof NoFoods === 'undefined' ? {} : NoFoods;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoods.lib = function() {
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
+
+Client.NoFoodz.lib = function () {
 
 	var MAX_PAGE_AMOUNT = 15;
 
@@ -38,7 +40,7 @@ NoFoods.lib = function() {
 
 }();
 
-NoFoods.lib.key = function() {
+Client.NoFoodz.lib.key = function () {
 
 	return {
 		getCode: function(e) {
