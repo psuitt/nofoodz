@@ -16,7 +16,6 @@
         if (options)
             _options = $.extend(_options, options);
 
-
         self.addClass('ratingDiv');
 
         for (var i = 0; i < _options.hearts; i += 1) {
@@ -95,17 +94,24 @@
             return parseInt((last.index() + 1), 10);
         };
 
-        return {
-            setValue: function (i) {
-                _setValue(i);
-            },
-            setUserValue: function (i) {
-                _setUserValue(i);
-            },
-            getValue: function () {
-                return _getValue();
-            }
+        this.setValue = function (i) {
+            _setValue(i);
         };
+
+        this.setUserValue = function (i) {
+            _setUserValue(i);
+        };
+
+        this.getValue = function (i) {
+            _getValue(i);
+        };
+
+        this.remove = function () {
+            self.off();
+            self.html('');
+        };
+
+        return this;
 
     };
 

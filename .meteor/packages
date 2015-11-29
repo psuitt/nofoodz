@@ -19,3 +19,4 @@ meteor-base
 check
 urigo:angular2-meteor
 mongo
+random

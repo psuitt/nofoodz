@@ -39,18 +39,12 @@ export class MyFoods {
         this.FOLLOWING = 7;
         this.FOLLOWERS = 8;
 
-        this.setup();
+        this.setup(router);
         this.loadListeners();
 
     }
 
     onActivate() {
-        this.followersFirstLoad = true;
-        this.followingFirstLoad = true;
-
-        this.PROFILE = 1;
-        this.FOLLOWING = 7;
-        this.FOLLOWERS = 8;
     }
 
     onDestroy() {
@@ -59,7 +53,7 @@ export class MyFoods {
             .removeClass('default');
     }
 
-    setup() {
+    setup(router) {
 
         var self = this;
 
@@ -117,6 +111,8 @@ export class MyFoods {
 
                 self.loadRatings();
 
+            } else {
+                router.navigate(['/Home']);
             }
 
         });

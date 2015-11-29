@@ -146,7 +146,7 @@ $(document).on('click', '#menu_searchbutton', function () {
 });
 
 $(document).on('click', '.menu-secondary-nav .menu-link', function (event) {
-    if (this.href.indexOf('#') !== 1) {
+    if (this.href[this.href.length - 1] !== '#') {
         closeAll();
         return;
     } else if (isNotMobile() && this.className.indexOf('menu-header') !== -1) {

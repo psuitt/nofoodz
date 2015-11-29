@@ -14,6 +14,7 @@ import {Wsie} from "./wsie/wsie";
 import {Explore} from "./explore/explore";
 import {Find} from "./find/find";
 import {UsersPage} from "./users/users";
+import {PagesPage} from "./pages/pages";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
@@ -32,7 +33,8 @@ declare var System:any;
     {path: '/wsie', component: Wsie, as: 'Wsie'},
     {path: '/explore', component: Explore, as: 'Explore'},
     {path: '/find/:type/:search', component: Find, as: 'Find'},
-    {path: '/users/...', component: UsersPage, as: 'Users'}
+    {path: '/users/...', component: UsersPage, as: 'Users'},
+    {path: '/pages/...', component: PagesPage, as: 'Pages'}
 ])
 
 class MainLayout {
