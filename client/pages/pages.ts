@@ -14,6 +14,7 @@ import {
 } from 'angular2/router';
 
 import {Item} from "./item/item";
+import {Brand} from "./brand/brand";
 
 declare var jQuery:any;
 
@@ -28,7 +29,8 @@ declare var jQuery:any;
 
 @RouteConfig([
     //{path: '/add', component: Add, as: 'Add'}
-    {path: '/:type/:_id', component: Item, as: 'Item'}
+    {path: '/:type/:_id', component: Item, as: 'Item'},
+    {path: '/brand/:_id', component: Brand, as: 'Brand'}
 ])
 
 export class PagesPage implements CanReuse {

@@ -63,7 +63,7 @@ export class Item {
         Meteor.call('getItemById', obj, function (err, response) {
 
             if (err || !response || !response.item) {
-                router.navigate(['/404']);
+                router.navigate(['/Error404']);
             }
 
             self.done(self, err, response);
@@ -250,9 +250,9 @@ export class Item {
 
     reloadRating(item) {
 
-        var avg = item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0;
+        var avg = new String(item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0);
 
-        if (avg != 0 && avg.lastIndexOf('0') === 3) {
+        if (avg != '0' && avg.lastIndexOf('0') === 3) {
             avg = avg.substring(0, 3);
             avg = avg.replace('.0', '');
         }

@@ -15,6 +15,7 @@ import {Explore} from "./explore/explore";
 import {Find} from "./find/find";
 import {UsersPage} from "./users/users";
 import {PagesPage} from "./pages/pages";
+import {Error404} from "./error/404/Error404";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
@@ -30,6 +31,7 @@ declare var System:any;
 @RouteConfig([
     //{path: '/', redirectTo: '/home'},
     {path: '/', component: Home, as: 'Home'},
+    {path: '/404', component: Error404, as: 'Error404'},
     {path: '/wsie', component: Wsie, as: 'Wsie'},
     {path: '/explore', component: Explore, as: 'Explore'},
     {path: '/find/:type/:search', component: Find, as: 'Find'},

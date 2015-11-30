@@ -1,65 +1,60 @@
-<template name="brandsTemplate">
+<div class="side-section left hidden-xs hidden-sm">
 
-    <div class="side-section left hidden-xs hidden-sm">
+    <div id="brands-nav" class="nofoods-pagenav floating">
+        <ul class="nav nav-list">
+            <li class="nav-header brand-name nofoodz-header">Brand</li>
+            <li class="active"><a href="#brand-details">Details</a></li>
+            <li class="nav-header">Ratings</li>
+            <li class=""><a href="#brand_food">Foods</a></li>
+            <li class=""><a href="#brand_drink">Drinks</a></li>
+            <li class=""><a href="#brand_product">Products</a></li>
+            <li class="nav-header">Options</li>
+            <li class=""><a id="brand_additem" class="button" href="/pages/add/{{_id}}">Add</a></li>
+            <li class=""><a class="button report" item-id="" item-type="brand">Report</a></li>
+        </ul>
+    </div>
 
-        <div id="brands-nav" class="nofoods-pagenav floating">
-            <ul class="nav nav-list">
-                <li class="nav-header brand-name nofoodz-header">Brand</li>
-                <li class="active"><a href="#brand-details">Details</a></li>
-                <li class="nav-header">Ratings</li>
-                <li class=""><a href="#brand_food">Foods</a></li>
-                <li class=""><a href="#brand_drink">Drinks</a></li>
-                <li class=""><a href="#brand_product">Products</a></li>
-                <li class="nav-header">Options</li>
-                {{#if currentUser}}
-                    <li class=""><a class="button" href="/pages/add/{{_id}}">Add</a></li>
-                    <li class=""><a class="button report" item-id="{{_id}}" item-type="brand">Report</a></li>
-                {{/if}}
-            </ul>
+</div>
+
+<div class="content middle">
+
+    <div class="brand pageheader">
+        <span class="brand-name"></span>
+    </div>
+
+    <div id="brand-pages" class="tab-content nofoods-navpages">
+
+        <div class="tab-pane active" id="brand-details">
+            <label for="brand_totalratingfood">Total Food Rating</label><span id="brand_totalratingfood"></span>
+            <label for="brand_totalratingdrink">Total Drink Rating</label><span id="brand_totalratingdrink"></span>
+            <label for="brand_totalratingproduct">Total Product Rating</label><span
+                id="brand_totalratingproduct"></span>
         </div>
+
+        <div class="tab-pane" id="brand_food">
+            <h4 class="section-title visible-xs-block visible-sm-block">Food Ratings</h4>
+
+            <div id="brand_listfood"></div>
+        </div>
+
+        <div class="tab-pane" id="brand_drink">
+            <h4 class="section-title visible-xs-block visible-sm-block">Drink Ratings</h4>
+
+            <div id="brand_listdrink"></div>
+        </div>
+
+        <div class="tab-pane" id="brand_product">
+            <h4 class="section-title visible-xs-block visible-sm-block">Product Ratings</h4>
+
+            <div id="brand_listproduct"></div>
+        </div>
+
 
     </div>
 
-    <div class="content middle">
+</div>
 
-        <div class="brand pageheader">
-            <span class="brand-name"></span>
-        </div>
+<div class="side-section right hidden-xs hidden-sm">
 
-        <div id="brand-pages" class="tab-content nofoods-navpages">
+</div>
 
-            <div class="tab-pane active" id="brand-details">
-                <label for="brand_totalratingfood">Total Food Rating</label><span id="brand_totalratingfood"></span>
-                <label for="brand_totalratingdrink">Total Drink Rating</label><span id="brand_totalratingdrink"></span>
-                <label for="brand_totalratingproduct">Total Product Rating</label><span
-                    id="brand_totalratingproduct"></span>
-            </div>
-
-            <div class="tab-pane" id="brand_food">
-                <h4 class="section-title visible-xs-block visible-sm-block">Food Ratings</h4>
-
-                <div id="brand_listfood"></div>
-            </div>
-
-            <div class="tab-pane" id="brand_drink">
-                <h4 class="section-title visible-xs-block visible-sm-block">Drink Ratings</h4>
-
-                <div id="brand_listdrink"></div>
-            </div>
-
-            <div class="tab-pane" id="brand_product">
-                <h4 class="section-title visible-xs-block visible-sm-block">Product Ratings</h4>
-
-                <div id="brand_listproduct"></div>
-            </div>
-
-
-        </div>
-
-    </div>
-
-    <div class="side-section right hidden-xs hidden-sm">
-
-    </div>
-
-</template>

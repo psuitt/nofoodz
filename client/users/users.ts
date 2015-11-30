@@ -14,6 +14,7 @@ import {
 } from 'angular2/router';
 
 import {MyFoods} from "./profile/myfoods";
+import {People} from "./people/people";
 
 @Component({
     selector: 'users',
@@ -25,7 +26,8 @@ import {MyFoods} from "./profile/myfoods";
 })
 
 @RouteConfig([
-    {path: '/myfoods', component: MyFoods, as: 'MyFoods'}
+    {path: '/myfoods', component: MyFoods, as: 'MyFoods'},
+    {path: '/people/:username', component: People, as: 'People'}
 ])
 
 export class UsersPage implements CanReuse {
