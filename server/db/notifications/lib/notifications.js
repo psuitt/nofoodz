@@ -6,7 +6,8 @@ NoFoodz.notifications = function () {
 
     var _types = {
         GENERIC: "generic",
-        RATING: "rating"
+        RATING: "rating",
+        FOLLOWING: "f"
     };
 
     var _messageMethods = {};
@@ -52,6 +53,22 @@ NoFoodz.notifications = function () {
 
     };
 
+    _messageMethods[_types.FOLLOWING] = function () {
+
+        var message = '';
+
+        message += '<a href=\'';
+        message += NoFoodz.consts.urls.PEOPLE;
+        message += this.followername;
+        message += '\'>';
+        message += this.followername;
+        message += '</a>';
+        message += ' is now following you.';
+
+        return message;
+
+    };
+
     var _createNotification = function (type, options) {
 
         var message = options.message;
@@ -70,7 +87,7 @@ NoFoodz.notifications = function () {
 
     };
 
-    var _notify = function (notification) {
+    var _notifyFollowers = function (notification) {
 
         var query = {
             user_id: notification.user_id
@@ -80,7 +97,7 @@ NoFoodz.notifications = function () {
             fields: {
                 follower_id: 1
             }
-        }
+        };
 
         _.each(Followers.find(query, filter).fetch(), function (element, index, list) {
             Meteor.users.update({_id: element.follower_id}, {
@@ -95,16 +112,38 @@ NoFoodz.notifications = function () {
 
     };
 
+    var _notify = function (notification) {
+
+        Meteor.users.update({_id: notification.user_id}, {
+            $push: {
+                "profile.notifications": {
+                    $each: [notification],
+                    $slice: -MAX_NOTIFICATIONS
+                }
+            }
+        });
+
+
+    };
+
     return {
+
         types: function () {
             return _.extend({}, _types);
         }(),
+
         notify: function (notification) {
             return _notify(notification);
         },
+
+        notifyFollowers: function (notification) {
+            return _notifyFollowers(notification);
+        },
+
         create: function (type, options) {
             return _createNotification(type, options);
         }
+
     };
 
 }();

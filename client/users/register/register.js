@@ -43,7 +43,7 @@ Template.register.events({
             Accounts.createUser({username: username, email: email, password: password}, function (err) {
                 if (err) {
                     // Inform the user that account creation failed
-                    t.$('.error-message').text(err.reason);
+                    t.$('.error-message').text('Username must be 4-15 alphanumeric characters start and with a letter or number. Usernames can also contain \'_\'s');
                 } else {
                     t.find('#login_cancel').click();
                 }

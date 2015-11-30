@@ -23,8 +23,6 @@ Template.foodsadd.rendered = function () {
 
     });
 
-    setPath();
-
     nofoodsRating = $('div.ratingDiv').nofoodsrating();
 
     if (data && data.brand_id) {
@@ -130,11 +128,12 @@ Template.foodsadd.events({
 var saveFinished = function (response, type) {
 
     if (response.error) {
-        $('.page-message.message').addClass('alert alert-danger').html(response.error.reason);
+        NoFoodz.alert.msg('danger', response.error.reason);
     } else if (response._id) {
         Router.go('foods', {_id: response._id, type: type.toLowerCase()});
     } else {
-        $('.page-message.message').addClass('alert alert-success').html('Successfully added');
+        NoFoodz.alert.msg('success', 'Successfully added');
+        $('.foodsadd-brand-remove').click();
     }
 
 };

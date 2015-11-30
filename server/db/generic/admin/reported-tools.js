@@ -10,7 +10,7 @@ Meteor.methods({
         });
 
         if (!this.userId)
-            throw new Meteor.Error(403, 'You must be logged in');
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var user = Meteor.user();
 
@@ -55,7 +55,7 @@ Meteor.methods({
         }
 
         if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in");
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var user = Meteor.user();
 

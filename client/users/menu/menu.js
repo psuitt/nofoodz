@@ -27,6 +27,8 @@ Template.menu.rendered = function () {
 
     });
 
+    $('#menu_close').on('click', closeMenu);
+
     $('#menu_user_menu [data-toggle=\'dropdown\']').dropdown().on('click', function () {
         $(this).parent().toggleClass('dropup');
     });
@@ -44,18 +46,6 @@ Template.menu.events({
 
     },
 
-    'click #menu_close': function (e, t) {
-
-        e.preventDefault();
-
-        var curWidth = $('#menu_user_menu').outerWidth();
-        $('#menu_user_menu').data('width', curWidth).animate({right: -curWidth + 'px'}, 350, function () {
-            $(this).toggle(false);
-        });
-
-        return false;
-    },
-
     'click #menu_login_button': function (e, t) {
 
         e.preventDefault();
@@ -68,3 +58,16 @@ Template.menu.events({
     }
 
 });
+
+var closeMenu = function (e) {
+
+    e.preventDefault();
+
+    var curWidth = $('#menu_user_menu').outerWidth();
+    $('#menu_user_menu').data('width', curWidth).animate({right: -curWidth + 'px'}, 350, function () {
+        $(this).toggle(false);
+    });
+
+    return false;
+
+};

@@ -1,4 +1,7 @@
 #register_form {
+    min-width: 260px;
+    max-width: 100%;
+    z-index: 100;
 }
 
 #register_close {
@@ -12,7 +15,10 @@
     margin-bottom: 30px;
 }
 
-#register_username,
+#register_username {
+    margin-bottom: 5px;
+}
+
 #register_email,
 #register_password {
     margin-bottom: 15px;
@@ -20,4 +26,8 @@
 
 #register_cancel {
     margin-top: 20px;
+}
+
+.register-margin-bottom {
+    margin-bottom: 15px;
 }

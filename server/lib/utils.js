@@ -18,6 +18,10 @@ NoFoodz.utils = {
 				uniqueArray.push(sp[i]);	
 		};
 		return uniqueArray;
+	},
+
+	calculateRating: function (item) {
+		return item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0;
 	}
 
 };

@@ -31,7 +31,7 @@ var fetchData = function (brand_id) {
             var brand = data.brand;
 
             if (!brand)
-                Router.go('/404');
+                Router.go('error.404');
 
             $('.brand-name').html(brand.name);
 

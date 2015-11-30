@@ -315,32 +315,6 @@ div.content > h3 {
     margin-top: 0px;
 }
 
-/* FOOTER */
-
-footer {
-    position: absolute;
-    width: 100%;
-}
-
-#footer {
-    width: 100%;
-    text-align: right;
-    color: #FFC107;
-    background: #222222;
-    display: block;
-    padding: 5px 2%;
-    margin-top: 0;
-    position: absolute;
-    bottom: 0;
-    margin-top: 15px;
-}
-
-#footer .totalusers {
-    margin-right: 50px;
-    color: #2196F3;
-    float: left;
-}
-
 /* MENU */
 .logo {
     font-family: 'VT323';
@@ -350,104 +324,7 @@ footer {
 
 span.logo a,
 span.logo a:hover {
-    color: #DAA520;
     text-decoration: none;
-}
-
-/* Menu CSS */
-
-#menu {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    background: rgba(255, 255, 255, .9);
-    overflow: visible;
-    z-index: 500;
-    border: 0;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
-#menu .navbar-brand {
-    letter-spacing: 5px;
-}
-
-#menu .navbar-brand .title-separator {
-    color: #424242;
-}
-
-#menu .navbar-brand .sub-title {
-    color: #2196F3;
-}
-
-#menu .navbar-header button.navbar-toggle {
-    border-color: #424242;
-}
-
-#menu .navbar-header button.navbar-toggle,
-#menu .navbar-header button.navbar-toggle:hover {
-    color: #4CAF50;
-    background: #FFFFFF;
-    border: 2px solid #4CAF50;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
-
-#menu .navbar-header button.navbar-toggle span.icon-bar {
-    background: #4CAF50;
-}
-
-#menu .menu-link {
-    padding: 15px;
-    color: #E91E63;
-    font-size: 16px;
-    font-weight: bold;
-    font-variant: small-caps;
-    background-image: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    text-decoration: none;
-}
-
-#menu .menu-link:hover {
-    color: #424242;
-    text-decoration: none;
-    background-color: transparent;
-}
-
-#menu .nav > li.active > a {
-    padding-bottom: 8px;
-    border-bottom: 3px solid;
-    background-color: transparent;
-}
-
-#menu-navbar {
-    overflow: visible;
-    border: 0;
-}
-
-#menu-navbar li.text-center {
-    text-align: center;
-}
-
-#loginDiv {
-    height: 50px;
-}
-
-.menu-button {
-    margin: -21px 0 auto 20px;
-    vertical-align: middle;
-    font-weight: bold;
-    position: relative;
-    top: 50%;
 }
 
 /* Buttons */
@@ -572,6 +449,11 @@ span.logo a:hover {
     display: inline-block;
 }
 
+.button-icon.inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 button span.button-icon {
     top: -2px;
     text-align: center;
@@ -635,125 +517,6 @@ button.simple.blue-button {
 
 .bootstrap-tagsinput input {
     min-width: 100px;
-}
-
-/* Notifications */
-
-#notifications {
-    cursor: pointer;
-    vertical-align: top;
-    padding: 0 8px 0 8px;
-    margin: 0 0 0 10px;
-    line-height: 50px;
-    display: inline-block;
-}
-
-#notifications.new {
-    color: #4CAF50;
-}
-
-#notifications.open {
-    color: #FFFFFF;
-    background: #4CAF50;
-}
-
-#notifications:hover {
-    color: #424242;
-}
-
-#notificationsList {
-    width: 400px;
-    display: none;
-    position: absolute;
-    background: #FFFFFF;
-    border: 2px solid #4CAF50;
-    top: 50px;
-    right: 0;
-    list-style: none;
-    z-index: 100;
-}
-
-#notificationsList.open {
-    display: block;
-}
-
-#notificationsList li {
-    display: block;
-    text-align: left;
-    padding: 5px 25px 5px 5px;
-    font-size: 14px;
-}
-
-#notificationsList li.title {
-    color: #4CAF50;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px;
-}
-
-#notificationsList li span {
-    color: #795548;
-    font-weight: 500;
-    margin: 0 15px;
-}
-
-#login-buttons {
-    vertical-align: middle;
-}
-
-/* MAIN SEARCH */
-
-#menu div.searchbar {
-    margin: 0;
-    height: 50px;
-    line-height: 50px;
-    color: white;
-}
-
-div.searchbar span {
-    vertical-align: middle;
-}
-
-div.searchbar div.btn-group > a {
-    height: 30px;
-    border-color: #424242;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    padding: 2px 12px;
-}
-
-div.searchbar input {
-    vertical-align: middle;
-    margin-bottom: 0;
-    border-right: 0;
-    border-left: 0;
-    border-color: #424242;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    width: 250px;
-    height: 30px;
-}
-
-div.searchbar button {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-    padding: 4px 8px;
-    color: #424242;
-    background: white;
-}
-
-div.searchbar button.go {
-    top: 0;
-    color: #424242;
-    border-color: #424242;
-}
-
-div.searchbar button:hover {
-    color: white;
-    background: #424242;
 }
 
 /* Header */
@@ -1037,10 +800,12 @@ div.nofoods-autocomplete.message {
 
 div.ratingDiv {
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 div.ratingDiv span.rating {
     vertical-align: middle;
+    cursor: default;
 }
 
 span.rating {
@@ -1194,4 +959,13 @@ span.rating.dashed.tempx100 {
 
 input[type='text'].form-control.inline {
     display: inline-block;
+}
+
+@media only screen and (max-width: 766px) {
+
+    div.content {
+        min-width: 0;
+        width: 100%;
+    }
+
 }

@@ -87,6 +87,42 @@ Meteor.methods({
         response.data = Brands.find(query, filter).fetch();
         return response;
 
+    },
+
+    itemTagSearch: function (options) {
+
+        check(options, {
+            'tags': TagsArrayCheck,
+            'type': TypeCheck
+        });
+
+        if (options.tags.length < 1)
+            return [];
+
+        var db = NoFoodz.db.typeToDb(options.type);
+
+        var query = {
+            tags: {$all: options.tags}
+        };
+
+        var filter = {
+            limit: 10,
+            fields: {
+                name: 1,
+                brand_id: 1,
+                brand_view: 1,
+                ratingtotal_calc: 1,
+                ratingcount_calc: 1
+            },
+            sort: {
+                brand_view: 1,
+                rating: -1,
+            }
+
+        };
+
+        return db.find(query, filter).fetch();
+
     }
 
 });

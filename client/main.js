@@ -1,37 +1,40 @@
 Router.configure({
-    layoutTemplate: 'mainLayout'
+    layoutTemplate: 'mainlayout'
 });
 
 Router.map(function () {
 
-    this.route('error404', {
-        path: '/404',
-        template: 'error404',
-        layoutTemplate: 'mainLayout'
-    });
-
     this.route('home', {
         path: '/',
         template: 'home',
-        layoutTemplate: 'mainLayout'
+        layoutTemplate: 'mainlayout'
+    });
+
+    this.route('error.404', {
+        path: '/error/404',
+        template: 'error404',
+        layoutTemplate: 'mainlayout',
+        yieldTemplates: {
+            'footer': {to: 'footer'}
+        }
     });
 
     this.route('admin', {
         path: '/admin',
         template: 'admin',
-        layoutTemplate: 'mainLayout'
+        layoutTemplate: 'mainlayout'
     });
 
     this.route('reported', {
         path: '/admin/reported',
         template: 'reported',
-        layoutTemplate: 'mainLayout'
+        layoutTemplate: 'mainlayout'
     });
 
     this.route('find', {
         path: '/find/:type/:search',
         template: 'find',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -46,7 +49,7 @@ Router.map(function () {
     this.route('myfoodz', {
         path: '/users/myfoods',
         template: 'myfoods',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         }
@@ -55,7 +58,7 @@ Router.map(function () {
     this.route('add', {
         path: '/pages/add/:brand_id?',
         template: 'foodsadd',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -67,7 +70,7 @@ Router.map(function () {
     this.route('addRecipe', {
         path: '/pages/addrecipe',
         template: 'addRecipe',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -79,7 +82,7 @@ Router.map(function () {
     this.route('brandsPage', {
         path: '/pages/brand/:_id',
         template: 'brandsTemplate',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -94,7 +97,7 @@ Router.map(function () {
     this.route('foods', {
         path: '/pages/:type/:_id',
         template: 'foods',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -109,7 +112,7 @@ Router.map(function () {
     this.route('explore', {
         path: '/explore',
         template: 'explore',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         }
@@ -118,7 +121,7 @@ Router.map(function () {
     this.route('explore-maptype', {
         path: '/explore/:maptype',
         template: 'explore',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -131,7 +134,7 @@ Router.map(function () {
     this.route('peoplesPage', {
         path: '/users/people/:username',
         template: 'people',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
         },
@@ -146,9 +149,21 @@ Router.map(function () {
     this.route('wsie', {
         path: '/wsie',
         template: 'wsie',
-        layoutTemplate: 'mainLayout',
+        layoutTemplate: 'mainlayout',
         yieldTemplates: {
             'footer': {to: 'footer'}
+        }
+    });
+
+    this.route('top.gaming', {
+        path: '/top/gaming',
+        template: 'gaming',
+        layoutTemplate: 'mainlayout',
+        yieldTemplates: {
+            'footer': {to: 'footer'}
+        },
+        data: function () {
+            return this.params;
         }
     });
 

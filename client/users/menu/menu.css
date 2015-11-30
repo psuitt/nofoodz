@@ -1,4 +1,7 @@
 #menu_user_menu {
+    min-width: 260px;
+    max-width: 100%;
+    z-index: 100;
 }
 
 #menu_user_menu h3 {
@@ -15,7 +18,8 @@
     left: 0;
     list-style: none;
     display: block;
-    min-width: 0;
+    min-width: 100%;
+    position: relative;
 }
 
 #menu_user_menu ul li {

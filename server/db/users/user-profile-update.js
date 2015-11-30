@@ -3,15 +3,20 @@ Meteor.methods({
     updateProfile: function (options) {
 
         check(options, {
-            name: Match.Optional(NonEmptyStringNoSpecialCharacters)
+            name: UsernameCharacters
         });
 
         if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in");
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
-        if (!options.name) {
-            return;
-        }
+        var user = Meteor.users.findOne({_id: this.userId}, {
+            fields: {
+                "profile.name": 1
+            }
+        });
+
+        if (user.name.toLowerCase !== options.name.toLowerCase)
+            throw new Meteor.Error(400, "Your profile name must match your username only casing can be changed");
 
         var update = {
             "profile.name": options.name
@@ -30,7 +35,7 @@ Meteor.methods({
         });
 
         if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in");
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var wish = {
             food_id: options.food_id ? options.food_id : "",
@@ -52,11 +57,10 @@ Meteor.methods({
         });
 
         if (!this.userId)
-            throw new Meteor.Error(403, "You must be logged in");
+            throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         if (!options.food_id && !options.drink_id && !options.product_id)
             throw new Meteor.Error(500, "A food or drink must be removed from the wishlist");
-
 
         var toRemove = {};
 
