@@ -7,6 +7,7 @@ import {Component, View, NgFor} from 'angular2/angular2';
 
 import {RouterLink, Router, RouteParams, Location, ROUTER_DIRECTIVES} from 'angular2/router';
 
+declare var window:any;
 declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
@@ -30,9 +31,7 @@ export class Add {
 
     constructor(private router:Router, params:RouteParams, location:Location) {
 
-        this.screenData = {
-            _id: params.get('brand_id')
-        };
+        this.screenData = Client.NoFoodz.lib.getParameters(true);
 
         this.setup();
         this.loadListeners();

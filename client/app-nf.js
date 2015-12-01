@@ -56,7 +56,6 @@ var closeNav = function () {
 
 var closeAll = function (event) {
 
-    closeMenu();
     $('#menu-navbar').removeClass('in');
     closeNav();
 
@@ -72,17 +71,6 @@ var isNotMobile = function () {
     }
 
     return (e[a + 'Width'] >= 767);
-
-};
-
-var closeMenu = function () {
-
-    var curWidth = $('#menu_user_menu').outerWidth();
-    $('#menu_user_menu').data('width', curWidth).animate({right: -curWidth + 'px'}, 350, function () {
-        $(this).toggle(false);
-    });
-
-    return false;
 
 };
 
@@ -148,7 +136,6 @@ $(document).on('click', '#menu_searchbutton', function () {
 $(document).on('click', '.menu-secondary-nav .menu-link', function (event) {
     if (this.href[this.href.length - 1] !== '#') {
         closeAll();
-        return;
     } else if (isNotMobile() && this.className.indexOf('menu-header') !== -1) {
         event.preventDefault();
         return false;

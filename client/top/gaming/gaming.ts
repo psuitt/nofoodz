@@ -27,8 +27,10 @@ export class Gaming {
 
     constructor(private router:Router, params:RouteParams) {
 
-        //jQuery('span.pagetitle-subtext').text(NoFoodz.format.camelCase(screenData.query.title));
-        //loadItems(screenData.query);
+        this.screenData = Client.NoFoodz.lib.getParameters(true);
+
+        jQuery('span.pagetitle-subtext').text(NoFoodz.format.camelCase(this.screenData.title));
+        this.loadItems(this.screenData);
 
         this.setup();
         this.loadListeners();
