@@ -1,6 +1,3 @@
-/**
- * Created by Sora on 11/28/2015.
- */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
 import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
@@ -12,40 +9,29 @@ import {
     CanReuse,
     Location
 } from 'angular2/router';
-
-import {Item} from "./item/item";
-import {Brand} from "./brand/brand";
-import {Add} from "./add/add";
+import {Reported} from "./reported/reported";
 
 declare var jQuery:any;
 
 @Component({
-    selector: 'pages',
+    selector: 'admin',
 })
 
 @View({
-    templateUrl: 'client/pages/pages.html',
+    templateUrl: 'client/admin/admin.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES,]
 })
 
 @RouteConfig([
-    //{path: '/add', component: Add, as: 'Add'}
-    {path: '/:type/:_id', component: Item, as: 'Item'},
-    {path: '/brand/:_id', component: Brand, as: 'Brand'},
-    {path: '/add', component: Add, as: 'Add'},
+    {path: '/reported', component: Reported, as: 'Reported'}
 ])
 
-export class PagesPage implements CanReuse {
+export class AdminPage implements CanReuse {
 
     location:Location;
 
     constructor(location:Location) {
         this.location = location;
-
-        var reportDialog = jQuery('#report-dialog').modal({
-            show: false,
-            keyboard: false
-        });
     }
 
     getLinkStyle(path) {

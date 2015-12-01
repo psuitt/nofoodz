@@ -7,15 +7,20 @@ import {Component, View, NgFor, provide} from 'angular2/angular2';
 
 import {bootstrap} from 'angular2-meteor';
 
-import {ROUTER_DIRECTIVES, RouteConfig, Location,ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
+import {ROUTER_DIRECTIVES, RouteConfig, Location, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
+
+import {Error404} from "./error/404/Error404";
 
 import {Home} from "client/home/home";
 import {Wsie} from "./wsie/wsie";
 import {Explore} from "./explore/explore";
 import {Find} from "./find/find";
+
 import {UsersPage} from "./users/users";
 import {PagesPage} from "./pages/pages";
-import {Error404} from "./error/404/Error404";
+import {TopPage} from "./top/top";
+import {AdminPage} from "./admin/admin";
+
 
 declare var jQuery:any;
 declare var NoFoodz:any;
@@ -36,7 +41,9 @@ declare var System:any;
     {path: '/explore', component: Explore, as: 'Explore'},
     {path: '/find/:type/:search', component: Find, as: 'Find'},
     {path: '/users/...', component: UsersPage, as: 'Users'},
-    {path: '/pages/...', component: PagesPage, as: 'Pages'}
+    {path: '/pages/...', component: PagesPage, as: 'Pages'},
+    {path: '/top/...', component: TopPage, as: 'Top'},
+    {path: '/admin/...', component: AdminPage, as: 'Admin'}
 ])
 
 class MainLayout {

@@ -100,10 +100,8 @@ export class MyFoods {
 
                     if (NoFoodz.client.permissions.isAdmin(user)) {
                         var adminHeader = jQuery('<li class=\'nav-header\'>Admin</li>');
-                        var admin = jQuery('<li class=\'\'><a href=\'/admin\'>Admin</a></li>');
-                        var adminReported = jQuery('<li class=\'\'><a href=\'/admin/reported\'>Reported</a></li>');
+                        var adminReported = jQuery('<li class=\'\'><a href=\'/#/admin/reported\'>Reported</a></li>');
                         jQuery('#myfoods-nav .nav-list').append(adminHeader)
-                            .append(admin)
                             .append(adminReported);
                     }
 

@@ -70,10 +70,7 @@ export class Item {
 
         });
 
-        Meteor.call('findCommentsForItem', {
-            item_id: this.screenData._id,
-            type: this.screenData.type
-        }, this.loadComments);
+        this.reloadComments();
 
         this.nofoodsRating = jQuery('#foods_bodydiv div.ratingDiv').nofoodsrating({
             hearts: 6,
@@ -198,6 +195,15 @@ export class Item {
         }
 
         self.loadUserData(item._id);
+
+    }
+
+    reloadComments() {
+
+        Meteor.call('findCommentsForItem', {
+            item_id: this.screenData._id,
+            type: this.screenData.type
+        }, this.loadComments);
 
     }
 

@@ -44,7 +44,7 @@ export class Brand {
 
         if (user) {
             jQuery('#foods-nav .button.report').show().attr('item-id', this.screenData._id);
-            jQuery('#brand_additem').show();
+            jQuery('#brand_additem').show().attr('href', '/#/pages/add?brand_id=' + this.screenData._id);
         } else {
             jQuery('#foods-nav .button.report').hide();
             jQuery('#brand_additem').hide();
@@ -97,7 +97,7 @@ export class Brand {
 
     loadItems(items, type) {
 
-        var avg = 0;
+        var avg = '0';
 
         jQuery('#brand_list' + type).text('');
         jQuery('#brand_totalrating' + type).text('');
