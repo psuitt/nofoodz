@@ -29,7 +29,7 @@ export class Gaming {
 
         this.screenData = Client.NoFoodz.lib.getParameters(true);
 
-        jQuery('span.pagetitle-subtext').text(NoFoodz.format.camelCase(this.screenData.title));
+        this.screenData.title && jQuery('span.pagetitle-subtext').text(NoFoodz.format.camelCase(this.screenData.title));
         this.loadItems(this.screenData);
 
         this.setup();
@@ -53,7 +53,7 @@ export class Gaming {
 
             if (!err && response) {
 
-                var list = jQuery('#gaming_list');
+                var list = jQuery('#gaming_list').html('');
 
                 _.each(response, function (item, index) {
 

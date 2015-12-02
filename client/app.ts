@@ -66,7 +66,7 @@ class MainLayout {
 
         });
 
-        jQuery('.searchbar input').nofoodssearch();
+        jQuery('.searchbar input').nofoodssearch({router: router});
 
         jQuery('#menu [data-toggle=\'dropdown\']').dropdown();
 

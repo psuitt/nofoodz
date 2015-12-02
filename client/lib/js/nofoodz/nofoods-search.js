@@ -3,12 +3,16 @@
 
  */
 (function ($) {
-    $.fn.nofoodssearch = function () {
+    $.fn.nofoodssearch = function (o) {
 
         var options = {
             values: ['Food', 'Drink', 'Brand', 'Product', 'People'],
-            defaultValue: 'Food'
+            defaultValue: 'Food',
+            router: ''
         };
+
+        if (o)
+            options = $.extend(options, o);
 
         var self = this,
             _searchType = $('<div></div>')
@@ -75,10 +79,7 @@
             var val = self.val().trim(),
                 type = _searchTypeMainDisplayText.html().toLowerCase();
             if (val.length > 0) {
-                Router.go('find', {
-                    type: type,
-                    search: val
-                });
+                options.router.navigate(['/Find', {type: type, search: val}]);
             }
         };
 

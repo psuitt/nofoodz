@@ -19,7 +19,7 @@ var loadNotifications = function () {
                             span = $('<span></span>');
 
                         li.html(notification.message);
-                        span.html(NoFoods.lib.formatDate(notification.date));
+                        span.html(Client.NoFoodz.lib.formatDate(notification.date));
 
                         li.prepend(span);
                         $('#notificationsList').append(li);
@@ -140,6 +140,10 @@ $(document).on('click', '.menu-secondary-nav .menu-link', function (event) {
         event.preventDefault();
         return false;
     }
-    return true;
+    if (this.href.indexOf('?') !== -1) {
+        // manually redirect
+        window.location = this.href;
+    }
+    return;
 
 });

@@ -9,3 +9,9 @@
 #logout_button {
     margin-top: 25px;
 }
+
+@media only screen and (max-width: 766px) {
+    #logout_button {
+        margin-left: 15px;
+    }
+}
