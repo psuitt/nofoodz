@@ -98,9 +98,9 @@ export class MyFoods {
                     jQuery('#myfoods-joined').html('Joined ' + Client.NoFoodz.lib.formatDate(user.profile.date));
                     jQuery('#myfoods_bonus').html(user.profile.bonusHearts);
 
-                    if (NoFoodz.client.permissions.isAdmin(user)) {
+                    if (NoFoodz.client.permissions.isAdmin(user) && jQuery('#myfoods-nav .nav-list .admin').length === 0) {
                         var adminHeader = jQuery('<li class=\'nav-header\'>Admin</li>');
-                        var adminReported = jQuery('<li class=\'\'><a href=\'/#/admin/reported\'>Reported</a></li>');
+                        var adminReported = jQuery('<li class=\'admin\'><a href=\'/#/admin/reported\'>Reported</a></li>');
                         jQuery('#myfoods-nav .nav-list').append(adminHeader)
                             .append(adminReported);
                     }

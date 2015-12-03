@@ -56,6 +56,7 @@ var closeNav = function () {
 
 var closeAll = function (event) {
 
+    event.preventDefault();
     $('#menu-navbar').removeClass('in');
     closeNav();
 
@@ -135,7 +136,7 @@ $(document).on('click', '#menu_searchbutton', function () {
 
 $(document).on('click', '.menu-secondary-nav .menu-link', function (event) {
     if (this.href[this.href.length - 1] !== '#') {
-        closeAll();
+        closeAll(event);
     } else if (isNotMobile() && this.className.indexOf('menu-header') !== -1) {
         event.preventDefault();
         return false;

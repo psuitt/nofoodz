@@ -153,7 +153,8 @@ export class Item {
 
                 if (!err) {
                     NoFoodz.alert.msg('success', 'Save was successful!');
-                    self.updateComments(comments);
+                    self.setCommentsInputs(comments);
+                    self.reloadComments();
                 } else {
                     NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
                 }
@@ -188,7 +189,7 @@ export class Item {
         if (data.userRating) {
             self.nofoodsRating.setUserValue(data.userRating.rating);
             var comments = data.userRating.comments;
-            self.updateComments(comments);
+            self.setCommentsInputs(comments);
             jQuery('#foods_commentsdiv').removeClass('no-user-rating');
         } else {
             self.nofoodsRating.setValue(avg);
@@ -207,7 +208,7 @@ export class Item {
 
     }
 
-    updateComments(comments) {
+    setCommentsInputs(comments) {
 
         if (comments && comments.length > 0) {
 
