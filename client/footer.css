@@ -2,6 +2,8 @@
 
 footer {
     width: 100%;
+    bottom: 0;
+    position: relative;;
 }
 
 #footer {
@@ -10,6 +12,7 @@ footer {
     background: #222222;
     display: block;
     text-align: center;
+    overflow: hidden;
 }
 
 .footer-list {
@@ -20,6 +23,7 @@ footer {
     margin: 0;
     list-style: none;
     vertical-align: top;
+    float: left;
 }
 
 .footer-list li {

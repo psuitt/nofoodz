@@ -1,0 +1,16 @@
+#register_form {
+    padding-left: 15px;
+}
+
+#register_username {
+    margin-bottom: 5px;
+}
+
+#register_email,
+#register_password {
+    margin-bottom: 15px;
+}
+
+.register-margin-bottom {
+    margin-bottom: 15px;
+}

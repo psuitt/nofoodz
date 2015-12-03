@@ -11,11 +11,11 @@ Meteor.methods({
 
         var user = Meteor.users.findOne({_id: this.userId}, {
             fields: {
-                "profile.name": 1
+                "username": 1
             }
         });
 
-        if (user.name.toLowerCase !== options.name.toLowerCase)
+        if (user.username.toLowerCase() !== options.name.toLowerCase())
             throw new Meteor.Error(400, "Your profile name must match your username only casing can be changed");
 
         var update = {

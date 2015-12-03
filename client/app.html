@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NoFoodz: A Food Rating</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk"/>
+    <base href="/">
+</head>
+<body>
+<nav id="menu" class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed hidden-md hidden-lg" data-toggle="collapse"
+                    data-target="#menu-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <button id="menu_searchbutton"
+                    class="btn btn-default simple glyphicon glyphicon-search hidden-md hidden-lg"></button>
+            <a class="navbar-brand logo" href="/">NoFoodz<span
+                    class="title-separator hidden-xs hidden-sm"> | </span><span
+                    class="sub-title  hidden-xs hidden-sm">alpha</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right" id="menu-navbar">
+            <ul class="nav navbar-nav primary-nav">
+                <li class="close-nav"><a href="#">Close</a></li>
+                <li class="has-children"><a class="menu-link" href="#">Links</a>
+                    <ul class="menu-secondary-nav is-hidden">
+                        <li class="close-nav"><a href="#">Close</a></li>
+                        <li class="back"><a class="menu-link" href="#">Links</a></li>
+                        <li class="has-children">
+                            <a class="menu-link menu-header" href="#">Random</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">Random</a></li>
+                                <li><a class="menu-link" [router-link]="['/Explore']">Explore</a></li>
+                                <li><a class="menu-link" [router-link]="['/Wsie']">What should I Eat?</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">
+                            <a class="menu-link menu-header" href="#">Top</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">Top</a></li>
+                                <li class="has-children"><a class="menu-link" href="#">Gaming</a>
+                                    <ul class="is-hidden">
+                                        <li class="close-nav"><a href="#">Close</a></li>
+                                        <li class="back"><a class="menu-link" href="#">Gaming</a></li>
+                                        <li class="has-children"><a class="menu-link" href="#">PC</a>
+                                            <ul class="is-hidden">
+                                                <li class="close-nav"><a href="#">Close</a></li>
+                                                <li class="back"><a class="menu-link" href="#">PC</a></li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,cpu&type=product&title=cpus">CPUs</a>
+                                                </li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,gpu&type=product&title=gpus">GPUs</a>
+                                                </li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,monitor&type=product&title=monitors">Monitors</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-children"><a class="menu-link" href="#">Peripherals</a>
+                                            <ul class="is-hidden">
+                                                <li class="close-nav"><a href="#">Close</a></li>
+                                                <li class="back"><a class="menu-link" href="#">Peripherals</a></li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,peripheral,headset&type=product&title=headsets">Headsets</a>
+                                                </li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,peripheral,headset,wireless&type=product&title=wireless%20headsets">Wireless
+                                                    Headsets</a></li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,peripheral,keyboard&type=product&title=keyboards">Keyboards</a>
+                                                </li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?tags=gaming,peripheral,mouse&type=product&title=mice">Mice</a>
+                                                </li>
+                                                <li><a class="menu-link"
+                                                       href="/#/top/gaming?type=product&title=wireless%20mice">Wireless
+                                                    Mice</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="text-center hidden-xs hidden-sm">
+                    <span id="notifications" class="button-icon glyphicon glyphicon-flag"></span>
+                    <ul id="notificationsList"></ul>
+                </li>
+                <li id="app_login_menu" class="has-children">
+                    <a class="menu-link username" href="#">Login</a>
+                    <ul class="menu-secondary-nav is-hidden">
+                        <li id="login_close" class="close-nav"><a href="#">Close</a></li>
+                        <li class="back"><a class="menu-link username" href="#">Login</a></li>
+                        <li id="login_menu" class="has-children">
+                            <a class="menu-link menu-header" href="#">Login</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">Login</a></li>
+                                <li>
+                                    <form id="login_form" action="action">
+                                        <label>Username</label>
+                                        <input type="text" id="login_email"/>
+                                        <label>Password</label>
+                                        <input type="password" id="login_password"/>
+
+                                        <div id="account_error" class="error-message"></div>
+                                        <input type="submit" id="login_button" value="Sign in" class="green-button"/>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="register_menu" class="has-children">
+                            <a class="menu-link menu-header" href="#">Register</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">Register</a></li>
+                                <li>
+                                    <form id="register_form" action="action">
+                                        <label>Username</label>
+                                        <input type="text" id="register_username" autocomplete="off"/>
+
+                                        <div class="register-margin-bottom">Valid characters include a-z, 0-9, @, _, -,
+                                            ~
+                                        </div>
+                                        <label>Email</label>
+                                        <input type="email" id="register_email" autocomplete="off"/>
+                                        <label>Password</label>
+                                        <input type="password" id="register_password" autocomplete="off"/>
+                                        <label>Confirm Password</label>
+                                        <input type="password" id="register_confirm_password" autocomplete="off"/>
+
+                                        <div id="account_error" class="error-message"></div>
+                                        <input type="submit" id="register_account" class="green-button"
+                                               value="Create an Account"/>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="user_menu" class="has-children">
+                            <a class="menu-link menu-header" href="#">User Links</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">User Links</a></li>
+                                <li><a class="menu-link" [router-link]="['/Users/MyFoods']">MyFoodz</a></li>
+                                <li><a class="menu-link" href='/pages/add'>Add</a></li>
+                                <li>
+                                    <button id="logout_button" class="green-button">Logout</button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <div id="header_searchdiv" class="searchbar"><input type="text"/></div>
+    <!-- /.container-fluid -->
+</nav>
+<div id="header">
+</div>
+<div id="mainContent" class="container-fluid default">
+    <router-outlet></router-outlet>
+</div>
+<div class="alertmessage alert alert-success"></div>
+</body>
+<footer>
+    <div id="footer">
+        <ul class="footer-list">
+            <li></li>
+        </ul>
+        <ul class="footer-list">
+            <li></li>
+        </ul>
+        <ul class="footer-list">
+            <li></li>
+        </ul>
+        <ul class="footer-list">
+            <li id='totalusers'></li>
+            <li>Version alpha-1.1.0</li>
+            <li>Copyright &copy; 2015 &middot; All Rights Reserved &middot;</li>
+        </ul>
+    </div>
+</footer>
+</html>
+

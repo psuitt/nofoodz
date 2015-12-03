@@ -1,6 +1,5 @@
-<template name="admin">
-    <div class="content middle">
-		<h3 class="pagetitle" >Admin Tools</h3>
-		<a href="{{pathFor 'reported'}}">Reported</a>
-	</div>
-</template>
+<div class="content">
+    <h3 class="pagetitle">Admin Links</h3>
+    <a [router-link]="['/Admin/Reported']">Reported</a>
+</div>
+<router-outlet></router-outlet>

@@ -38,6 +38,6 @@ NoFoodz.utils.user = {
 
 	isNormalUser: function (user) {
 		return user.roles && user.roles.indexOf(NoFoodz.consts.admin.NORMAL) > -1;
-	},
+	}
 
 };

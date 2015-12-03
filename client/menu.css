@@ -1,0 +1,17 @@
+#app_login_menu .menu-secondary-nav {
+    padding-bottom: 48px;
+}
+
+#app_login_menu .menu-secondary-nav > li {
+    height: auto;
+}
+
+#logout_button {
+    margin-top: 25px;
+}
+
+@media only screen and (max-width: 766px) {
+    #logout_button {
+        margin-left: 15px;
+    }
+}

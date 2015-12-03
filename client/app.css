@@ -1,0 +1,828 @@
+/* Menu CSS */
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+#menu ul,
+#menu ol {
+    list-style: none;
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: rgba(255, 255, 255, .9);
+    overflow: visible;
+    z-index: 500;
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+#menu .navbar-brand {
+    letter-spacing: 5px;
+}
+
+#menu .navbar-brand .title-separator {
+    color: #424242;
+}
+
+#menu .navbar-brand .sub-title {
+    color: #2196F3;
+}
+
+#menu .navbar-header {
+    line-height: 50px;
+}
+
+#menu .navbar-header button.navbar-toggle {
+    border-color: #424242;
+}
+
+#menu .navbar-header button.navbar-toggle,
+#menu .navbar-header button.navbar-toggle:hover {
+    color: #4CAF50;
+    background: #FFFFFF;
+    border: 2px solid #4CAF50;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+#menu .navbar-header button.navbar-toggle span.icon-bar {
+    background: #4CAF50;
+}
+
+#menu-navbar {
+    padding: 0;
+}
+
+#loginDiv {
+    height: 50px;
+}
+
+/* MAIN SEARCH */
+
+#header_searchdiv {
+    margin: -50px 0 0 0;
+    background: transparent;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+}
+
+div.searchbar span {
+    vertical-align: middle;
+}
+
+div.searchbar div.btn-group > a {
+    height: 30px;
+    border-color: #424242;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding: 2px 12px;
+}
+
+div.searchbar input {
+    vertical-align: middle;
+    margin-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+    border-color: #424242;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    width: 350px;
+    height: 30px;
+}
+
+div.searchbar button {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding: 4px 8px;
+    color: #424242;
+    background: white;
+}
+
+div.searchbar button.go {
+    top: 0;
+    color: #424242;
+    border-color: #424242;
+}
+
+div.searchbar button:hover {
+    color: white;
+    background: #424242;
+}
+
+/* Menu Layout */
+
+.menu-button {
+    margin: -21px 0 auto 0;
+    vertical-align: middle;
+    font-weight: bold;
+    position: relative;
+    top: 50%;
+}
+
+#menu_searchbutton {
+    height: 50px;
+    float: right;
+    margin: auto;
+}
+
+.navbar-default .navbar-nav a.menu-link,
+.navbar-default .navbar-nav a.menu-link:focus {
+    padding: 15px;
+    color: #E91E63;
+    font-size: 16px;
+    font-weight: bold;
+    font-variant: small-caps;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.navbar-default .navbar-nav .menu-link:hover:not('.menu-header') {
+    color: #424242;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.menu-link .button-icon {
+    margin-left: 5px;
+}
+
+.primary-nav .menu-secondary-nav ul {
+    top: 0;
+    right: 0;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    transition: transform 0.3s;
+}
+
+.primary-nav a,
+.primary-nav ul a {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.primary-nav.is-hidden,
+.primary-nav ul.is-hidden {
+    /* secondary navigations hidden by default */
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.navbar-default .navbar-nav.nav .menu-secondary-nav li a {
+    display: block;
+}
+
+.primary-nav .back a::before,
+.primary-nav .back a::after {
+    /* arrow goes on the left side - go back button */
+    left: 20px;
+    -webkit-transform-origin: 1px 50%;
+    -moz-transform-origin: 1px 50%;
+    -ms-transform-origin: 1px 50%;
+    -o-transform-origin: 1px 50%;
+    transform-origin: 1px 50%;
+}
+
+.has-children > a::before,
+.back a::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.has-children > a::after,
+.back a::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.has-children > a::before,
+.has-children > a::after,
+.back a::before,
+.back a::after {
+    /* arrow icon in CSS - for element with nested unordered lists */
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    display: inline-block;
+    height: 2px;
+    width: 10px;
+    background: #424242;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.primary-nav .menu-secondary-nav ul ul.is-hidden {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.primary-nav ul.moves-out > li > a {
+    /* push the navigation items to the left - and lower down opacity - when secondary nav slides in */
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.nav.navbar-nav.primary-nav .close-nav {
+    text-align: right;
+}
+
+.nav.navbar-nav.primary-nav .close-nav a {
+    color: transparent;
+}
+
+.nav.navbar-nav.primary-nav .close-nav a::before {
+    width: 14px;
+    right: 20px;
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    display: inline-block;
+    height: 2px;
+    background: #424242;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: width 0.3s, -webkit-transform 0.3s;
+    -moz-transition: width 0.3s, -moz-transform 0.3s;
+    transition: width 0.3s, transform 0.3s;
+    -webkit-transform: translateX(5px) rotate(-45deg);
+    -moz-transform: translateX(5px) rotate(-45deg);
+    -ms-transform: translateX(5px) rotate(-45deg);
+    -o-transform: translateX(5px) rotate(-45deg);
+    transform: translateX(5px) rotate(-45deg);
+}
+
+.nav.navbar-nav.primary-nav .close-nav a::after {
+    width: 14px;
+    right: 15px;
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    display: inline-block;
+    height: 2px;
+    background: #424242;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-transition: width 0.3s, -webkit-transform 0.3s;
+    -moz-transition: width 0.3s, -moz-transform 0.3s;
+    transition: width 0.3s, transform 0.3s;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+@media only screen and (min-width: 767px) {
+
+    ul.nav.navbar-nav.primary-nav > li {
+        margin-left: 15px;
+    }
+
+    .nav.navbar-nav.primary-nav .close-nav,
+    .menu-secondary-nav > li.back,
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul > .back {
+        display: none;
+    }
+
+    .navbar-default .navbar-nav .menu-secondary-nav .menu-link.menu-header {
+        cursor: default;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li {
+        min-height: 340px;
+        width: 23%;
+        float: left;
+        margin-right: 2.66%;
+        border-right: 1px solid #DDDDDD;
+        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        z-index: 3;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 100vw;;
+        background: #FFFFFF;
+        padding: 48px 64px 130px;
+        box-shadow: inset 0 1px 0 #DDDDDD, 0 3px 6px rgba(0, 0, 0, 0.05);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+        -moz-transition: opacity .3s 0s, visibility 0s 0s;
+        transition: opacity .3s 0s, visibility 0s 0s;
+        z-index: 50;
+    }
+
+    .navbar-default .navbar-nav.nav > li > a.selected {
+        padding-bottom: 12px;
+        border-bottom: 3px solid;
+        background-color: transparent;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav a.menu-link {
+        padding: 0;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > a.menu-link {
+        font-size: 150%;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul {
+        margin-top: 25px;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul a.menu-link {
+        color: #424242;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li > ul a.menu-link:hover {
+        color: #E91E63;
+    }
+
+    .primary-nav .menu-secondary-nav.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+        -moz-transition: opacity .3s 0s, visibility 0s .3s;
+        transition: opacity .3s 0s, visibility 0s .3s;
+    }
+
+    .primary-nav ul.is-hidden {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    .primary-nav .menu-secondary-nav ul ul .back a {
+        color: transparent !important;
+    }
+
+    .primary-nav .menu-secondary-nav .moves-out > li > a {
+        /* push the navigation items to the left - and lower down opacity - when tertiary nav slides in */
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+        transform: translateX(-100%);
+    }
+
+    .primary-nav ul.moves-out > li > a {
+        /* reset mobile style */
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .primary-nav .menu-secondary-nav ul ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .primary-nav > .has-children > a {
+        /* main navigation arrows on larger devices */
+        padding-right: 30px !important;
+    }
+
+    .primary-nav > .has-children > a::before,
+    .primary-nav > .has-children > a::after {
+        width: 9px;
+        -webkit-transform-origin: 50% 50%;
+        -moz-transform-origin: 50% 50%;
+        -ms-transform-origin: 50% 50%;
+        -o-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+        background: #424242;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: width 0.3s, -webkit-transform 0.3s;
+        -moz-transition: width 0.3s, -moz-transform 0.3s;
+        transition: width 0.3s, transform 0.3s;
+    }
+
+    .primary-nav > .has-children > a::before {
+        right: 12px;
+    }
+
+    .primary-nav > .has-children > a::after {
+        right: 7px;
+    }
+
+    .primary-nav > .has-children > a.selected::before,
+    .primary-nav > .has-children > a.selected::after {
+        width: 14px;
+    }
+
+    .primary-nav > .has-children > a.selected::before {
+        -webkit-transform: translateX(5px) rotate(-45deg);
+        -moz-transform: translateX(5px) rotate(-45deg);
+        -ms-transform: translateX(5px) rotate(-45deg);
+        -o-transform: translateX(5px) rotate(-45deg);
+        transform: translateX(5px) rotate(-45deg);
+    }
+
+    .primary-nav > .has-children > a.selected::after {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .menu-secondary-nav > .has-children > a::before,
+    .menu-secondary-nav > .has-children > a::after {
+        /* remove arrows on secondary nav titles */
+        display: none;
+    }
+
+    .primary-nav .back a {
+        padding-left: 20px;
+    }
+
+    .primary-nav .back a::before,
+    .primary-nav .back a::after {
+        left: 1px;
+    }
+}
+
+.has-children > a {
+    padding-right: 40px;
+}
+
+.has-children > a::before,
+.has-children > a::after {
+    /* arrow goes on the right side - children navigation */
+    right: 20px;
+    -webkit-transform-origin: 9px 50%;
+    -moz-transform-origin: 9px 50%;
+    -ms-transform-origin: 9px 50%;
+    -o-transform-origin: 9px 50%;
+    transform-origin: 9px 50%;
+}
+
+.has-children > a::before,
+.has-children > a::after,
+.back a::before,
+.back a::after {
+    /* arrow icon in CSS - for element with nested unordered lists */
+    content: '';
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    display: inline-block;
+    height: 2px;
+    width: 10px;
+    background: #424242;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.has-children > a, .back a {
+    position: relative;
+}
+
+.has-children > a::before,
+.back a::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.has-children > a::after,
+.back a::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+@media only screen and (min-width: 767px) {
+
+    .primary-nav .secondary-nav ul {
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    .has-children > a::before,
+    .has-children > a::after {
+        right: 15%;
+    }
+
+    .has-children > a::before,
+    .has-children > a::after,
+    .back a::before,
+    .back a::after {
+        background: #424242;
+    }
+
+    .has-children > a:hover::before,
+    .has-children > a:hover::after,
+    .back a:hover::before,
+    .back a:hover::after {
+        background: #E91E63;
+    }
+
+}
+
+/* Notifications */
+
+#notifications {
+    cursor: pointer;
+    vertical-align: top;
+    padding: 0 8px 0 8px;
+    margin: 0;
+    line-height: 50px;
+    display: inline-block;
+}
+
+#notifications.new {
+    color: #4CAF50;
+}
+
+#notifications.open {
+    color: #FFFFFF;
+    background: #4CAF50;
+}
+
+#notifications:hover {
+    color: #424242;
+}
+
+#notificationsList {
+    width: 400px;
+    display: none;
+    position: absolute;
+    background: #FFFFFF;
+    border: 2px solid #4CAF50;
+    top: 50px;
+    right: 0;
+    list-style: none;
+    z-index: 100;
+}
+
+#notificationsList.open {
+    display: block;
+}
+
+#notificationsList li {
+    display: block;
+    text-align: left;
+    padding: 5px 25px 5px 5px;
+    font-size: 14px;
+}
+
+#notificationsList a {
+    display: inline-block;
+    height: auto;
+    padding: 0;
+}
+
+#notificationsList li.title {
+    color: #4CAF50;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+#notificationsList li span {
+    color: #795548;
+    font-weight: 500;
+    margin: 0 15px;
+}
+
+#login-buttons {
+    vertical-align: middle;
+}
+
+/* Small screen customizations */
+
+@media only screen and (max-width: 766px) {
+
+    #menu-navbar {
+        overflow: visible;
+    }
+
+    .primary-nav, .primary-nav ul {
+        position: fixed;
+        margin: 0;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 260px;
+        background: #FFFFFF;
+        overflow: visible;
+        -webkit-overflow-scrolling: touch;
+        z-index: 1;
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        -webkit-transition: -webkit-transform 0.3s;
+        -moz-transition: -moz-transform 0.3s;
+        transition: transform 0.3s;
+    }
+
+    .primary-nav ul {
+        position: fixed;
+    }
+
+    .primary-nav a,
+    .primary-nav ul a {
+        display: block;
+        height: 50px;
+        padding: 0 20px;
+    }
+
+    .primary-nav .menu-secondary-nav ul {
+        width: 260px;
+        display: block;
+    }
+
+    .navbar-default .navbar-nav.nav .menu-secondary-nav {
+        top: 0;
+        right: 0;
+        background: #FFFFFF;
+        position: fixed;
+        padding: 0;
+        height: 100%;
+        width: 260px;
+        overflow: auto;
+    }
+
+    .nav-on-left .cd-overlay.is-visible {
+        -webkit-transform: translateX(260px);
+        -moz-transform: translateX(260px);
+        -ms-transform: translateX(260px);
+        -o-transform: translateX(260px);
+        transform: translateX(260px);
+    }
+
+    .cd-overlay.is-visible.search-is-visible, .nav-on-left .cd-overlay.is-visible.search-is-visible {
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    .primary-nav .back a {
+        padding-left: 40px !important;
+    }
+
+    #notifications {
+        padding-left: 15px;
+    }
+
+    #loginDiv {
+        padding: 15px;
+    }
+
+    .menu-button {
+        width: 100%;
+    }
+
+    #header_searchdiv {
+        display: none;
+        margin: 0;
+    }
+
+    #header_searchdiv.is-visible {
+        display: block;
+    }
+
+    #header_searchdiv > div {
+        display: block;
+        width: 100%;
+    }
+
+    #header_searchdiv > div > a {
+        font-size: 25px;
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+    #header_searchdiv > div .nofoodssearch.text {
+        width: auto;
+    }
+
+    #header_searchdiv > div .nofoodssearch.caret {
+        display: none;
+    }
+
+    #header_searchdiv > div > ul {
+        position: relative;
+        width: 100%;
+    }
+
+    #header_searchdiv > div > ul > li {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    #header_searchdiv > input {
+        height: 47px;
+        padding: 10px 12px;
+        font-size: 25px;
+        display: block;
+        border: 0;
+        width: 100%;
+    }
+
+    #header_searchdiv > button {
+        font-size: 25px;
+        display: block;
+        width: 100%;
+    }
+
+}

@@ -3,7 +3,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-standard-app-packages
 accounts-password
 d3
 email
@@ -12,8 +11,12 @@ jquery
 mrt:jquery-ui@1.9.2
 http
 underscore
-iron:router
 
 accounts-base
 ajduke:bootstrap-tagsinput
 standard-minifiers
+meteor-base
+check
+urigo:angular2-meteor
+mongo
+random
