@@ -15,6 +15,8 @@ var doRandom = function () {
             } else {
                 $('#wsie_result').text('Please rate more things to use this feature');
             }
+        } else {
+            $('#wsie_result').text(err.reason);
         }
 
     });

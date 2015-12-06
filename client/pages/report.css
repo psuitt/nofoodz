@@ -1,3 +1,7 @@
 #report_button {
     background: #F44336;
 }
+
+a.button.report.reported {
+    cursor: default;
+}

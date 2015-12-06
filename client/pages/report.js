@@ -1,6 +1,6 @@
 var button;
 
-$(document).on('click', '.button.report', function () {
+$(document).on('click', '.button.report:not(.reported)', function () {
 
     $('#report-dialog').modal('show');
     button = $(this);

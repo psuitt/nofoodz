@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, Directive, HostListener} from 'angular2/angular2';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -11,13 +11,57 @@ declare var jQuery:any;
 declare var NoFoodz:any;
 declare var _:any;
 
+@Directive({
+    selector: '[removeitem]'
+})
+class RemoveDirective {
+
+    @HostListener('click', ['$event.target'])
+    onClick(btn) {
+
+        console.log('THis works');
+
+        return false;
+
+        var options = {
+            items: []
+        };
+
+        var item = {
+            _id: '',
+            type: ''
+        };
+
+        if (jQuery(this).data('food_id')) {
+            item._id = jQuery(this).data('food_id');
+            item.type = NoFoodz.consts.FOOD;
+        } else {
+            item._id = jQuery(this).data('drink_id');
+            item.type = NoFoodz.consts.DRINK;
+        }
+
+        options.items.push(item);
+
+        Meteor.call('removeItems', options, function (err) {
+            if (!err) {
+                NoFoodz.alert.msg('success', 'Remove was successful');
+            }
+        });
+        jQuery(btn).parent().remove();
+
+        // Prevent default
+        return false;
+
+    }
+}
+
 @Component({
     selector: 'reported'
 })
 
 @View({
     templateUrl: 'client/admin/reported/reported.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [RemoveDirective, RouterLink, ROUTER_DIRECTIVES]
 })
 
 export class Reported {
@@ -25,57 +69,13 @@ export class Reported {
     screenData:any;
 
     constructor(private router:Router, params:RouteParams) {
-
-        this.setup();
-        this.loadListeners();
-
     }
 
-    setup() {
+    onActivate() {
 
         this.createGetReportedPage()(1, false);
 
     }
-
-    loadListeners() {
-
-        var self = this;
-
-        jQuery('#reported-content').on('click', 'a.remove', function (e) {
-
-            var options = {
-                items: []
-            };
-
-            var item = {
-                _id: '',
-                type: ''
-            };
-
-            if (jQuery(this).data('food_id')) {
-                item._id = jQuery(this).data('food_id');
-                item.type = NoFoodz.consts.FOOD;
-            } else {
-                item._id = jQuery(this).data('drink_id');
-                item.type = NoFoodz.consts.DRINK;
-            }
-
-            options.items.push(item);
-
-            Meteor.call('removeItems', options, self.success);
-            jQuery(this).parent().remove();
-            e.preventDefault();
-        });
-
-    }
-
-    success(err) {
-
-        if (!err) {
-            NoFoodz.alert.msg('success', 'Remove was successful');
-        }
-
-    };
 
     createGetReportedPage() {
 
@@ -130,7 +130,7 @@ export class Reported {
             var div = jQuery("<div class='myrating myfoods'></div>");
             var title = jQuery("<span class='name myfoods'></span>");
             var brand = jQuery("<span class='brand myfoods'></span>");
-            var removeLink = jQuery("<a class='remove myfoods' href='#'>Remove</a>");
+            var removeLink = jQuery("<a class='remove myfoods' removeitem>Remove</a>");
             var link = '';
 
             title.addClass('lower');
