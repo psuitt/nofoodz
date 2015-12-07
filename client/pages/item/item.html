@@ -18,7 +18,8 @@
         <span class="brand brand-color"></span>
 
         <div class="ratingDiv"></div>
-        <span class="totalRating"></span><span class="ratingdivider">(</span><span class="totalCount"></span><span
+        <span class="totalRating"></span><span class="ratingdivider">(</span><span class="total-count"
+                                                                                   (click)="toggleRaters($event)"></span><span
             class="ratingdivider">)</span>
 
         <div id="infoDiv"></div>
@@ -40,6 +41,14 @@
             </div>
             <input id="foods_comment" type="button" class="green-button" value="Comment"/>
         </div>
+    </div>
+    <div id="item_raters">
+        <ul id="item_raterstablist">
+            <li><a class="active" href="#" (click)="loadRaters($event, true)">All</a></li>
+            <li><a href="#" (click)="loadRaters($event, false)">Following</a></li>
+            <li class="close"><a href="#" (click)="toggleRaters($event)"></a></li>
+        </ul>
+        <ul id="item_raterslist"></ul>
     </div>
 </div>
 <div class="side-section right hidden-xs hidden-sm"></div>

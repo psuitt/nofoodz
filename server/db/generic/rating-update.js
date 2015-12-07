@@ -18,6 +18,7 @@ Meteor.methods({
 
         var user = Meteor.users.findOne({_id: this.userId}, {fields: {
             roles: 1,
+            "profile.name": 1,
             "profile.bonusHearts": 1
         }});
 
@@ -43,6 +44,7 @@ Meteor.methods({
         rating.item_id = options._id;
         // Set the rating for updating
         rating.rating = options.rating;
+        rating.username_view = user.profile.name;
 
         // Update the rating
         var upsertObj = rating.upsert(),

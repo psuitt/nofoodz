@@ -18,7 +18,7 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/pages/item/item.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [Item, RouterLink, ROUTER_DIRECTIVES]
 })
 
 export class Item {
@@ -26,6 +26,7 @@ export class Item {
     nofoodsRating:any;
     idField:string;
     screenData:any;
+    user:any;
 
     constructor(private router:Router, params:RouteParams) {
 
@@ -39,8 +40,15 @@ export class Item {
 
     }
 
-    onDeactivate() {
+    onDestroy() {
         this.nofoodsRating.remove();
+
+        jQuery('span.wishstar').off('click');
+        jQuery('.food-menu-link').off('click');
+
+        jQuery(document).off('click', '#foods_comment');
+        jQuery(document).off('click', '#foods_editcomments');
+
     }
 
     setup(router) {
@@ -169,7 +177,6 @@ export class Item {
 
         });
 
-
     }
 
     done(self, err, data) {
@@ -231,20 +238,20 @@ export class Item {
 
     loadUserData(id) {
 
-        var user = Meteor.user();
+        this.user = Meteor.user();
 
-        if (!user) {
+        if (!this.user) {
             jQuery('#foods-nav .button.report').parent().hide();
             return;
         } else {
             jQuery('#foods-nav .button.report').parent().show();
         }
 
-        if (user.profile) {
+        if (this.user.profile) {
 
-            if (user.profile.wishlist) {
-                for (var i = 0, l = user.profile.wishlist.length; i < l; i += 1) {
-                    if (user.profile.wishlist[i][this.idField] === id) {
+            if (this.user.profile.wishlist) {
+                for (var i = 0, l = this.user.profile.wishlist.length; i < l; i += 1) {
+                    if (this.user.profile.wishlist[i][this.idField] === id) {
                         jQuery('.wishstar').toggleClass('x100', true);
                         break;
                     }
@@ -265,7 +272,7 @@ export class Item {
         }
 
         jQuery('.totalRating').html(avg);
-        jQuery('.totalCount').html(item.ratingcount_calc);
+        jQuery('.total-count').html(item.ratingcount_calc);
 
         return avg;
 
@@ -293,6 +300,62 @@ export class Item {
             jQuery('#foods_comments').jQCloud('update', words);
 
         }
+
+    }
+
+    loadRaters(event, all) {
+
+        // Do not redirect
+        event.preventDefault();
+
+        jQuery('#item_raterstablist .active').removeClass('active');
+        jQuery(event.target).addClass('active');
+
+        var obj = {
+            page: 1,
+            _id: this.screenData._id,
+            type: this.screenData.type
+        };
+
+        if (!all) {
+            obj['user_id'] = this.user._id;
+        }
+
+        jQuery('#item_raterslist').html('');
+
+        Meteor.call('getAllRaters', obj, function (err, data) {
+
+            if (!err && data) {
+
+                _.each(data, function (rater, index) {
+
+                    var li = jQuery('<li></li>');
+                    var a = jQuery('<a></a>');
+                    var username = rater.username_view ? rater.username_view : "Unknown"
+
+                    a.attr('href', NoFoodz.consts.urls.PEOPLE + username.toLowerCase());
+
+                    a.text(username);
+
+                    li.append(a);
+
+                    jQuery('#item_raterslist').append(li);
+
+                });
+
+            }
+
+
+        });
+
+    }
+
+    toggleRaters(event) {
+
+        // Do not redirect
+        event.preventDefault();
+
+        jQuery('#item_raters').toggleClass('visible');
 
     }
 

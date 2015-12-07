@@ -36,6 +36,12 @@ export class Brand {
 
     }
 
+    onDestroy() {
+
+        jQuery(document).off('click', '#brands-nav a');
+
+    }
+
     setup() {
         this.fetchData();
         Client.NoFoodz.widgetlib.floatMenu(jQuery('#brands-nav'));
@@ -52,7 +58,7 @@ export class Brand {
     }
 
     loadListeners() {
-        jQuery('.nofoods-pagenav a').click(function (e) {
+        jQuery(document).on('click', '#brands-nav a', function (e) {
             if (!jQuery(this).hasClass('button')) {
                 e.preventDefault();
                 jQuery(this).tab('show');

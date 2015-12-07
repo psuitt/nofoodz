@@ -24,4 +24,26 @@ var setUpStatistics = function() {
 
 var runBatchFixes = function() {
 
+	Meteor.users.find({}).forEach(function (user) {
+
+		FoodRatings.update({user_id: user._id}, {
+			$set: {
+				username_view: user.profile.name
+			}
+		});
+
+		DrinkRatings.update({user_id: user._id}, {
+			$set: {
+				username_view: user.profile.name
+			}
+		});
+
+		ProductRatings.update({user_id: user._id}, {
+			$set: {
+				username_view: user.profile.name
+			}
+		});
+
+	});
+
 };

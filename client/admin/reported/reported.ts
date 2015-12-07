@@ -7,6 +7,8 @@ import {Component, View, Directive, HostListener} from 'angular2/angular2';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
+import {MeteorComponent} from 'angular2-meteor';
+
 declare var jQuery:any;
 declare var NoFoodz:any;
 declare var _:any;
@@ -32,13 +34,8 @@ class RemoveDirective {
             type: ''
         };
 
-        if (jQuery(this).data('food_id')) {
-            item._id = jQuery(this).data('food_id');
-            item.type = NoFoodz.consts.FOOD;
-        } else {
-            item._id = jQuery(this).data('drink_id');
-            item.type = NoFoodz.consts.DRINK;
-        }
+        item._id = jQuery(this).data('_id');
+        item.type = jQuery(this).data('type');
 
         options.items.push(item);
 
@@ -64,11 +61,13 @@ class RemoveDirective {
     directives: [RemoveDirective, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Reported {
+export class Reported extends MeteorComponent {
 
     screenData:any;
+    reportedItems:any;
 
     constructor(private router:Router, params:RouteParams) {
+        super();
     }
 
     onActivate() {
@@ -128,22 +127,17 @@ export class Reported {
 
             var item = list[i];
             var div = jQuery("<div class='myrating myfoods'></div>");
-            var title = jQuery("<span class='name myfoods'></span>");
-            var brand = jQuery("<span class='brand myfoods'></span>");
-            var removeLink = jQuery("<a class='remove myfoods' removeitem>Remove</a>");
+            var title = jQuery("<span class='name item-color myfoods'></span>");
+            var brand = jQuery("<span class='brand brand-color myfoods'></span>");
+            var removeLink = jQuery("<button class='remove red-button' removeitem>Remove</button>");
             var link = '';
 
             title.addClass('lower');
 
-            if (type === NoFoodz.consts.FOOD) {
-                link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls.FOOD + item.brand_id)
-                    .html(item.name);
-                removeLink.data('food_id', item._id);
-            } else {
-                link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls.DRINK + item.brand_id)
-                    .html(item.name);
-                removeLink.data('drink_id', item._id);
-            }
+            link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls[type.toUpperCase()] + item._id)
+                .html(item.name);
+            removeLink.data('type', type);
+            removeLink.data('_id', item._id);
 
             title.append(link);
 
