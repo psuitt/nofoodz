@@ -27,6 +27,7 @@ export class Item {
     idField:string;
     screenData:any;
     user:any;
+    firstLoad:boolean = false;
 
     constructor(private router:Router, params:RouteParams) {
 
@@ -48,6 +49,10 @@ export class Item {
 
         jQuery(document).off('click', '#foods_comment');
         jQuery(document).off('click', '#foods_editcomments');
+
+        jQuery(document).off('click', 'body', this.hideRaters);
+
+        jQuery('#foods_infodiv').off('click', 'h4', this.toggleInfo);
 
     }
 
@@ -177,6 +182,11 @@ export class Item {
 
         });
 
+        // Hide listener
+        jQuery(document).on('click', 'body', this.hideRaters);
+
+        jQuery('#foods_infodiv').on('click', 'h4', this.toggleInfo);
+
     }
 
     done(self, err, data) {
@@ -202,7 +212,69 @@ export class Item {
             self.nofoodsRating.setValue(avg);
         }
 
+        self.loadInformation(item.info);
+
         self.loadUserData(item._id);
+
+    }
+
+    loadInformation(info) {
+
+        var infoDiv = jQuery('#foods_infodiv');
+
+        infoDiv.html('');
+
+        if (!info)
+            return;
+
+        _.each(info, function (infoItem, index) {
+
+            var div = jQuery('<div></div>');
+            var title = jQuery('<h4></h4>');
+            title.text(infoItem._title);
+            // This is the downward arrow span
+            title.append('<span> </span>');
+            div.append(title);
+
+            if (infoItem._info) {
+                var spanDesc = jQuery('<span></span');
+                spanDesc.text(infoItem._info);
+                div.append(spanDesc);
+            }
+
+            var list = jQuery('<ul></ul');
+            list.addClass('item-infolist');
+            div.append(list);
+
+            for (var field in infoItem) {
+
+                if (infoItem.hasOwnProperty(field) && field.indexOf('_') !== 0) {
+                    var liItem = jQuery('<li></li');
+
+                    var fieldTitle = jQuery('<span></span');
+                    fieldTitle.text(NoFoodz.format.camelCase(field));
+
+                    var detail = jQuery('<span></span');
+                    detail.text(infoItem[field]);
+
+                    liItem.append(fieldTitle);
+                    liItem.append(detail);
+
+                    list.append(liItem);
+
+                }
+
+            }
+
+            infoDiv.append(div);
+
+        });
+
+    }
+
+    toggleInfo() {
+
+        jQuery(this).parent().toggleClass('open');
 
     }
 
@@ -291,7 +363,7 @@ export class Item {
             _.each(response, function (comment, index) {
 
                 words.push({
-                    text: comment.comment,
+                    text: NoFoodz.format.camelCase(comment.comment),
                     weight: comment.value
                 });
 
@@ -306,10 +378,14 @@ export class Item {
     loadRaters(event, all) {
 
         // Do not redirect
-        event.preventDefault();
+        if (event) {
 
-        jQuery('#item_raterstablist .active').removeClass('active');
-        jQuery(event.target).addClass('active');
+            event.preventDefault();
+
+            jQuery('#item_raterstablist .active').removeClass('active');
+            jQuery(event.target).addClass('active');
+
+        }
 
         var obj = {
             page: 1,
@@ -331,7 +407,7 @@ export class Item {
 
                     var li = jQuery('<li></li>');
                     var a = jQuery('<a></a>');
-                    var username = rater.username_view ? rater.username_view : "Unknown"
+                    var username = rater.username_view ? rater.username_view : "Unknown";
 
                     a.attr('href', NoFoodz.consts.urls.PEOPLE + username.toLowerCase());
 
@@ -345,7 +421,6 @@ export class Item {
 
             }
 
-
         });
 
     }
@@ -356,6 +431,21 @@ export class Item {
         event.preventDefault();
 
         jQuery('#item_raters').toggleClass('visible');
+
+        if (!this.firstLoad) {
+            this.firstLoad = true;
+            this.loadRaters(false, true);
+        }
+
+    }
+
+    hideRaters(event) {
+
+        if (jQuery(event.target).closest('#item_raters').length === 0
+            && jQuery(event.target).closest('.total-count').length === 0
+            && jQuery('#item_raters').hasClass('visible')) {
+            jQuery('#item_raters').removeClass('visible');
+        }
 
     }
 

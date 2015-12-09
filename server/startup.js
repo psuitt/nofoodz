@@ -30,19 +30,19 @@ var runBatchFixes = function() {
 			$set: {
 				username_view: user.profile.name
 			}
-		});
+		}, {multi: true});
 
 		DrinkRatings.update({user_id: user._id}, {
 			$set: {
 				username_view: user.profile.name
 			}
-		});
+		}, {multi: true});
 
 		ProductRatings.update({user_id: user._id}, {
 			$set: {
 				username_view: user.profile.name
 			}
-		});
+		}, {multi: true});
 
 	});
 

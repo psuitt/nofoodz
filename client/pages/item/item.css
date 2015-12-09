@@ -99,6 +99,7 @@ span.foods-comment {
     padding-bottom: 5px;
 }
 
+#foods_infodiv h4 > span::before,
 #item_raterstablist li.close a::before {
     content: '';
     position: relative;
@@ -124,6 +125,7 @@ span.foods-comment {
     transition: width 0.3s, transform 0.3s;
 }
 
+#foods_infodiv h4 > span::after,
 #item_raterstablist li.close a::after {
     content: '';
     position: relative;
@@ -150,7 +152,9 @@ span.foods-comment {
 }
 
 #item_raterstablist li.close a:hover::before,
-#item_raterstablist li.close a:hover::after {
+#item_raterstablist li.close a:hover::after,
+#foods_infodiv h4:hover > span::before,
+#foods_infodiv h4:hover > span::after {
     background: #E91E63;
 }
 
@@ -162,4 +166,73 @@ span.foods-comment {
 #item_raterslist {
     margin: 20px 0 0 0;
     list-style: none;
+}
+
+#foods_infodiv h4 {
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+#foods_infodiv > div > ul.item-infolist {
+    display: none;
+}
+
+#foods_infodiv > div.open > ul.item-infolist {
+    display: block;
+}
+
+#foods_infodiv > div > span {
+    display: none;
+}
+
+#foods_infodiv > div.open > span {
+    display: block;
+}
+
+ul.item-infolist span {
+    width: 82%;
+    display: inline-block;
+}
+
+ul.item-infolist span:first-child {
+    text-align: center;
+    width: 18%;
+}
+
+#foods_infodiv h4 > span {
+    position: relative;
+    margin-left: 30px;
+}
+
+#foods_infodiv h4 > span::before {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    right: 6px;
+}
+
+#foods_infodiv h4 > span::after {
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    right: 0;
+}
+
+#foods_infodiv > div.open > h4 > span::before {
+    width: 14px;
+    right: 5px;
+    webkit-transform: translateX(5px) rotate(-45deg);
+    -moz-transform: translateX(5px) rotate(-45deg);
+    -ms-transform: translateX(5px) rotate(-45deg);
+    -o-transform: translateX(5px) rotate(-45deg);
+    transform: translateX(5px) rotate(-45deg);
+}
+
+#foods_infodiv > div.open > h4 > span::after {
+    width: 14px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
