@@ -50,7 +50,6 @@ div.content label {
 div.side-section {
     display: inline-block;
     width: 18%;
-    min-height: 600px;
     height: 100%;
     position: relative;
     vertical-align: top;

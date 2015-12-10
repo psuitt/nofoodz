@@ -45,7 +45,6 @@ export class Item {
         this.nofoodsRating.remove();
 
         jQuery('span.wishstar').off('click');
-        jQuery('.food-menu-link').off('click');
 
         jQuery(document).off('click', '#foods_comment');
         jQuery(document).off('click', '#foods_editcomments');
@@ -107,8 +106,6 @@ export class Item {
             }
         });
 
-        Client.NoFoodz.widgetlib.floatMenu(jQuery('#foods-nav'));
-
         jQuery('#foods-nav .button.report').attr('item-id', self.screenData._id).attr('item-type', self.screenData.type);
 
     }
@@ -125,25 +122,6 @@ export class Item {
             Meteor.call('addToWishList', options);
 
             jQuery('.wishstar').toggleClass('x100', true);
-        });
-
-        jQuery('.food-menu-link').on('click', function (e) {
-            var self = jQuery(this);
-            e.preventDefault();
-            jQuery('#foods-nav li').removeClass('active');
-            self.parent().addClass('active');
-            var height = jQuery(self.attr('link')).offset().top - jQuery('#menu').height(),
-                currentHeight = jQuery('body').scrollTop(),
-                max = jQuery(document).height() - jQuery(window).height();
-
-            if ((currentHeight !== max && height > currentHeight)
-                || (height < currentHeight)) {
-                jQuery('body').animate({
-                    scrollTop: height
-                }, 300);
-            }
-
-            return false;
         });
 
         jQuery(document).on('click', '#foods_comment', function (event) {

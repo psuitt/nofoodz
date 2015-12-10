@@ -8,8 +8,11 @@ footer {
 
 #footer {
     width: 100%;
-    color: #FFC107;
+    color: #DDDDDD;
     background: #222222;
+    border-top: 1px solid #DDDDDD;
+    margin-top: 20px;
+    padding-bottom: 20px;
     display: block;
     text-align: center;
     overflow: hidden;
@@ -19,7 +22,7 @@ footer {
     display: inline-block;
     min-height: 50px;
     width: 25%;
-    padding: 20px 20px;
+    padding: 20px 30px;
     margin: 0;
     list-style: none;
     vertical-align: top;
@@ -27,5 +30,23 @@ footer {
 }
 
 .footer-list li {
+    display: block;
+    text-align: left;
+}
+
+li.footer-header {
+    color: #FFC107;
+    font-variant: small-caps;
+    font-size: 150%;
+    margin-bottom: 10px;
+}
+
+#footer div {
+    overflow: hidden;
+}
+
+#footer div.footer-section {
+    padding: 20px 0;
+    text-align: center;
     display: block;
 }
