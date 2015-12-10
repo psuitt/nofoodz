@@ -50,3 +50,29 @@ li.footer-header {
     text-align: center;
     display: block;
 }
+
+#footer i {
+    height: 48px;
+    width: 48px;
+    margin: 0 15px;
+    display: inline-block;
+    background-position: center center;
+    background-size: 48px 48px;
+    background-repeat: no-repeat;
+}
+
+i.facebook {
+    background-image: url('/facebook-48x48.png');
+}
+
+i.google-plus {
+    background-image: url('/google-plus-48x48.png');
+}
+
+i.pinterest {
+    background-image: url('/pinterest-48x48.png');
+}
+
+i.twitter {
+    background-image: url('/twitter-48x48.png');
+}
