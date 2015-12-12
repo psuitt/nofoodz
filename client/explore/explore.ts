@@ -3,7 +3,7 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnInit} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
@@ -21,7 +21,7 @@ declare var NoFoodz:any;
     directives: [Explore, RouterLink]
 })
 
-export class Explore {
+export class Explore implements OnInit {
 
     constructor() {
 
@@ -52,7 +52,7 @@ export class Explore {
 
     }
 
-    onActivate() {
+    ngOnInit() {
         jQuery('.explore-options button').eq(0).click();
     }
 

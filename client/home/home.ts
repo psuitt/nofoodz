@@ -3,9 +3,9 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
-import {RouterLink, Router} from 'angular2/router';
+import {RouterLink, Router, RouterOutlet} from 'angular2/router';
 
 declare var jQuery:any;
 
@@ -15,10 +15,10 @@ declare var jQuery:any;
 
 @View({
     templateUrl: 'client/home/home.html',
-    directives: [NgFor, RouterLink]
+    directives: [RouterLink, RouterOutlet]
 })
 
-export class Home {
+export class Home implements OnDestroy {
 
     constructor(private router:Router) {
 
@@ -49,7 +49,7 @@ export class Home {
 
     }
 
-    onDestroy() {
+    ngOnDestroy() {
         jQuery('#mainContent').removeClass('white');
         jQuery('#header').removeClass('hidden');
         jQuery('#login .logo').show();

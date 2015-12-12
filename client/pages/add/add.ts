@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, Location, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -19,10 +19,10 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/pages/add/add.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Add {
+export class Add implements OnDestroy {
 
     location:Location;
 
@@ -38,7 +38,7 @@ export class Add {
 
     }
 
-    onDestroy() {
+    ngOnDestroy() {
 
         jQuery(document).off('click', '#save');
 

@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>NoFoodz: A Food Rating</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
-    <meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk"/>
-    <base href="/">
-</head>
-<body>
+<title>NoFoodz: A Food Rating</title>
+<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk"></meta>
+<base href="/"></base>
 <nav id="menu" class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -37,8 +32,8 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
-                                <li><a class="menu-link" [router-link]="['/Explore']">Explore</a></li>
-                                <li><a class="menu-link" [router-link]="['/Wsie']">What should I Eat?</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Wsie']">What should I Eat?</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
@@ -151,8 +146,8 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">User Links</a></li>
-                                <li><a class="menu-link" [router-link]="['/Users/MyFoods']">MyFoodz</a></li>
-                                <li><a class="menu-link" [router-link]="['/Pages/Add']">Add</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>
                                 <li>
                                     <button id="logout_button" class="green-button">Logout</button>
                                 </li>
@@ -173,7 +168,6 @@
     <router-outlet></router-outlet>
 </div>
 <div class="alertmessage alert alert-success"></div>
-</body>
 <footer>
     <div id="footer">
         <div id="footer_followlinks" class="footer-section">
@@ -185,9 +179,9 @@
         <div>
             <ul class="footer-list">
                 <li class="footer-header">Info</li>
-                <li><a [router-link]="['/Info/About']">About</a></li>
+                <li><a [routerLink]="['/Info/About']">About</a></li>
                 <li id='totalusers'></li>
-                <li>Version alpha-1.1.0</li>
+                <li>Version alpha-1.2.0</li>
             </ul>
             <ul class="footer-list">
                 <li class="footer-header">Company</li>
@@ -205,5 +199,3 @@
         <div class="footer-section">Copyright &copy; 2015 &middot; All Rights Reserved &middot;</div>
     </div>
 </footer>
-</html>
-

@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
 
 import {RouterLink, RouteParams} from 'angular2/router';
 
@@ -170,7 +170,7 @@ export class Find {
         aBrand.attr('href', NoFoodz.consts.urls.BRAND + item.brand_id);
         aBrand.html(item.brand_view);
 
-        rating.attr('title', ratingValue)
+        rating.attr('title', ratingValue);
         var i = (Math.round((ratingValue * 2)) * 10).toString();
 
         rating.addClass('rating');
@@ -298,7 +298,6 @@ export class Find {
         var htmlBuilder = [];
 
         jQuery('#findContent').html('');
-        jQuery('#findResults').html('');
 
         var obj = {
             'username': search
@@ -337,7 +336,7 @@ export class Find {
                         name.append(aName);
                         //div.append(icon);
                         div.append(name);
-                        jQuery('#findResults').append(div);
+                        jQuery('#findContent').append(div);
 
                     });
 

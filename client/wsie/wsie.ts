@@ -3,7 +3,7 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
@@ -19,7 +19,11 @@ declare var jQuery:any;
     directives: [Wsie, RouterLink]
 })
 
-export class Wsie {
+export class Wsie implements OnDestroy {
+
+    ngOnDestroy() {
+        jQuery('#wsie_random').off();
+    }
 
     doRandom() {
 

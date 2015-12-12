@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -18,10 +18,10 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/pages/brand/brand.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Brand {
+export class Brand implements OnDestroy {
 
     screenData:any;
 
@@ -36,7 +36,7 @@ export class Brand {
 
     }
 
-    onDestroy() {
+    ngOnDestroy() {
 
         jQuery(document).off('click', '#brands-nav a');
 

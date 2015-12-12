@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, Directive, HostListener} from 'angular2/angular2';
+import {Component, View, Directive, HostListener, OnInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -61,7 +61,7 @@ class RemoveDirective {
     directives: [RemoveDirective, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Reported extends MeteorComponent {
+export class Reported extends MeteorComponent implements OnInit {
 
     screenData:any;
     reportedItems:any;
@@ -70,7 +70,7 @@ export class Reported extends MeteorComponent {
         super();
     }
 
-    onActivate() {
+    ngOnInit() {
 
         this.createGetReportedPage()(1, false);
 

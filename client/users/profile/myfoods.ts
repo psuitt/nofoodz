@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -21,7 +21,7 @@ declare var _:any;
     directives: [MyFoods, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class MyFoods {
+export class MyFoods implements OnDestroy {
 
     followersFirstLoad:boolean;
     followingFirstLoad:boolean;
@@ -44,10 +44,7 @@ export class MyFoods {
 
     }
 
-    onActivate() {
-    }
-
-    onDestroy() {
+    ngOnDestroy() {
 
         jQuery(document).off('click', '#myfoods_edit');
         jQuery(document).off('click', '#myfoods_save');

@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -21,7 +21,7 @@ declare var _:any;
     directives: [Item, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Item {
+export class Item implements OnDestroy {
 
     nofoodsRating:any;
     idField:string;
@@ -41,7 +41,7 @@ export class Item {
 
     }
 
-    onDestroy() {
+    ngOnDestroy() {
         this.nofoodsRating.remove();
 
         jQuery('span.wishstar').off('click');
