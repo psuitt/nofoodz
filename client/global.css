@@ -234,7 +234,7 @@ div.alertmessage {
 }
 
 #mainContent {
-    min-height: 600px;
+    min-height: 800px;
     height: auto;
     background-repeat: repeat-y;
     background-attachment: fixed;

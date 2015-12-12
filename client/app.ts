@@ -25,6 +25,7 @@ import {UsersPage} from "./users/users";
 import {PagesPage} from "./pages/pages";
 import {TopPage} from "./top/top";
 import {AdminPage} from "./admin/admin";
+import {InfoPage} from "./info/info";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
@@ -47,6 +48,7 @@ declare var System:any;
     {path: '/users/...', component: UsersPage, as: 'Users'},
     {path: '/pages/...', component: PagesPage, as: 'Pages'},
     {path: '/top/...', component: TopPage, as: 'Top'},
+    {path: '/info/...', component: InfoPage, as: 'Info'},
     {path: '/admin/...', component: AdminPage, as: 'Admin'}
 ])
 
@@ -62,6 +64,8 @@ class MainLayout implements CanReuse {
 
         this.router = router;
         this.location = location;
+
+        window.scrollTo(0, 0);
 
         Meteor.call('getUserCount', function (err, response) {
 

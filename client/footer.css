@@ -8,9 +8,9 @@ footer {
 
 #footer {
     width: 100%;
-    color: #DDDDDD;
+    color: #FFFFFF;
     background: #222222;
-    border-top: 1px solid #DDDDDD;
+    border-top: 2px solid #E91E63;
     margin-top: 20px;
     padding-bottom: 20px;
     display: block;
@@ -34,8 +34,16 @@ footer {
     text-align: left;
 }
 
+.footer-list li a {
+    color: #FFFFFF;
+}
+
+.footer-list li a:hover {
+    color: #424242;
+}
+
 li.footer-header {
-    color: #FFC107;
+    color: #E91E63;
     font-variant: small-caps;
     font-size: 150%;
     margin-bottom: 10px;
@@ -49,9 +57,10 @@ li.footer-header {
     padding: 20px 0;
     text-align: center;
     display: block;
+    color: #E91E63;
 }
 
-#footer i {
+#footer div.footer-section a {
     height: 48px;
     width: 48px;
     margin: 0 15px;
@@ -61,18 +70,18 @@ li.footer-header {
     background-repeat: no-repeat;
 }
 
-i.facebook {
+a.facebook {
     background-image: url('/facebook-48x48.png');
 }
 
-i.google-plus {
+a.google-plus {
     background-image: url('/google-plus-48x48.png');
 }
 
-i.pinterest {
+a.pinterest {
     background-image: url('/pinterest-48x48.png');
 }
 
-i.twitter {
+a.twitter {
     background-image: url('/twitter-48x48.png');
 }
