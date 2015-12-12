@@ -3,13 +3,54 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, Directive, HostListener} from 'angular2/angular2';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 declare var jQuery:any;
 declare var NoFoodz:any;
 declare var _:any;
+
+@Directive({
+    selector: '[removeitem]'
+})
+class RemoveDirective {
+
+    @HostListener('click', ['$event.target'])
+    onClick(btn) {
+
+        console.log('THis works');
+
+        return false;
+
+        var options = {
+            items: []
+        };
+
+        var item = {
+            _id: '',
+            type: ''
+        };
+
+        item._id = jQuery(this).data('_id');
+        item.type = jQuery(this).data('type');
+
+        options.items.push(item);
+
+        Meteor.call('removeItems', options, function (err) {
+            if (!err) {
+                NoFoodz.alert.msg('success', 'Remove was successful');
+            }
+        });
+        jQuery(btn).parent().remove();
+
+        // Prevent default
+        return false;
+
+    }
+}
 
 @Component({
     selector: 'reported'
@@ -17,65 +58,23 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/admin/reported/reported.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [RemoveDirective, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Reported {
+export class Reported extends MeteorComponent {
 
     screenData:any;
+    reportedItems:any;
 
     constructor(private router:Router, params:RouteParams) {
-
-        this.setup();
-        this.loadListeners();
-
+        super();
     }
 
-    setup() {
+    onActivate() {
 
         this.createGetReportedPage()(1, false);
 
     }
-
-    loadListeners() {
-
-        var self = this;
-
-        jQuery('#reported-content').on('click', 'a.remove', function (e) {
-
-            var options = {
-                items: []
-            };
-
-            var item = {
-                _id: '',
-                type: ''
-            };
-
-            if (jQuery(this).data('food_id')) {
-                item._id = jQuery(this).data('food_id');
-                item.type = NoFoodz.consts.FOOD;
-            } else {
-                item._id = jQuery(this).data('drink_id');
-                item.type = NoFoodz.consts.DRINK;
-            }
-
-            options.items.push(item);
-
-            Meteor.call('removeItems', options, self.success);
-            jQuery(this).parent().remove();
-            e.preventDefault();
-        });
-
-    }
-
-    success(err) {
-
-        if (!err) {
-            NoFoodz.alert.msg('success', 'Remove was successful');
-        }
-
-    };
 
     createGetReportedPage() {
 
@@ -128,22 +127,17 @@ export class Reported {
 
             var item = list[i];
             var div = jQuery("<div class='myrating myfoods'></div>");
-            var title = jQuery("<span class='name myfoods'></span>");
-            var brand = jQuery("<span class='brand myfoods'></span>");
-            var removeLink = jQuery("<a class='remove myfoods' href='#'>Remove</a>");
+            var title = jQuery("<span class='name item-color myfoods'></span>");
+            var brand = jQuery("<span class='brand brand-color myfoods'></span>");
+            var removeLink = jQuery("<button class='remove red-button' removeitem>Remove</button>");
             var link = '';
 
             title.addClass('lower');
 
-            if (type === NoFoodz.consts.FOOD) {
-                link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls.FOOD + item.brand_id)
-                    .html(item.name);
-                removeLink.data('food_id', item._id);
-            } else {
-                link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls.DRINK + item.brand_id)
-                    .html(item.name);
-                removeLink.data('drink_id', item._id);
-            }
+            link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls[type.toUpperCase()] + item._id)
+                .html(item.name);
+            removeLink.data('type', type);
+            removeLink.data('_id', item._id);
 
             title.append(link);
 

@@ -34,6 +34,7 @@ export class TopPage implements CanReuse {
 
     constructor(location:Location) {
         this.location = location;
+        window.scrollTo(0, 0);
     }
 
     getLinkStyle(path) {

@@ -25,7 +25,7 @@ declare var jQuery:any;
 
 @View({
     templateUrl: 'client/pages/pages.html',
-    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES,]
+    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES]
 })
 
 @RouteConfig([

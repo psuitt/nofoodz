@@ -21,11 +21,7 @@ Meteor.methods({
 
         var following = Followers.findOne(query);
 
-        if (following && following._id) {
-            return true;
-        }
-
-        return false;
+        return following && following._id;
 
     },
 
@@ -45,7 +41,7 @@ Meteor.methods({
                 follower_id: 1,
                 followername: 1
             }
-        }
+        };
 
         return Followers.find(query, filter).fetch();
 
@@ -67,7 +63,7 @@ Meteor.methods({
                 user_id: 1,
                 username: 1
             }
-        }
+        };
 
         return Followers.find(query, filter).fetch();
     }

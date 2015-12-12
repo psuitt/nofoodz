@@ -6,11 +6,12 @@ Rating = function (rating, userId, type) {
     this.rating = rating;
     this.user_id = userId;
     this._id = Random.id();
-    this.date = Date.now();
     this.item_id = false;
+    this.username_view = '';
     this.type = type;
     this.random = Math.random();
     this.comments = [];
+    this.date = Date.now();
 
 };
 
@@ -54,10 +55,11 @@ Rating.prototype.insert = function () {
         _id: this._id,
         user_id: this.user_id,
         item_id: this.item_id,
+        username_view: this.username_view,
         rating: this.rating,
-        date: this.date,
         random: this.random,
-        comments: this.comments
+        comments: this.comments,
+        date: this.date
     };
 
     if (this.type) {

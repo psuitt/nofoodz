@@ -116,7 +116,7 @@ Meteor.methods({
             },
             sort: {
                 brand_view: 1,
-                rating: -1,
+                rating: -1
             }
 
         };

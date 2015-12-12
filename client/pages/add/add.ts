@@ -38,6 +38,24 @@ export class Add {
 
     }
 
+    onDestroy() {
+
+        jQuery(document).off('click', '#save');
+
+        jQuery(document).off('click', '#foodsadd_typeselect .btn');
+
+        jQuery(document).off('click', '#foodsadd_numberselect .btn');
+
+        jQuery(document).off('click', '#foodsadd_add_brand');
+
+        jQuery(document).off('click', '.foodsadd-group .foodsadd-add-item');
+
+        jQuery(document).off('click', '.foodsadd-brand-remove');
+
+        jQuery(document).off('click', '.foodsadd-remove');
+
+    }
+
     setup() {
 
         if (!Meteor.userId()) {

@@ -38,6 +38,13 @@ export class People {
 
     }
 
+    onDestroy() {
+
+        jQuery(document).off('click', '#people_nav a');
+        jQuery('span.wishstar').off('click');
+
+    }
+
     setup() {
 
         Client.NoFoodz.widgetlib.floatMenu(jQuery('#people_nav'));
@@ -46,7 +53,7 @@ export class People {
 
     loadListeners() {
 
-        jQuery('div.nofoods-pagenav a').click(function (e) {
+        jQuery(document).on('click', '#people_nav a', function (e) {
             e.preventDefault();
             jQuery(this).tab('show');
         });

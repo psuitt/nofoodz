@@ -14,10 +14,17 @@ Meteor.methods({
         };
 
         var filter = {
-            sort: {name: -1}
+            sort: {name: -1},
+            fields: {
+                _id: 1,
+                name: 1,
+                brand_id: 1,
+                brand_view: 1,
+                ratingtotal_calc: 1,
+                ratingcount_calc: 1,
+                info: 1
+            }
         };
-
-        filter = _.extend(filter, NoFoodz.consts.filters.HIDDEN_FOODS);
 
         switch (options.type) {
             case NoFoodz.consts.db.FOOD:

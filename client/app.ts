@@ -9,6 +9,11 @@ import {bootstrap} from 'angular2-meteor';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Location, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
 
+import {
+    ComponentInstruction,
+    CanReuse
+} from 'angular2/router';
+
 import {Error404} from "./error/404/Error404";
 
 import {Home} from "client/home/home";
@@ -20,7 +25,7 @@ import {UsersPage} from "./users/users";
 import {PagesPage} from "./pages/pages";
 import {TopPage} from "./top/top";
 import {AdminPage} from "./admin/admin";
-
+import {InfoPage} from "./info/info";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
@@ -43,10 +48,11 @@ declare var System:any;
     {path: '/users/...', component: UsersPage, as: 'Users'},
     {path: '/pages/...', component: PagesPage, as: 'Pages'},
     {path: '/top/...', component: TopPage, as: 'Top'},
+    {path: '/info/...', component: InfoPage, as: 'Info'},
     {path: '/admin/...', component: AdminPage, as: 'Admin'}
 ])
 
-class MainLayout {
+class MainLayout implements CanReuse {
 
     router:Router;
     location:Location;
@@ -59,12 +65,38 @@ class MainLayout {
         this.router = router;
         this.location = location;
 
+        window.scrollTo(0, 0);
+
         Meteor.call('getUserCount', function (err, response) {
 
             if (!err)
                 jQuery('#totalusers').text('Total Users ' + response);
 
         });
+
+        this.loadListeners(router);
+
+        this.loadUserInfo();
+
+    }
+
+    /*
+     Defines route lifecycle method canReuse, which is called by the router to determine whether a component should be reused across routes, or whether to destroy and instantiate a new component.
+
+     The canReuse hook is called with two ComponentInstructions as parameters, the first representing the current route being navigated to, and the second parameter representing the previous route.
+
+     If canReuse returns or resolves to true, the component instance will be reused and the OnDeactivate hook will be run. If canReuse returns or resolves to false, a new component will be instantiated, and the existing component will be deactivated and removed as part of the navigation.
+
+     If canReuse throws or rejects, the navigation will be cancelled.
+     */
+    canReuse(next:ComponentInstruction, prev:ComponentInstruction) {
+        if (next.reuse) {
+
+        }
+        return false;
+    }
+
+    loadListeners(router) {
 
         jQuery('.searchbar input').nofoodssearch({router: router});
 
@@ -102,8 +134,6 @@ class MainLayout {
         jQuery(document).on('click', 'register_account', function () {
             jQuery('#register_form').submit();
         });
-
-        this.loadUserInfo();
 
     }
 

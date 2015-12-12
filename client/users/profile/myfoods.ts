@@ -18,7 +18,7 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/users/profile/myfoods.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [MyFoods, RouterLink, ROUTER_DIRECTIVES]
 })
 
 export class MyFoods {
@@ -48,39 +48,20 @@ export class MyFoods {
     }
 
     onDestroy() {
+
+        jQuery(document).off('click', '#myfoods_edit');
+        jQuery(document).off('click', '#myfoods_save');
+        jQuery('#myfoods-wishlist').off('click', 'a.remove', this.unlike);
+        jQuery('#myfoods_following').off('click', 'a.remove', this.unfollow);
         jQuery('#mainContent').off('swiperight')
             .off('swipeleft')
             .removeClass('default');
+
     }
 
     setup(router) {
 
         var self = this;
-
-        jQuery('#myfoods-nav a').click(function (e) {
-            e.preventDefault();
-            jQuery(this).tab('show');
-            var index = jQuery(this).parent().index();
-
-            switch (index) {
-                case self.FOLLOWING:
-                    if (self.followingFirstLoad) {
-                        self.loadFollowing();
-                        self.followingFirstLoad = false;
-                    }
-                    break;
-                case self.FOLLOWERS:
-                    if (self.followersFirstLoad) {
-                        self.loadFollowers();
-                        self.followersFirstLoad = false;
-                    }
-                    break;
-                default:
-                    jQuery('#myfoods_edit').toggle(index === self.PROFILE);
-                    break;
-            }
-
-        });
 
         Client.NoFoodz.widgetlib.staticOffCanvasMenu(jQuery('#myfoods-nav'));
 
@@ -115,51 +96,6 @@ export class MyFoods {
 
         });
 
-        jQuery('#myfoods-wishlist').on('click', 'a.remove', function (e) {
-            var options = {};
-            if (jQuery(this).data('food_id')) {
-                options['food_id'] = jQuery(this).data('food_id');
-            } else {
-                options['drink_id'] = jQuery(this).data('drink_id');
-            }
-            Meteor.call('removeFromWishList', options);
-            jQuery(this).parent().remove();
-            e.preventDefault();
-        });
-
-        jQuery('#myfoods_following').on('click', 'a.remove', function (e) {
-            Meteor.call('unfollow', {user_id: jQuery(this).data('user_id')});
-            jQuery(this).parent().remove();
-            e.preventDefault();
-        });
-
-        jQuery('#myfoods-foods .ratingsearch').on('keyup', function (e) {
-            var code = Client.NoFoodz.lib.key.getCode(e),
-                self = jQuery(this);
-
-            if (code == 13) {
-                self.getFoodsPage(1);
-            }
-
-        });
-
-        jQuery('#myfoods-drinks .ratingsearch').on('keyup', function (e) {
-            var code = Client.NoFoodz.lib.key.getCode(e),
-                self = jQuery(this);
-
-            if (code == 13) {
-                self.getDrinksPage(1);
-            }
-
-        });
-
-        jQuery('#mainContent').removeClass('default')
-            .on('swiperight', function () {
-                jQuery('.row.row-offcanvas').addClass('active');
-            })
-            .on('swipeleft', function () {
-                jQuery('.row.row-offcanvas').removeClass('active');
-            });
     }
 
     loadListeners() {
@@ -192,6 +128,61 @@ export class MyFoods {
             });
         });
 
+        jQuery('#myfoods-wishlist').on('click', 'a.remove', this.unlike);
+
+        jQuery('#myfoods_following').on('click', 'a.remove', this.unfollow);
+
+        jQuery('#mainContent').removeClass('default')
+            .on('swiperight', function () {
+                jQuery('.row.row-offcanvas').addClass('active');
+            })
+            .on('swipeleft', function () {
+                jQuery('.row.row-offcanvas').removeClass('active');
+            });
+
+    }
+
+    loadFollowingFollowers(e) {
+        e.preventDefault();
+        jQuery(e.target).tab('show');
+        var index = jQuery(e.target).parent().index();
+
+        switch (index) {
+            case this.FOLLOWING:
+                if (this.followingFirstLoad) {
+                    this.loadFollowing();
+                    this.followingFirstLoad = false;
+                }
+                break;
+            case this.FOLLOWERS:
+                if (this.followersFirstLoad) {
+                    this.loadFollowers();
+                    this.followersFirstLoad = false;
+                }
+                break;
+            default:
+                jQuery('#myfoods_edit').toggle(index === this.PROFILE);
+                break;
+        }
+
+    }
+
+    unlike(e) {
+        var options = {};
+        if (jQuery(this).data('food_id')) {
+            options['food_id'] = jQuery(this).data('food_id');
+        } else {
+            options['drink_id'] = jQuery(this).data('drink_id');
+        }
+        Meteor.call('removeFromWishList', options);
+        jQuery(this).parent().remove();
+        e.preventDefault();
+    }
+
+    unfollow(e) {
+        Meteor.call('unfollow', {user_id: jQuery(this).data('user_id')});
+        jQuery(this).parent().remove();
+        e.preventDefault();
     }
 
     loadRatings() {

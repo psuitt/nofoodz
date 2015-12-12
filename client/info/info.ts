@@ -13,24 +13,22 @@ import {
     Location
 } from 'angular2/router';
 
-import {MyFoods} from "./profile/myfoods";
-import {People} from "./people/people";
+import {About} from "./about/about";
 
 @Component({
-    selector: 'users',
+    selector: 'info',
 })
 
 @View({
     template: '<router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, MyFoods]
+    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES]
 })
 
 @RouteConfig([
-    {path: '/myfoods', component: MyFoods, as: 'MyFoods'},
-    {path: '/people/:username', component: People, as: 'People'}
+    {path: '/about', component: About, as: 'About'}
 ])
 
-export class UsersPage implements CanReuse {
+export class InfoPage implements CanReuse {
 
     location:Location;
 

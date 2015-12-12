@@ -27,9 +27,13 @@ input {
 }
 
 /* BOOTSTRAP OVERRIDE */
-a {
+a,
+a:focus,
+a:hover,
+a:active {
     color: #E91E63;
     background-color: transparent;
+    text-decoration: none;
 }
 
 a:hover {
@@ -230,7 +234,7 @@ div.alertmessage {
 }
 
 #mainContent {
-    min-height: 600px;
+    min-height: 800px;
     height: auto;
     background-repeat: repeat-y;
     background-attachment: fixed;
@@ -639,6 +643,10 @@ div.myfoods a.name {
 
 div.myfoods.rating {
     cursor: default;
+}
+
+.myfoods.remove {
+    font-weight: bold;
 }
 
 /* Report Dialog */
