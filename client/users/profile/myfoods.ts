@@ -218,7 +218,7 @@ export class MyFoods implements OnDestroy {
 
                     title.addClass('lower');
 
-                    title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
+                    title.attr('href', Client.NoFoodz.consts.urls.PEOPLE + username);
                     title.html(username);
 
                     removeLink.data('user_id', following.user_id);
@@ -257,7 +257,7 @@ export class MyFoods implements OnDestroy {
 
                     title.addClass('lower');
 
-                    title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
+                    title.attr('href', Client.NoFoodz.consts.urls.PEOPLE + username);
                     title.html(username);
 
                     div.append(title);
@@ -325,8 +325,8 @@ export class MyFoods implements OnDestroy {
                     });
 
                     _.each(data.items, function (item, index, list) {
-                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
-                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type] + item._id).html(item.name);
+                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
                     });
 
                 } else {
@@ -399,16 +399,16 @@ export class MyFoods implements OnDestroy {
                         len = data.foods.length;
                     for (var f = 0; f < len; f += 1) {
                         var food = data.foods[f];
-                        jQuery('.' + food._id + ' .name a').attr('href', NoFoodz.consts.urls.FOOD + food._id).html(food.name);
-                        jQuery('.' + food._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + food.brand_id).html(food.brand_view);
+                        jQuery('.' + food._id + ' .name a').attr('href', Client.NoFoodz.consts.urls.FOOD + food._id).html(food.name);
+                        jQuery('.' + food._id + ' .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + food.brand_id).html(food.brand_view);
                     }
 
                     if (data.drinks)
                         len = data.drinks.length;
                     for (var f = 0; f < len; f += 1) {
                         var drink = data.drinks[f];
-                        jQuery('.' + drink._id + ' .name a').attr('href', NoFoodz.consts.urls.DRINK + drink._id).html(drink.name);
-                        jQuery('.' + drink._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + drink.brand_id).html(drink.brand_view);
+                        jQuery('.' + drink._id + ' .name a').attr('href', Client.NoFoodz.consts.urls.DRINK + drink._id).html(drink.name);
+                        jQuery('.' + drink._id + ' .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + drink.brand_id).html(drink.brand_view);
                     }
 
                 }

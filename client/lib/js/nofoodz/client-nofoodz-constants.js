@@ -1,6 +1,8 @@
-NoFoodz = typeof NoFoodz === 'undefined' ? {} : NoFoodz;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoodz.consts = function () {
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
+
+Client.NoFoodz.consts = function () {
 
     var _urls = {
         FOOD: '/#/pages/food/',
@@ -23,7 +25,7 @@ NoFoodz.consts = function () {
 
 }();
 
-NoFoodz.consts.flags = {
+Client.NoFoodz.consts.flags = {
     REPORTED: 'R',
     ADMIN_SUPER: 'S'
 };

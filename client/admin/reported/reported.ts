@@ -10,6 +10,7 @@ import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/route
 import {MeteorComponent} from 'angular2-meteor';
 
 declare var jQuery:any;
+declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
 
@@ -97,8 +98,8 @@ export class Reported extends MeteorComponent implements OnInit {
 
                 if (!err && data) {
 
-                    self.createItemsRow(data.foods, NoFoodz.consts.FOOD);
-                    self.createItemsRow(data.drinks, NoFoodz.consts.DRINK);
+                    self.createItemsRow(data.foods, Client.NoFoodz.consts.FOOD);
+                    self.createItemsRow(data.drinks, Client.NoFoodz.consts.DRINK);
 
                     if (count) {
                         jQuery(".myfoods-paging").nofoodspaging({
@@ -134,14 +135,14 @@ export class Reported extends MeteorComponent implements OnInit {
 
             title.addClass('lower');
 
-            link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls[type.toUpperCase()] + item._id)
+            link = jQuery('<a></a>').attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + item._id)
                 .html(item.name);
             removeLink.data('type', type);
             removeLink.data('_id', item._id);
 
             title.append(link);
 
-            var brandLink = jQuery('<a></a>').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id)
+            var brandLink = jQuery('<a></a>').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id)
                 .html(item.brand_view);
 
             brand.append(brandLink);

@@ -96,8 +96,8 @@ export class Explore implements OnInit {
 
                     div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
 
-                    title.find('a').attr('href', NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
-                    brand.find('a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                    title.find('a').attr('href', Client.NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
+                    brand.find('a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
 
                     listItem.append(div);
                     list.append(listItem);

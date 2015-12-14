@@ -168,8 +168,8 @@ export class People implements OnDestroy {
                     });
 
                     _.each(data.items, function (item, index, list) {
-                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
-                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type] + item._id).html(item.name);
+                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
                     });
 
                 } else {

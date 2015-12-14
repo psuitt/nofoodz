@@ -3,7 +3,7 @@
 import {Component, View} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {ROUTER_DIRECTIVES, RouteConfig, Route} from 'angular2/router';
+import {ROUTER_DIRECTIVES, RouteConfig, Route, RouterLink} from 'angular2/router';
 
 import {
     ComponentInstruction,
@@ -20,7 +20,7 @@ declare var jQuery:any;
 
 @View({
     templateUrl: 'client/admin/admin.html',
-    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES,]
+    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, RouterLink]
 })
 
 @RouteConfig([

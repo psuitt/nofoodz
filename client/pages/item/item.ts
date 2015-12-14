@@ -64,9 +64,9 @@ export class Item implements OnDestroy {
             type: this.screenData.type
         };
 
-        if (this.screenData.type === NoFoodz.consts.FOOD) {
+        if (this.screenData.type === Client.NoFoodz.consts.FOOD) {
             this.idField = 'food_id';
-        } else if (this.screenData.type === NoFoodz.consts.DRINK) {
+        } else if (this.screenData.type === Client.NoFoodz.consts.DRINK) {
             this.idField = 'drink_id';
         } else {
             this.idField = 'product_id';
@@ -176,7 +176,7 @@ export class Item implements OnDestroy {
         jQuery('.food-name').html(item.name);
         jQuery('.brand').html(Client.NoFoodz.widgetlib.createBrandLink(item.brand_id, item.brand_view));
 
-        if (item.flags && item.flags.indexOf(NoFoodz.consts.flags.REPORTED) !== -1)
+        if (item.flags && item.flags.indexOf(Client.NoFoodz.consts.flags.REPORTED) !== -1)
             jQuery('.button.report').addClass('reported')
                 .html('Reported')
                 .attr('title', 'This item has been reported.');
@@ -387,7 +387,7 @@ export class Item implements OnDestroy {
                     var a = jQuery('<a></a>');
                     var username = rater.username_view ? rater.username_view : "Unknown";
 
-                    a.attr('href', NoFoodz.consts.urls.PEOPLE + username.toLowerCase());
+                    a.attr('href', Client.NoFoodz.consts.urls.PEOPLE + username.toLowerCase());
 
                     a.text(username);
 
