@@ -70,6 +70,10 @@ li.footer-header {
     background-repeat: no-repeat;
 }
 
+#footer div.footer-section a:hover {
+    border: 2px solid #FFFFFF;
+}
+
 a.facebook {
     background-image: url('/facebook-48x48.png');
 }

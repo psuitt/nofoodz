@@ -13,15 +13,24 @@ Client.NoFoodz.consts = function () {
         ADD: '/#/pages/add/'
     };
 
+    var _types = {
+        FOOD: 'food',
+        DRINK: 'drink',
+        PRODUCT: 'product',
+        BRAND: 'brand',
+        PEOPLE: 'people'
+    };
+
     return {
 
         urls: _urls,
+        types: _types,
         PAGE_LIMIT: 2,
         FOOD: 'food',
         DRINK: 'drink',
         PRODUCT: 'product'
 
-    }
+    };
 
 }();
 

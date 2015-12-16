@@ -5,9 +5,14 @@
 
 import {Component, View, OnDestroy} from 'angular2/core';
 
+import {NgFor} from 'angular2/common';
+
 import {RouterLink, Router, RouterOutlet} from 'angular2/router';
 
+declare var NoFoodz:any;
+declare var Client:any;
 declare var jQuery:any;
+declare var _:any;
 
 @Component({
     selector: 'home'
@@ -15,12 +20,22 @@ declare var jQuery:any;
 
 @View({
     templateUrl: 'client/home/home.html',
-    directives: [RouterLink, RouterOutlet]
+    directives: [NgFor, RouterLink, RouterOutlet]
 })
 
 export class Home implements OnDestroy {
 
+    types:Array<String>;
+
     constructor(private router:Router) {
+
+        var types = [];
+
+        _.each(Client.NoFoodz.consts.types, function (value, key) {
+            types.push(NoFoodz.format.camelCase(value));
+        });
+
+        this.types = types;
 
         jQuery('#login .logo').hide();
         jQuery('#login .searchbar').hide();

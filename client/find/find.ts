@@ -36,8 +36,12 @@ export class Find {
 
     search(type, search) {
 
-        if (!type || !search)
+        if (!type || !search) {
+            jQuery('div.loading').addClass('hide');
+            jQuery('#findResultsCount').html('No results found');
+            jQuery('#menu .nofoodssearch input').val('');
             return;
+        }
 
         jQuery('#menu span.nofoodssearch.text').text(type.substring(0, 1).toUpperCase() + type.substring(1));
         jQuery('#menu .nofoodssearch input').val(search);

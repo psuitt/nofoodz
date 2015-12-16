@@ -15,6 +15,7 @@ import {
 } from 'angular2/router';
 
 import {About} from "./about/about";
+import {ChangeLog} from "./changelog/changelog";
 
 @Component({
     selector: 'info',
@@ -26,7 +27,8 @@ import {About} from "./about/about";
 })
 
 @RouteConfig([
-    {path: '/about', component: About, as: 'About'}
+    {path: '/about', component: About, as: 'About'},
+    {path: '/changelog', component: ChangeLog, as: 'ChangeLog'}
 ])
 
 export class InfoPage implements CanReuse {

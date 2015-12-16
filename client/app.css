@@ -119,7 +119,9 @@ div.searchbar button.go {
     border-color: #424242;
 }
 
-div.searchbar button:hover {
+div.searchbar button.btn.btn-default:active,
+div.searchbar button.btn.btn-default:hover,
+div.searchbar button.btn.btn-default:focus {
     color: white;
     background: #424242;
 }

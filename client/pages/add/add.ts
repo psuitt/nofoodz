@@ -19,7 +19,7 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/pages/add/add.html',
-    directives: [RouterLink, ROUTER_DIRECTIVES]
+    directives: [Add, RouterLink, ROUTER_DIRECTIVES]
 })
 
 export class Add implements OnDestroy {
@@ -40,19 +40,13 @@ export class Add implements OnDestroy {
 
     ngOnDestroy() {
 
-        jQuery(document).off('click', '#save');
-
-        jQuery(document).off('click', '#foodsadd_typeselect .btn');
-
-        jQuery(document).off('click', '#foodsadd_numberselect .btn');
-
-        jQuery(document).off('click', '#foodsadd_add_brand');
-
         jQuery(document).off('click', '.foodsadd-group .foodsadd-add-item');
 
         jQuery(document).off('click', '.foodsadd-brand-remove');
 
         jQuery(document).off('click', '.foodsadd-remove');
+
+        this.nofoodsRating.remove();
 
     }
 
@@ -107,38 +101,6 @@ export class Add implements OnDestroy {
 
         var self = this;
 
-        jQuery(document).on('click', '#save', function (event) {
-
-            var data = self.getData();
-
-            Meteor.call('createItems', data, function (error, result) {
-                var response = _.extend({}, result);
-                response.error = error;
-                self.saveFinished(response, data[0].type);
-            });
-
-        });
-
-        jQuery(document).on('click', '#foodsadd_typeselect .btn', function (event) {
-            var selected = jQuery('#foodsadd_typeselect .btn.selected');
-            selected.removeClass('selected');
-            jQuery(event.currentTarget).addClass('selected');
-        });
-
-        jQuery(document).on('click', '#foodsadd_numberselect .btn', function (event) {
-            var selected = jQuery('#foodsadd_numberselect .btn.selected');
-            selected.removeClass('selected');
-            jQuery(event.currentTarget).addClass('selected');
-            jQuery('.subcontent').addClass(event.currentTarget.value.toLocaleLowerCase()).removeClass(selected[0].value.toLowerCase());
-        });
-
-        jQuery(document).on('click', '#foodsadd_add_brand', function (event) {
-
-            var target = jQuery(event.currentTarget);
-            target.before(self.createBrandDiv());
-
-        });
-
         jQuery(document).on('click', '.foodsadd-group .foodsadd-add-item', function (event) {
             var target = jQuery(event.currentTarget);
             var parent = target.closest('.foodsadd-group');
@@ -179,12 +141,50 @@ export class Add implements OnDestroy {
 
     }
 
+    numberSelect(event, type) {
+        var selected = jQuery('#foodsadd_numberselect .btn.selected');
+        selected.removeClass('selected');
+        jQuery(event.target).addClass('selected');
+        jQuery('.subcontent').removeClass(selected[0].value.toLowerCase()).addClass(type);
+    }
+
+    typeSelect(event) {
+        var selected = jQuery('#foodsadd_typeselect .btn.selected');
+        selected.removeClass('selected');
+        jQuery(event.target).addClass('selected');
+    }
+
+    createBrandButton(event) {
+
+        var target = jQuery(event.target);
+        target.before(this.createBrandDiv());
+
+    }
+
+    save(event) {
+
+        var self = this;
+        var data = this.getData();
+
+        if (data.length < 1) {
+            NoFoodz.alert.msg('danger', 'Invalid data');
+            return;
+        }
+
+        Meteor.call('createItems', data, function (error, result) {
+            var response = _.extend({}, result);
+            response.error = error;
+            self.saveFinished(response, data[0].type);
+        });
+
+    }
+
     saveFinished(response, type) {
 
         if (response.error) {
             NoFoodz.alert.msg('danger', response.error.reason);
         } else if (response._id) {
-            this.router.navigate(['/Item', {_id: response._id, type: type.toLowerCase()}]);
+            this.router.navigate(['/Pages/Item', {_id: response._id, type: type}]);
         } else {
             NoFoodz.alert.msg('success', 'Successfully added');
             jQuery('.foodsadd-brand-remove').click();
@@ -201,10 +201,14 @@ export class Add implements OnDestroy {
         switch (selectionType) {
             case 's':
 
-                var name = jQuery('#foodsadd_name').value,
-                    brand = jQuery('#foodsadd_brand').value,
+                var name = jQuery('#foodsadd_name').val(),
+                    brand = jQuery('#foodsadd_brand').val(),
                     brandId = jQuery('#foodsadd_brand').data('brand_id'),
                     rating = this.nofoodsRating.getValue();
+
+                if (!name || !brand) {
+                    return [];
+                }
 
                 data.push({
                     brand: brand,
@@ -235,6 +239,10 @@ export class Add implements OnDestroy {
                         var productDiv = jQuery(this),
                             name = productDiv.find('.foodsadd-name-input').val(),
                             tags = productDiv.find('.foodsadd-name-tags').tagsinput('items');
+
+                        if (!item['brand'] || !name) {
+                            return [];
+                        }
 
                         item['items'].push({
                             name: name,

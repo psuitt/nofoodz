@@ -10,10 +10,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a>Product</a></li>
-                    <li><a>Food</a></li>
-                    <li><a>Brand</a></li>
-                    <li><a>People</a></li>
+                    <li *ngFor="#type of types"><a>{{type}}</a></li>
                 </ul>
             </div>
             <input name="home-search" id="home-search" type="text" placeholder="Start searching for things"
