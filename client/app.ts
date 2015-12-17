@@ -101,8 +101,6 @@ class MainLayout implements CanReuse {
 
         jQuery('.searchbar input').nofoodssearch({router: router});
 
-        jQuery('#menu [data-toggle=\'dropdown\']').dropdown();
-
         jQuery('#logout_button').on('click', function () {
             Meteor.logout(function (err) {
                 // TODO - Do something if there is an error.

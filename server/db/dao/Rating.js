@@ -7,6 +7,8 @@ Rating = function (rating, userId, type) {
     this.user_id = userId;
     this._id = Random.id();
     this.item_id = false;
+    this.itemname_view = '';
+    this.itembrand_view = '';
     this.username_view = '';
     this.type = type;
     this.random = Math.random();
@@ -55,6 +57,8 @@ Rating.prototype.insert = function () {
         _id: this._id,
         user_id: this.user_id,
         item_id: this.item_id,
+        itemname_view: this.itemname_view,
+        itembrand_view: this.itembrand_view,
         username_view: this.username_view,
         rating: this.rating,
         random: this.random,

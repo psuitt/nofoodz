@@ -82,7 +82,7 @@ div.searchbar span {
     vertical-align: middle;
 }
 
-div.searchbar div.btn-group > a {
+div.nofoodssearch.btn-group > a {
     height: 30px;
     border-color: #424242;
     -webkit-border-radius: 0;
@@ -91,7 +91,7 @@ div.searchbar div.btn-group > a {
     padding: 2px 12px;
 }
 
-div.searchbar input {
+input.nofoodssearch {
     vertical-align: middle;
     margin-bottom: 0;
     border-right: 0;
@@ -104,7 +104,7 @@ div.searchbar input {
     height: 30px;
 }
 
-div.searchbar button {
+button.nofoodssearch.go {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
@@ -113,15 +113,15 @@ div.searchbar button {
     background: white;
 }
 
-div.searchbar button.go {
+button.nofoodssearch.go {
     top: 0;
     color: #424242;
     border-color: #424242;
 }
 
-div.searchbar button.btn.btn-default:active,
-div.searchbar button.btn.btn-default:hover,
-div.searchbar button.btn.btn-default:focus {
+button.nofoodssearch.btn.btn-default:active,
+button.nofoodssearch.btn.btn-default:hover,
+button.nofoodssearch.btn.btn-default:focus {
     color: white;
     background: #424242;
 }
