@@ -18,13 +18,19 @@ db.getCollection('brands').ensureIndex({'name' : 'text'});
 
 db.getCollection('foods').ensureIndex({'name' : 'text'});
 
-db.getCollection('food_ratings').ensureIndex({'random' : 1, , 'itemname_view' : 'text', 'itembrand_view' : 'text'});
+db.getCollection('food_ratings').ensureIndex({'random' : 1});
+
+db.getCollection('food_ratings').ensureIndex({'itemname_view' : 'text', 'itembrand_view' : 'text'});
 
 db.getCollection('drinks').ensureIndex({'name' : 'text'});
 
-db.getCollection('drink_ratings').ensureIndex({'random' : 1, , 'itemname_view' : 'text', 'itembrand_view' : 'text'});
+db.getCollection('drink_ratings').ensureIndex({'random' : 1});
+
+db.getCollection('drink_ratings').ensureIndex({'itemname_view' : 'text', 'itembrand_view' : 'text'});
 
 db.getCollection('products').ensureIndex({'name' : 'text'});
 
-db.getCollection('product_ratings').ensureIndex({'random' : 1, 'itemname_view' : 'text', 'itembrand_view' : 'text'});
+db.getCollection('product_ratings').ensureIndex({'random' : 1});
+
+db.getCollection('product_ratings').ensureIndex({'itemname_view' : 'text', 'itembrand_view' : 'text'});
 
