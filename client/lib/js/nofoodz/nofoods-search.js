@@ -92,7 +92,7 @@
         };
 
         this.getSearch = function () {
-            return self.text();
+            return self.val();
         };
 
         this.go = function () {

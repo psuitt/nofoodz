@@ -317,30 +317,19 @@ export class MyFoods implements OnDestroy {
 
         Meteor.call('getUserRatings', obj, function (err, data) {
 
-            if (!err && data.items) {
+            var itemDiv = jQuery('#myfoods_ratingsitem');
 
-                var itemDiv = jQuery('#myfoods_ratingsitem');
+            itemDiv.html('');
 
-                itemDiv.html('');
+            if (!err && data.ratings && data.ratings.length !== 0) {
 
-                var len = data.items.length;
-
-                if (len !== 0) {
-
-                    _.each(data.ratings, function (rating, index, list) {
-                        var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
-                        div.attr(t, rating.item_id);
-                        itemDiv.append(div);
-                    });
-
-                    _.each(data.items, function (item, index, list) {
-                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type] + item._id).html(item.name);
-                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-                    });
-
-                } else {
-                    itemDiv.append('No ratings found');
-                }
+                _.each(data.ratings, function (rating, index, list) {
+                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
+                    div.attr(t, rating.item_id);
+                    itemDiv.append(div);
+                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + rating.item_id).html(rating.name_view);
+                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + rating.brand_id).html(rating.brand_view);
+                });
 
                 if (count) {
                     jQuery('#myfoods_item .myfoods-paging').nofoodspaging({
@@ -349,6 +338,8 @@ export class MyFoods implements OnDestroy {
                     });
                 }
 
+            } else {
+                itemDiv.append('No ratings found');
             }
 
         });

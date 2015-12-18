@@ -51,8 +51,9 @@ Meteor.methods({
                 if (item.rating) {
                     var ratingDao = new Rating(item.rating, userId, brand.type);
                     ratingDao.item_id = dao._id;
-                    ratingDao.itemname_view = item.name;
-                    ratingDao.itembrand_view = brand.brand;
+                    ratingDao.brand_id = brand._id;
+                    ratingDao.name_view = item.name;
+                    ratingDao.brand_view = brand.brand;
                     ratingDao.insert();
                 }
 

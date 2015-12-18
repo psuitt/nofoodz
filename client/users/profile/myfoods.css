@@ -113,52 +113,6 @@ span.brand.myfoods {
     font-size: 14px;
 }
 
-div.achievement {
-    display: inline-block;
-    width: 290px;
-    text-align: left;
-    padding: 4px;
-    background: rgb(240, 248, 255);
-    border: 2px solid #795548;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    /*-webkit-border-radius: 5px 5px 5px 5px;
-    -moz-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;*/
-    -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.75);
-    box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.75);
-}
-
-div.achievement img {
-    vertical-align: top;
-    display: inline-block;
-    height: 80px;
-    width: 80px;
-}
-
-div.achievement div.info {
-    display: inline-block;
-    width: 200px;
-    margin-left: 5px;
-}
-
-div.achievement div.title {
-    font-weight: 700;
-}
-
-div.achievement div.date,
-div.achievement div.progress {
-    color: green;
-    margin-bottom: 4px;
-}
-
-div.achievement div.description {
-    color: #222222;
-}
-
-span.achievementPoints {
-    display: inline-block;
-    color: #DAA520;
-    margin-left: 10px;
+#myfoods_ratingsitem {
+    margin-top: 20px;
 }

@@ -35,6 +35,14 @@ Meteor.methods({
 
         }
 
+        // Find the item
+        var func = NoFoodz.db.typeToDao(options.type),
+            itemDao = new func();
+
+        itemDao._id = options._id;
+
+        var item = itemDao.find();
+
         var ratingDiff = options.rating,
             countDiff = options.rating > 0 ? 1 : 0;
 
@@ -44,6 +52,9 @@ Meteor.methods({
         rating.item_id = options._id;
         // Set the rating for updating
         rating.rating = options.rating;
+        rating.brand_id = item.brand_id;
+        rating.name_view = item.name;
+        rating.brand_view = item.brand_view;
         rating.username_view = user.profile.name;
 
         // Update the rating
@@ -76,13 +87,7 @@ Meteor.methods({
         }
 
         //Recalculate Rating total
-        var func = NoFoodz.db.typeToDao(options.type),
-            itemDao = new func();
-
-        itemDao._id = options._id;
-
-        var item = itemDao.find(),
-            total = item.ratingtotal_calc ? item.ratingtotal_calc : 0,
+        var total = item.ratingtotal_calc ? item.ratingtotal_calc : 0,
             count = item.ratingcount_calc + countDiff;
 
         if (count > 0) {
