@@ -1,6 +1,6 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
 
 import {RouterLink, RouteParams} from 'angular2/router';
 
@@ -8,7 +8,7 @@ import {bootstrap} from 'angular2-meteor';
 
 declare var jQuery:any;
 declare var _:any;
-declare var NoFoodz:any;
+declare var Client:any;
 
 @Component({
     selector: 'find'
@@ -36,8 +36,12 @@ export class Find {
 
     search(type, search) {
 
-        if (!type || !search)
+        if (!type || !search) {
+            jQuery('div.loading').addClass('hide');
+            jQuery('#findResultsCount').html('No results found');
+            jQuery('#menu .nofoodssearch input').val('');
             return;
+        }
 
         jQuery('#menu span.nofoodssearch.text').text(type.substring(0, 1).toUpperCase() + type.substring(1));
         jQuery('#menu .nofoodssearch input').val(search);
@@ -99,7 +103,7 @@ export class Find {
 
                     } else {
 
-                        self.createGetPage().call({url: NoFoodz.consts.urls[type.toUpperCase()]}, 1);
+                        self.createGetPage().call({url: Client.NoFoodz.consts.urls[type.toUpperCase()]}, 1);
 
                         if (self.paging)
                             self.paging.remove();
@@ -108,7 +112,7 @@ export class Find {
                         self.paging = jQuery('#findContent .search-paging').nofoodspaging({
                             max: self.results.length / self.MAX_RESULTS,
                             select: self.createGetPage(),
-                            data: {url: NoFoodz.consts.urls[type.toUpperCase()]}
+                            data: {url: Client.NoFoodz.consts.urls[type.toUpperCase()]}
                         });
 
                     }
@@ -167,10 +171,10 @@ export class Find {
         aName.attr('href', link + item._id);
         aName.html(item.name);
 
-        aBrand.attr('href', NoFoodz.consts.urls.BRAND + item.brand_id);
+        aBrand.attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id);
         aBrand.html(item.brand_view);
 
-        rating.attr('title', ratingValue)
+        rating.attr('title', ratingValue);
         var i = (Math.round((ratingValue * 2)) * 10).toString();
 
         rating.addClass('rating');
@@ -231,7 +235,7 @@ export class Find {
                         self.paging = jQuery('#findContent .search-paging').nofoodspaging({
                             max: self.results.length / self.MAX_RESULTS,
                             select: self.createGetBrandPage(),
-                            data: {url: NoFoodz.consts.urls[type.toUpperCase()]}
+                            data: {url: Client.NoFoodz.consts.urls[type.toUpperCase()]}
                         });
 
                     }
@@ -280,7 +284,7 @@ export class Find {
         div.addClass('item');
         brand.addClass('itemBrand');
 
-        aBrand.attr('href', NoFoodz.consts.urls.BRAND + item._id);
+        aBrand.attr('href', Client.NoFoodz.consts.urls.BRAND + item._id);
         aBrand.text(item.name);
 
         brand.append(aBrand);
@@ -298,7 +302,6 @@ export class Find {
         var htmlBuilder = [];
 
         jQuery('#findContent').html('');
-        jQuery('#findResults').html('');
 
         var obj = {
             'username': search
@@ -331,13 +334,13 @@ export class Find {
                         //icon.addClass('itemIcon');
                         name.addClass('itemName');
 
-                        aName.attr('href', NoFoodz.consts.urls.PEOPLE + value.username);
+                        aName.attr('href', Client.NoFoodz.consts.urls.PEOPLE + value.username);
                         aName.html(value.username);
 
                         name.append(aName);
                         //div.append(icon);
                         div.append(name);
-                        jQuery('#findResults').append(div);
+                        jQuery('#findContent').append(div);
 
                     });
 

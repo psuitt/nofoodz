@@ -6,8 +6,10 @@
     $.fn.nofoodssearch = function (o) {
 
         var options = {
-            values: ['Food', 'Drink', 'Brand', 'Product', 'People'],
+            values: ['Food', 'Drink', 'Product', 'Brand', 'People'],
             defaultValue: 'Food',
+            searchPlaceholder: 'Search',
+            select: false,
             router: ''
         };
 
@@ -50,8 +52,8 @@
 
         }
 
-        self.attr('placeholder', 'Search');
-        self.addClass('form-control inline')
+        self.attr('placeholder', options.searchPlaceholder);
+        self.addClass('form-control inline nofoodssearch');
 
         self.keyup(function (event) {
 
@@ -67,6 +69,14 @@
 
         });
 
+        var go = options.select ? options.select : function () {
+            var val = self.val().trim(),
+                type = _searchTypeMainDisplayText.html().toLowerCase();
+            if (val.length > 0) {
+                options.router.navigate(['/Find', {type: type, search: val}]);
+            }
+        };
+
         _goButton.on('click', function () {
             go();
         });
@@ -75,12 +85,18 @@
             _searchTypeMainDisplayText.html(e.target.innerHTML)
         });
 
-        var go = function () {
-            var val = self.val().trim(),
-                type = _searchTypeMainDisplayText.html().toLowerCase();
-            if (val.length > 0) {
-                options.router.navigate(['/Find', {type: type, search: val}]);
-            }
+        _searchTypeMainDisplay.dropdown();
+
+        this.getType = function () {
+            return _searchTypeMainDisplayText.text();
+        };
+
+        this.getSearch = function () {
+            return self.val();
+        };
+
+        this.go = function () {
+            go();
         };
 
         return this;

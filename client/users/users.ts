@@ -3,7 +3,8 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route} from 'angular2/router';
 
@@ -43,7 +44,7 @@ export class UsersPage implements CanReuse {
         return this.location.path().indexOf(path) > -1;
     }
 
-    canReuse(next:ComponentInstruction, prev:ComponentInstruction) {
+    routerCanReuse(next:ComponentInstruction, prev:ComponentInstruction) {
         return false;
     }
 }

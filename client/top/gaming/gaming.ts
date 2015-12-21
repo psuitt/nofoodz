@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -18,7 +18,7 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/top/gaming/gaming.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
 export class Gaming {
@@ -63,7 +63,7 @@ export class Gaming {
                     var title = jQuery('<span class=\'name item-color myfoods\'><a></a></span>');
 
                     var brand = jQuery('<span class=\'brand brand-color myfoods\'><a></a></span>');
-                    brand.find('a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                    brand.find('a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
 
                     title.addClass('lower');
 
@@ -74,7 +74,7 @@ export class Gaming {
 
                     div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
 
-                    title.find('a').attr('href', NoFoodz.consts.urls[typeUpper] + item._id).html(item.name);
+                    title.find('a').attr('href', Client.NoFoodz.consts.urls[typeUpper] + item._id).html(item.name);
 
 
                     listItem.append(div);

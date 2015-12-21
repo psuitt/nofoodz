@@ -1,5 +1,5 @@
 #homeDiv {
-	padding-top: 125px;
+	padding-top: 200px;
 	padding-bottom: 20px;
 	width: 100%;
 	text-align: center;
@@ -47,8 +47,53 @@
 	margin: auto;
 }
 
+#search-btn-group div.input-group-btn > button {
+	height: 30px;
+	border-color: #424242;
+	border-right: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	padding: 2px 12px;
+}
+
+#search-btn-group div.input-group-btn > button > span.home-searchval {
+	text-align: left;
+}
+
+#search-btn-group input {
+	vertical-align: middle;
+	margin-bottom: 0;
+	border-color: #424242;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	height: 30px;
+}
+
+#search-btn-group button {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	padding: 4px 8px;
+	color: #424242;
+	background: white;
+}
+
 #home-searchgo {
-	margin-top: -1px;
+	top: 0;
+	color: #424242;
+	border-color: #424242;
+}
+
+#search-btn-group div.input-group-btn > button:active,
+#search-btn-group div.input-group-btn > button:hover,
+#search-btn-group div.input-group-btn > button:focus,
+#home-searchgo:active,
+#home-searchgo:hover,
+#home-searchgo:focus {
+	color: white;
+	background: #424242;
 }
 
 #searchResults {

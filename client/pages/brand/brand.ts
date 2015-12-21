@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -18,10 +18,10 @@ declare var _:any;
 
 @View({
     templateUrl: 'client/pages/brand/brand.html',
-    directives: [NgFor, RouterLink, ROUTER_DIRECTIVES]
+    directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Brand {
+export class Brand implements OnDestroy {
 
     screenData:any;
 
@@ -36,7 +36,7 @@ export class Brand {
 
     }
 
-    onDestroy() {
+    ngOnDestroy() {
 
         jQuery(document).off('click', '#brands-nav a');
 
@@ -85,14 +85,14 @@ export class Brand {
 
                 jQuery('.brand-name').html(brand.name);
 
-                if (brand.flags && brand.flags.indexOf(NoFoodz.consts.flags.REPORTED) !== -1)
+                if (brand.flags && brand.flags.indexOf(Client.NoFoodz.consts.flags.REPORTED) !== -1)
                     jQuery('.button.report').addClass('reported')
                         .html('Reported')
                         .attr('title', 'This item has been reported.');
 
-                self.loadItems(data.foods, NoFoodz.consts.FOOD);
-                self.loadItems(data.drinks, NoFoodz.consts.DRINK);
-                self.loadItems(data.products, NoFoodz.consts.PRODUCT);
+                self.loadItems(data.foods, Client.NoFoodz.consts.FOOD);
+                self.loadItems(data.drinks, Client.NoFoodz.consts.DRINK);
+                self.loadItems(data.products, Client.NoFoodz.consts.PRODUCT);
 
 
             }
@@ -119,7 +119,7 @@ export class Brand {
                     link = jQuery('<a></a>');
 
                 link.addClass('item-color');
-                link.attr('href', NoFoodz.consts.urls[type.toUpperCase()] + item._id).html(item.name);
+                link.attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + item._id).html(item.name);
 
                 div.append(link);
 

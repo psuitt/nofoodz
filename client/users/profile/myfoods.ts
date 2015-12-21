@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -21,33 +21,36 @@ declare var _:any;
     directives: [MyFoods, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class MyFoods {
+export class MyFoods implements OnDestroy {
 
+    itemSearch:any;
+
+    itemFirstLoad:boolean;
     followersFirstLoad:boolean;
     followingFirstLoad:boolean;
 
     PROFILE:number;
+    ITEM:number;
     FOLLOWING:number;
     FOLLOWERS:number;
 
     constructor(private router:Router) {
 
+        this.itemFirstLoad = true;
         this.followersFirstLoad = true;
         this.followingFirstLoad = true;
 
         this.PROFILE = 1;
-        this.FOLLOWING = 7;
-        this.FOLLOWERS = 8;
+        this.ITEM = 3;
+        this.FOLLOWING = 5;
+        this.FOLLOWERS = 6;
 
         this.setup(router);
         this.loadListeners();
 
     }
 
-    onActivate() {
-    }
-
-    onDestroy() {
+    ngOnDestroy() {
 
         jQuery(document).off('click', '#myfoods_edit');
         jQuery(document).off('click', '#myfoods_save');
@@ -95,6 +98,14 @@ export class MyFoods {
             }
 
         });
+
+        if (!jQuery('#myfoods_item input').hasClass('nofoodssearch')) {
+            this.itemSearch = jQuery('#myfoods_item input').nofoodssearch({
+                values: ['Food', 'Drink', 'Product'],
+                searchPlaceholder: 'Search your items',
+                select: this.getPageFunction()
+            });
+        }
 
     }
 
@@ -148,6 +159,12 @@ export class MyFoods {
         var index = jQuery(e.target).parent().index();
 
         switch (index) {
+            case this.ITEM:
+                if (this.itemFirstLoad) {
+                    this.itemSearch.go();
+                    this.itemFirstLoad = false;
+                }
+                break;
             case this.FOLLOWING:
                 if (this.followingFirstLoad) {
                     this.loadFollowing();
@@ -195,9 +212,6 @@ export class MyFoods {
 
         wDiv.html('');
 
-        this.getFoodsPage(false, 1, true);
-        this.getDrinksPage(false, 1, true);
-        this.getProductsPage(false, 1, true);
         this.getWishlistPage(false, 1, true);
 
     }
@@ -221,7 +235,7 @@ export class MyFoods {
 
                     title.addClass('lower');
 
-                    title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
+                    title.attr('href', Client.NoFoodz.consts.urls.PEOPLE + username);
                     title.html(username);
 
                     removeLink.data('user_id', following.user_id);
@@ -260,7 +274,7 @@ export class MyFoods {
 
                     title.addClass('lower');
 
-                    title.attr('href', NoFoodz.consts.urls.PEOPLE + username);
+                    title.attr('href', Client.NoFoodz.consts.urls.PEOPLE + username);
                     title.html(username);
 
                     div.append(title);
@@ -278,28 +292,20 @@ export class MyFoods {
 
     }
 
-    getFoodsPage(pagingObj, page, count) {
+    getPageFunction() {
 
-        this.getGenericPage(this.getProductsPage, pagingObj, page, count, 'FOOD', false);
+        var self = this;
 
-    }
-
-    getDrinksPage(pagingObj, page, count) {
-
-        this.getGenericPage(this.getProductsPage, pagingObj, page, count, 'DRINK', false);
-
-    }
-
-    getProductsPage(pagingObj, page, count) {
-
-        this.getGenericPage(this.getProductsPage, pagingObj, page, count, 'PRODUCT', false);
+        return function (pagingObj, page, count) {
+            self.getGenericPage(self.getGenericPage, pagingObj, page, count, self.itemSearch.getType(), self.itemSearch.getSearch());
+        };
 
     }
 
     getGenericPage(func, pagingObj, page, count, type, search) {
 
         var obj = {
-                'page': page,
+                'page': page ? page : 1,
                 'type': type
             },
             t = type.toLowerCase();
@@ -311,38 +317,29 @@ export class MyFoods {
 
         Meteor.call('getUserRatings', obj, function (err, data) {
 
-            if (!err && data.items) {
+            var itemDiv = jQuery('#myfoods_ratingsitem');
 
-                var itemDiv = jQuery('#myfoods_ratings' + t);
+            itemDiv.html('');
 
-                itemDiv.html('');
+            if (!err && data.ratings && data.ratings.length !== 0) {
 
-                var len = data.items.length;
-
-                if (len !== 0) {
-
-                    _.each(data.ratings, function (rating, index, list) {
-                        var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
-                        div.attr(t, rating.item_id);
-                        itemDiv.append(div);
-                    });
-
-                    _.each(data.items, function (item, index, list) {
-                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', NoFoodz.consts.urls[type] + item._id).html(item.name);
-                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-                    });
-
-                } else {
-                    itemDiv.append('No ratings found');
-                }
+                _.each(data.ratings, function (rating, index, list) {
+                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
+                    div.attr(t, rating.item_id);
+                    itemDiv.append(div);
+                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + rating.item_id).html(rating.name_view);
+                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + rating.brand_id).html(rating.brand_view);
+                });
 
                 if (count) {
-                    jQuery('#myfoods_' + t + ' .myfoods-paging').nofoodspaging({
+                    jQuery('#myfoods_item .myfoods-paging').nofoodspaging({
                         max: data.count / data.maxPageSize,
                         select: func
                     });
                 }
 
+            } else {
+                itemDiv.append('No ratings found');
             }
 
         });
@@ -402,16 +399,16 @@ export class MyFoods {
                         len = data.foods.length;
                     for (var f = 0; f < len; f += 1) {
                         var food = data.foods[f];
-                        jQuery('.' + food._id + ' .name a').attr('href', NoFoodz.consts.urls.FOOD + food._id).html(food.name);
-                        jQuery('.' + food._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + food.brand_id).html(food.brand_view);
+                        jQuery('.' + food._id + ' .name a').attr('href', Client.NoFoodz.consts.urls.FOOD + food._id).html(food.name);
+                        jQuery('.' + food._id + ' .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + food.brand_id).html(food.brand_view);
                     }
 
                     if (data.drinks)
                         len = data.drinks.length;
                     for (var f = 0; f < len; f += 1) {
                         var drink = data.drinks[f];
-                        jQuery('.' + drink._id + ' .name a').attr('href', NoFoodz.consts.urls.DRINK + drink._id).html(drink.name);
-                        jQuery('.' + drink._id + ' .brand a').attr('href', NoFoodz.consts.urls.BRAND + drink.brand_id).html(drink.brand_view);
+                        jQuery('.' + drink._id + ' .name a').attr('href', Client.NoFoodz.consts.urls.DRINK + drink._id).html(drink.name);
+                        jQuery('.' + drink._id + ' .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + drink.brand_id).html(drink.brand_view);
                     }
 
                 }

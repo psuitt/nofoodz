@@ -3,11 +3,11 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
-declare var NoFoodz:any;
+declare var Client:any;
 declare var jQuery:any;
 
 @Component({
@@ -19,7 +19,11 @@ declare var jQuery:any;
     directives: [Wsie, RouterLink]
 })
 
-export class Wsie {
+export class Wsie implements OnDestroy {
+
+    ngOnDestroy() {
+        jQuery('#wsie_random').off();
+    }
 
     doRandom() {
 
@@ -27,7 +31,7 @@ export class Wsie {
 
         jQuery('#wsie_random').off('click').removeClass('glyphicon glyphicon-gift').addClass('loading');
 
-        Meteor.call('getRandom', {type: NoFoodz.consts.FOOD}, function (err, response) {
+        Meteor.call('getRandom', {type: Client.NoFoodz.consts.FOOD}, function (err, response) {
 
             if (!err) {
                 if (response.rating) {

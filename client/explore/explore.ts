@@ -3,7 +3,7 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View, OnInit} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
@@ -21,7 +21,7 @@ declare var NoFoodz:any;
     directives: [Explore, RouterLink]
 })
 
-export class Explore {
+export class Explore implements OnInit {
 
     constructor() {
 
@@ -52,7 +52,7 @@ export class Explore {
 
     }
 
-    onActivate() {
+    ngOnInit() {
         jQuery('.explore-options button').eq(0).click();
     }
 
@@ -96,8 +96,8 @@ export class Explore {
 
                     div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
 
-                    title.find('a').attr('href', NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
-                    brand.find('a').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
+                    title.find('a').attr('href', Client.NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
+                    brand.find('a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
 
                     listItem.append(div);
                     list.append(listItem);

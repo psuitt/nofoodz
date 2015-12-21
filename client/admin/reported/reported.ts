@@ -3,13 +3,14 @@
  */
 /// <reference path="../../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, Directive, HostListener} from 'angular2/angular2';
+import {Component, View, Directive, HostListener, OnInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {MeteorComponent} from 'angular2-meteor';
 
 declare var jQuery:any;
+declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
 
@@ -61,7 +62,7 @@ class RemoveDirective {
     directives: [RemoveDirective, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Reported extends MeteorComponent {
+export class Reported extends MeteorComponent implements OnInit {
 
     screenData:any;
     reportedItems:any;
@@ -70,7 +71,7 @@ export class Reported extends MeteorComponent {
         super();
     }
 
-    onActivate() {
+    ngOnInit() {
 
         this.createGetReportedPage()(1, false);
 
@@ -97,8 +98,8 @@ export class Reported extends MeteorComponent {
 
                 if (!err && data) {
 
-                    self.createItemsRow(data.foods, NoFoodz.consts.FOOD);
-                    self.createItemsRow(data.drinks, NoFoodz.consts.DRINK);
+                    self.createItemsRow(data.foods, Client.NoFoodz.consts.FOOD);
+                    self.createItemsRow(data.drinks, Client.NoFoodz.consts.DRINK);
 
                     if (count) {
                         jQuery(".myfoods-paging").nofoodspaging({
@@ -134,14 +135,14 @@ export class Reported extends MeteorComponent {
 
             title.addClass('lower');
 
-            link = jQuery('<a></a>').attr('href', NoFoodz.consts.urls[type.toUpperCase()] + item._id)
+            link = jQuery('<a></a>').attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + item._id)
                 .html(item.name);
             removeLink.data('type', type);
             removeLink.data('_id', item._id);
 
             title.append(link);
 
-            var brandLink = jQuery('<a></a>').attr('href', NoFoodz.consts.urls.BRAND + item.brand_id)
+            var brandLink = jQuery('<a></a>').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id)
                 .html(item.brand_view);
 
             brand.append(brandLink);

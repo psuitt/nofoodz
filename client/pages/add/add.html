@@ -4,20 +4,22 @@
     <div class="subcontent s">
         <div id="foodsadd_numberselect" class="input-spacing hide">
             <button type="button" id="foodsadd_single" class="btn btn-default blue-button invert selected"
-                    value="s">Single
+                    value="s" (click)="numberSelect($event, 's')">Single
             </button>
             <button type="button" id="foodsadd_multiple" class="btn btn-default blue-button invert"
-                    value="m">Multiple
+                    value="m" (click)="numberSelect($event, 'm')">Multiple
             </button>
         </div>
         <div id="foodsadd_typeselect" class="input-spacing">
             <button type="button" id="foodsadd_food" class="btn btn-default blue-button invert selected"
-                    value="Food">Food
+                    value="food" (click)="typeSelect($event)">Food
             </button>
-            <button type="button" id="foodsadd_drink" class="btn btn-default blue-button invert" value="Drink">
+            <button type="button" id="foodsadd_drink" class="btn btn-default blue-button invert" value="drink"
+                    (click)="typeSelect($event)">
                 Drink
             </button>
-            <button type="button" id="foodsadd_product" class="btn btn-default blue-button invert" value="Product">
+            <button type="button" id="foodsadd_product" class="btn btn-default blue-button invert" value="product"
+                    (click)="typeSelect($event)">
                 Product
             </button>
         </div>
@@ -32,10 +34,11 @@
             </div>
         </div>
         <div id="foodsadd_multiple_div">
-            <button type="button" id="foodsadd_add_brand" class="btn btn-default blue-button"><span
+            <button type="button" id="foodsadd_add_brand" class="btn btn-default blue-button"
+                    (click)="createBrandButton($event)"><span
                     class="button-icon glyphicon glyphicon-plus"></span>Brand
             </button>
         </div>
-        <input id="save" type="button" class="green-button" value="Save"/>
+        <input id="save" type="button" class="green-button" value="Save" (click)="save($event)"/>
     </div>
 </div>

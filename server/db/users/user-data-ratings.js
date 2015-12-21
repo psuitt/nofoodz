@@ -25,6 +25,14 @@ Meteor.methods({
         }
 
         var filter = {
+            fields: {
+                _id: 1,
+                item_id: 1,
+                brand_id: 1,
+                name_view: 1,
+                brand_view: 1,
+                rating: 1
+            },
             sort: {date: -1}
         };
 
@@ -32,9 +40,26 @@ Meteor.methods({
             db = NoFoodz.db.typeToRatingsDb(t);
 
         response = {
-            ratings: [],
-            items: []
+            ratings: []
         };
+
+        if (options.search) {
+
+            filter.fields.score = {
+                $meta: 'textScore'
+            };
+
+            filter.sort = {
+                score: {
+                    $meta: 'textScore'
+                }
+            };
+
+            query.$text = {
+                $search: options.search
+            };
+
+        }
 
         if (!options.count) {
 
@@ -48,7 +73,7 @@ Meteor.methods({
 
         } else {
 
-            filter.limit = 200;
+            filter.limit = 100;
 
             var results = db.find(query, filter).fetch();
 
@@ -69,19 +94,6 @@ Meteor.methods({
                 item_ids.push(rating.item_id);
                 response.ratings.push(rating);
             }
-
-        }
-
-        if (response.ratings.length > 0) {
-            var itemDb = NoFoodz.db.typeToDb(t);
-            response.items = itemDb.find({_id: {$in: item_ids}}, {
-                fields: {
-                    _id: 1,
-                    name: 1,
-                    brand_id: 1,
-                    brand_view: 1
-                }
-            }).fetch();
 
         }
 

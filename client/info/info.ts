@@ -3,7 +3,8 @@
  */
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 
-import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route} from 'angular2/router';
 
@@ -14,6 +15,7 @@ import {
 } from 'angular2/router';
 
 import {About} from "./about/about";
+import {ChangeLog} from "./changelog/changelog";
 
 @Component({
     selector: 'info',
@@ -25,7 +27,8 @@ import {About} from "./about/about";
 })
 
 @RouteConfig([
-    {path: '/about', component: About, as: 'About'}
+    {path: '/about', component: About, as: 'About'},
+    {path: '/changelog', component: ChangeLog, as: 'ChangeLog'}
 ])
 
 export class InfoPage implements CanReuse {
@@ -41,7 +44,7 @@ export class InfoPage implements CanReuse {
         return this.location.path().indexOf(path) > -1;
     }
 
-    canReuse(next:ComponentInstruction, prev:ComponentInstruction) {
+    routerCanReuse(next:ComponentInstruction, prev:ComponentInstruction) {
         return false;
     }
 }

@@ -102,8 +102,8 @@
             _setUserValue(i);
         };
 
-        this.getValue = function (i) {
-            _getValue(i);
+        this.getValue = function () {
+            return _getValue();
         };
 
         this.remove = function () {

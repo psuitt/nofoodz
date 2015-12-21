@@ -1,13 +1,14 @@
 /**
  * Created by Sora on 11/23/2015.
  */
+/// <reference path="../typings/angular2.d.ts" />
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor, provide} from 'angular2/angular2';
+import {Component, View, provide} from 'angular2/core';
 
-import {bootstrap} from 'angular2-meteor';
+import {bootstrap} from 'angular2/bootstrap';
 
-import {ROUTER_DIRECTIVES, RouteConfig, Location, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
+import {RouterLink, ROUTER_DIRECTIVES, RouterOutlet, RouteConfig, Location, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
 
 import {
     ComponentInstruction,
@@ -35,7 +36,7 @@ declare var System:any;
 @Component({
     selector: 'app',
     templateUrl: 'client/app.html',
-    directives: [UsersPage, Find, ROUTER_DIRECTIVES]
+    directives: [UsersPage, Find, ROUTER_DIRECTIVES, RouterLink, RouterOutlet]
 })
 
 @RouteConfig([
@@ -89,7 +90,7 @@ class MainLayout implements CanReuse {
 
      If canReuse throws or rejects, the navigation will be cancelled.
      */
-    canReuse(next:ComponentInstruction, prev:ComponentInstruction) {
+    routerCanReuse(next:ComponentInstruction, prev:ComponentInstruction) {
         if (next.reuse) {
 
         }
@@ -99,8 +100,6 @@ class MainLayout implements CanReuse {
     loadListeners(router) {
 
         jQuery('.searchbar input').nofoodssearch({router: router});
-
-        jQuery('#menu [data-toggle=\'dropdown\']').dropdown();
 
         jQuery('#logout_button').on('click', function () {
             Meteor.logout(function (err) {
@@ -145,10 +144,6 @@ class MainLayout implements CanReuse {
         else if (path.length > 0) {
             return this.location.path().indexOf(path) > -1;
         }
-    }
-
-    onActivate() {
-        return true;
     }
 
     loadUserInfo() {

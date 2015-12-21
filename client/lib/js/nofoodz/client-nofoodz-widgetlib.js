@@ -130,7 +130,7 @@ Client.NoFoodz.widgetlib = function () {
 		},
 
 		createBrandLink: function (id, name) {
-			return $('<a class=\'brand\'></a>').attr('href', NoFoodz.consts.urls.BRAND + id).html(name);
+			return $('<a class=\'brand\'></a>').attr('href', Client.NoFoodz.consts.urls.BRAND + id).html(name);
 		}
 		
 	};
