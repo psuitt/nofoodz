@@ -53,6 +53,12 @@ export class Item implements OnDestroy {
 
         jQuery('#foods_infodiv').off('click', 'h4', this.toggleInfo);
 
+        jQuery('.list-add-button').attr({
+            'item-id': '',
+            'item-type': '',
+            'item-name': ''
+        }).hide();
+
     }
 
     setup(router) {
@@ -64,13 +70,7 @@ export class Item implements OnDestroy {
             type: this.screenData.type
         };
 
-        if (this.screenData.type === Client.NoFoodz.consts.FOOD) {
-            this.idField = 'food_id';
-        } else if (this.screenData.type === Client.NoFoodz.consts.DRINK) {
-            this.idField = 'drink_id';
-        } else {
-            this.idField = 'product_id';
-        }
+        this.idField = this.screenData.type + '_id';
 
         Meteor.call('getItemById', obj, function (err, response) {
 
@@ -193,6 +193,12 @@ export class Item implements OnDestroy {
         self.loadInformation(item.info);
 
         self.loadUserData(item._id);
+
+        jQuery('.list-add-button').attr({
+            'item-id': self.screenData._id,
+            'item-type': self.screenData.type,
+            'item-name': item.name
+        }).show();
 
     }
 

@@ -31,12 +31,6 @@ PageNumber = Match.Where(function (x) {
     return x < 101 && x > 0;
 });
 
-TypeCheck = Match.Where(function (x) {
-    check(x, String);
-    var type = x.toLowerCase();
-    return type === NoFoodz.consts.db.FOOD || type === NoFoodz.consts.db.DRINK || type === NoFoodz.consts.db.BRAND || type === NoFoodz.consts.db.PRODUCT;
-});
-
 NullCheck = Match.Where(function (x) {
     check(x, Object);
     return x;

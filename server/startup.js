@@ -14,12 +14,12 @@ Meteor.startup(function () {
      */
     var setting = Settings.findOne({'_type': 'version'});
 
-    if (!setting || setting.version !== 'alpha-1.2.1') {
+    if (!setting || setting.version !== 'alpha-1.3.0') {
         Settings.upsert({'_type': 'version'}, {
             '_type': 'version',
-            'version': 'alpha-1.2.1'
+            'version': 'alpha-1.3.0'
         });
-        runBatchFixes();
+        fixRatings();
     }
 
 });
@@ -62,3 +62,30 @@ var runBatchFixes = function () {
     });
 
 };
+
+var fixRatings = function () {
+
+    Meteor.users.find({}).forEach(function (user) {
+
+        FoodRatings.update({user_id: user._id}, {
+            $set: {
+                username_view: user.profile.name
+            }
+        }, {multi: true});
+
+        DrinkRatings.update({user_id: user._id}, {
+            $set: {
+                username_view: user.profile.name
+            }
+        }, {multi: true});
+
+        ProductRatings.update({user_id: user._id}, {
+            $set: {
+                username_view: user.profile.name
+            }
+        }, {multi: true});
+
+    });
+
+};
+

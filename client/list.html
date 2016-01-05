@@ -1,0 +1,17 @@
+<div id="listContainer">
+    <div class="list closed">
+        <ul class="tab-list">
+            <li><a class="active" href="#">List</a><span class="list-count">(0)</span></li>
+            <li class="close"><a href="#" (click)="toggleList($event)"></a></li>
+        </ul>
+        <div>
+            <input type="text"/>
+            <ul class="list-display">
+            </ul>
+            <button class="btn btn-default blue-button list-add-button" type="button" (click)="addItem($event)"><span
+                    class="button-icon glyphicon glyphicon-plus"></span>Add Item
+            </button>
+            <button class="btn btn-default green-button list-save-button" type="button">Save</button>
+        </div>
+    </div>
+</div>

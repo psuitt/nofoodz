@@ -75,32 +75,32 @@ span.foods-comment {
     height: 60%;
 }
 
-#item_raterstablist {
+.tab-list {
     list-style: none;
     margin-bottom: 0;
 }
 
-#item_raterstablist li {
+.tab-list li {
     display: inline-block;
     padding: 10px 20px;
     font-size: 20px;
 }
 
-#item_raterstablist li.close,
-#item_raterstablist li.close:hover {
+.tab-list li.close,
+.tab-list li.close:hover {
     height: 48px;
     float: right;
     color: transparent;
     opacity: 1;
 }
 
-#item_raterstablist li.close a {
+.tab-list li.close a {
     color: transparent;
     padding-bottom: 5px;
 }
 
 #foods_infodiv h4 > span::before,
-#item_raterstablist li.close a::before {
+.tab-list li.close a::before {
     content: '';
     position: relative;
     right: -3px;
@@ -126,7 +126,7 @@ span.foods-comment {
 }
 
 #foods_infodiv h4 > span::after,
-#item_raterstablist li.close a::after {
+.tab-list li.close a::after {
     content: '';
     position: relative;
     right: 3px;
@@ -151,14 +151,14 @@ span.foods-comment {
     transition: width 0.3s, transform 0.3s;
 }
 
-#item_raterstablist li.close a:hover::before,
-#item_raterstablist li.close a:hover::after,
+.tab-list li.close a:hover::before,
+.tab-list li.close a:hover::after,
 #foods_infodiv h4:hover > span::before,
 #foods_infodiv h4:hover > span::after {
     background: #E91E63;
 }
 
-#item_raterstablist li a.active {
+.tab-list li a.active {
     color: #424242;
     border-bottom: 2px solid #424242;
 }

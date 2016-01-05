@@ -12,7 +12,8 @@ Meteor.methods({
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var user = Meteor.users.findOne({_id: userId}, {fields: {
-            roles: 1
+            roles: 1,
+            'profile.name': 1
         }});
 
         check(products, ProductsArrayCheck);
@@ -54,6 +55,7 @@ Meteor.methods({
                     ratingDao.brand_id = brand._id;
                     ratingDao.name_view = item.name;
                     ratingDao.brand_view = brand.brand;
+                    ratingDao.username_view = user.profile.name;
                     ratingDao.insert();
                 }
 

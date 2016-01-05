@@ -49,9 +49,11 @@ export class Find {
         jQuery('div.loading').removeClass('hide');
 
         switch (type) {
-            case 'food':
-            case 'drink':
-            case 'product':
+            case Client.NoFoodz.consts.FOOD:
+            case Client.NoFoodz.consts.DRINK:
+            case Client.NoFoodz.consts.PRODUCT:
+            case Client.NoFoodz.consts.MEDIA:
+            case Client.NoFoodz.consts.OTHER:
                 this.doSearch(search, type);
                 break;
             case 'brand':

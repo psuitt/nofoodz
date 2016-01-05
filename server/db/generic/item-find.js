@@ -30,6 +30,8 @@ Meteor.methods({
             case NoFoodz.consts.db.FOOD:
             case NoFoodz.consts.db.DRINK:
             case NoFoodz.consts.db.PRODUCT:
+            case NoFoodz.consts.db.MEDIA:
+            case NoFoodz.consts.db.OTHER:
                 var func = NoFoodz.db.typeToDao(options.type),
                     itemDao = new func();
 

@@ -8,6 +8,8 @@ NoFoodz.consts.urls = {
     FOOD: '/#/pages/food/',
     DRINK: '/#/pages/drink/',
     PRODUCT: '/#/pages/product/',
+    MEDIA: '/#/pages/media/',
+    OTHER: '/#/pages/other/',
     BRAND: '/#/pages/brand/',
     PEOPLE: '/#/users/people/'
 };
@@ -36,5 +38,7 @@ NoFoodz.consts.db = {
     FOOD: 'food',
     DRINK: 'drink',
     PRODUCT: 'product',
+    MEDIA: 'media',
+    OTHER: 'other',
     BRAND: 'brand'
 };

@@ -1,11 +1,17 @@
 /**
- * Created by Sora on 7/28/2015.
+ * Created by Sora on 12/29/2015.
  */
 // Start the collection
-Products = new Meteor.Collection("products");
+Medias = new Meteor.Collection("medias");
+/*
+ Movies
+ Music
+ Tv Shows
+ Video Games
+ */
 
 // Set up permissions for the collection
-Products.allow({
+Medias.allow({
     insert: function () {
         return false;
     },
@@ -17,7 +23,7 @@ Products.allow({
     }
 });
 
-Products.deny({
+Medias.deny({
     insert: function () {
         return true;
     },
@@ -29,10 +35,10 @@ Products.deny({
     }
 });
 
-ProductRatings = new Meteor.Collection("product_ratings");
+MediaRatings = new Meteor.Collection("media_ratings");
 
 // Set up permissions for the collection
-ProductRatings.allow({
+MediaRatings.allow({
     insert: function () {
         return false;
     },
@@ -44,7 +50,7 @@ ProductRatings.allow({
     }
 });
 
-ProductRatings.deny({
+MediaRatings.deny({
     insert: function () {
         return true;
     },

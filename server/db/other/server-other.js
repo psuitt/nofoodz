@@ -1,11 +1,14 @@
 /**
- * Created by Sora on 7/28/2015.
+ * Created by Sora on 12/29/2015.
  */
 // Start the collection
-Products = new Meteor.Collection("products");
+Others = new Meteor.Collection("others");
+/*
+ Websites
+ */
 
 // Set up permissions for the collection
-Products.allow({
+Others.allow({
     insert: function () {
         return false;
     },
@@ -17,7 +20,7 @@ Products.allow({
     }
 });
 
-Products.deny({
+Others.deny({
     insert: function () {
         return true;
     },
@@ -29,10 +32,10 @@ Products.deny({
     }
 });
 
-ProductRatings = new Meteor.Collection("product_ratings");
+OtherRatings = new Meteor.Collection("other_ratings");
 
 // Set up permissions for the collection
-ProductRatings.allow({
+OtherRatings.allow({
     insert: function () {
         return false;
     },
@@ -44,7 +47,7 @@ ProductRatings.allow({
     }
 });
 
-ProductRatings.deny({
+OtherRatings.deny({
     insert: function () {
         return true;
     },

@@ -8,6 +8,8 @@ Client.NoFoodz.consts = function () {
         FOOD: '/#/pages/food/',
         DRINK: '/#/pages/drink/',
         PRODUCT: '/#/pages/product/',
+        MEDIA: '/#/pages/media/',
+        OTHER: '/#/pages/other/',
         BRAND: '/#/pages/brand/',
         PEOPLE: '/#/users/people/',
         ADD: '/#/pages/add/'
@@ -17,6 +19,8 @@ Client.NoFoodz.consts = function () {
         FOOD: 'food',
         DRINK: 'drink',
         PRODUCT: 'product',
+        MEDIA: 'media',
+        OTHER: 'other',
         BRAND: 'brand',
         PEOPLE: 'people'
     };
@@ -28,7 +32,9 @@ Client.NoFoodz.consts = function () {
         PAGE_LIMIT: 2,
         FOOD: 'food',
         DRINK: 'drink',
-        PRODUCT: 'product'
+        PRODUCT: 'product',
+        MEDIA: 'media',
+        OTHER: 'other'
 
     };
 

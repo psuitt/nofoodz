@@ -4,7 +4,7 @@
 /// <reference path="../typings/angular2.d.ts" />
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, enableProdMode} from 'angular2/core';
 
 import {bootstrap} from 'angular2/bootstrap';
 
@@ -27,6 +27,7 @@ import {PagesPage} from "./pages/pages";
 import {TopPage} from "./top/top";
 import {AdminPage} from "./admin/admin";
 import {InfoPage} from "./info/info";
+import {List} from "./list";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
@@ -252,5 +253,7 @@ class ComponentHelper {
         return System.import(path).then(c => c[name]);
     }
 }
+
+//enableProdMode();
 
 bootstrap(MainLayout, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);

@@ -101,7 +101,7 @@ export class MyFoods implements OnDestroy {
 
         if (!jQuery('#myfoods_item input').hasClass('nofoodssearch')) {
             this.itemSearch = jQuery('#myfoods_item input').nofoodssearch({
-                values: ['Food', 'Drink', 'Product'],
+                values: ['Food', 'Drink', 'Product', 'Media', 'Other'],
                 searchPlaceholder: 'Search your items',
                 select: this.getPageFunction()
             });
