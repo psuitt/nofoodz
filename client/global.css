@@ -529,7 +529,7 @@ button.simple.blue-button {
     margin-top: 50px;
     min-height: 200px;
     background: rgb(245, 245, 245);
-    background-image: url('/backgrounds/denver_colorado.png');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/backgrounds/header-1700_1130.png');
     /*background-repeat: repeat-y;*/
     /*background-attachment: fixed;*/
     background-position: center bottom;

@@ -367,6 +367,11 @@ button.nofoodssearch.btn.btn-default:focus {
         z-index: 3;
     }
 
+    .navbar-default .navbar-nav.nav .menu-secondary-nav > li.nav-icons {
+        width: auto;
+        border-right: none;
+    }
+
     .navbar-default .navbar-nav.nav .menu-secondary-nav {
         position: fixed;
         top: 50px;

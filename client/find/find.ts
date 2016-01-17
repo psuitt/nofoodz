@@ -21,12 +21,14 @@ declare var Client:any;
 
 export class Find {
 
+    query:any;
     results:any;
     MAX_RESULTS:number;
     paging:any;
 
     constructor(params:RouteParams) {
 
+        this.query = Client.NoFoodz.lib.getParameters(true);
         this.results = [];
         this.MAX_RESULTS = 3;
 

@@ -33,7 +33,7 @@
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
                                 <li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Wsie']">What should I Eat?</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Wsie']">What Should I Eat?</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
@@ -142,14 +142,23 @@
                             </ul>
                         </li>
                         <li id="user_menu" class="has-children">
-                            <a class="menu-link menu-header" href="#">User Links</a>
+                            <a class="menu-link menu-header" href="#">My Account</a>
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
-                                <li class="back"><a class="menu-link" href="#">User Links</a></li>
+                                <li class="back"><a class="menu-link" href="#">My Account</a></li>
                                 <li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>
                                 <li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>
                                 <li>
                                     <button id="logout_button" class="green-button">Logout</button>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="user_menu_icons" class="has-children nav-icons">
+                            <a class="menu-link menu-header" href="#">User Links</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">User Links</a></li>
+                                <li><a class="menu-link nav-icon" [routerLink]="['/Users/MyFoods']">Notifications</a>
                                 </li>
                             </ul>
                         </li>
