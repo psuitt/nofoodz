@@ -22,7 +22,8 @@ Meteor.methods({
                 brand_view: 1,
                 ratingtotal_calc: 1,
                 ratingcount_calc: 1,
-                info: 1
+                info: 1,
+                images: 1
             }
         };
 

@@ -1,8 +1,8 @@
 /**
  * Created by Sora on 12/22/2015.
  */
-/// <reference path="../typings/angular2.d.ts" />
-/// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="../typings/angular2/angular2.d.ts" />
+/// <reference path="../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, Inject} from 'angular2/core';
 

@@ -1,9 +1,9 @@
 /**
  * Created by Sora on 11/29/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -11,6 +11,7 @@ declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'people'
@@ -21,7 +22,7 @@ declare var _:any;
     directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class People implements OnDestroy {
+export class People implements OnDestroy, AfterViewInit {
 
     screenData:any;
 
@@ -31,11 +32,6 @@ export class People implements OnDestroy {
             username: params.get('username')
         };
 
-        this.setup();
-        this.loadListeners();
-
-        this.loadUser();
-
     }
 
     ngOnDestroy() {
@@ -43,6 +39,12 @@ export class People implements OnDestroy {
         jQuery(document).off('click', '#people_nav a');
         jQuery('span.wishstar').off('click');
 
+    }
+
+    ngAfterViewInit() {
+        this.setup();
+        this.loadListeners();
+        this.loadUser();
     }
 
     setup() {

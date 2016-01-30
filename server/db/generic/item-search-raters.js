@@ -15,7 +15,8 @@ Meteor.methods({
         var ratingDB = NoFoodz.db.typeToRatingsDb(options.type);
 
         var ratingQuery = {
-            item_id: options._id
+            item_id: options._id,
+            rating: {$gt: 0}
         };
 
         var ratingFilter = {

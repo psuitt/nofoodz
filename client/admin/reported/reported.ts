@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/30/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, Directive, HostListener, OnInit} from 'angular2/core';
 
@@ -13,6 +13,7 @@ declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Directive({
     selector: '[removeitem]'

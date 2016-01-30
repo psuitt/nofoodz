@@ -18,10 +18,12 @@ Meteor.methods({
 
         check(products, ProductsArrayCheck);
 
-        if (!NoFoodz.utils.user.isMod(user) && products.length > 1)
+        if (products.length > 1) {
+            if (!NoFoodz.utils.user.isMod(user) && !NoFoodz.utils.user.isAdmin(user))
+                throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+        } else if (!NoFoodz.utils.user.isMod(user) && !NoFoodz.utils.user.isAdmin(user) && !NoFoodz.utils.user.isNormalUser(user)) {
             throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
-        if (!NoFoodz.utils.user.isNormalUser(user))
-            throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+        }
 
         _.each(products, function (brand) {
 

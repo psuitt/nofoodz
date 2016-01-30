@@ -1,9 +1,9 @@
 /**
  * Created by Sora on 11/28/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -11,6 +11,7 @@ declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'item'
@@ -21,7 +22,7 @@ declare var _:any;
     directives: [Item, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Item implements OnDestroy {
+export class Item implements OnDestroy, AfterViewInit {
 
     nofoodsRating:any;
     idField:string;
@@ -35,9 +36,6 @@ export class Item implements OnDestroy {
             _id: params.get('_id'),
             type: params.get('type')
         };
-
-        this.setup(router);
-        this.loadListeners();
 
     }
 
@@ -59,6 +57,11 @@ export class Item implements OnDestroy {
             'item-name': ''
         }).hide();
 
+    }
+
+    ngAfterViewInit() {
+        this.setup(this.router);
+        this.loadListeners();
     }
 
     setup(router) {
@@ -191,7 +194,7 @@ export class Item implements OnDestroy {
         }
 
         self.loadInformation(item.info);
-
+        self.loadImages(item.images);
         self.loadUserData(item._id);
 
         jQuery('.list-add-button').attr({
@@ -253,6 +256,12 @@ export class Item implements OnDestroy {
             infoDiv.append(div);
 
         });
+
+    }
+
+    loadImages() {
+
+
 
     }
 

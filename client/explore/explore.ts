@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, OnInit} from 'angular2/core';
 
@@ -11,6 +11,7 @@ declare var jQuery:any;
 declare var _:any;
 declare var Client:any;
 declare var NoFoodz:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'home'
@@ -24,6 +25,10 @@ declare var NoFoodz:any;
 export class Explore implements OnInit {
 
     constructor() {
+
+    }
+
+    ngOnInit() {
 
         jQuery("#explore-worldmap").vectorMap({
             map: 'world_en',
@@ -50,9 +55,6 @@ export class Explore implements OnInit {
 
         this.setup();
 
-    }
-
-    ngOnInit() {
         jQuery('.explore-options button').eq(0).click();
     }
 

@@ -1303,7 +1303,7 @@ declare module ngRouter {
 
   /**
    * The `RouteConfig` decorator defines routes for a given component.
-   *
+   * 
    * It takes an array of {@link RouteDefinition}s.
    */
   var RouteConfig:(configs:RouteDefinition[]) => ClassDecorator;
@@ -1312,7 +1312,7 @@ declare module ngRouter {
   /**
    * Represents either a component type (`type` is `component`) or a loader function
    * (`type` is `loader`).
-   *
+   * 
    * See also {@link RouteDefinition}.
    */
   interface ComponentDefinition {

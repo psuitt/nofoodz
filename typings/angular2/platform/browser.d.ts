@@ -19,14 +19,14 @@
 declare module browser {
   /**
    * Marks a function or method as an Angular 2 entrypoint. Only necessary in Dart code.
-   *
+   * 
    * The optional `name` parameter will be reflected in logs when the entry point is processed.
-   *
+   * 
    * See [the wiki][] for detailed documentation.
    * [the wiki]: https://github.com/angular/angular/wiki/Angular-2-Dart-Transformer#entry_points
-   *
+   * 
    * ## Example
-   *
+   * 
    * ```
    * @AngularEntrypoint("name-for-debug")
    * void main() {
@@ -39,13 +39,13 @@ declare module browser {
     constructor(name?:String);
 
     name:String;
-
+    
   }
 
 
   /**
    * A set of providers to initialize the Angular platform in a web browser.
-   *
+   * 
    * Used automatically by `bootstrap`, or can be passed to {@link platform}.
    */
   let BROWSER_PROVIDERS:Array<any /*core.Type | Provider | any[]*/>;
@@ -53,7 +53,7 @@ declare module browser {
 
   /**
    * Use {@link ELEMENT_PROBE_PROVIDERS}.
-   *
+   * 
    * @deprecated
    */
   let ELEMENT_PROBE_BINDINGS:any;
@@ -61,9 +61,9 @@ declare module browser {
 
   /**
    * Providers which support debugging Angular applications (e.g. via `ng.probe`).
-   *
+   * 
    * ## Example
-   *
+   * 
    * {@example platform/dom/debug/ts/debug_element_view_listener/providers.ts region='providers'}
    */
   let ELEMENT_PROBE_PROVIDERS:any[];
@@ -291,7 +291,7 @@ declare module browser {
     cancelAnimationFrame(id:number):void;
 
     performanceNow():number;
-
+    
   }
 
 
@@ -302,37 +302,37 @@ declare module browser {
     
     /**
      * Match all elements.
-     *
+     * 
      * ## Example
-     *
+     * 
      * {@example platform/dom/debug/ts/by/by.ts region='by_all'}
      */
     static all():Predicate<core.DebugElement>;
     
     /**
      * Match elements by the given CSS selector.
-     *
+     * 
      * ## Example
-     *
+     * 
      * {@example platform/dom/debug/ts/by/by.ts region='by_css'}
      */
     static css(selector:string):Predicate<core.DebugElement>;
     
     /**
      * Match elements that have the given directive present.
-     *
+     * 
      * ## Example
-     *
+     * 
      * {@example platform/dom/debug/ts/by/by.ts region='by_directive'}
      */
     static directive(type:core.Type):Predicate<core.DebugElement>;
-
+    
   }
 
 
   /**
    * A service that can be used to get and set the title of a current HTML document.
-   *
+   * 
    * Since an Angular 2 application can't be bootstrapped on the entire HTML document (`<html>` tag)
    * it is not possible to bind to the `text` property of the `HTMLTitleElement` elements
    * (representing the `<title>` tag). Instead, this service can be used to set and get the current
@@ -351,13 +351,13 @@ declare module browser {
      * @param newTitle
      */
     setTitle(newTitle:string):void;
-
+    
   }
 
 
   /**
    * A DI Token representing the main rendering context. In a browser this is the DOM Document.
-   *
+   * 
    * Note: Document might not be available in the Application Context when Application and Rendering
    * Contexts are not the same (e.g. when running the application into a Web Worker).
    */
@@ -367,9 +367,9 @@ declare module browser {
   /**
    * Enabled Angular 2 debug tools that are accessible via your browser's
    * developer console.
-   *
+   * 
    * Usage:
-   *
+   * 
    * 1. Open developer console (e.g. in Chrome Ctrl + Shift + j)
    * 1. core.Type `ng.` (usually the console will show auto-complete suggestion)
    * 1. Try the change detection profiler `ng.profiler.timeChangeDetection()`
@@ -392,14 +392,14 @@ declare module browser {
 
   /**
    * Bootstrapping for Angular applications.
-   *
+   * 
    * You instantiate an Angular application by explicitly specifying a component to use
    * as the root component for your application via the `bootstrap()` method.
-   *
+   * 
    * ## Simple Example
-   *
+   * 
    * Assuming this `index.html`:
-   *
+   * 
    * ```html
    * <html>
    *   <!-- load Angular script tags here. -->
@@ -408,21 +408,21 @@ declare module browser {
    *   </body>
    * </html>
    * ```
-   *
+   * 
    * An application is bootstrapped inside an existing browser DOM, typically `index.html`.
    * Unlike Angular 1, Angular 2 does not compile/process providers in `index.html`. This is
    * mainly for security reasons, as well as architectural changes in Angular 2. This means
    * that `index.html` can safely be processed using server-side technologies such as
    * providers. Bindings can thus use double-curly `{{ syntax }}` without collision from
    * Angular 2 component double-curly `{{ syntax }}`.
-   *
+   * 
    * We can use this script code:
-   *
+   * 
    * {@example core/ts/bootstrap/bootstrap.ts region='bootstrap'}
-   *
+   * 
    * When the app developer invokes `bootstrap()` with the root component `MyApp` as its
    * argument, Angular performs the following tasks:
-   *
+   * 
    *  1. It uses the component's `selector` property to locate the DOM element which needs
    *     to be upgraded into the angular component.
    *  2. It creates a new child injector (from the platform injector). Optionally, you can
@@ -436,26 +436,26 @@ declare module browser {
    *  6. Finally, Angular performs change detection to apply the initial data providers for the
    *     application.
    *
-   *
+   * 
    * ## Bootstrapping Multiple Applications
-   *
+   * 
    * When working within a browser window, there are many singleton resources: cookies, title,
    * location, and others. Angular services that represent these resources must likewise be
    * shared across all Angular applications that occupy the same browser window. For this
    * reason, Angular creates exactly one global platform object which stores all shared
    * services, and each angular application injector has the platform injector as its parent.
-   *
+   * 
    * Each application has its own private injector as well. When there are multiple
    * applications on a page, Angular treats each application injector's services as private
    * to that application.
-   *
+   * 
    * ## API
-   *
+   * 
    * - `appComponentType`: The root component which should act as the application. This is
    *   a reference to a `core.Type` which is annotated with `@Component(...)`.
    * - `customProviders`: An additional set of providers that can be added to the
    *   app injector to override default injection behavior.
-   *
+   * 
    * Returns a `Promise` of {@link core.ComponentRef}.
    */
   function bootstrap(appComponentType:core.Type, customProviders?:Array<any /*core.Type | Provider | any[]*/>):Promise<core.ComponentRef>;

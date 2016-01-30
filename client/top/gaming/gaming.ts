@@ -1,9 +1,9 @@
 /**
  * Created by Sora on 11/30/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/core';
+import {Component, View, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -11,6 +11,7 @@ declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'gaming'
@@ -21,13 +22,17 @@ declare var _:any;
     directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Gaming {
+export class Gaming implements AfterViewInit {
 
     screenData:any;
 
     constructor(private router:Router, params:RouteParams) {
 
         this.screenData = Client.NoFoodz.lib.getParameters(true);
+
+    }
+
+    ngAfterViewInit() {
 
         this.screenData.title && jQuery('span.pagetitle-subtext').text(NoFoodz.format.camelCase(this.screenData.title));
         this.loadItems(this.screenData);

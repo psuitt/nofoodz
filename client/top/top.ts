@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/30/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';

@@ -1,19 +1,18 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../typings/angular2.d.ts" />
-/// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="../typings/angular2/angular2.d.ts" />
+/// <reference path="../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, provide, enableProdMode} from 'angular2/core';
+import {bootstrap} from 'angular2/platform/browser';
 
-import {bootstrap} from 'angular2/bootstrap';
+import {Component, View, provide, enableProdMode, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, ROUTER_DIRECTIVES, RouterOutlet, RouteConfig, Location, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
 
-import {
-    ComponentInstruction,
-    CanReuse
-} from 'angular2/router';
+import { ComponentInstruction, CanReuse } from 'angular2/router';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 import {Error404} from "./error/404/Error404";
 
@@ -31,6 +30,8 @@ import {List} from "./list";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
+declare var Meteor:any;
+declare var Accounts:any;
 
 declare var System:any;
 
@@ -54,7 +55,7 @@ declare var System:any;
     {path: '/admin/...', component: AdminPage, as: 'Admin'}
 ])
 
-class MainLayout implements CanReuse {
+class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     router:Router;
     location:Location;
@@ -64,21 +65,12 @@ class MainLayout implements CanReuse {
 
     constructor(router:Router, location:Location) {
 
+        super();
+
         this.router = router;
         this.location = location;
 
         window.scrollTo(0, 0);
-
-        Meteor.call('getUserCount', function (err, response) {
-
-            if (!err)
-                jQuery('#totalusers').text('Total Users ' + response);
-
-        });
-
-        this.loadListeners(router);
-
-        this.loadUserInfo();
 
     }
 
@@ -96,6 +88,21 @@ class MainLayout implements CanReuse {
 
         }
         return false;
+    }
+
+    ngAfterViewInit() {
+
+        this.call('getUserCount', function (err, response) {
+
+            if (!err)
+                jQuery('#totalusers').text('Total Users ' + response);
+
+        });
+
+        this.loadListeners(this.router);
+
+        this.loadUserInfo();
+
     }
 
     loadListeners(router) {
@@ -149,7 +156,7 @@ class MainLayout implements CanReuse {
 
     loadUserInfo() {
 
-        var currentUser = Meteor.call('userDataSimple', function (err, currentUser) {
+        var currentUser = this.call('userDataSimple', function (err, currentUser) {
 
             if (!err && currentUser) {
 

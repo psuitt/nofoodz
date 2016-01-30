@@ -22,11 +22,11 @@
  * @description
  * Starting point to import all public core APIs.
  */
-declare module core {
+declare module core {  
   /**
    * Disable Angular's development mode, which turns off assertions and other
    * checks within the framework.
-   *
+   * 
    * One important assertion this disables verifies that a change detection pass
    * does not result in additional changes to any bindings (also known as
    * unidirectional data flow).
@@ -36,14 +36,14 @@ declare module core {
 
   /**
    * Initialize the Angular 'platform' on the page.
-   *
+   * 
    * See {@link PlatformRef} for details on the Angular platform.
-   *
+   * 
    * It is also possible to specify providers to be made in the new platform. These providers
    * will be shared between all applications on the page. For example, an abstraction for
    * the browser cookie jar should be bound at the platform level, because there is only one
    * cookie jar regardless of how many applications on the page will be accessing it.
-   *
+   * 
    * The platform function can be called multiple times as long as the same list of providers
    * is passed into each call. If the platform function is called with a different set of
    * provides, Angular will throw an exception.
@@ -61,7 +61,7 @@ declare module core {
    * The Angular platform is the entry point for Angular on a web page. Each page
    * has exactly one platform, and services (such as reflection) which are common
    * to every Angular application running on the page are bound in its scope.
-   *
+   * 
    * A page's platform is initialized implicitly when {@link bootstrap}() is called, or
    * explicitly by calling {@link platform}().
    */
@@ -80,25 +80,25 @@ declare module core {
     
     /**
      * Instantiate a new Angular application on the page.
-     *
+     * 
      * ### What is an application?
-     *
+     * 
      * Each Angular application has its own zone, change detection, compiler,
      * renderer, and other framework components. An application hosts one or more
      * root components, which can be initialized via `ApplicationRef.bootstrap()`.
-     *
+     * 
      * ### Application Providers
-     *
+     * 
      * Angular applications require numerous providers to be properly instantiated.
      * When using `application()` to create a new app on the page, these providers
      * must be provided. Fortunately, there are helper functions to configure
      * typical providers, as shown in the example below.
-     *
+     * 
      * ### Example
-     *
+     * 
      * {@example core/ts/platform/platform.ts region='longform'}
      * ### See Also
-     *
+     * 
      * See the {@link bootstrap} documentation for more details.
      */
     application(providers:Array<Type | Provider | any[]>):ApplicationRef;
@@ -107,9 +107,9 @@ declare module core {
      * Instantiate a new Angular application on the page, using providers which
      * are only available asynchronously. One such use case is to initialize an
      * application running in a web worker.
-     *
+     * 
      * ### Usage
-     *
+     * 
      * `bindingFn` is a function that will be called in the new application's zone.
      * It should return a `Promise` to a list of providers to be used for the
      * new application. Once this promise resolves, the application will be
@@ -121,13 +121,13 @@ declare module core {
      * Destroy the Angular platform and all Angular applications on the page.
      */
     dispose():void;
-
+    
   }
 
 
   /**
    * A reference to an Angular application running on a page.
-   *
+   * 
    * For more about Angular applications, see the documentation for {@link bootstrap}.
    */
   abstract class ApplicationRef {
@@ -145,19 +145,19 @@ declare module core {
     
     /**
      * Bootstrap a new component at the root level of the application.
-     *
+     * 
      * ### Bootstrap process
-     *
+     * 
      * When bootstrapping a new root component into an application, Angular mounts the
      * specified application component onto DOM elements identified by the [componentType]'s
      * selector and kicks off automatic change detection to finish initializing the component.
-     *
+     * 
      * ### Optional Providers
-     *
+     * 
      * Providers for the given component can optionally be overridden via the `providers`
      * parameter. These providers will only apply for the root component being added and any
      * child components under it.
-     *
+     * 
      * ### Example
      * {@example core/ts/platform/platform.ts region='longform'}
      */
@@ -167,20 +167,20 @@ declare module core {
      * Retrieve the application {@link Injector}.
      */
     injector:Injector;
-
+    
     /**
      * Retrieve the application {@link NgZone}.
      */
     zone:NgZone;
-
+    
     /**
      * Dispose of this application and all of its components.
      */
     dispose():void;
-
+    
     /**
      * Invoke this method to explicitly process change detection and its side-effects.
-     *
+     * 
      * In development mode, `tick()` also performs a second change detection cycle to ensure that no
      * further changes are detected. If additional changes are picked up during this second cycle,
      * bindings in the app have side-effects that cannot be resolved in a single change detection
@@ -189,12 +189,12 @@ declare module core {
      * detection pass during which all change detection must complete.
      */
     tick():void;
-
+    
     /**
      * Get a list of component types registered to this application.
      */
     componentTypes:Type[];
-
+    
   }
 
 
@@ -202,7 +202,7 @@ declare module core {
    * A DI Token representing a unique string id assigned to the application by Angular and used
    * primarily for prefixing application attributes and CSS styles when
    * {@link ViewEncapsulation#Emulated} is being used.
-   *
+   * 
    * If you need to avoid randomly generated value to be used as an application id, you can provide
    * a custom value via a DI provider <!-- TODO: provider --> configuring the root {@link Injector}
    * using this token.
@@ -213,17 +213,17 @@ declare module core {
   /**
    * An {@link angular2/di/OpaqueToken} representing the application root type in the {@link
       * Injector}.
-   *
+   * 
    * ```
    * @Component(...)
    * class MyApp {
    *   ...
    * }
-   *
+   * 
    * bootstrap(MyApp).then((appRef:ApplicationRef) {
    *   expect(appRef.injector.get(appComponentTypeToken)).toEqual(MyApp);
    * });
-   *
+   * 
    * ```
    */
   let APP_COMPONENT:OpaqueToken;
@@ -251,7 +251,7 @@ declare module core {
    * A DebugElement contains information from the Angular compiler about an
    * element and provides access to the corresponding ElementInjector and
    * underlying DOM Element, as well as a way to query for children.
-   *
+   * 
    * A DebugElement can be obtained from a {@link ComponentFixture} or from an
    * {@link ElementRef} via {@link inspectElement}.
    */
@@ -261,80 +261,80 @@ declare module core {
      * Return the instance of the component associated with this element, if any.
      */
     componentInstance:any;
-
+    
     /**
      * Return the native HTML element for this DebugElement.
      */
     nativeElement:any;
-
+    
     /**
      * Return an Angular {@link ElementRef} for this element.
      */
     elementRef:ElementRef;
-
+    
     /**
      * Get the directive active for this element with the given index, if any.
      */
     getDirectiveInstance(directiveIndex:number):any;
-
+    
     /**
      * Get child DebugElements from within the Light DOM.
-     *
+     * 
      * @return {DebugElement[]}
      */
     children:DebugElement[];
-
+    
     /**
      * Get the root DebugElement children of a component. Returns an empty
      * list if the current DebugElement is not a component root.
-     *
+     * 
      * @return {DebugElement[]}
      */
     componentViewChildren:DebugElement[];
-
+    
     /**
      * Simulate an event from this element as if the user had caused
      * this event to fire from the page.
      */
     triggerEventHandler(eventName:string, eventObj:Event):void;
-
+    
     /**
      * Check whether the element has a directive with the given type.
      */
     hasDirective(type:Type):boolean;
-
+    
     /**
      * Inject the given type from the element injector.
      */
     inject(type:Type):any;
-
+    
     /**
      * Read a local variable from the element (e.g. one defined with `#variable`).
      */
     getLocal(name:string):any;
-
+    
     /**
      * Return the first descendant TestElement matching the given predicate
      * and scope.
-     *
+     * 
      * @param {Function: boolean} predicate
      * @param {Scope} scope
      * 
      * @return {DebugElement}
      */
     query(predicate:Predicate<DebugElement>, scope?:Function):DebugElement;
-
+    
     /**
      * Return descendant TestElememts matching the given predicate
      * and scope.
-     *
+     * 
      * @param {Function: boolean} predicate
      * @param {Scope} scope
-     *
+     * 
      * @return {DebugElement[]}
      */
     queryAll(predicate:Predicate<DebugElement>, scope?:Function):DebugElement[];
-
+    
   }
 
 
@@ -346,37 +346,37 @@ declare module core {
     /**
      * Scope queries to both the light dom and view of an element and its
      * children.
-     *
+     * 
      * ## Example
-     *
+     * 
      * {@example core/debug/ts/debug_element/debug_element.ts region='scope_all'}
      */
     static all(debugElement:DebugElement):DebugElement[];
-
+    
     /**
      * Scope queries to the light dom of an element and its children.
-     *
+     * 
      * ## Example
-     *
+     * 
      * {@example core/debug/ts/debug_element/debug_element.ts region='scope_light'}
      */
     static light(debugElement:DebugElement):DebugElement[];
-
+    
     /**
      * Scope queries to the view of an element of its children.
-     *
+     * 
      * ## Example
-     *
+     * 
      * {@example core/debug/ts/debug_element/debug_element.ts region='scope_view'}
      */
     static view(debugElement:DebugElement):DebugElement[];
-
+    
   }
 
 
   /**
    * Returns a {@link DebugElement} for an {@link ElementRef}.
-   *
+   * 
    * @param {ElementRef}: elementRef
    * @return {DebugElement}
    */
@@ -392,21 +392,21 @@ declare module core {
   /**
    * Declares an injectable parameter to be a live list of directives or variable
    * bindings from the content children of a directive.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/lY9m8HLy7z06vDoUaSN2?p=preview))
-   *
+   * 
    * Assume that `<tabs>` component would like to get a list its children `<pane>`
    * components as shown in this example:
-   *
+   * 
    * ```html
    * <tabs>
    *   <pane title="Overview">...</pane>
    *   <pane *ngFor="#o of objects" [title]="o.title">{{o.text}}</pane>
    * </tabs>
    * ```
-   *
+   * 
    * The preferred solution is to query for `Pane` directives using this decorator.
-   *
+   * 
    * ```javascript
    * @Component({
    *   selector: 'pane',
@@ -415,7 +415,7 @@ declare module core {
    * class Pane {
    *   title:string;
    * }
-   *
+   * 
    * @Component({
    *  selector: 'tabs',
    *  template: `
@@ -432,32 +432,32 @@ declare module core {
    *  }
    * }
    * ```
-   *
+   * 
    * A query can look for variable bindings by passing in a string with desired binding symbol.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/sT2j25cH1dURAyBRCKx1?p=preview))
    * ```html
    * <seeker>
    *   <div #findme>...</div>
    * </seeker>
-   *
+   * 
    * @Component({ selector: 'seeker' })
    * class Seeker {
    *   constructor(@Query('findme') elList: QueryList<ElementRef>) {...}
    * }
    * ```
-   *
+   * 
    * In this case the object that is injected depend on the type of the variable
    * binding. It can be an ElementRef, a directive or a component.
-   *
+   * 
    * Passing in a comma separated list of variable bindings will query for all of them.
-   *
+   * 
    * ```html
    * <seeker>
    *   <div #find-me>...</div>
    *   <div #find-me-too>...</div>
    * </seeker>
-   *
+   * 
    *  @Component({
    *   selector: 'seeker'
    * })
@@ -465,11 +465,11 @@ declare module core {
    *   constructor(@Query('findMe, findMeToo') elList: QueryList<ElementRef>) {...}
    * }
    * ```
-   *
+   * 
    * Configure whether query looks for direct children or all descendants
    * of the querying element, by using the `descendants` parameter.
    * It is set to `false` by default.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/wtGeB977bv7qvA5FTYl9?p=preview))
    * ```html
    * <container #first>
@@ -480,26 +480,26 @@ declare module core {
    *   </container>
    * </container>
    * ```
-   *
+   * 
    * When querying for items, the first container will see only `a` and `b` by default,
    * but with `Query(TextDirective, {descendants: true})` it will see `c` too.
-   *
+   * 
    * The queried directives are kept in a depth-first pre-order with respect to their
    * positions in the DOM.
-   *
+   * 
    * Query does not look deep into any subcomponent views.
-   *
+   * 
    * Query is updated as part of the change-detection cycle. Since change detection
    * happens after construction of a directive, QueryList will always be empty when observed in the
    * constructor.
-   *
+   * 
    * The injected object is an unmodifiable live list.
    * See {@link QueryList} for more details.
    */
   class QueryMetadata extends DependencyMetadata {
 
     constructor(_selector:Type | string, {descendants, first}?: {descendants?: boolean, first?: boolean});
-
+    
     /**
      * whether we want to query only direct children (false) or all
      * children (true).
@@ -512,17 +512,17 @@ declare module core {
      * always `false` to differentiate it with {@link ViewQueryMetadata}.
      */
     isViewQuery:boolean;
-
+    
     /**
      * what this is querying for.
      */
     selector:any;
-
+    
     /**
      * whether this is querying for a variable binding or a directive.
      */
     isVarBindingQuery:boolean;
-
+    
     /**
      * returns a list of variable bindings this is querying for.
      * Only applicable if this is a variable bindings query.
@@ -530,24 +530,24 @@ declare module core {
     varBindings:string[];
 
     toString():string;
-
+    
   }
 
 
   /**
    * Configures a content query.
-   *
+   * 
    * Content queries are set before the `ngAfterContentInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Directive({
    *   selector: 'someDir'
    * })
    * class SomeDir {
    *   @ContentChildren(ChildDirective) contentChildren: QueryList<ChildDirective>;
-   *
+   * 
    *   ngAfterContentInit() {
    *     // contentChildren is set
    *   }
@@ -557,24 +557,24 @@ declare module core {
   class ContentChildrenMetadata extends QueryMetadata {
 
     constructor(_selector:Type | string, {descendants}?: {descendants?: boolean});
-
+    
   }
 
 
   /**
    * Configures a content query.
-   *
+   * 
    * Content queries are set before the `ngAfterContentInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Directive({
    *   selector: 'someDir'
    * })
    * class SomeDir {
    *   @ContentChild(ChildDirective) contentChild;
-   *
+   * 
    *   ngAfterContentInit() {
    *     // contentChild is set
    *   }
@@ -584,17 +584,17 @@ declare module core {
   class ContentChildMetadata extends QueryMetadata {
 
     constructor(_selector:Type | string);
-
+    
   }
 
 
   /**
    * Configures a view query.
-   *
+   * 
    * View queries are set before the `ngAfterViewInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'someDir',
@@ -603,7 +603,7 @@ declare module core {
    * })
    * class SomeDir {
    *   @ViewChildren(ItemDirective) viewChildren: QueryList<ItemDirective>;
-   *
+   * 
    *   ngAfterViewInit() {
    *     // viewChildren is set
    *   }
@@ -613,16 +613,16 @@ declare module core {
   class ViewChildrenMetadata extends ViewQueryMetadata {
 
     constructor(_selector:Type | string);
-
+    
   }
 
 
   /**
    * Similar to {@link QueryMetadata}, but querying the component view, instead of
    * the content children.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/eNsFHDf7YjyM6IzKxM1j?p=preview))
-   *
+   * 
    * ```javascript
    * @Component({...})
    * @View({
@@ -640,39 +640,39 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * Supports the same querying parameters as {@link QueryMetadata}, except
    * `descendants`. This always queries the whole view.
-   *
+   * 
    * As `shown` is flipped between true and false, items will contain zero of one
    * items.
-   *
+   * 
    * Specifies that a {@link QueryList} should be injected.
-   *
+   * 
    * The injected object is an iterable and observable live list.
    * See {@link QueryList} for more details.
    */
   class ViewQueryMetadata extends QueryMetadata {
 
     constructor(_selector:Type | string, {descendants, first}?: {descendants?: boolean, first?: boolean});
-
+    
     /**
      * always `true` to differentiate it with {@link QueryMetadata}.
      */
     isViewQuery:any;
 
     toString():string;
-
+    
   }
 
 
   /**
    * Configures a view query.
-   *
+   * 
    * View queries are set before the `ngAfterViewInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'someDir',
@@ -681,7 +681,7 @@ declare module core {
    * })
    * class SomeDir {
    *   @ViewChild(ItemDirective) viewChild:ItemDirective;
-   *
+   * 
    *   ngAfterViewInit() {
    *     // viewChild is set
    *   }
@@ -691,25 +691,25 @@ declare module core {
   class ViewChildMetadata extends ViewQueryMetadata {
 
     constructor(_selector:Type | string);
-
+    
   }
 
 
   /**
    * Specifies that a constant attribute value should be injected.
-   *
+   * 
    * The directive can inject constant string literals of host element attributes.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Suppose we have an `<input>` element and want to know its `type`.
-   *
+   * 
    * ```html
    * <input type="text">
    * ```
-   *
+   * 
    * A decorator can inject string literal `text` like so:
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
    */
   class AttributeMetadata extends DependencyMetadata {
@@ -721,34 +721,34 @@ declare module core {
     token:AttributeMetadata;
 
     toString():string;
-
+    
   }
 
 
   /**
    * Declare reusable UI building blocks for an application.
-   *
+   * 
    * Each Angular component requires a single `@Component` annotation. The
    * `@Component`
    * annotation specifies when a component is instantiated, and which properties and hostListeners it
    * binds to.
-   *
+   * 
    * When a component is instantiated, Angular
    * - creates a shadow DOM for the component.
    * - loads the selected template into the shadow DOM.
    * - creates all the injectable objects configured with `providers` and `viewProviders`.
-   *
+   * 
    * All template expressions and statements are then evaluated against the component instance.
-   *
+   * 
    * For details on the `@View` annotation, see {@link ViewMetadata}.
-   *
+   * 
    * ## Lifecycle hooks
-   *
+   * 
    * When the component class implements some {@link angular2/lifecycle_hooks} the callbacks are
    * called by the change detection at defined points in time during the life of the component.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='component'}
    */
   class ComponentMetadata extends DirectiveMetadata {
@@ -782,10 +782,10 @@ declare module core {
     
     /**
      * Defines the used change detection strategy.
-     *
+     * 
      * When a component is instantiated, Angular creates a change detector, which is responsible for
      * propagating the component's bindings.
-     *
+     * 
      * The `changeDetection` property defines, whether the change detection will be checked every time
      * or only when the component tells it to do so.
      */
@@ -793,9 +793,9 @@ declare module core {
     
     /**
      * Defines the set of injectable objects that are visible to its view DOM children.
-     *
+     * 
      * ## Simple Example
-     *
+     * 
      * Here is an example of a class that can be injected:
      * 
      * ```
@@ -804,7 +804,7 @@ declare module core {
      *      return 'Hello ' + name + '!';
      *    }
      * }
-     *
+     * 
      * @Directive({
      *   selector: 'needs-greeter'
      * })
@@ -815,7 +815,7 @@ declare module core {
      *     this.greeter = greeter;
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'greet',
      *   viewProviders: [
@@ -826,7 +826,7 @@ declare module core {
      * })
      * class HelloWorld {
      * }
-     *
+     * 
      * ```
      */
     viewProviders:any[];
@@ -838,7 +838,7 @@ declare module core {
      * Needed to be able to resolve relative urls for templates and styles.
      * In Dart, this can be determined automatically and does not need to be set.
      * In CommonJS, this can always be set to `module.id`.
-     *
+     * 
      * ## Simple Example
      * 
      * ```
@@ -866,27 +866,27 @@ declare module core {
     pipes:Array<Type | any[]>;
 
     encapsulation:ViewEncapsulation;
-
+    
   }
 
 
   /**
    * Directives allow you to attach behavior to elements in the DOM.
-   *
+   * 
    * {@link DirectiveMetadata}s with an embedded view are called {@link ComponentMetadata}s.
-   *
+   * 
    * A directive consists of a single directive annotation and a controller class. When the
    * directive's `selector` matches
    * elements in the DOM, the following steps occur:
-   *
+   * 
    * 1. For each directive, the `ElementInjector` attempts to resolve the directive's constructor
    * arguments.
    * 2. Angular instantiates directives for each matched element using `ElementInjector` in a
    * depth-first order,
    *    as declared in the HTML.
-   *
+   * 
    * ## Understanding How Injection Works
-   *
+   * 
    * There are three stages of injection resolution.
    * - *Pre-existing Injectors*:
    *   - The terminal {@link Injector} cannot resolve dependencies. It either throws an error or, if
@@ -900,24 +900,24 @@ declare module core {
    * - *Element Injectors*: Each component instance has a Shadow DOM. Within the Shadow DOM each
    * element has an `ElementInjector`
    *     which follow the same parent-child hierarchy as the DOM elements themselves.
-   *
+   * 
    * When a template is instantiated, it also must instantiate the corresponding directives in a
    * depth-first order. The
    * current `ElementInjector` resolves the constructor dependencies for each directive.
-   *
+   * 
    * Angular then resolves dependencies as follows, according to the order in which they appear in the
    * {@link ViewMetadata}:
-   *
+   * 
    * 1. Dependencies on the current element
    * 2. Dependencies on element injectors and their parents until it encounters a Shadow DOM boundary
    * 3. Dependencies on component injectors and their parents until it encounters the root component
    * 4. Dependencies on pre-existing injectors
    *
-   *
+   * 
    * The `ElementInjector` can inject other directives, element-specific special objects, or it can
    * delegate to the parent
    * injector.
-   *
+   * 
    * To inject other directives, declare the constructor parameter as:
    * - `directive:DirectiveType`: a directive on the current element only
    * - `@Host() directive:DirectiveType`: any directive that matches the type between the current
@@ -927,21 +927,21 @@ declare module core {
    * directives.
    * - `@QueryDescendants(DirectiveType) query:QueryList<DirectiveType>`: A live collection of any
    * child directives.
-   *
+   * 
    * To inject element-specific special objects, declare the constructor parameter as:
    * - `element: ElementRef` to obtain a reference to logical element in the view.
    * - `viewContainer: ViewContainerRef` to control child template instantiation, for
    * {@link DirectiveMetadata} directives only
    * - `bindingPropagation: BindingPropagation` to control change detection in a more granular way.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example demonstrates how dependency injection resolves constructor arguments in
    * practice.
    *
-   *
+   * 
    * Assume this HTML template:
-   *
+   * 
    * ```
    * <div dependency="1">
    *   <div dependency="2">
@@ -954,14 +954,14 @@ declare module core {
    *   </div>
    * </div>
    * ```
-   *
+   * 
    * With the following `dependency` decorator and `SomeService` injectable class.
-   *
+   * 
    * ```
    * @Injectable()
    * class SomeService {
    * }
-   *
+   * 
    * @Directive({
    *   selector: '[dependency]',
    *   inputs: [
@@ -972,15 +972,15 @@ declare module core {
    *   id:string;
    * }
    * ```
-   *
+   * 
    * Let's step through the different ways in which `MyDirective` could be declared...
    *
-   *
+   * 
    * ### No injection
-   *
+   * 
    * Here the constructor is declared with no arguments, therefore nothing is injected into
    * `MyDirective`.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -988,15 +988,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with no dependencies.
    *
-   *
+   * 
    * ### Component-level injection
-   *
+   * 
    * Directives can inject any injectable instance from the closest component injector or any of its
    * parents.
-   *
+   * 
    * Here, the constructor declares a parameter, `someService`, and injects the `SomeService` type
    * from the parent
    * component's injector.
@@ -1007,14 +1007,14 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a dependency on `SomeService`.
    *
-   *
+   * 
    * ### Injecting a directive from the current element
-   *
+   * 
    * Directives can inject other directives declared on the current element.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -1025,9 +1025,9 @@ declare module core {
    * ```
    * This directive would be instantiated with `Dependency` declared at the same element, in this case
    * `dependency="3"`.
-   *
+   * 
    * ### Injecting a directive from any ancestor elements
-   *
+   * 
    * Directives can inject other directives declared on any ancestor element (in the current Shadow
    * DOM), i.e. on the current element, the
    * parent element, or its parents.
@@ -1039,23 +1039,23 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * `@Host` checks the current element, the parent, as well as its parents recursively. If
    * `dependency="2"` didn't
    * exist on the direct parent, this injection would
    * have returned
    * `dependency="1"`.
    *
-   *
+   * 
    * ### Injecting a live collection of direct child directives
    *
-   *
+   * 
    * A directive can also query for other child directives. Since parent directives are instantiated
    * before child directives, a directive can't simply inject the list of child directives. Instead,
    * the directive injects a {@link QueryList}, which updates its contents as children are added,
    * removed, or moved by a directive that uses a {@link ViewContainerRef} such as a `ngFor`, an
    * `ngIf`, or an `ngSwitch`.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -1063,15 +1063,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a {@link QueryList} which contains `Dependency` 4 and
    * `Dependency` 6. Here, `Dependency` 5 would not be included, because it is not a direct child.
-   *
+   * 
    * ### Injecting a live collection of descendant directives
-   *
+   * 
    * By passing the descendant flag to `@Query` above, we can include the children of the child
    * elements.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -1079,18 +1079,18 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a Query which would contain `Dependency` 4, 5 and 6.
-   *
+   * 
    * ### Optional injection
-   *
+   * 
    * The normal behavior of directives is to return an error when a specified dependency cannot be
    * resolved. If you
    * would like to inject `null` on unresolved dependency instead, you can annotate that dependency
    * with `@Optional()`.
    * This explicitly permits the author of a template to treat some of the surrounding directives as
    * optional.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -1098,15 +1098,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a `Dependency` directive found on the current element.
    * If none can be
    * found, the injector supplies `null` instead of throwing an error.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Here we use a decorator directive to simply define basic tool-tip behavior.
-   *
+   * 
    * ```
    * @Directive({
    *   selector: '[tooltip]',
@@ -1141,39 +1141,39 @@ declare module core {
    * In our HTML template, we can then add this behavior to a `<div>` or any other element with the
    * `tooltip` selector,
    * like so:
-   *
+   * 
    * ```
    * <div tooltip="some text here"></div>
    * ```
-   *
+   * 
    * Directives can also control the instantiation, destruction, and positioning of inline template
    * elements:
-   *
+   * 
    * A directive uses a {@link ViewContainerRef} to instantiate, insert, move, and destroy views at
    * runtime.
    * The {@link ViewContainerRef} is created as a result of `<template>` element, and represents a
    * location in the current view
    * where these actions are performed.
-   *
+   * 
    * Views are always created as children of the current {@link ViewMetadata}, and as siblings of the
    * `<template>` element. Thus a
    * directive in a child view cannot inject the directive that created it.
-   *
+   * 
    * Since directives that create views via ViewContainers are common in Angular, and using the full
    * `<template>` element syntax is wordy, Angular
    * also supports a shorthand notation: `<li *foo="bar">` and `<li template="foo: bar">` are
    * equivalent.
-   *
+   * 
    * Thus,
-   *
+   * 
    * ```
    * <ul>
    *   <li *foo="bar" title="text"></li>
    * </ul>
    * ```
-   *
+   * 
    * Expands in use to:
-   *
+   * 
    * ```
    * <ul>
    *   <template [foo]="bar">
@@ -1181,22 +1181,22 @@ declare module core {
    *   </template>
    * </ul>
    * ```
-   *
+   * 
    * Notice that although the shorthand places `*foo="bar"` within the `<li>` element, the binding for
    * the directive
    * controller is correctly instantiated on the `<template>` element rather than the `<li>` element.
-   *
+   * 
    * ## Lifecycle hooks
-   *
+   * 
    * When the directive class implements some {@link angular2/lifecycle_hooks} the callbacks are
    * called by the change detection at defined points in time during the life of the directive.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Let's suppose we want to implement the `unless` behavior, to conditionally include a template.
-   *
+   * 
    * Here is a simple directive that triggers on an `unless` selector:
-   *
+   * 
    * ```
    * @Directive({
    *   selector: '[unless]',
@@ -1224,17 +1224,17 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * We can then use this `unless` selector in a template:
    * ```
    * <ul>
    *   <li *unless="expr"></li>
    * </ul>
    * ```
-   *
+   * 
    * Once the directive instantiates the child view, the shorthand notation for the template expands
    * and the result is:
-   *
+   * 
    * ```
    * <ul>
    *   <template [unless]="exp">
@@ -1243,7 +1243,7 @@ declare module core {
    *   <li></li>
    * </ul>
    * ```
-   *
+   * 
    * Note also that although the `<li></li>` template still exists inside the `<template></template>`,
    * the instantiated
    * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
@@ -1263,15 +1263,15 @@ declare module core {
       exportAs?: string,
       queries?: {[key: string]: any}
     });
-
+    
     /**
      * The CSS selector that triggers the instantiation of a directive.
-     *
+     * 
      * Angular only allows directives to trigger on CSS selectors that do not cross element
      * boundaries.
-     *
+     * 
      * `selector` may be declared as one of the following:
-     *
+     * 
      * - `element-name`: select by element name.
      * - `.class`: select by class name.
      * - `[attribute]`: select by attribute name.
@@ -1279,41 +1279,41 @@ declare module core {
      * - `:not(sub_selector)`: select only if the element does not match the `sub_selector`.
      * - `selector1, selector2`: select if either `selector1` or `selector2` matches.
      *
-     *
+     * 
      * ### Example
-     *
+     * 
      * Suppose we have a directive with an `input[type=text]` selector.
-     *
+     * 
      * And the following HTML:
-     *
+     * 
      * ```html
      * <form>
      *   <input type="text">
      *   <input type="radio">
      * <form>
      * ```
-     *
+     * 
      * The directive would only be instantiated on the `<input type="text">` element.
      */
     selector:string;
-
+    
     /**
      * Enumerates the set of data-bound input properties for a directive
-     *
+     * 
      * Angular automatically updates input properties during change detection.
-     *
+     * 
      * The `inputs` property defines a set of `directiveProperty` to `bindingProperty`
      * configuration:
-     *
+     * 
      * - `directiveProperty` specifies the component property where the value is written.
      * - `bindingProperty` specifies the DOM property where the value is read from.
-     *
+     * 
      * When `bindingProperty` is not provided, it is assumed to be equal to `directiveProperty`.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/ivhfXY?p=preview))
-     *
+     * 
      * The following example creates a component with two data-bound properties.
-     *
+     * 
      * ```typescript
      * @Component({
      *   selector: 'bank-account',
@@ -1330,7 +1330,7 @@ declare module core {
      *   // this property is not bound, and won't be automatically updated by Angular
      *   normalizedBankName: string;
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   template: `
@@ -1339,28 +1339,28 @@ declare module core {
      *   directives: [BankAccount]
      * })
      * class App {}
-     *
+     * 
      * bootstrap(App);
      * ```
      */
     inputs:string[];
 
     properties:string[];
-
+    
     /**
      * Enumerates the set of event-bound output properties.
-     *
+     * 
      * When an output property emits an event, an event handler attached to that event
      * the template is invoked.
-     *
+     * 
      * The `outputs` property defines a set of `directiveProperty` to `bindingProperty`
      * configuration:
-     *
+     * 
      * - `directiveProperty` specifies the component property that emits events.
      * - `bindingProperty` specifies the DOM property the event handler is attached to.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/d5CNq7?p=preview))
-     *
+     * 
      * ```typescript
      * @Directive({
      *   selector: 'interval-dir',
@@ -1375,7 +1375,7 @@ declare module core {
      *     setInterval(() => this.five5Secs.emit("event"), 5000);
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   template: `
@@ -1394,30 +1394,30 @@ declare module core {
     outputs:string[];
 
     events:string[];
-
+    
     /**
      * Specify the events, actions, properties and attributes related to the host element.
-     *
+     * 
      * ## Host Listeners
-     *
+     * 
      * Specifies which DOM events a directive listens to via a set of `(event)` to `method`
      * key-value pairs:
-     *
+     * 
      * - `event`: the DOM event that the directive listens to.
      * - `statement`: the statement to execute when the event occurs.
      * If the evaluation of the statement returns `false`, then `preventDefault`is applied on the DOM
      * event.
-     *
+     * 
      * To listen to global events, a target must be added to the event name.
      * The target can be `window`, `document` or `body`.
-     *
+     * 
      * When writing a directive event binding, you can also refer to the $event local variable.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/DlA5KU?p=preview))
-     *
+     * 
      * The following example declares a directive that attaches a click listener to the button and
      * counts clicks.
-     *
+     * 
      * ```typescript
      * @Directive({
      *   selector: 'button[counting]',
@@ -1432,29 +1432,29 @@ declare module core {
      *     console.log("button", btn, "number of clicks:", this.numberOfClicks++);
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   template: `<button counting>Increment</button>`,
      *   directives: [CountClicks]
      * })
      * class App {}
-     *
+     * 
      * bootstrap(App);
      * ```
-     *
+     * 
      * ## Host Property Bindings
-     *
+     * 
      * Specifies which DOM properties a directive updates.
-     *
+     * 
      * Angular automatically checks host property bindings during change detection.
      * If a binding changes, it will update the host element of the directive.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/gNg0ED?p=preview))
-     *
+     * 
      * The following example creates a directive that sets the `valid` and `invalid` classes
      * on the DOM element that has ngModel directive on it.
-     *
+     * 
      * ```typescript
      * @Directive({
      *   selector: '[ngModel]',
@@ -1468,7 +1468,7 @@ declare module core {
      *   get valid { return this.control.valid; }
      *   get invalid { return this.control.invalid; }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   template: `<input [(ngModel)]="prop">`,
@@ -1477,19 +1477,19 @@ declare module core {
      * class App {
      *   prop;
      * }
-     *
+     * 
      * bootstrap(App);
      * ```
-     *
+     * 
      * ## Attributes
-     *
+     * 
      * Specifies static attributes that should be propagated to a host element.
-     *
+     * 
      * ### Example
-     *
+     * 
      * In this example using `my-button` directive (ex.: `<div my-button></div>`) on a host element
      * (here: `<div>` ) will ensure that this element will get the "button" role.
-     *
+     * 
      * ```typescript
      * @Directive({
      *   selector: '[my-button]',
@@ -1502,22 +1502,22 @@ declare module core {
      * ```
      */
     host:{[key: string]: string};
-
+    
     /**
      * Defines the set of injectable objects that are visible to a Directive and its light DOM
      * children.
-     *
+     * 
      * ## Simple Example
-     *
+     * 
      * Here is an example of a class that can be injected:
-     *
+     * 
      * ```
      * class Greeter {
      *    greet(name:string) {
      *      return 'Hello ' + name + '!';
      *    }
      * }
-     *
+     * 
      * @Directive({
      *   selector: 'greet',
      *   bindings: [
@@ -1534,17 +1534,17 @@ declare module core {
      * ```
      */
     providers:any[];
-
+    
     /**
      * @deprecated
      */
     bindings:any[];
-
+    
     /**
      * Defines the name that can be used in the template to assign this directive to a variable.
-     *
+     * 
      * ## Simple Example
-     *
+     * 
      * ```
      * @Directive({
      *   selector: 'child-dir',
@@ -1552,7 +1552,7 @@ declare module core {
      * })
      * class ChildDir {
      * }
-     *
+     * 
      * @Component({
      *   selector: 'main',
      *   template: `<child-dir #c="child"></child-dir>`,
@@ -1560,19 +1560,19 @@ declare module core {
      * })
      * class MainComponent {
      * }
-     *
+     * 
      * ```
      */
     exportAs:string;
-
+    
     /**
      * Configures the queries that will be injected into the directive.
-     *
+     * 
      * Content queries are set before the `ngAfterContentInit` callback is called.
      * View queries are set before the `ngAfterViewInit` callback is called.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @Component({
      *   selector: 'someDir',
@@ -1598,19 +1598,19 @@ declare module core {
      * ```
      */
     queries:{[key: string]: any};
-
+    
   }
 
 
   /**
    * Declare reusable pipe function.
-   *
+   * 
    * A "pure" pipe is only re-evaluated when either the input or any of the arguments change.
-   *
+   * 
    * When not specified, pipes default to being pure.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   class PipeMetadata extends InjectableMetadata {
@@ -1620,23 +1620,23 @@ declare module core {
     name:string;
 
     pure:boolean;
-
+    
   }
 
 
   /**
    * Declares a data-bound input property.
-   *
+   * 
    * Angular automatically updates data-bound properties during change detection.
-   *
+   * 
    * `InputMetadata` takes an optional parameter that specifies the name
    * used when instantiating a component in the template. When not provided,
    * the name of the decorated property is used.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example creates a component with two input properties.
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'bank-account',
@@ -1648,11 +1648,11 @@ declare module core {
    * class BankAccount {
    *   @Input() bankName: string;
    *   @Input('account-id') id: string;
-   *
+   * 
    *   // this property is not bound, and won't be automatically updated by Angular
    *   normalizedBankName: string;
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -1661,34 +1661,34 @@ declare module core {
    *   directives: [BankAccount]
    * })
    * class App {}
-   *
+   * 
    * bootstrap(App);
    * ```
    */
   class InputMetadata {
 
     constructor(bindingPropertyName?:string);
-
+    
     /**
      * Name used when instantiating a component in the temlate.
      */
     bindingPropertyName:string;
-
+    
   }
 
 
   /**
    * Declares an event-bound output property.
-   *
+   * 
    * When an output property emits an event, an event handler attached to that event
    * the template is invoked.
-   *
+   * 
    * `OutputMetadata` takes an optional parameter that specifies the name
    * used when instantiating a component in the template. When not provided,
    * the name of the decorated property is used.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * @Directive({
    *   selector: 'interval-dir',
@@ -1696,13 +1696,13 @@ declare module core {
    * class IntervalDir {
    *   @Output() everySecond = new EventEmitter();
    *   @Output('everyFiveSeconds') five5Secs = new EventEmitter();
-   *
+   * 
    *   constructor() {
    *     setInterval(() => this.everySecond.emit("event"), 1000);
    *     setInterval(() => this.five5Secs.emit("event"), 5000);
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -1723,25 +1723,25 @@ declare module core {
     constructor(bindingPropertyName?:string);
 
     bindingPropertyName:string;
-
+    
   }
 
 
   /**
    * Declares a host property binding.
-   *
+   * 
    * Angular automatically checks host property bindings during change detection.
    * If a binding changes, it will update the host element of the directive.
-   *
+   * 
    * `HostBindingMetadata` takes an optional parameter that specifies the property
    * name of the host element that will be updated. When not provided,
    * the class property name is used.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example creates a directive that sets the `valid` and `invalid` classes
    * on the DOM element that has ngModel directive on it.
-   *
+   * 
    * ```typescript
    * @Directive({selector: '[ngModel]'})
    * class NgModelStatus {
@@ -1749,7 +1749,7 @@ declare module core {
    *   @HostBinding('[class.valid]') get valid { return this.control.valid; }
    *   @HostBinding('[class.invalid]') get invalid { return this.control.invalid; }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `<input [(ngModel)]="prop">`,
@@ -1758,7 +1758,7 @@ declare module core {
    * class App {
    *   prop;
    * }
-   *
+   * 
    * bootstrap(App);
    * ```
    */
@@ -1767,23 +1767,23 @@ declare module core {
     constructor(hostPropertyName?:string);
 
     hostPropertyName:string;
-
+    
   }
 
 
   /**
    * Declares a host listener.
-   *
+   * 
    * Angular will invoke the decorated method when the host element emits the specified event.
-   *
+   * 
    * If the decorated method returns `false`, then `preventDefault` is applied on the DOM
    * event.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example declares a directive that attaches a click listener to the button and
    * counts clicks.
-   *
+   * 
    * ```typescript
    * @Directive({selector: 'button[counting]'})
    * class CountClicks {
@@ -1794,14 +1794,14 @@ declare module core {
    *     console.log("button", btn, "number of clicks:", this.numberOfClicks++);
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `<button counting>Increment</button>`,
    *   directives: [CountClicks]
    * })
    * class App {}
-   *
+   * 
    * bootstrap(App);
    * ```
    */
@@ -1812,24 +1812,24 @@ declare module core {
     eventName:string;
 
     args:string[];
-
+    
   }
 
 
   /**
    * Metadata properties available for configuring Views.
-   *
+   * 
    * Each Angular component requires a single `@Component` and at least one `@View` annotation. The
    * `@View` annotation specifies the HTML template to use, and lists the directives that are active
    * within the template.
-   *
+   * 
    * When a component is instantiated, the template is loaded into the component's shadow root, and
    * the expressions and statements in the template are evaluated against the component.
-   *
+   * 
    * For details on the `@Component` annotation, see {@link ComponentMetadata}.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'greet',
@@ -1856,42 +1856,42 @@ declare module core {
       styles?: string[],
       styleUrls?: string[],
     });
-
+    
     /**
      * Specifies a template URL for an Angular component.
-     *
+     * 
      * NOTE: Only one of `templateUrl` or `template` can be defined per View.
-     *
+     * 
      * <!-- TODO: what's the url relative to? -->
      */
     templateUrl:string;
-
+    
     /**
      * Specifies an inline template for an Angular component.
-     *
+     * 
      * NOTE: Only one of `templateUrl` or `template` can be defined per View.
      */
     template:string;
-
+    
     /**
      * Specifies stylesheet URLs for an Angular component.
-     *
+     * 
      * <!-- TODO: what's the url relative to? -->
      */
     styleUrls:string[];
-
+    
     /**
      * Specifies an inline stylesheet for an Angular component.
      */
     styles:string[];
-
+    
     /**
      * Specifies a list of directives that can be used within a template.
-     *
+     * 
      * Directives must be listed explicitly to provide proper component encapsulation.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```javascript
      * @Component({
      *   selector: 'my-component',
@@ -1916,13 +1916,13 @@ declare module core {
      * otherwise {@link ViewEncapsulation#None `ViewEncapsulation.None`}.
      */
     encapsulation:ViewEncapsulation;
-
+    
   }
 
 
   /**
    * Defines template and style encapsulation options available for Component's {@link View}.
-   *
+   * 
    * See {@link ViewMetadata#encapsulation}.
    */
   enum ViewEncapsulation {
@@ -1932,14 +1932,14 @@ declare module core {
      * Element and pre-processing the style rules provided via
      * {@link ViewMetadata#styles} or {@link ViewMetadata#stylesUrls}, and adding the new Host Element
      * attribute to all selectors.
-     *
+     * 
      * This is the default option.
      */
     Emulated,
     
     /**
      * Use the native encapsulation mechanism of the renderer.
-     *
+     * 
      * For the DOM this means using [Shadow DOM](https://w3c.github.io/webcomponents/spec/shadow/) and
      * creating a ShadowRoot for Component's Host Element.
      */
@@ -1954,7 +1954,7 @@ declare module core {
 
   /**
    * Interface for the {@link DirectiveMetadata} decorator function.
-   *
+   * 
    * See {@link DirectiveFactory}.
    */
   interface DirectiveDecorator extends TypeDecorator {
@@ -1964,7 +1964,7 @@ declare module core {
 
   /**
    * Interface for the {@link ComponentMetadata} decorator function.
-   *
+   * 
    * See {@link ComponentFactory}.
    */
   interface ComponentDecorator extends TypeDecorator {
@@ -1981,13 +1981,13 @@ declare module core {
       styles?: string[],
       styleUrls?: string[],
     }): ViewDecorator;
-
+    
   }
 
 
   /**
    * Interface for the {@link ViewMetadata} decorator function.
-   *
+   * 
    * See {@link ViewFactory}.
    */
   interface ViewDecorator extends TypeDecorator {
@@ -2004,19 +2004,19 @@ declare module core {
       styles?: string[],
       styleUrls?: string[],
     }): ViewDecorator;
-
+    
   }
 
 
   /**
    * {@link DirectiveMetadata} factory for creating annotations, decorators or DSL.
-   *
+   * 
    * ### Example as TypeScript Decorator
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='directive'}
-   *
+   * 
    * ### Example as ES5 DSL
-   *
+   * 
    * ```
    * var MyDirective = ng
    *   .Directive({...})
@@ -2026,14 +2026,14 @@ declare module core {
    *     }
    *   })
    * ```
-   *
+   * 
    * ### Example as ES5 annotation
-   *
+   * 
    * ```
    * var MyDirective = function() {
    *   ...
    * };
-   *
+   * 
    * MyDirective.annotations = [
    *   new ng.Directive({...})
    * ]
@@ -2066,19 +2066,19 @@ declare module core {
       exportAs?: string,
       queries?: {[key: string]: any}
     }): DirectiveDecorator;
-
+    
   }
 
 
   /**
    * {@link ComponentMetadata} factory for creating annotations, decorators or DSL.
-   *
+   * 
    * ### Example as TypeScript Decorator
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='component'}
-   *
+   * 
    * ### Example as ES5 DSL
-   *
+   * 
    * ```
    * var MyComponent = ng
    *   .Component({...})
@@ -2088,14 +2088,14 @@ declare module core {
    *     }
    *   })
    * ```
-   *
+   * 
    * ### Example as ES5 annotation
-   *
+   * 
    * ```
    * var MyComponent = function() {
    *   ...
    * };
-   *
+   * 
    * MyComponent.annotations = [
    *   new ng.Component({...})
    * ]
@@ -2153,18 +2153,18 @@ declare module core {
       pipes?: Array<Type | any[]>,
       encapsulation?: ViewEncapsulation
     }): ComponentDecorator;
-
+    
   }
 
 
   /**
    * {@link ViewMetadata} factory for creating annotations, decorators or DSL.
-   *
+   * 
    * ### Example as TypeScript Decorator
-   *
+   * 
    * ```
    * import {Component, View} from "angular2/core";
-   *
+   * 
    * @Component({...})
    * @View({...})
    * class MyComponent {
@@ -2173,9 +2173,9 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * ### Example as ES5 DSL
-   *
+   * 
    * ```
    * var MyComponent = ng
    *   .Component({...})
@@ -2186,14 +2186,14 @@ declare module core {
    *     }
    *   })
    * ```
-   *
+   * 
    * ### Example as ES5 annotation
-   *
+   * 
    * ```
    * var MyComponent = function() {
    *   ...
    * };
-   *
+   * 
    * MyComponent.annotations = [
    *   new ng.Component({...}),
    *   new ng.View({...})
@@ -2221,19 +2221,19 @@ declare module core {
       styles?: string[],
       styleUrls?: string[],
     }): ViewDecorator;
-
+    
   }
 
 
   /**
    * {@link AttributeMetadata} factory for creating annotations, decorators or DSL.
-   *
+   * 
    * ### Example as TypeScript Decorator
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='attributeFactory'}
-   *
+   * 
    * ### Example as ES5 DSL
-   *
+   * 
    * ```
    * var MyComponent = ng
    *   .Component({...})
@@ -2243,14 +2243,14 @@ declare module core {
    *     }]
    *   })
    * ```
-   *
+   * 
    * ### Example as ES5 annotation
-   *
+   * 
    * ```
    * var MyComponent = function(title) {
    *   ...
    * };
-   *
+   * 
    * MyComponent.annotations = [
    *   new ng.Component({...})
    * ]
@@ -2264,18 +2264,18 @@ declare module core {
     new(name:string): AttributeMetadata;
 
     (name:string): TypeDecorator;
-
+    
   }
 
 
   /**
    * {@link QueryMetadata} factory for creating annotations, decorators or DSL.
-   *
+   * 
    * ### Example as TypeScript Decorator
-   *
+   * 
    * ```
    * import {Query, QueryList, Component} from "angular2/core";
-   *
+   * 
    * @Component({...})
    * class MyComponent {
    *   constructor(@Query(SomeType) queryList: QueryList<SomeType>) {
@@ -2283,9 +2283,9 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * ### Example as ES5 DSL
-   *
+   * 
    * ```
    * var MyComponent = ng
    *   .Component({...})
@@ -2295,14 +2295,14 @@ declare module core {
    *     }]
    *   })
    * ```
-   *
+   * 
    * ### Example as ES5 annotation
-   *
+   * 
    * ```
    * var MyComponent = function(queryList) {
    *   ...
    * };
-   *
+   * 
    * MyComponent.annotations = [
    *   new ng.Component({...})
    * ]
@@ -2316,7 +2316,7 @@ declare module core {
     new(selector:Type | string, {descendants}?: {descendants?: boolean}): QueryMetadata;
 
     (selector:Type | string, {descendants}?: {descendants?: boolean}): ParameterDecorator;
-
+    
   }
 
 
@@ -2328,7 +2328,7 @@ declare module core {
     new(selector:Type | string, {descendants}?: {descendants?: boolean}): ContentChildrenMetadata;
 
     (selector:Type | string, {descendants}?: {descendants?: boolean}): any;
-
+    
   }
 
 
@@ -2340,7 +2340,7 @@ declare module core {
     new(selector:Type | string): ContentChildFactory;
 
     (selector:Type | string): any;
-
+    
   }
 
 
@@ -2352,7 +2352,7 @@ declare module core {
     new(selector:Type | string): ViewChildrenMetadata;
 
     (selector:Type | string): any;
-
+    
   }
 
 
@@ -2364,15 +2364,15 @@ declare module core {
     new(selector:Type | string): ViewChildFactory;
 
     (selector:Type | string): any;
-
+    
   }
 
 
   /**
    * {@link PipeMetadata} factory for creating decorators.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   interface PipeFactory {
@@ -2380,13 +2380,13 @@ declare module core {
     new(obj:{name: string, pure?: boolean}): any;
 
     (obj:{name: string, pure?: boolean}): any;
-
+    
   }
 
 
   /**
    * {@link InputMetadata} factory for creating decorators.
-   *
+   * 
    * See {@link InputMetadata}.
    */
   interface InputFactory {
@@ -2394,13 +2394,13 @@ declare module core {
     new(bindingPropertyName?:string): any;
 
     (bindingPropertyName?:string): any;
-
+    
   }
 
 
   /**
    * {@link OutputMetadata} factory for creating decorators.
-   *
+   * 
    * See {@link OutputMetadata}.
    */
   interface OutputFactory {
@@ -2408,7 +2408,7 @@ declare module core {
     new(bindingPropertyName?:string): any;
 
     (bindingPropertyName?:string): any;
-
+    
   }
 
 
@@ -2420,7 +2420,7 @@ declare module core {
     new(hostPropertyName?:string): any;
 
     (hostPropertyName?:string): any;
-
+    
   }
 
 
@@ -2432,34 +2432,34 @@ declare module core {
     new(eventName:string, args?:string[]): any;
 
     (eventName:string, args?:string[]): any;
-
+    
   }
 
 
   /**
    * Declare reusable UI building blocks for an application.
-   *
+   * 
    * Each Angular component requires a single `@Component` and at least one `@View` annotation. The
    * `@Component`
    * annotation specifies when a component is instantiated, and which properties and hostListeners it
    * binds to.
-   *
+   * 
    * When a component is instantiated, Angular
    * - creates a shadow DOM for the component.
    * - loads the selected template into the shadow DOM.
    * - creates all the injectable objects configured with `providers` and `viewProviders`.
-   *
+   * 
    * All template expressions and statements are then evaluated against the component instance.
-   *
+   * 
    * For details on the `@View` annotation, see {@link ViewMetadata}.
-   *
+   * 
    * ## Lifecycle hooks
-   *
+   * 
    * When the component class implements some {@link angular2/lifecycle_hooks} the callbacks are
    * called by the change detection at defined points in time during the life of the component.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='component'}
    */
   var Component:ComponentFactory;
@@ -2467,21 +2467,21 @@ declare module core {
 
   /**
    * Directives allow you to attach behavior to elements in the DOM.
-   *
+   * 
    * {@link DirectiveMetadata}s with an embedded view are called {@link ComponentMetadata}s.
-   *
+   * 
    * A directive consists of a single directive annotation and a controller class. When the
    * directive's `selector` matches
    * elements in the DOM, the following steps occur:
-   *
+   * 
    * 1. For each directive, the `ElementInjector` attempts to resolve the directive's constructor
    * arguments.
    * 2. Angular instantiates directives for each matched element using `ElementInjector` in a
    * depth-first order,
    *    as declared in the HTML.
-   *
+   * 
    * ## Understanding How Injection Works
-   *
+   * 
    * There are three stages of injection resolution.
    * - *Pre-existing Injectors*:
    *   - The terminal {@link Injector} cannot resolve dependencies. It either throws an error or, if
@@ -2495,24 +2495,24 @@ declare module core {
    * - *Element Injectors*: Each component instance has a Shadow DOM. Within the Shadow DOM each
    * element has an `ElementInjector`
    *     which follow the same parent-child hierarchy as the DOM elements themselves.
-   *
+   * 
    * When a template is instantiated, it also must instantiate the corresponding directives in a
    * depth-first order. The
    * current `ElementInjector` resolves the constructor dependencies for each directive.
-   *
+   * 
    * Angular then resolves dependencies as follows, according to the order in which they appear in the
    * {@link ViewMetadata}:
-   *
+   * 
    * 1. Dependencies on the current element
    * 2. Dependencies on element injectors and their parents until it encounters a Shadow DOM boundary
    * 3. Dependencies on component injectors and their parents until it encounters the root component
    * 4. Dependencies on pre-existing injectors
    *
-   *
+   * 
    * The `ElementInjector` can inject other directives, element-specific special objects, or it can
    * delegate to the parent
    * injector.
-   *
+   * 
    * To inject other directives, declare the constructor parameter as:
    * - `directive:DirectiveType`: a directive on the current element only
    * - `@Host() directive:DirectiveType`: any directive that matches the type between the current
@@ -2522,21 +2522,21 @@ declare module core {
    * directives.
    * - `@QueryDescendants(DirectiveType) query:QueryList<DirectiveType>`: A live collection of any
    * child directives.
-   *
+   * 
    * To inject element-specific special objects, declare the constructor parameter as:
    * - `element: ElementRef` to obtain a reference to logical element in the view.
    * - `viewContainer: ViewContainerRef` to control child template instantiation, for
    * {@link DirectiveMetadata} directives only
    * - `bindingPropagation: BindingPropagation` to control change detection in a more granular way.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example demonstrates how dependency injection resolves constructor arguments in
    * practice.
    *
-   *
+   * 
    * Assume this HTML template:
-   *
+   * 
    * ```
    * <div dependency="1">
    *   <div dependency="2">
@@ -2549,14 +2549,14 @@ declare module core {
    *   </div>
    * </div>
    * ```
-   *
+   * 
    * With the following `dependency` decorator and `SomeService` injectable class.
-   *
+   * 
    * ```
    * @Injectable()
    * class SomeService {
    * }
-   *
+   * 
    * @Directive({
    *   selector: '[dependency]',
    *   inputs: [
@@ -2567,15 +2567,15 @@ declare module core {
    *   id:string;
    * }
    * ```
-   *
+   * 
    * Let's step through the different ways in which `MyDirective` could be declared...
    *
-   *
+   * 
    * ### No injection
-   *
+   * 
    * Here the constructor is declared with no arguments, therefore nothing is injected into
    * `MyDirective`.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -2583,15 +2583,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with no dependencies.
    *
-   *
+   * 
    * ### Component-level injection
-   *
+   * 
    * Directives can inject any injectable instance from the closest component injector or any of its
    * parents.
-   *
+   * 
    * Here, the constructor declares a parameter, `someService`, and injects the `SomeService` type
    * from the parent
    * component's injector.
@@ -2602,14 +2602,14 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a dependency on `SomeService`.
    *
-   *
+   * 
    * ### Injecting a directive from the current element
-   *
+   * 
    * Directives can inject other directives declared on the current element.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -2620,9 +2620,9 @@ declare module core {
    * ```
    * This directive would be instantiated with `Dependency` declared at the same element, in this case
    * `dependency="3"`.
-   *
+   * 
    * ### Injecting a directive from any ancestor elements
-   *
+   * 
    * Directives can inject other directives declared on any ancestor element (in the current Shadow
    * DOM), i.e. on the current element, the
    * parent element, or its parents.
@@ -2634,23 +2634,23 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * `@Host` checks the current element, the parent, as well as its parents recursively. If
    * `dependency="2"` didn't
    * exist on the direct parent, this injection would
    * have returned
    * `dependency="1"`.
    *
-   *
+   * 
    * ### Injecting a live collection of direct child directives
    *
-   *
+   * 
    * A directive can also query for other child directives. Since parent directives are instantiated
    * before child directives, a directive can't simply inject the list of child directives. Instead,
    * the directive injects a {@link QueryList}, which updates its contents as children are added,
    * removed, or moved by a directive that uses a {@link ViewContainerRef} such as a `ngFor`, an
    * `ngIf`, or an `ngSwitch`.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -2658,15 +2658,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a {@link QueryList} which contains `Dependency` 4 and
    * 6. Here, `Dependency` 5 would not be included, because it is not a direct child.
-   *
+   * 
    * ### Injecting a live collection of descendant directives
-   *
+   * 
    * By passing the descendant flag to `@Query` above, we can include the children of the child
    * elements.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -2674,18 +2674,18 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a Query which would contain `Dependency` 4, 5 and 6.
-   *
+   * 
    * ### Optional injection
-   *
+   * 
    * The normal behavior of directives is to return an error when a specified dependency cannot be
    * resolved. If you
    * would like to inject `null` on unresolved dependency instead, you can annotate that dependency
    * with `@Optional()`.
    * This explicitly permits the author of a template to treat some of the surrounding directives as
    * optional.
-   *
+   * 
    * ```
    * @Directive({ selector: '[my-directive]' })
    * class MyDirective {
@@ -2693,15 +2693,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * This directive would be instantiated with a `Dependency` directive found on the current element.
    * If none can be
    * found, the injector supplies `null` instead of throwing an error.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Here we use a decorator directive to simply define basic tool-tip behavior.
-   *
+   * 
    * ```
    * @Directive({
    *   selector: '[tooltip]',
@@ -2736,39 +2736,39 @@ declare module core {
    * In our HTML template, we can then add this behavior to a `<div>` or any other element with the
    * `tooltip` selector,
    * like so:
-   *
+   * 
    * ```
    * <div tooltip="some text here"></div>
    * ```
-   *
+   * 
    * Directives can also control the instantiation, destruction, and positioning of inline template
    * elements:
-   *
+   * 
    * A directive uses a {@link ViewContainerRef} to instantiate, insert, move, and destroy views at
    * runtime.
    * The {@link ViewContainerRef} is created as a result of `<template>` element, and represents a
    * location in the current view
    * where these actions are performed.
-   *
+   * 
    * Views are always created as children of the current {@link ViewMetadata}, and as siblings of the
    * `<template>` element. Thus a
    * directive in a child view cannot inject the directive that created it.
-   *
+   * 
    * Since directives that create views via ViewContainers are common in Angular, and using the full
    * `<template>` element syntax is wordy, Angular
    * also supports a shorthand notation: `<li *foo="bar">` and `<li template="foo: bar">` are
    * equivalent.
-   *
+   * 
    * Thus,
-   *
+   * 
    * ```
    * <ul>
    *   <li *foo="bar" title="text"></li>
    * </ul>
    * ```
-   *
+   * 
    * Expands in use to:
-   *
+   * 
    * ```
    * <ul>
    *   <template [foo]="bar">
@@ -2776,22 +2776,22 @@ declare module core {
    *   </template>
    * </ul>
    * ```
-   *
+   * 
    * Notice that although the shorthand places `*foo="bar"` within the `<li>` element, the binding for
    * the directive
    * controller is correctly instantiated on the `<template>` element rather than the `<li>` element.
-   *
+   * 
    * ## Lifecycle hooks
-   *
+   * 
    * When the directive class implements some {@link angular2/lifecycle_hooks} the callbacks are
    * called by the change detection at defined points in time during the life of the directive.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Let's suppose we want to implement the `unless` behavior, to conditionally include a template.
-   *
+   * 
    * Here is a simple directive that triggers on an `unless` selector:
-   *
+   * 
    * ```
    * @Directive({
    *   selector: '[unless]',
@@ -2819,17 +2819,17 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * We can then use this `unless` selector in a template:
    * ```
    * <ul>
    *   <li *unless="expr"></li>
    * </ul>
    * ```
-   *
+   * 
    * Once the directive instantiates the child view, the shorthand notation for the template expands
    * and the result is:
-   *
+   * 
    * ```
    * <ul>
    *   <template [unless]="exp">
@@ -2838,7 +2838,7 @@ declare module core {
    *   <li></li>
    * </ul>
    * ```
-   *
+   * 
    * Note also that although the `<li></li>` template still exists inside the `<template></template>`,
    * the instantiated
    * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
@@ -2848,18 +2848,18 @@ declare module core {
 
   /**
    * Metadata properties available for configuring Views.
-   *
+   * 
    * Each Angular component requires a single `@Component` and at least one `@View` annotation. The
    * `@View` annotation specifies the HTML template to use, and lists the directives that are active
    * within the template.
-   *
+   * 
    * When a component is instantiated, the template is loaded into the component's shadow root, and
    * the expressions and statements in the template are evaluated against the component.
-   *
+   * 
    * For details on the `@Component` annotation, see {@link ComponentMetadata}.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'greet',
@@ -2880,19 +2880,19 @@ declare module core {
 
   /**
    * Specifies that a constant attribute value should be injected.
-   *
+   * 
    * The directive can inject constant string literals of host element attributes.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Suppose we have an `<input>` element and want to know its `type`.
-   *
+   * 
    * ```html
    * <input type="text">
    * ```
-   *
+   * 
    * A decorator can inject string literal `text` like so:
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
    */
   var Attribute:AttributeFactory;
@@ -2901,21 +2901,21 @@ declare module core {
   /**
    * Declares an injectable parameter to be a live list of directives or variable
    * bindings from the content children of a directive.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/lY9m8HLy7z06vDoUaSN2?p=preview))
-   *
+   * 
    * Assume that `<tabs>` component would like to get a list its children `<pane>`
    * components as shown in this example:
-   *
+   * 
    * ```html
    * <tabs>
    *   <pane title="Overview">...</pane>
    *   <pane *ngFor="#o of objects" [title]="o.title">{{o.text}}</pane>
    * </tabs>
    * ```
-   *
+   * 
    * The preferred solution is to query for `Pane` directives using this decorator.
-   *
+   * 
    * ```javascript
    * @Component({
    *   selector: 'pane',
@@ -2924,7 +2924,7 @@ declare module core {
    * class Pane {
    *   title:string;
    * }
-   *
+   * 
    * @Component({
    *  selector: 'tabs',
    *  template: `
@@ -2941,32 +2941,32 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * A query can look for variable bindings by passing in a string with desired binding symbol.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/sT2j25cH1dURAyBRCKx1?p=preview))
    * ```html
    * <seeker>
    *   <div #findme>...</div>
    * </seeker>
-   *
+   * 
    * @Component({ selector: 'foo' })
    * class seeker {
    *   constructor(@Query('findme') elList: QueryList<ElementRef>) {...}
    * }
    * ```
-   *
+   * 
    * In this case the object that is injected depend on the type of the variable
    * binding. It can be an ElementRef, a directive or a component.
-   *
+   * 
    * Passing in a comma separated list of variable bindings will query for all of them.
-   *
+   * 
    * ```html
    * <seeker>
    *   <div #findMe>...</div>
    *   <div #findMeToo>...</div>
    * </seeker>
-   *
+   * 
    *  @Component({
    *   selector: 'foo'
    * })
@@ -2974,11 +2974,11 @@ declare module core {
    *   constructor(@Query('findMe, findMeToo') elList: QueryList<ElementRef>) {...}
    * }
    * ```
-   *
+   * 
    * Configure whether query looks for direct children or all descendants
    * of the querying element, by using the `descendants` parameter.
    * It is set to `false` by default.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/wtGeB977bv7qvA5FTYl9?p=preview))
    * ```html
    * <container #first>
@@ -2989,19 +2989,19 @@ declare module core {
    *   </container>
    * </container>
    * ```
-   *
+   * 
    * When querying for items, the first container will see only `a` and `b` by default,
    * but with `Query(TextDirective, {descendants: true})` it will see `c` too.
-   *
+   * 
    * The queried directives are kept in a depth-first pre-order with respect to their
    * positions in the DOM.
-   *
+   * 
    * Query does not look deep into any subcomponent views.
-   *
+   * 
    * Query is updated as part of the change-detection cycle. Since change detection
    * happens after construction of a directive, QueryList will always be empty when observed in the
    * constructor.
-   *
+   * 
    * The injected object is an unmodifiable live list.
    * See {@link QueryList} for more details.
    */
@@ -3010,18 +3010,18 @@ declare module core {
 
   /**
    * Configures a content query.
-   *
+   * 
    * Content queries are set before the `ngAfterContentInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Directive({
    *   selector: 'someDir'
    * })
    * class SomeDir {
    *   @ContentChildren(ChildDirective) contentChildren: QueryList<ChildDirective>;
-   *
+   * 
    *   ngAfterContentInit() {
    *     // contentChildren is set
    *   }
@@ -3033,18 +3033,18 @@ declare module core {
 
   /**
    * Configures a content query.
-   *
+   * 
    * Content queries are set before the `ngAfterContentInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Directive({
    *   selector: 'someDir'
    * })
    * class SomeDir {
    *   @ContentChild(ChildDirective) contentChild;
-   *
+   * 
    *   ngAfterContentInit() {
    *     // contentChild is set
    *   }
@@ -3056,11 +3056,11 @@ declare module core {
 
   /**
    * Configures a view query.
-   *
+   * 
    * View queries are set before the `ngAfterViewInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'someDir',
@@ -3069,7 +3069,7 @@ declare module core {
    * })
    * class SomeDir {
    *   @ViewChildren(ItemDirective) viewChildren: QueryList<ItemDirective>;
-   *
+   * 
    *   ngAfterViewInit() {
    *     // viewChildren is set
    *   }
@@ -3081,11 +3081,11 @@ declare module core {
 
   /**
    * Configures a view query.
-   *
+   * 
    * View queries are set before the `ngAfterViewInit` callback is called.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'someDir',
@@ -3094,7 +3094,7 @@ declare module core {
    * })
    * class SomeDir {
    *   @ViewChild(ItemDirective) viewChild:ItemDirective;
-   *
+   * 
    *   ngAfterViewInit() {
    *     // viewChild is set
    *   }
@@ -3107,9 +3107,9 @@ declare module core {
   /**
    * Similar to {@link QueryMetadata}, but querying the component view, instead of
    * the content children.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/eNsFHDf7YjyM6IzKxM1j?p=preview))
-   *
+   * 
    * ```javascript
    * @Component({...})
    * @View({
@@ -3127,15 +3127,15 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * Supports the same querying parameters as {@link QueryMetadata}, except
    * `descendants`. This always queries the whole view.
-   *
+   * 
    * As `shown` is flipped between true and false, items will contain zero of one
    * items.
-   *
+   * 
    * Specifies that a {@link QueryList} should be injected.
-   *
+   * 
    * The injected object is an iterable and observable live list.
    * See {@link QueryList} for more details.
    */
@@ -3144,9 +3144,9 @@ declare module core {
 
   /**
    * Declare reusable pipe function.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   var Pipe:PipeFactory;
@@ -3154,17 +3154,17 @@ declare module core {
 
   /**
    * Declares a data-bound input property.
-   *
+   * 
    * Angular automatically updates data-bound properties during change detection.
-   *
+   * 
    * `InputMetadata` takes an optional parameter that specifies the name
    * used when instantiating a component in the template. When not provided,
    * the name of the decorated property is used.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example creates a component with two input properties.
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'bank-account',
@@ -3176,11 +3176,11 @@ declare module core {
    * class BankAccount {
    *   @Input() bankName: string;
    *   @Input('account-id') id: string;
-   *
+   * 
    *   // this property is not bound, and won't be automatically updated by Angular
    *   normalizedBankName: string;
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -3189,7 +3189,7 @@ declare module core {
    *   directives: [BankAccount]
    * })
    * class App {}
-   *
+   * 
    * bootstrap(App);
    * ```
    */
@@ -3198,16 +3198,16 @@ declare module core {
 
   /**
    * Declares an event-bound output property.
-   *
+   * 
    * When an output property emits an event, an event handler attached to that event
    * the template is invoked.
-   *
+   * 
    * `OutputMetadata` takes an optional parameter that specifies the name
    * used when instantiating a component in the template. When not provided,
    * the name of the decorated property is used.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * @Directive({
    *   selector: 'interval-dir',
@@ -3215,13 +3215,13 @@ declare module core {
    * class IntervalDir {
    *   @Output() everySecond = new EventEmitter();
    *   @Output('everyFiveSeconds') five5Secs = new EventEmitter();
-   *
+   * 
    *   constructor() {
    *     setInterval(() => this.everySecond.emit("event"), 1000);
    *     setInterval(() => this.five5Secs.emit("event"), 5000);
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -3242,19 +3242,19 @@ declare module core {
 
   /**
    * Declares a host property binding.
-   *
+   * 
    * Angular automatically checks host property bindings during change detection.
    * If a binding changes, it will update the host element of the directive.
-   *
+   * 
    * `HostBindingMetadata` takes an optional parameter that specifies the property
    * name of the host element that will be updated. When not provided,
    * the class property name is used.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example creates a directive that sets the `valid` and `invalid` classes
    * on the DOM element that has ngModel directive on it.
-   *
+   * 
    * ```typescript
    * @Directive({selector: '[ngModel]'})
    * class NgModelStatus {
@@ -3262,7 +3262,7 @@ declare module core {
    *   @HostBinding('[class.valid]') get valid { return this.control.valid; }
    *   @HostBinding('[class.invalid]') get invalid { return this.control.invalid; }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `<input [(ngModel)]="prop">`,
@@ -3271,7 +3271,7 @@ declare module core {
    * class App {
    *   prop;
    * }
-   *
+   * 
    * bootstrap(App);
    * ```
    */
@@ -3280,17 +3280,17 @@ declare module core {
 
   /**
    * Declares a host listener.
-   *
+   * 
    * Angular will invoke the decorated method when the host element emits the specified event.
-   *
+   * 
    * If the decorated method returns `false`, then `preventDefault` is applied on the DOM
    * event.
-   *
+   * 
    * ### Example
-   *
+   * 
    * The following example declares a directive that attaches a click listener to the button and
    * counts clicks.
-   *
+   * 
    * ```typescript
    * @Directive({selector: 'button[counting]'})
    * class CountClicks {
@@ -3301,14 +3301,14 @@ declare module core {
    *     console.log("button", btn, "number of clicks:", this.numberOfClicks++);
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `<button counting>Increment</button>`,
    *   directives: [CountClicks]
    * })
    * class App {}
-   *
+   * 
    * bootstrap(App);
    * ```
    */
@@ -3317,9 +3317,9 @@ declare module core {
 
   /**
    * Provides a way for expressing ES6 classes with parameter annotations in ES5.
-   *
+   * 
    * ## Basic Example
-   *
+   * 
    * ```
    * var Greeter = ng.Class({
    *   constructor: function(name) {
@@ -3331,9 +3331,9 @@ declare module core {
    *   }
    * });
    * ```
-   *
+   * 
    * is equivalent to ES6:
-   *
+   * 
    * ```
    * class Greeter {
    *   constructor(name) {
@@ -3345,21 +3345,21 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * or equivalent to ES5:
-   *
+   * 
    * ```
    * var Greeter = function (name) {
    *   this.name = name;
    * }
-   *
+   * 
    * Greeter.prototype.greet = function () {
    *   alert('Hello ' + this.name + '!');
    * }
    * ```
-   *
+   * 
    * ### Example with parameter annotations
-   *
+   * 
    * ```
    * var MyService = ng.Class({
    *   constructor: [String, [new Query(), QueryList], function(name, queryList) {
@@ -3367,9 +3367,9 @@ declare module core {
    *   }]
    * });
    * ```
-   *
+   * 
    * is equivalent to ES6:
-   *
+   * 
    * ```
    * class MyService {
    *   constructor(name: string, @Query() queryList: QueryList) {
@@ -3377,16 +3377,16 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * ### Example with inheritance
-   *
+   * 
    * ```
    * var Shape = ng.Class({
    *   constructor: (color) {
    *     this.color = color;
    *   }
    * });
-   *
+   * 
    * var Square = ng.Class({
    *   extends: Shape,
    *   constructor: function(color, size) {
@@ -3411,11 +3411,11 @@ declare module core {
     
     /**
      * Required constructor function for a class.
-     *
+     * 
      * The function may be optionally wrapped in an `Array`, in which case additional parameter
      * annotations may be specified.
      * The number of arguments and the number of parameter annotations must match.
-     *
+     * 
      * See {@link Class} for example of usage.
      */
     constructor: Function | any[];
@@ -3427,18 +3427,18 @@ declare module core {
    * An interface implemented by all Angular type decorators, which allows them to be used as ES7
    * decorators as well as
    * Angular DSL syntax.
-   *
+   * 
    * DSL syntax:
-   *
+   * 
    * ```
    * var MyClass = ng
    *   .Component({...})
    *   .View({...})
    *   .Class({...});
    * ```
-   *
+   * 
    * ES7 syntax:
-   *
+   * 
    * ```
    * @ng.Component({...})
    * @ng.View({...})
@@ -3454,7 +3454,7 @@ declare module core {
     
     /**
      * Storage for the accumulated annotations so far used by the DSL syntax.
-     *
+     * 
      * Used by {@link Class} to annotate the generated class.
      */
     annotations: any[];
@@ -3463,18 +3463,18 @@ declare module core {
      * Generate a class from the definition and annotate it with {@link TypeDecorator#annotations}.
      */
     Class(obj:ClassDefinition): ConcreteType;
-
+    
   }
 
 
   /**
    * A parameter metadata that specifies a dependency.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/6uHYJK?p=preview))
-   *
+   * 
    * ```typescript
    * class Engine {}
-   *
+   * 
    * @Injectable()
    * class Car {
    *   engine;
@@ -3482,27 +3482,27 @@ declare module core {
    *     this.engine = engine;
    *   }
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([
    *  provide("MyEngine", {useClass: Engine}),
    *  Car
    * ]);
-   *
+   * 
    * expect(injector.get(Car).engine instanceof Engine).toBe(true);
    * ```
-   *
+   * 
    * When `@Inject()` is not present, {@link Injector} will use the type annotation of the parameter.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * class Engine {}
-   *
+   * 
    * @Injectable()
    * class Car {
    *   constructor(public engine: Engine) {} //same as constructor(@Inject(Engine) engine:Engine)
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([Engine, Car]);
    * expect(injector.get(Car).engine instanceof Engine).toBe(true);
    * ```
@@ -3514,19 +3514,19 @@ declare module core {
     token:any;
 
     toString():string;
-
+    
   }
 
 
   /**
    * A parameter metadata that marks a dependency as optional. {@link Injector} provides `null` if
    * the dependency is not found.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/AsryOm?p=preview))
-   *
+   * 
    * ```typescript
    * class Engine {}
-   *
+   * 
    * @Injectable()
    * class Car {
    *   engine;
@@ -3534,7 +3534,7 @@ declare module core {
    *     this.engine = engine;
    *   }
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([Car]);
    * expect(injector.get(Car).engine).toBeNull();
    * ```
@@ -3542,37 +3542,37 @@ declare module core {
   class OptionalMetadata {
 
     toString():string;
-
+    
   }
 
 
   /**
    * A marker metadata that marks a class as available to {@link Injector} for creation.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/Wk4DMQ?p=preview))
-   *
+   * 
    * ```typescript
    * @Injectable()
    * class UsefulService {}
-   *
+   * 
    * @Injectable()
    * class NeedsService {
    *   constructor(public service:UsefulService) {}
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([NeedsService, UsefulService]);
    * expect(injector.get(NeedsService).service instanceof UsefulService).toBe(true);
    * ```
    * {@link Injector} will throw {@link NoAnnotationError} when trying to instantiate a class that
    * does not have `@Injectable` marker, as shown in the example below.
-   *
+   * 
    * ```typescript
    * class UsefulService {}
-   *
+   * 
    * class NeedsService {
    *   constructor(public service:UsefulService) {}
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([NeedsService, UsefulService]);
    * expect(() => injector.get(NeedsService)).toThrowError();
    * ```
@@ -3586,13 +3586,13 @@ declare module core {
 
   /**
    * Specifies that an {@link Injector} should retrieve a dependency only from itself.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/NeagAg?p=preview))
-   *
+   * 
    * ```typescript
    * class Dependency {
    * }
-   *
+   * 
    * @Injectable()
    * class NeedsDependency {
    *   dependency;
@@ -3600,12 +3600,12 @@ declare module core {
    *     this.dependency = dependency;
    *   }
    * }
-   *
+   * 
    * var inj = Injector.resolveAndCreate([Dependency, NeedsDependency]);
    * var nd = inj.get(NeedsDependency);
-   *
+   * 
    * expect(nd.dependency instanceof Dependency).toBe(true);
-   *
+   * 
    * var inj = Injector.resolveAndCreate([Dependency]);
    * var child = inj.resolveAndCreateChild([NeedsDependency]);
    * expect(() => child.get(NeedsDependency)).toThrowError();
@@ -3614,29 +3614,29 @@ declare module core {
   class SelfMetadata {
 
     toString():string;
-
+    
   }
 
 
   /**
    * Specifies that an injector should retrieve a dependency from any injector until reaching the
    * closest host.
-   *
+   * 
    * In Angular, a component element is automatically declared as a host for all the injectors in
    * its view.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/GX79pV?p=preview))
-   *
+   * 
    * In the following example `App` contains `ParentCmp`, which contains `ChildDirective`.
    * So `ParentCmp` is the host of `ChildDirective`.
-   *
+   * 
    * `ChildDirective` depends on two services: `HostService` and `OtherService`.
    * `HostService` is defined at `ParentCmp`, and `OtherService` is defined at `App`.
-   *
+   * 
    * ```typescript
    * class OtherService {}
    * class HostService {}
-   *
+   * 
    * @Directive({
    *   selector: 'child-directive'
    * })
@@ -3646,7 +3646,7 @@ declare module core {
    *     console.log("hs is NOT null", hs);
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'parent-cmp',
    *   providers: [HostService],
@@ -3657,7 +3657,7 @@ declare module core {
    * })
    * class ParentCmp {
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   providers: [OtherService],
@@ -3668,26 +3668,26 @@ declare module core {
    * })
    * class App {
    * }
-   *
+   * 
    * bootstrap(App);
    * ```
    */
   class HostMetadata {
 
     toString():string;
-
+    
   }
 
 
   /**
    * Specifies that the dependency resolution should start from the parent injector.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/Wchdzb?p=preview))
-   *
+   * 
    * ```typescript
    * class Dependency {
    * }
-   *
+   * 
    * @Injectable()
    * class NeedsDependency {
    *   dependency;
@@ -3695,11 +3695,11 @@ declare module core {
    *     this.dependency = dependency;
    *   }
    * }
-   *
+   * 
    * var parent = Injector.resolveAndCreate([Dependency]);
    * var child = parent.resolveAndCreateChild([NeedsDependency]);
    * expect(child.get(NeedsDependency).dependency instanceof Depedency).toBe(true);
-   *
+   * 
    * var inj = Injector.resolveAndCreate([Dependency, NeedsDependency]);
    * expect(() => inj.get(NeedsDependency)).toThrowError();
    * ```
@@ -3707,7 +3707,7 @@ declare module core {
   class SkipSelfMetadata {
 
     toString():string;
-
+    
   }
 
 
@@ -3718,18 +3718,18 @@ declare module core {
   class DependencyMetadata {
 
     token:any;
-
+    
   }
 
 
   /**
    * Allows to refer to references which are not yet defined.
-   *
+   * 
    * For instance, `forwardRef` is used when the `token` which we need to refer to for the purposes of
    * DI is declared,
    * but not yet defined. It is also used when the `token` which we use when creating a query is not
    * yet defined.
-   *
+   * 
    * ### Example
    * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref'}
    */
@@ -3738,17 +3738,17 @@ declare module core {
 
   /**
    * Lazily retrieves the reference value from a forwardRef.
-   *
+   * 
    * Acts as the identity function when given a non-forward-ref value.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/GU72mJrk1fiodChcmiDR?p=preview))
-   *
+   * 
    * ```typescript
    * var ref = forwardRef(() => "refValue");
    * expect(resolveForwardRef(ref)).toEqual("refValue");
    * expect(resolveForwardRef("regularValue")).toEqual("regularValue");
    * ```
-   *
+   * 
    * See: {@link forwardRef}
    */
   function resolveForwardRef(type:any):any;
@@ -3756,9 +3756,9 @@ declare module core {
 
   /**
    * An interface that a function passed into {@link forwardRef} has to implement.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref_fn'}
    */
   interface ForwardRefFn {
@@ -3770,33 +3770,33 @@ declare module core {
 
   /**
    * A dependency injection container used for instantiating objects and resolving dependencies.
-   *
+   * 
    * An `Injector` is a replacement for a `new` operator, which can automatically resolve the
    * constructor dependencies.
-   *
+   * 
    * In typical use, application code asks for the dependencies in the constructor and they are
    * resolved by the `Injector`.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/jzjec0?p=preview))
-   *
+   * 
    * The following example creates an `Injector` configured to create `Engine` and `Car`.
-   *
+   * 
    * ```typescript
    * @Injectable()
    * class Engine {
    * }
-   *
+   * 
    * @Injectable()
    * class Car {
    *   constructor(public engine:Engine) {}
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([Car, Engine]);
    * var car = injector.get(Car);
    * expect(car instanceof Car).toBe(true);
    * expect(car.engine instanceof Engine).toBe(true);
    * ```
-   *
+   * 
    * Notice, we don't use the `new` operator because we explicitly want to have the `Injector`
    * resolve all of the object's dependencies automatically.
    */
@@ -3809,45 +3809,45 @@ declare module core {
     
     /**
      * Turns an array of provider definitions into an array of resolved providers.
-     *
+     * 
      * A resolution is a process of flattening multiple nested arrays and converting individual
      * providers into an array of {@link ResolvedProvider}s.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/AiXTHi?p=preview))
      * 
      * ```typescript
      * @Injectable()
      * class Engine {
      * }
-     *
+     * 
      * @Injectable()
      * class Car {
      *   constructor(public engine:Engine) {}
      * }
-     *
+     * 
      * var providers = Injector.resolve([Car, [[Engine]]]);
-     *
+     * 
      * expect(providers.length).toEqual(2);
-     *
+     * 
      * expect(providers[0] instanceof ResolvedProvider).toBe(true);
      * expect(providers[0].key.displayName).toBe("Car");
      * expect(providers[0].dependencies.length).toEqual(1);
      * expect(providers[0].factory).toBeDefined();
-     *
+     * 
      * expect(providers[1].key.displayName).toBe("Engine");
      * });
      * ```
-     *
+     * 
      * See {@link Injector#fromResolvedProviders} for more info.
      */
     static resolve(providers:Array<Type | Provider | any[]>):ResolvedProvider[];
     
     /**
      * Resolves an array of providers and creates an injector from those providers.
-     *
+     * 
      * The passed-in providers can be an array of `Type`, {@link Provider},
      * or a recursive array of more providers.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/ePOccA?p=preview))
      * 
      * ```typescript
@@ -3863,48 +3863,48 @@ declare module core {
      * var injector = Injector.resolveAndCreate([Car, Engine]);
      * expect(injector.get(Car) instanceof Car).toBe(true);
      * ```
-     *
+     * 
      * This function is slower than the corresponding `fromResolvedProviders`
      * because it needs to resolve the passed-in providers first.
      * See {@link Injector#resolve} and {@link Injector#fromResolvedProviders}.
      */
     static resolveAndCreate(providers:Array<Type | Provider | any[]>):Injector;
-
+    
     /**
      * Creates an injector from previously resolved providers.
-     *
+     * 
      * This API is the recommended way to construct injectors in performance-sensitive parts.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/KrSMci?p=preview))
-     *
+     * 
      * ```typescript
      * @Injectable()
      * class Engine {
      * }
-     *
+     * 
      * @Injectable()
      * class Car {
      *   constructor(public engine:Engine) {}
      * }
-     *
+     * 
      * var providers = Injector.resolve([Car, Engine]);
      * var injector = Injector.fromResolvedProviders(providers);
      * expect(injector.get(Car) instanceof Car).toBe(true);
      * ```
      */
     static fromResolvedProviders(providers:ResolvedProvider[]):Injector;
-
+    
     /**
      * @deprecated
      */
     static fromResolvedBindings(providers:ResolvedProvider[]):Injector;
-
+    
     /**
      * Retrieves an instance from the injector based on the provided token.
      * Throws {@link NoProviderError} if not found.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/HeXSHg?p=preview))
-     *
+     * 
      * ```typescript
      * var injector = Injector.resolveAndCreate([
      *   provide("validToken", {useValue: "Value"})
@@ -3912,22 +3912,22 @@ declare module core {
      * expect(injector.get("validToken")).toEqual("Value");
      * expect(() => injector.get("invalidToken")).toThrowError();
      * ```
-     *
+     * 
      * `Injector` returns itself when given `Injector` as a token.
-     *
+     * 
      * ```typescript
      * var injector = Injector.resolveAndCreate([]);
      * expect(injector.get(Injector)).toBe(injector);
      * ```
      */
     get(token:any):any;
-
+    
     /**
      * Retrieves an instance from the injector based on the provided token.
      * Returns null if not found.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/tpEbEy?p=preview))
-     *
+     * 
      * ```typescript
      * var injector = Injector.resolveAndCreate([
      *   provide("validToken", {useValue: "Value"})
@@ -3935,24 +3935,24 @@ declare module core {
      * expect(injector.getOptional("validToken")).toEqual("Value");
      * expect(injector.getOptional("invalidToken")).toBe(null);
      * ```
-     *
+     * 
      * `Injector` returns itself when given `Injector` as a token.
-     *
+     * 
      * ```typescript
      * var injector = Injector.resolveAndCreate([]);
      * expect(injector.getOptional(Injector)).toBe(injector);
      * ```
      */
     getOptional(token:any):any;
-
+    
     /**
      * Parent of this injector.
-     *
+     * 
      * <!-- TODO: Add a link to the section of the user guide talking about hierarchical injection.
      * -->
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/eosMGo?p=preview))
-     *
+     * 
      * ```typescript
      * var parent = Injector.resolveAndCreate([]);
      * var child = parent.resolveAndCreateChild([]);
@@ -3960,106 +3960,106 @@ declare module core {
      * ```
      */
     parent:Injector;
-
+    
     /**
      * Resolves an array of providers and creates a child injector from those providers.
-     *
+     * 
      * <!-- TODO: Add a link to the section of the user guide talking about hierarchical injection.
      * -->
-     *
+     * 
      * The passed-in providers can be an array of `Type`, {@link Provider},
      * or a recursive array of more providers.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/opB3T4?p=preview))
-     *
+     * 
      * ```typescript
      * class ParentProvider {}
      * class ChildProvider {}
-     *
+     * 
      * var parent = Injector.resolveAndCreate([ParentProvider]);
      * var child = parent.resolveAndCreateChild([ChildProvider]);
-     *
+     * 
      * expect(child.get(ParentProvider) instanceof ParentProvider).toBe(true);
      * expect(child.get(ChildProvider) instanceof ChildProvider).toBe(true);
      * expect(child.get(ParentProvider)).toBe(parent.get(ParentProvider));
      * ```
-     *
+     * 
      * This function is slower than the corresponding `createChildFromResolved`
      * because it needs to resolve the passed-in providers first.
      * See {@link Injector#resolve} and {@link Injector#createChildFromResolved}.
      */
     resolveAndCreateChild(providers:Array<Type | Provider | any[]>):Injector;
-
+    
     /**
      * Creates a child injector from previously resolved providers.
-     *
+     * 
      * <!-- TODO: Add a link to the section of the user guide talking about hierarchical injection.
      * -->
-     *
+     * 
      * This API is the recommended way to construct injectors in performance-sensitive parts.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/VhyfjN?p=preview))
-     *
+     * 
      * ```typescript
      * class ParentProvider {}
      * class ChildProvider {}
-     *
+     * 
      * var parentProviders = Injector.resolve([ParentProvider]);
      * var childProviders = Injector.resolve([ChildProvider]);
-     *
+     * 
      * var parent = Injector.fromResolvedProviders(parentProviders);
      * var child = parent.createChildFromResolved(childProviders);
-     *
+     * 
      * expect(child.get(ParentProvider) instanceof ParentProvider).toBe(true);
      * expect(child.get(ChildProvider) instanceof ChildProvider).toBe(true);
      * expect(child.get(ParentProvider)).toBe(parent.get(ParentProvider));
      * ```
      */
     createChildFromResolved(providers:ResolvedProvider[]):Injector;
-
+    
     /**
      * Resolves a provider and instantiates an object in the context of the injector.
-     *
+     * 
      * The created object does not get cached by the injector.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/yvVXoB?p=preview))
-     *
+     * 
      * ```typescript
      * @Injectable()
      * class Engine {
      * }
-     *
+     * 
      * @Injectable()
      * class Car {
      *   constructor(public engine:Engine) {}
      * }
-     *
+     * 
      * var injector = Injector.resolveAndCreate([Engine]);
-     *
+     * 
      * var car = injector.resolveAndInstantiate(Car);
      * expect(car.engine).toBe(injector.get(Engine));
      * expect(car).not.toBe(injector.resolveAndInstantiate(Car));
      * ```
      */
     resolveAndInstantiate(provider:Type | Provider):any;
-
+    
     /**
      * Instantiates an object using a resolved provider in the context of the injector.
-     *
+     * 
      * The created object does not get cached by the injector.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/ptCImQ?p=preview))
-     *
+     * 
      * ```typescript
      * @Injectable()
      * class Engine {
      * }
-     *
+     * 
      * @Injectable()
      * class Car {
      *   constructor(public engine:Engine) {}
      * }
-     *
+     * 
      * var injector = Injector.resolveAndCreate([Engine]);
      * var carProvider = Injector.resolve([Car])[0];
      * var car = injector.instantiateResolved(carProvider);
@@ -4072,13 +4072,13 @@ declare module core {
     displayName:string;
 
     toString():string;
-
+    
   }
 
 
   /**
    * See {@link Provider} instead.
-   *
+   * 
    * @deprecated
    */
   class Binding extends Provider {
@@ -4109,7 +4109,7 @@ declare module core {
      * @deprecated
      */
     toValue:any;
-
+    
   }
 
 
@@ -4124,17 +4124,17 @@ declare module core {
     
     /**
      * Binds a DI token to a class.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/ZpBCSYqv6e2ud5KXLdxQ?p=preview))
-     *
+     * 
      * Because `toAlias` and `toClass` are often confused, the example contains
      * both use cases for easy comparison.
-     *
+     * 
      * ```typescript
      * class Vehicle {}
-     *
+     * 
      * class Car extends Vehicle {}
-     *
+     * 
      * var injectorClass = Injector.resolveAndCreate([
      *   Car,
      *   provide(Vehicle, {useClass: Car})
@@ -4143,10 +4143,10 @@ declare module core {
      *   Car,
      *   provide(Vehicle, {useExisting: Car})
      * ]);
-     *
+     * 
      * expect(injectorClass.get(Vehicle)).not.toBe(injectorClass.get(Car));
      * expect(injectorClass.get(Vehicle) instanceof Car).toBe(true);
-     *
+     * 
      * expect(injectorAlias.get(Vehicle)).toBe(injectorAlias.get(Car));
      * expect(injectorAlias.get(Vehicle) instanceof Car).toBe(true);
      * ```
@@ -4155,14 +4155,14 @@ declare module core {
     
     /**
      * Binds a DI token to a value.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/G024PFHmDL0cJFgfZK8O?p=preview))
-     *
+     * 
      * ```typescript
      * var injector = Injector.resolveAndCreate([
      *   provide('message', {useValue: 'Hello'})
      * ]);
-     *
+     * 
      * expect(injector.get('message')).toEqual('Hello');
      * ```
      */
@@ -4170,20 +4170,20 @@ declare module core {
     
     /**
      * Binds a DI token to an existing token.
-     *
+     * 
      * Angular will return the same instance as if the provided token was used. (This is
      * in contrast to `useClass` where a separate instance of `useClass` will be returned.)
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/uBaoF2pN5cfc5AfZapNw?p=preview))
-     *
+     * 
      * Because `toAlias` and `toClass` are often confused, the example contains
      * both use cases for easy comparison.
      * 
      * ```typescript
      * class Vehicle {}
-     *
+     * 
      * class Car extends Vehicle {}
-     *
+     * 
      * var injectorAlias = Injector.resolveAndCreate([
      *   Car,
      *   provide(Vehicle, {useExisting: Car})
@@ -4192,39 +4192,39 @@ declare module core {
      *   Car,
      *   provide(Vehicle, {useClass: Car})
      * ]);
-     *
+     * 
      * expect(injectorAlias.get(Vehicle)).toBe(injectorAlias.get(Car));
      * expect(injectorAlias.get(Vehicle) instanceof Car).toBe(true);
-     *
+     * 
      * expect(injectorClass.get(Vehicle)).not.toBe(injectorClass.get(Car));
      * expect(injectorClass.get(Vehicle) instanceof Car).toBe(true);
      * ```
      */
     toAlias(aliasToken:/*Type*/ any):Provider;
-
+    
     /**
      * Binds a DI token to a function which computes the value.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/OejNIfTT3zb1iBxaIYOb?p=preview))
-     *
+     * 
      * ```typescript
      * var injector = Injector.resolveAndCreate([
      *   provide(Number, {useFactory: () => { return 1+2; }}),
      *   provide(String, {useFactory: (v) => { return "Value: " + v; }, deps: [Number]})
      * ]);
-     *
+     * 
      * expect(injector.get(Number)).toEqual(3);
      * expect(injector.get(String)).toEqual('Value: 3');
      * ```
      */
     toFactory(factory:Function, dependencies?:any[]):Provider;
-
+    
   }
 
 
   /**
    * See {@link ResolvedProvider} instead.
-   *
+   * 
    * @deprecated
    */
   interface ResolvedBinding extends ResolvedProvider {
@@ -4238,17 +4238,17 @@ declare module core {
   class ResolvedFactory {
 
     constructor(factory:Function, dependencies:Dependency[]);
-
+    
     /**
      * Factory function which can return an instance of an object represented by a key.
      */
     factory:Function;
-
+    
     /**
      * Arguments (dependencies) to the `factory` function.
      */
     dependencies:Dependency[];
-
+    
   }
 
 
@@ -4271,20 +4271,20 @@ declare module core {
     upperBoundVisibility:any;
 
     properties:any[];
-
+    
   }
 
 
   /**
    * Creates a {@link Provider}.
-   *
+   * 
    * To construct a {@link Provider}, bind a `token` to either a class, a value, a factory function,
    * or
    * to an existing `token`.
    * See {@link ProviderBuilder} for more details.
-   *
+   * 
    * The `token` is most commonly a class or {@link angular2/di/OpaqueToken}.
-   *
+   * 
    * @deprecated
    */
   function bind(token:any):ProviderBuilder;
@@ -4292,16 +4292,16 @@ declare module core {
 
   /**
    * Describes how the {@link Injector} should instantiate a given token.
-   *
+   * 
    * See {@link provide}.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/GNAyj6K6PfYg2NBzgwZ5?p%3Dpreview&p=preview))
-   *
+   * 
    * ```javascript
    * var injector = Injector.resolveAndCreate([
    *   new Provider("message", { useValue: 'Hello' })
    * ]);
-   *
+   * 
    * expect(injector.get("message")).toEqual('Hello');
    * ```
    */
@@ -4323,17 +4323,17 @@ declare module core {
     
     /**
      * Binds a DI token to an implementation class.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/RSTG86qgmoxCyj9SWPwY?p=preview))
-     *
+     * 
      * Because `useExisting` and `useClass` are often confused, the example contains
      * both use cases for easy comparison.
      * 
      * ```typescript
      * class Vehicle {}
-     *
+     * 
      * class Car extends Vehicle {}
-     *
+     * 
      * var injectorClass = Injector.resolveAndCreate([
      *   Car,
      *   new Provider(Vehicle, { useClass: Car })
@@ -4342,10 +4342,10 @@ declare module core {
      *   Car,
      *   new Provider(Vehicle, { useExisting: Car })
      * ]);
-     *
+     * 
      * expect(injectorClass.get(Vehicle)).not.toBe(injectorClass.get(Car));
      * expect(injectorClass.get(Vehicle) instanceof Car).toBe(true);
-     *
+     * 
      * expect(injectorAlias.get(Vehicle)).toBe(injectorAlias.get(Car));
      * expect(injectorAlias.get(Vehicle) instanceof Car).toBe(true);
      * ```
@@ -4354,14 +4354,14 @@ declare module core {
     
     /**
      * Binds a DI token to a value.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/UFVsMVQIDe7l4waWziES?p=preview))
-     *
+     * 
      * ```javascript
      * var injector = Injector.resolveAndCreate([
      *   new Provider("message", { useValue: 'Hello' })
      * ]);
-     *
+     * 
      * expect(injector.get("message")).toEqual('Hello');
      * ```
      */
@@ -4369,20 +4369,20 @@ declare module core {
     
     /**
      * Binds a DI token to an existing token.
-     *
+     * 
      * {@link Injector} returns the same instance as if the provided token was used.
      * This is in contrast to `useClass` where a separate instance of `useClass` is returned.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/QsatsOJJ6P8T2fMe9gr8?p=preview))
-     *
+     * 
      * Because `useExisting` and `useClass` are often confused the example contains
      * both use cases for easy comparison.
      * 
      * ```typescript
      * class Vehicle {}
-     *
+     * 
      * class Car extends Vehicle {}
-     *
+     * 
      * var injectorAlias = Injector.resolveAndCreate([
      *   Car,
      *   new Provider(Vehicle, { useExisting: Car })
@@ -4391,10 +4391,10 @@ declare module core {
      *   Car,
      *   new Provider(Vehicle, { useClass: Car })
      * ]);
-     *
+     * 
      * expect(injectorAlias.get(Vehicle)).toBe(injectorAlias.get(Car));
      * expect(injectorAlias.get(Vehicle) instanceof Car).toBe(true);
-     *
+     * 
      * expect(injectorClass.get(Vehicle)).not.toBe(injectorClass.get(Car));
      * expect(injectorClass.get(Vehicle) instanceof Car).toBe(true);
      * ```
@@ -4403,7 +4403,7 @@ declare module core {
     
     /**
      * Binds a DI token to a function which computes the value.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/Scoxy0pJNqKGAPZY1VVC?p=preview))
      * 
      * ```typescript
@@ -4412,11 +4412,11 @@ declare module core {
      *   new Provider(String, { useFactory: (value) => { return "Value: " + value; },
      *                       deps: [Number] })
      * ]);
-     *
+     * 
      * expect(injector.get(Number)).toEqual(3);
      * expect(injector.get(String)).toEqual('Value: 3');
      * ```
-     *
+     * 
      * Used in conjuction with dependencies.
      */
     useFactory:Function;
@@ -4424,7 +4424,7 @@ declare module core {
     /**
      * Specifies a set of dependencies
      * (as `token`s) which should be injected into the factory function.
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/Scoxy0pJNqKGAPZY1VVC?p=preview))
      * 
      * ```typescript
@@ -4433,23 +4433,23 @@ declare module core {
      *   new Provider(String, { useFactory: (value) => { return "Value: " + value; },
      *                       deps: [Number] })
      * ]);
-     *
+     * 
      * expect(injector.get(Number)).toEqual(3);
      * expect(injector.get(String)).toEqual('Value: 3');
      * ```
-     *
+     * 
      * Used in conjunction with `useFactory`.
      */
     dependencies:Object[];
     
     /**
      * Creates multiple providers matching the same token (a multi-provider).
-     *
+     * 
      * Multi-providers are used for creating pluggable service, where the system comes
      * with some default providers, and the user can register additonal providers.
      * The combination of the default providers and the additional providers will be
      * used to drive the behavior of the system.
-     *
+     * 
      * ### Example
      * 
      * ```typescript
@@ -4457,10 +4457,10 @@ declare module core {
      *   new Provider("Strings", { useValue: "String1", multi: true}),
      *   new Provider("Strings", { useValue: "String2", multi: true})
      * ]);
-     *
+     * 
      * expect(injector.get("Strings")).toEqual(["String1", "String2"]);
      * ```
-     *
+     * 
      * Multi-providers and regular providers cannot be mixed. The following
      * will throw an exception:
      * 
@@ -4472,23 +4472,23 @@ declare module core {
      * ```
      */
     multi:boolean;
-
+    
   }
 
 
   /**
    * An internal resolved representation of a {@link Provider} used by the {@link Injector}.
-   *
+   * 
    * It is usually created automatically by `Injector.resolveAndCreate`.
-   *
+   * 
    * It can be created manually, as follows:
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/RfEnhh8kUEI0G3qsnIeT?p%3Dpreview&p=preview))
-   *
+   * 
    * ```typescript
    * var resolvedProviders = Injector.resolve([new Provider('message', {useValue: 'Hello'})]);
    * var injector = Injector.fromResolvedProviders(resolvedProviders);
-   *
+   * 
    * expect(injector.get('message')).toEqual('Hello');
    * ```
    */
@@ -4514,9 +4514,9 @@ declare module core {
 
   /**
    * Creates a {@link Provider}.
-   *
+   * 
    * See {@link Provider} for more details.
-   *
+   * 
    * <!-- TODO: improve the docs -->
    */
   function provide(token:any, {useClass, useValue, useExisting, useFactory, deps, multi}: {
@@ -4531,14 +4531,14 @@ declare module core {
 
   /**
    * A unique object used for retrieving items from the {@link Injector}.
-   *
+   * 
    * Keys have:
    * - a system-wide unique `id`.
    * - a `token`.
-   *
+   * 
    * `Key` is used internally by {@link Injector} because its system-wide unique `id` allows the
    * injector to store created objects in a more efficient way.
-   *
+   * 
    * `Key` should not be created directly. {@link Injector} creates keys automatically when resolving
    * providers.
    */
@@ -4567,7 +4567,7 @@ declare module core {
      * Returns a stringified token.
      */
     displayName:string;
-
+    
   }
 
 
@@ -4578,28 +4578,28 @@ declare module core {
   class TypeLiteral {
 
     type:any;
-
+    
   }
 
 
   /**
    * Thrown when trying to retrieve a dependency by `Key` from {@link Injector}, but the
    * {@link Injector} does not have a {@link Provider} for {@link Key}.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/vq8D3FRB9aGbnWJqtEPE?p=preview))
-   *
+   * 
    * ```typescript
    * class A {
    *   constructor(b:B) {}
    * }
-   *
+   * 
    * expect(() => Injector.resolveAndCreate([A])).toThrowError();
    * ```
    */
   class NoProviderError extends AbstractProviderError {
 
     constructor(injector:Injector, key:Key);
-
+    
   }
 
 
@@ -4613,50 +4613,50 @@ declare module core {
     addKey(injector:Injector, key:Key):void;
 
     context:any;
-
+    
   }
 
 
   /**
    * Thrown when dependencies form a cycle.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/wYQdNos0Tzql3ei1EV9j?p=info))
-   *
+   * 
    * ```typescript
    * var injector = Injector.resolveAndCreate([
    *   provide("one", {useFactory: (two) => "two", deps: [[new Inject("two")]]}),
    *   provide("two", {useFactory: (one) => "one", deps: [[new Inject("one")]]})
    * ]);
-   *
+   * 
    * expect(() => injector.get("one")).toThrowError();
    * ```
-   *
+   * 
    * Retrieving `A` or `B` throws a `CyclicDependencyError` as the graph above cannot be constructed.
    */
   class CyclicDependencyError extends AbstractProviderError {
 
     constructor(injector:Injector, key:Key);
-
+    
   }
 
 
   /**
    * Thrown when a constructing type returns with an Error.
-   *
+   * 
    * The `InstantiationError` class contains the original error plus the dependency graph which caused
    * this object to be instantiated.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/7aWYdcqTQsP0eNqEdUAf?p=preview))
-   *
+   * 
    * ```typescript
    * class A {
    *   constructor() {
    *     throw new Error('message');
    *   }
    * }
-   *
+   * 
    * var injector = Injector.resolveAndCreate([A]);
-   *
+   * 
    * try {
    *   injector.get(A);
    * } catch (e) {
@@ -4677,16 +4677,16 @@ declare module core {
     causeKey:Key;
 
     context:any;
-
+    
   }
 
 
   /**
    * Thrown when an object other then {@link Provider} (or `Type`) is passed to {@link Injector}
    * creation.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/YatCFbPAMCL0JSSQ4mvH?p=preview))
-   *
+   * 
    * ```typescript
    * expect(() => Injector.resolveAndCreate(["not a type"])).toThrowError();
    * ```
@@ -4694,83 +4694,83 @@ declare module core {
   class InvalidProviderError extends BaseException {
 
     constructor(provider:any);
-
+    
   }
 
 
   /**
    * Thrown when the class has no annotation information.
-   *
+   * 
    * Lack of annotation information prevents the {@link Injector} from determining which dependencies
    * need to be injected into the constructor.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/rHnZtlNS7vJOPQ6pcVkm?p=preview))
-   *
+   * 
    * ```typescript
    * class A {
    *   constructor(b) {}
    * }
-   *
+   * 
    * expect(() => Injector.resolveAndCreate([A])).toThrowError();
    * ```
-   *
+   * 
    * This error is also thrown when the class not marked with {@link Injectable} has parameter types.
-   *
+   * 
    * ```typescript
    * class B {}
-   *
+   * 
    * class A {
    *   constructor(b:B) {} // no information about the parameter types of A is available at runtime.
    * }
-   *
+   * 
    * expect(() => Injector.resolveAndCreate([A,B])).toThrowError();
    * ```
    */
   class NoAnnotationError extends BaseException {
 
     constructor(typeOrFunc:any, params:any[][]);
-
+    
   }
 
 
   /**
    * Thrown when getting an object by index.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/bRs0SX2OTQiJzqvjgl8P?p=preview))
-   *
+   * 
    * ```typescript
    * class A {}
-   *
+   * 
    * var injector = Injector.resolveAndCreate([A]);
-   *
+   * 
    * expect(() => injector.getAt(100)).toThrowError();
    * ```
    */
   class OutOfBoundsError extends BaseException {
 
     constructor(index:any);
-
+    
   }
 
 
   /**
    * Creates a token that can be used in a DI Provider.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/Ys9ezXpj2Mnoy3Uc8KBp?p=preview))
-   *
+   * 
    * ```typescript
    * var t = new OpaqueToken("value");
-   *
+   * 
    * var injector = Injector.resolveAndCreate([
    *   provide(t, {useValue: "providedValue"})
    * ]);
-   *
+   * 
    * expect(injector.get(t)).toEqual("bindingValue");
    * ```
-   *
+   * 
    * Using an `OpaqueToken` is preferable to using strings as tokens because of possible collisions
    * caused by multiple providers using the same string as two different tokens.
-   *
+   * 
    * Using an `OpaqueToken` is preferable to using an `Object` as tokens because it provides better
    * error messages.
    */
@@ -4779,7 +4779,7 @@ declare module core {
     constructor(_desc:string);
 
     toString():string;
-
+    
   }
 
 
@@ -4791,7 +4791,7 @@ declare module core {
     new(token:any): InjectMetadata;
 
     (token:any): any;
-
+    
   }
 
 
@@ -4897,14 +4897,14 @@ declare module core {
   interface ConcreteType extends Type {
 
     new(...args:any[]): any;
-
+    
   }
 
 
   /**
-   *
+   * 
    * Runtime representation a type that a Component or other object is instances of.
-   *
+   * 
    * An example of a `Type` is `MyCustomComponent` class, which in JavaScript is be represented by
    * the `MyCustomComponent` constructor function.
    */
@@ -4915,12 +4915,12 @@ declare module core {
 
   /**
    * Use by directives and components to emit custom Events.
-   *
+   * 
    * ### Examples
-   *
+   * 
    * In the following example, `Zippy` alternatively emits `open` and `close` events when its
    * title gets clicked:
-   *
+   * 
    * ```
    * @Component({
    *   selector: 'zippy',
@@ -4935,7 +4935,7 @@ declare module core {
    *   visible: boolean = true;
    *   @Output() open: EventEmitter<any> = new EventEmitter();
    *   @Output() close: EventEmitter<any> = new EventEmitter();
-   *
+   * 
    *   toggle() {
    *     this.visible = !this.visible;
    *     if (this.visible) {
@@ -4946,10 +4946,10 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * Use Rx.Observable but provides an adapter to make it work as specified here:
    * https://github.com/jhusain/observable-spec
-   *
+   * 
    * Once a reference implementation of the spec is available, switch to it.
    */
   class EventEmitter<T> extends Subject<T> {
@@ -4961,14 +4961,14 @@ declare module core {
     constructor(isAsync?:boolean);
 
     emit(value:T):void;
-
+    
     /**
      * @deprecated - use .emit(value) instead
      */
     next(value:any):void;
 
     subscribe(generatorOrNext?:any, error?:any, complete?:any):any;
-
+    
   }
 
 
@@ -4992,29 +4992,29 @@ declare module core {
     message:string;
 
     toString():string;
-
+    
   }
 
 
   /**
    * Provides a hook for centralized exception handling.
-   *
+   * 
    * The default implementation of `ExceptionHandler` prints error messages to the `Console`. To
    * intercept error handling,
    * write a custom exception handler that replaces this default as appropriate for your app.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```javascript
-   *
+   * 
    * class MyExceptionHandler implements ExceptionHandler {
    *   call(error, stackTrace = null, reason = null) {
    *     // do something with the exception
    *   }
    * }
-   *
+   * 
    * bootstrap(MyApp, [provide(ExceptionHandler, {useClass: MyExceptionHandler})])
-   *
+   * 
    * ```
    */
   class ExceptionHandler {
@@ -5024,28 +5024,28 @@ declare module core {
     static exceptionToString(exception:any, stackTrace?:any, reason?:string):string;
 
     call(exception:any, stackTrace?:any, reason?:string):void;
-
+    
   }
 
 
   /**
    * An injectable service for executing work inside or outside of the Angular zone.
-   *
+   * 
    * The most common use of this service is to optimize performance when starting a work consisting of
    * one or more asynchronous tasks that don't require UI updates or error handling to be handled by
    * Angular. Such tasks can be kicked off via {@link #runOutsideAngular} and if needed, these tasks
    * can reenter the Angular zone via {@link #run}.
-   *
+   * 
    * <!-- TODO: add/fix links to:
    *   - docs explaining zones and the use of zones in Angular and change-detection
    *   - link to runOutsideAngular/run (throughout this file!)
    *   -->
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/lY9m8HLy7z06vDoUaSN2?p=preview))
    * ```
    * import {Component, View, NgZone} from 'angular2/core';
    * import {NgIf} from 'angular2/common';
-   *
+   * 
    * @Component({
    *   selector: 'ng-zone-demo'.
    *   template: `
@@ -5110,18 +5110,18 @@ declare module core {
     /**
      * Sets the zone hook that is called just before a browser task that is handled by Angular
      * executes.
-     *
+     * 
      * The hook is called once per browser task that is handled by Angular.
-     *
+     * 
      * Setting the hook overrides any previously set hook.
-     *
+     * 
      * @deprecated this API will be removed in the future. Use `onTurnStart` instead.
      */
     overrideOnTurnStart(onTurnStartHook:ZeroArgFunction):void;
     
     /**
      * Notifies subscribers just before Angular event turn starts.
-     *
+     * 
      * Emits an event once per browser task that is handled by Angular.
      */
     onTurnStart:/* Subject */ any;
@@ -5129,105 +5129,105 @@ declare module core {
     /**
      * Sets the zone hook that is called immediately after Angular zone is done processing the current
      * task and any microtasks scheduled from that task.
-     *
+     * 
      * This is where we typically do change-detection.
-     *
+     * 
      * The hook is called once per browser task that is handled by Angular.
-     *
+     * 
      * Setting the hook overrides any previously set hook.
-     *
+     * 
      * @deprecated this API will be removed in the future. Use `onTurnDone` instead.
      */
     overrideOnTurnDone(onTurnDoneHook:ZeroArgFunction):void;
-
+    
     /**
      * Notifies subscribers immediately after Angular zone is done processing
      * the current turn and any microtasks scheduled from that turn.
-     *
+     * 
      * Used by Angular as a signal to kick off change-detection.
      */
     onTurnDone:any;
-
+    
     /**
      * Sets the zone hook that is called immediately after the `onTurnDone` callback is called and any
      * microstasks scheduled from within that callback are drained.
-     *
+     * 
      * `onEventDoneFn` is executed outside Angular zone, which means that we will no longer attempt to
      * sync the UI with any model changes that occur within this callback.
-     *
+     * 
      * This hook is useful for validating application state (e.g. in a test).
-     *
+     * 
      * Setting the hook overrides any previously set hook.
-     *
+     * 
      * @deprecated this API will be removed in the future. Use `onEventDone` instead.
      */
     overrideOnEventDone(onEventDoneFn:ZeroArgFunction, opt_waitForAsync?:boolean):void;
-
+    
     /**
      * Notifies subscribers immediately after the final `onTurnDone` callback
      * before ending VM event.
-     *
+     * 
      * This event is useful for validating application state (e.g. in a test).
      */
     onEventDone:any;
-
+    
     /**
      * Whether there are any outstanding microtasks.
      */
     hasPendingMicrotasks:boolean;
-
+    
     /**
      * Whether there are any outstanding timers.
      */
     hasPendingTimers:boolean;
-
+    
     /**
      * Whether there are any outstanding asychnronous tasks of any kind that are
      * scheduled to run within Angular zone.
-     *
+     * 
      * Useful as a signal of UI stability. For example, when a test reaches a
      * point when [hasPendingAsyncTasks] is `false` it might be a good time to run
      * test expectations.
      */
     hasPendingAsyncTasks:boolean;
-
+    
     /**
      * Sets the zone hook that is called when an error is thrown in the Angular zone.
-     *
+     * 
      * Setting the hook overrides any previously set hook.
-     *
+     * 
      * @deprecated this API will be removed in the future. Use `onError` instead.
      */
     overrideOnErrorHandler(errorHandler:ErrorHandlingFn):void;
 
     onError:any;
-
+    
     /**
      * Executes the `fn` function synchronously within the Angular zone and returns value returned by
      * the function.
-     *
+     * 
      * Running functions via `run` allows you to reenter Angular zone from a task that was executed
      * outside of the Angular zone (typically started via {@link #runOutsideAngular}).
-     *
+     * 
      * Any future tasks or microtasks scheduled from within this function will continue executing from
      * within the Angular zone.
      */
     run(fn:() => any):any;
-
+    
     /**
      * Executes the `fn` function synchronously in Angular's parent zone and returns value returned by
      * the function.
-     *
+     * 
      * Running functions via `runOutsideAngular` allows you to escape Angular's zone and do work that
      * doesn't trigger Angular change-detection or is subject to Angular's error handling.
-     *
+     * 
      * Any future tasks or microtasks scheduled from within this function will continue executing from
      * outside of the Angular zone.
-     *
+     * 
      * Use {@link #run} to reenter the Angular zone and do work that updates the application model.
      */
     runOutsideAngular(fn:() => any):any;
-
+    
   }
 
 
@@ -5247,7 +5247,7 @@ declare module core {
   interface ErrorHandlingFn {
 
     (error:any, stackTrace:any): void;
-
+    
   }
 
 
@@ -5261,13 +5261,13 @@ declare module core {
     error:any;
 
     stackTrace:any;
-
+    
   }
 
 
   /**
    * A dispatcher that relays all events that occur in a Render View.
-   *
+   * 
    * Use {@link Renderer#setEventDispatcher} to register a dispatcher for a particular Render View.
    */
   interface RenderEventDispatcher {
@@ -5275,30 +5275,30 @@ declare module core {
     /**
      * Called when Event called `eventName` was triggered on an Element with an Event Binding for this
      * Event.
-     *
+     * 
      * `elementIndex` specifies the depth-first index of the Element in the Render View.
-     *
+     * 
      * `locals` is a map for local variable to value mapping that should be used when evaluating the
      * Event Binding expression.
-     *
+     * 
      * Returns `false` if `preventDefault` should be called to stop the default behavior of the Event
      * in the Rendering Context.
      */
     dispatchRenderEvent(elementIndex:number, eventName:string, locals:Map<string, any>): boolean;
-
+    
   }
 
 
   /**
    * Injectable service that provides a low-level interface for modifying the UI.
-   *
+   * 
    * Use this service to bypass Angular's templating and make custom UI changes that can't be
    * expressed declaratively. For example if you need to set a property or an attribute whose name is
    * not statically known, use {@link #setElementProperty} or {@link #setElementAttribute}
    * respectively.
-   *
+   * 
    * If you are implementing a custom renderer, you must implement this interface.
-   *
+   * 
    * The default Renderer implementation is `DomRenderer`. Also available is `WebWorkerRenderer`.
    */
   abstract class Renderer {
@@ -5306,92 +5306,92 @@ declare module core {
     /**
      * Registers a component template represented as arrays of {@link RenderTemplateCmd}s and styles
      * with the Renderer.
-     *
+     * 
      * Once a template is registered it can be referenced via {@link RenderBeginComponentCmd} when
      * {@link #createProtoView creating Render ProtoView}.
      */
     registerComponentTemplate(template:RenderComponentTemplate):void;
-
+    
     /**
      * Creates a {@link RenderProtoViewRef} from an array of {@link RenderTemplateCmd}`s.
      */
     createProtoView(componentTemplateId:string, cmds:RenderTemplateCmd[]):RenderProtoViewRef;
-
+    
     /**
      * Creates a Root Host View based on the provided `hostProtoViewRef`.
-     *
+     * 
      * `fragmentCount` is the number of nested {@link RenderFragmentRef}s in this View. This parameter
      * is non-optional so that the renderer can create a result synchronously even when application
      * runs in a different context (e.g. in a Web Worker).
-     *
+     * 
      * `hostElementSelector` is a (CSS) selector for querying the main document to find the Host
      * Element. The newly created Root Host View should be attached to this element.
-     *
+     * 
      * Returns an instance of {@link RenderViewWithFragments}, representing the Render View.
      */
     createRootHostView(hostProtoViewRef:RenderProtoViewRef, fragmentCount:number, hostElementSelector:string):RenderViewWithFragments;
-
+    
     /**
      * Creates a Render View based on the provided `protoViewRef`.
-     *
+     * 
      * `fragmentCount` is the number of nested {@link RenderFragmentRef}s in this View. This parameter
      * is non-optional so that the renderer can create a result synchronously even when application
      * runs in a different context (e.g. in a Web Worker).
-     *
+     * 
      * Returns an instance of {@link RenderViewWithFragments}, representing the Render View.
      */
     createView(protoViewRef:RenderProtoViewRef, fragmentCount:number):RenderViewWithFragments;
-
+    
     /**
      * Destroys a Render View specified via `viewRef`.
-     *
+     * 
      * This operation should be performed only on a View that has already been dehydrated and
      * all of its Render Fragments have been detached.
-     *
+     * 
      * Destroying a View indicates to the Renderer that this View is not going to be referenced in any
      * future operations. If the Renderer created any renderer-specific objects for this View, these
      * objects should now be destroyed to prevent memory leaks.
      */
     destroyView(viewRef:RenderViewRef):void;
-
+    
     /**
      * Attaches the Nodes of a Render Fragment after the last Node of `previousFragmentRef`.
      */
     attachFragmentAfterFragment(previousFragmentRef:RenderFragmentRef, fragmentRef:RenderFragmentRef):void;
-
+    
     /**
      * Attaches the Nodes of the Render Fragment after an Element.
      */
     attachFragmentAfterElement(elementRef:RenderElementRef, fragmentRef:RenderFragmentRef):void;
-
+    
     /**
      * Detaches the Nodes of a Render Fragment from their parent.
-     *
+     * 
      * This operations should be called only on a View that has been already
      * {@link #dehydrateView dehydrated}.
      */
     detachFragment(fragmentRef:RenderFragmentRef):void;
-
+    
     /**
      * Notifies a custom Renderer to initialize a Render View.
-     *
+     * 
      * This method is called by Angular after a Render View has been created, or when a previously
      * dehydrated Render View is about to be reused.
      */
     hydrateView(viewRef:RenderViewRef):void;
-
+    
     /**
      * Notifies a custom Renderer that a Render View is no longer active.
-     *
+     * 
      * This method is called by Angular before a Render View will be destroyed, or when a hydrated
      * Render View is about to be put into a pool for future reuse.
      */
     dehydrateView(viewRef:RenderViewRef):void;
-
+    
     /**
      * Returns the underlying native element at the specified `location`, or `null` if direct access
      * to native elements is not supported (e.g. when the application runs in a web worker).
-     *
+     * 
      * <div class="callout is-critical">
      *   <header>Use with caution</header>
      *   <p>
@@ -5406,43 +5406,43 @@ declare module core {
      * </div>
      */
     getNativeElementSync(location:RenderElementRef):any;
-
+    
     /**
      * Sets a property on the Element specified via `location`.
      */
     setElementProperty(location:RenderElementRef, propertyName:string, propertyValue:any):void;
-
+    
     /**
      * Sets an attribute on the Element specified via `location`.
-     *
+     * 
      * If `attributeValue` is `null`, the attribute is removed.
      */
     setElementAttribute(location:RenderElementRef, attributeName:string, attributeValue:string):void;
 
     setBindingDebugInfo(location:RenderElementRef, propertyName:string, propertyValue:string):void;
-
+    
     /**
      * Sets a (CSS) class on the Element specified via `location`.
-     *
+     * 
      * `isAdd` specifies if the class should be added or removed.
      */
     setElementClass(location:RenderElementRef, className:string, isAdd:boolean):void;
-
+    
     /**
      * Sets a (CSS) inline style on the Element specified via `location`.
-     *
+     * 
      * If `styleValue` is `null`, the style is removed.
      */
     setElementStyle(location:RenderElementRef, styleName:string, styleValue:string):void;
-
+    
     /**
      * Calls a method on the Element specified via `location`.
      */
     invokeElementMethod(location:RenderElementRef, methodName:string, args:any[]):void;
-
+    
     /**
      * Sets the value of an interpolated TextNode at the specified index to the `text` value.
-     *
+     * 
      * `textNodeIndex` is the depth-first index of the Node among interpolated Nodes in the Render
      * View.
      */
@@ -5450,20 +5450,20 @@ declare module core {
     
     /**
      * Sets a dispatcher to relay all events triggered in the given Render View.
-     *
+     * 
      * Each Render View can have only one Event Dispatcher, if this method is called multiple times,
      * the last provided dispatcher will be used.
      */
     setEventDispatcher(viewRef:RenderViewRef, dispatcher:RenderEventDispatcher):void;
-
+    
   }
 
 
   /**
    * Represents an Element that is part of a {@link RenderViewRef Render View}.
-   *
+   * 
    * `RenderElementRef` is a counterpart to {@link ElementRef} available in the Application Context.
-   *
+   * 
    * When using `Renderer` from the Application Context, `ElementRef` can be used instead of
    * `RenderElementRef`.
    */
@@ -5479,12 +5479,12 @@ declare module core {
 
   /**
    * Represents an Angular View in the Rendering Context.
-   *
+   * 
    * `RenderViewRef` specifies to the {@link Renderer} what View to update or destroy.
-   *
+   * 
    * Unlike a {@link ViewRef} available in the Application Context, Render View contains all the
    * static Component Views that have been recursively merged into a single Render View.
-   *
+   * 
    * Each `RenderViewRef` contains one or more {@link RenderFragmentRef Render Fragments}, these
    * Fragments are created, hydrated, dehydrated and destroyed as a single unit together with the
    * View.
@@ -5496,15 +5496,15 @@ declare module core {
 
   /**
    * Represents an Angular ProtoView in the Rendering Context.
-   *
+   * 
    * When you implement a custom {@link Renderer}, `RenderProtoViewRef` specifies what Render View
    * your renderer should create.
-   *
+   * 
    * `RenderProtoViewRef` is a counterpart to {@link ProtoViewRef} available in the Application
    * Context. But unlike `ProtoViewRef`, `RenderProtoViewRef` contains all static nested Proto Views
    * that are recursively merged into a single Render Proto View.
    *
-   *
+   * 
    * <!-- TODO: this is created by Renderer#createProtoView in the new compiler -->
    */
   class RenderProtoViewRef {
@@ -5515,9 +5515,9 @@ declare module core {
   /**
    * Represents a list of sibling Nodes that can be moved by the {@link Renderer} independently of
    * other Render Fragments.
-   *
+   * 
    * Any {@link RenderViewRef} has one Render Fragment.
-   *
+   * 
    * Additionally any View with an Embedded View that contains a {@link NgContentAst View Projection}
    * results in additional Render Fragment.
    */
@@ -5528,7 +5528,7 @@ declare module core {
 
   /**
    * Container class produced by a {@link Renderer} when creating a Render View.
-   *
+   * 
    * An instance of `RenderViewWithFragments` contains a {@link RenderViewRef} and an array of
    * {@link RenderFragmentRef}s belonging to this Render View.
    */
@@ -5540,12 +5540,12 @@ declare module core {
      * Reference to the {@link RenderViewRef}.
      */
     viewRef:RenderViewRef;
-
+    
     /**
      * Array of {@link RenderFragmentRef}s ordered in the depth-first order.
      */
     fragmentRefs:RenderFragmentRef[];
-
+    
   }
 
 
@@ -5555,7 +5555,7 @@ declare module core {
   abstract class RenderTemplateCmd {
 
     visit(visitor:RenderCommandVisitor, context:any):any;
-
+    
   }
 
 
@@ -5577,7 +5577,7 @@ declare module core {
     visitEndComponent(context:any): any;
 
     visitEmbeddedTemplate(cmd:RenderEmbeddedTemplateCmd, context:any): any;
-
+    
   }
 
 
@@ -5587,7 +5587,7 @@ declare module core {
   abstract class RenderTextCmd extends RenderBeginCmd {
 
     value:string;
-
+    
   }
 
 
@@ -5599,7 +5599,7 @@ declare module core {
     index:number;
 
     ngContentIndex:number;
-
+    
   }
 
 
@@ -5613,7 +5613,7 @@ declare module core {
     attrNameAndValues:string[];
 
     eventTargetAndNames:string[];
-
+    
   }
 
 
@@ -5623,7 +5623,7 @@ declare module core {
   abstract class RenderBeginComponentCmd extends RenderBeginElementCmd {
 
     templateId:string;
-
+    
   }
 
 
@@ -5635,7 +5635,7 @@ declare module core {
     isMerged:boolean;
 
     children:RenderTemplateCmd[];
-
+    
   }
 
 
@@ -5647,7 +5647,7 @@ declare module core {
     ngContentIndex:number;
 
     isBound:boolean;
-
+    
   }
 
 
@@ -5667,16 +5667,16 @@ declare module core {
     commands:RenderTemplateCmd[];
 
     styles:string[];
-
+    
   }
 
 
   /**
    * Implement this interface to get notified when your directive's content has been fully
    * initialized.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/plamXUpsLQbIXpViZhUO?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'child-cmp',
@@ -5685,29 +5685,29 @@ declare module core {
    * class ChildComponent {
    *   @Input() where: string;
    * }
-   *
+   * 
    * @Component({
    *   selector: 'parent-cmp',
    *   template: `<ng-content></ng-content>`
    * })
    * class ParentComponent implements AfterContentInit {
    *   @ContentChild(ChildComponent) contentChild: ChildComponent;
-   *
+   * 
    *   constructor() {
    *     // contentChild is not initialized yet
    *     console.log(this.getMessage(this.contentChild));
    *   }
-   *
+   * 
    *   ngAfterContentInit() {
    *     // contentChild is updated after the content has been checked
    *     console.log('AfterContentInit: ' + this.getMessage(this.contentChild));
    *   }
-   *
+   * 
    *   private getMessage(cmp: ChildComponent): string {
    *     return cmp ? cmp.where + ' child' : 'no child';
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -5718,7 +5718,7 @@ declare module core {
    * })
    * export class App {
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    */
@@ -5731,34 +5731,34 @@ declare module core {
 
   /**
    * Implement this interface to get notified after every check of your directive's content.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/tGdrytNEKQnecIPkD7NU?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({selector: 'child-cmp', template: `{{where}} child`})
    * class ChildComponent {
    *   @Input() where: string;
    * }
-   *
+   * 
    * @Component({selector: 'parent-cmp', template: `<ng-content></ng-content>`})
    * class ParentComponent implements AfterContentChecked {
    *   @ContentChild(ChildComponent) contentChild: ChildComponent;
-   *
+   * 
    *   constructor() {
    *     // contentChild is not initialized yet
    *     console.log(this.getMessage(this.contentChild));
    *   }
-   *
+   * 
    *   ngAfterContentChecked() {
    *     // contentChild is updated after the content has been checked
    *     console.log('AfterContentChecked: ' + this.getMessage(this.contentChild));
    *   }
-   *
+   * 
    *   private getMessage(cmp: ChildComponent): string {
    *     return cmp ? cmp.where + ' child' : 'no child';
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -5771,7 +5771,7 @@ declare module core {
    * export class App {
    *   hasContent = true;
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    */
@@ -5784,15 +5784,15 @@ declare module core {
 
   /**
    * Implement this interface to get notified when your component's view has been fully initialized.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/LhTKVMEM0fkJgyp4CI1W?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({selector: 'child-cmp', template: `{{where}} child`})
    * class ChildComponent {
    *   @Input() where: string;
    * }
-   *
+   * 
    * @Component({
    *   selector: 'parent-cmp',
    *   template: `<child-cmp where="view"></child-cmp>`,
@@ -5800,22 +5800,22 @@ declare module core {
    * })
    * class ParentComponent implements AfterViewInit {
    *   @ViewChild(ChildComponent) viewChild: ChildComponent;
-   *
+   * 
    *   constructor() {
    *     // viewChild is not initialized yet
    *     console.log(this.getMessage(this.viewChild));
    *   }
-   *
+   * 
    *   ngAfterViewInit() {
    *     // viewChild is updated after the view has been initialized
    *     console.log('ngAfterViewInit: ' + this.getMessage(this.viewChild));
    *   }
-   *
+   * 
    *   private getMessage(cmp: ChildComponent): string {
    *     return cmp ? cmp.where + ' child' : 'no child';
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `<parent-cmp></parent-cmp>`,
@@ -5823,7 +5823,7 @@ declare module core {
    * })
    * export class App {
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    */
@@ -5836,15 +5836,15 @@ declare module core {
 
   /**
    * Implement this interface to get notified after every check of your component's view.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/0qDGHcPQkc25CXhTNzKU?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({selector: 'child-cmp', template: `{{where}} child`})
    * class ChildComponent {
    *   @Input() where: string;
    * }
-   *
+   * 
    * @Component({
    *   selector: 'parent-cmp',
    *   template: `
@@ -5855,22 +5855,22 @@ declare module core {
    * class ParentComponent implements AfterViewChecked {
    *   @ViewChild(ChildComponent) viewChild: ChildComponent;
    *   showView = true;
-   *
+   * 
    *   constructor() {
    *     // viewChild is not initialized yet
    *     console.log(this.getMessage(this.viewChild));
    *   }
-   *
+   * 
    *   ngAfterViewChecked() {
    *     // viewChild is updated after the view has been checked
    *     console.log('AfterViewChecked: ' + this.getMessage(this.viewChild));
    *   }
-   *
+   * 
    *   private getMessage(cmp: ChildComponent): string {
    *     return cmp ? cmp.where + ' child' : 'no child';
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `<parent-cmp></parent-cmp>`,
@@ -5878,7 +5878,7 @@ declare module core {
    * })
    * export class App {
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    */
@@ -5900,15 +5900,15 @@ declare module core {
    * - `AfterViewChecked`,
    * - `OnDestroy` (at the very end before destruction)
    * Implement this interface to get notified when any data-bound property of your directive changes.
-   *
+   * 
    * `ngOnChanges` is called right after the data-bound properties have been checked and before view
    * and content children are checked if at least one of them has changed.
-   *
+   * 
    * The `changes` parameter contains an entry for each of the changed data-bound property. The key is
    * the property name and the value is an instance of {@link SimpleChange}.
-   *
+   * 
    * ### Example ([live example](http://plnkr.co/edit/AHrB6opLqHDBPkt4KpdT?p=preview)):
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'my-cmp',
@@ -5916,12 +5916,12 @@ declare module core {
    * })
    * class MyComponent implements OnChanges {
    *   @Input() myProp: any;
-   *
+   * 
    *   ngOnChanges(changes: {[propName: string]: SimpleChange}) {
    *     console.log('ngOnChanges - myProp = ' + changes['myProp'].currentValue);
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -5932,25 +5932,25 @@ declare module core {
    * export class App {
    *   value = 0;
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    */
   interface OnChanges {
 
     ngOnChanges(changes:{[key: string]: SimpleChange}): void;
-
+    
   }
 
 
   /**
    * Implement this interface to get notified when your directive is destroyed.
-   *
+   * 
    * `ngOnDestroy` callback is typically used for any custom cleanup that needs to occur when the
    * instance is destroyed
-   *
+   * 
    * ### Example ([live example](http://plnkr.co/edit/1MBypRryXd64v4pV03Yn?p=preview))
-   *
+   * 
    * ```typesript
    * @Component({
    *   selector: 'my-cmp',
@@ -5965,7 +5965,7 @@ declare module core {
    *     console.log('ngOnDestroy');
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -5978,25 +5978,25 @@ declare module core {
    * export class App {
    *   hasChild = true;
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    *
-   *
+   * 
    * To create a stateful Pipe, you should implement this interface and set the `pure`
    * parameter to `false` in the {@link PipeMetadata}.
-   *
+   * 
    * A stateful pipe may produce different output, given the same input. It is
    * likely that a stateful pipe may contain state that should be cleaned up when
    * a binding is destroyed. For example, a subscription to a stream of data may need to
    * be disposed, or an interval may need to be cleared.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/i8pm5brO4sPaLxBx56MR?p=preview))
-   *
+   * 
    * In this example, a pipe is created to countdown its input value, updating it every
    * 50ms. Because it maintains an internal interval, it automatically clears
    * the interval when the binding is destroyed or the countdown completes.
-   *
+   * 
    * ```
    * import {OnDestroy, Pipe, PipeTransform} from 'angular2/core'
    * @Pipe({name: 'countdown', pure: false})
@@ -6027,7 +6027,7 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * Invoking `{{ 10000 | countdown }}` would cause the value to be decremented by 50,
    * every 50ms, until it reaches 0.
    */
@@ -6041,13 +6041,13 @@ declare module core {
   /**
    * Implement this interface to execute custom initialization logic after your directive's
    * data-bound properties have been initialized.
-   *
+   * 
    * `ngOnInit` is called right after the directive's data-bound properties have been checked for the
    * first time, and before any of its children have been checked. It is invoked only once when the
    * directive is instantiated.
-   *
+   * 
    * ### Example ([live example](http://plnkr.co/edit/1MBypRryXd64v4pV03Yn?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'my-cmp',
@@ -6062,7 +6062,7 @@ declare module core {
    *     console.log('ngOnDestroy');
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -6075,7 +6075,7 @@ declare module core {
    * export class App {
    *   hasChild = true;
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    *  ```
    */
@@ -6088,27 +6088,27 @@ declare module core {
 
   /**
    * Implement this interface to override the default change detection algorithm for your directive.
-   *
+   * 
    * `ngDoCheck` gets called to check the changes in the directives instead of the default algorithm.
-   *
+   * 
    * The default change detection algorithm looks for differences by comparing bound-property values
    * by reference across change detection runs. When `DoCheck` is implemented, the default algorithm
    * is disabled and `ngDoCheck` is responsible for checking for changes.
-   *
+   * 
    * Implementing this interface allows improving performance by using insights about the component,
    * its implementation and data types of its properties.
-   *
+   * 
    * Note that a directive should not implement both `DoCheck` and {@link OnChanges} at the same time.
    * `ngOnChanges` would not be called when a directive implements `DoCheck`. Reaction to the changes
    * have to be handled from within the `ngDoCheck` callback.
-   *
+   * 
    * Use {@link KeyValueDiffers} and {@link IterableDiffers} to add your custom check mechanisms.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/QpnIlF0CR2i5bcYbHEUJ?p=preview))
-   *
+   * 
    * In the following example `ngDoCheck` uses an {@link IterableDiffers} to detect the updates to the
    * array `list`:
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'custom-check',
@@ -6123,11 +6123,11 @@ declare module core {
    *   @Input() list: any[];
    *   differ: any;
    *   logs = [];
-   *
+   * 
    *   constructor(differs: IterableDiffers) {
    *     this.differ = differs.find([]).create(null);
    *   }
-   *
+   * 
    *   ngDoCheck() {
    *     var changes = this.differ.diff(this.list);
    * 
@@ -6137,7 +6137,7 @@ declare module core {
    *     }
    *   }
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -6164,7 +6164,7 @@ declare module core {
      * Return {@link DirectiveMetadata} for a given `Type`.
      */
     resolve(type:Type):DirectiveMetadata;
-
+    
   }
 
 
@@ -6174,14 +6174,14 @@ declare module core {
   class ViewResolver {
 
     resolve(component:Type):ViewMetadata;
-
+    
   }
 
 
   /**
    * Low-level service for compiling {@link Component}s into {@link ProtoViewRef ProtoViews}s, which
    * can later be used to create and render a Component instance.
-   *
+   * 
    * Most applications should instead use higher-level {@link DynamicComponentLoader} service, which
    * both compiles and instantiates a Component.
    */
@@ -6190,13 +6190,13 @@ declare module core {
     compileInHost(componentType:Type):Promise<ProtoViewRef>;
 
     clearCache():void;
-
+    
   }
 
 
   /**
    * Service exposing low level API for creating, moving and destroying Views.
-   *
+   * 
    * Most applications should use higher-level abstractions like {@link DynamicComponentLoader} and
    * {@link ViewContainerRef} instead.
    */
@@ -6206,41 +6206,41 @@ declare module core {
      * Returns a {@link ViewContainerRef} of the View Container at the specified location.
      */
     getViewContainer(location:ElementRef):ViewContainerRef;
-
+    
     /**
      * Returns the {@link ElementRef} that makes up the specified Host View.
      */
     getHostElement(hostViewRef:HostViewRef):ElementRef;
-
+    
     /**
      * Searches the Component View of the Component specified via `hostLocation` and returns the
      * {@link ElementRef} for the Element identified via a Variable Name `variableName`.
-     *
+     * 
      * Throws an exception if the specified `hostLocation` is not a Host Element of a Component, or if
      * variable `variableName` couldn't be found in the Component View of this Component.
      */
     getNamedElementInComponentView(hostLocation:ElementRef, variableName:string):ElementRef;
-
+    
     /**
      * Returns the component instance for the provided Host Element.
      */
     getComponent(hostLocation:ElementRef):any;
-
+    
     /**
      * Creates an instance of a Component and attaches it to the first element in the global View
      * (usually DOM Document) that matches the component's selector or `overrideSelector`.
-     *
+     * 
      * This as a low-level way to bootstrap an application and upgrade an existing Element to a
      * Host Element. Most applications should use {@link DynamicComponentLoader#loadAsRoot} instead.
-     *
+     * 
      * The Component and its View are created based on the `hostProtoViewRef` which can be obtained
      * by compiling the component with {@link Compiler#compileInHost}.
-     *
+     * 
      * Use {@link AppViewManager#destroyRootHostView} to destroy the created Component and it's Host
      * View.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @ng.Component({
      *   selector: 'child-component'
@@ -6251,7 +6251,7 @@ declare module core {
      * class ChildComponent {
      * 
      * }
-     *
+     * 
      * @ng.Component({
      *   selector: 'my-app'
      * })
@@ -6274,7 +6274,7 @@ declare module core {
      *     this.viewRef = null;
      *   }
      * }
-     *
+     * 
      * ng.bootstrap(MyApp);
      * ```
      */
@@ -6282,76 +6282,76 @@ declare module core {
     
     /**
      * Destroys the Host View created via {@link AppViewManager#createRootHostView}.
-     *
+     * 
      * Along with the Host View, the Component Instance as well as all nested View and Components are
      * destroyed as well.
      */
     destroyRootHostView(hostViewRef:HostViewRef):void;
-
+    
     /**
      * Instantiates an Embedded View based on the {@link TemplateRef `templateRef`} and inserts it
      * into the View Container specified via `viewContainerLocation` at the specified `index`.
-     *
+     * 
      * Returns the {@link ViewRef} for the newly created View.
-     *
+     * 
      * This as a low-level way to create and attach an Embedded via to a View Container. Most
      * applications should used {@link ViewContainerRef#createEmbeddedView} instead.
-     *
+     * 
      * Use {@link AppViewManager#destroyViewInContainer} to destroy the created Embedded View.
      */
     createEmbeddedViewInContainer(viewContainerLocation:ElementRef, index:number, templateRef:TemplateRef):ViewRef;
-
+    
     /**
      * Instantiates a single {@link Component} and inserts its Host View into the View Container
      * found at `viewContainerLocation`. Within the container, the view will be inserted at position
      * specified via `index`.
-     *
+     * 
      * The component is instantiated using its {@link ProtoViewRef `protoViewRef`} which can be
      * obtained via {@link Compiler#compileInHost}.
-     *
+     * 
      * You can optionally specify `imperativelyCreatedInjector`, which configure the {@link Injector}
      * that will be created for the Host View.
-     *
+     * 
      * Returns the {@link HostViewRef} of the Host View created for the newly instantiated Component.
-     *
+     * 
      * Use {@link AppViewManager#destroyViewInContainer} to destroy the created Host View.
      */
     createHostViewInContainer(viewContainerLocation:ElementRef, index:number, protoViewRef:ProtoViewRef, imperativelyCreatedInjector:ResolvedProvider[]):HostViewRef;
-
+    
     /**
      * Destroys an Embedded or Host View attached to a View Container at the specified `index`.
-     *
+     * 
      * The View Container is located via `viewContainerLocation`.
      */
     destroyViewInContainer(viewContainerLocation:ElementRef, index:number):void;
-
+    
     /**
      * See {@link AppViewManager#detachViewInContainer}.
      */
     attachViewInContainer(viewContainerLocation:ElementRef, index:number, viewRef:ViewRef):ViewRef;
-
+    
     /**
      * See {@link AppViewManager#attachViewInContainer}.
      */
     detachViewInContainer(viewContainerLocation:ElementRef, index:number):ViewRef;
-
+    
   }
 
 
   /**
    * An unmodifiable list of items that Angular keeps up to date when the state
    * of the application changes.
-   *
+   * 
    * The type of object that {@link QueryMetadata} and {@link ViewQueryMetadata} provide.
-   *
+   * 
    * Implements an iterable interface, therefore it can be used in both ES6
    * javascript `for (var i of items)` loops as well as in Angular templates with
    * `*ngFor="#i of myList"`.
-   *
+   * 
    * Changes can be observed by subscribing to the changes `Observable`.
-   *
+   * 
    * NOTE: In the future this class will implement an `Observable` interface.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/RX8sJnQYl9FWuSCWme5z?p=preview))
    * ```typescript
    * @Component({...})
@@ -6371,7 +6371,7 @@ declare module core {
     first:T;
 
     last:T;
-
+    
     /**
      * returns a new array with the passed in function applied to each element.
      */
@@ -6381,19 +6381,19 @@ declare module core {
      * returns a filtered array.
      */
     filter(fn:(item:T) => boolean):T[];
-
+    
     /**
      * returns a reduced value.
      */
     reduce<U>(fn:(acc:U, item:T) => U, init:U):U;
-
+    
     /**
      * converts QueryList into an array
      */
     toArray():T[];
 
     toString():string;
-
+    
   }
 
 
@@ -6405,21 +6405,21 @@ declare module core {
     /**
      * Creates an instance of a Component `type` and attaches it to the first element in the
      * platform-specific global view that matches the component's selector.
-     *
+     * 
      * In a browser the platform-specific global view is the main DOM Document.
-     *
+     * 
      * If needed, the component's selector can be overridden via `overrideSelector`.
-     *
+     * 
      * You can optionally provide `injector` and this {@link Injector} will be used to instantiate the
      * Component.
-     *
+     * 
      * To be notified when this Component instance is destroyed, you can also optionally provide
      * `onDispose` callback.
-     *
+     * 
      * Returns a promise for the {@link ComponentRef} representing the newly created Component.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @Component({
      *   selector: 'child-component',
@@ -6427,7 +6427,7 @@ declare module core {
      * })
      * class ChildComponent {
      * }
-     *
+     * 
      * @Component({
      *   selector: 'my-app',
      *   template: 'Parent (<child id="child"></child>)'
@@ -6437,12 +6437,12 @@ declare module core {
      *     dcl.loadAsRoot(ChildComponent, '#child', injector);
      *   }
      * }
-     *
+     * 
      * bootstrap(MyApp);
      * ```
-     *
+     * 
      * Resulting DOM:
-     *
+     * 
      * ```
      * <my-app>
      *   Parent (
@@ -6452,22 +6452,22 @@ declare module core {
      * ```
      */
     loadAsRoot(type:Type, overrideSelector:string, injector:Injector, onDispose?:() => void):Promise<ComponentRef>;
-
+    
     /**
      * Creates an instance of a Component and attaches it to a View Container located inside of the
      * Component View of another Component instance.
-     *
+     * 
      * The targeted Component Instance is specified via its `hostLocation` {@link ElementRef}. The
      * location within the Component View of this Component Instance is specified via `anchorName`
      * Template Variable Name.
-     *
+     * 
      * You can optionally provide `providers` to configure the {@link Injector} provisioned for this
      * Component Instance.
-     *
+     * 
      * Returns a promise for the {@link ComponentRef} representing the newly created Component.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @Component({
      *   selector: 'child-component',
@@ -6475,7 +6475,7 @@ declare module core {
      * })
      * class ChildComponent {
      * }
-     *
+     * 
      * @Component({
      *   selector: 'my-app',
      *   template: 'Parent (<div #child></div>)'
@@ -6485,12 +6485,12 @@ declare module core {
      *     dcl.loadIntoLocation(ChildComponent, elementRef, 'child');
      *   }
      * }
-     *
+     * 
      * bootstrap(MyApp);
      * ```
-     *
+     * 
      * Resulting DOM:
-     *
+     * 
      * ```
      * <my-app>
      *    Parent (
@@ -6501,19 +6501,19 @@ declare module core {
      * ```
      */
     loadIntoLocation(type:Type, hostLocation:ElementRef, anchorName:string, providers?:ResolvedProvider[]):Promise<ComponentRef>;
-
+    
     /**
      * Creates an instance of a Component and attaches it to the View Container found at the
      * `location` specified as {@link ElementRef}.
-     *
+     * 
      * You can optionally provide `providers` to configure the {@link Injector} provisioned for this
      * Component Instance.
-     *
+     * 
      * Returns a promise for the {@link ComponentRef} representing the newly created Component.
      *
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @Component({
      *   selector: 'child-component',
@@ -6521,7 +6521,7 @@ declare module core {
      * })
      * class ChildComponent {
      * }
-     *
+     * 
      * @Component({
      *   selector: 'my-app',
      *   template: 'Parent'
@@ -6531,29 +6531,29 @@ declare module core {
      *     dcl.loadNextToLocation(ChildComponent, elementRef);
      *   }
      * }
-     *
+     * 
      * bootstrap(MyApp);
      * ```
-     *
+     * 
      * Resulting DOM:
-     *
+     * 
      * ```
      * <my-app>Parent</my-app>
      * <child-component>Child</child-component>
      * ```
      */
     loadNextToLocation(type:Type, location:ElementRef, providers?:ResolvedProvider[]):Promise<ComponentRef>;
-
+    
   }
 
 
   /**
    * Represents a location in a View that has an injection, change-detection and render context
    * associated with it.
-   *
+   * 
    * An `ElementRef` is created for each element in the Template that contains a Directive, Component
    * or data-binding.
-   *
+   * 
    * An `ElementRef` is backed by a render-specific element. In the browser, this is usually a DOM
    * element.
    */
@@ -6562,7 +6562,7 @@ declare module core {
     /**
      * The underlying native element or `null` if direct access to native elements is not supported
      * (e.g. when the application runs in a web worker).
-     *
+     * 
      * <div class="callout is-critical">
      *   <header>Use with caution</header>
      *   <p>
@@ -6581,18 +6581,18 @@ declare module core {
     nativeElement:any;
 
     renderView:RenderViewRef;
-
+    
   }
 
 
   /**
    * Represents an Embedded Template that can be used to instantiate Embedded Views.
-   *
+   * 
    * You can access a `TemplateRef`, in two ways. Via a directive placed on a `<template>` element (or
    * directive prefixed with `*`) and have the `TemplateRef` for this Embedded View injected into the
    * constructor of the directive using the `TemplateRef` Token. Alternatively you can query for the
    * `TemplateRef` from a Component or a Directive via {@link Query}.
-   *
+   * 
    * To instantiate Embedded Views based on a Template, use
    * {@link ViewContainerRef#createEmbeddedView}, which will create the View and attach it to the
    * View Container.
@@ -6601,10 +6601,10 @@ declare module core {
     
     /**
      * The location in the View where the Embedded View logically belongs to.
-     *
+     * 
      * The data-binding and injection contexts of Embedded Views created from this `TemplateRef`
      * inherit from the contexts of this location.
-     *
+     * 
      * Typically new Embedded Views are attached to the View Container of this location, but in
      * advanced use-cases, the View can be attached to a different container while keeping the
      * data-binding and injection context from the original location.
@@ -6615,35 +6615,35 @@ declare module core {
      * Allows you to check if this Embedded Template defines Local Variable with name matching `name`.
      */
     hasLocal(name:string):boolean;
-
+    
   }
 
 
   /**
    * Represents an Angular View.
-   *
+   * 
    * <!-- TODO: move the next two paragraphs to the dev guide -->
    * A View is a fundamental building block of the application UI. It is the smallest grouping of
    * Elements which are created and destroyed together.
-   *
+   * 
    * Properties of elements in a View can change, but the structure (number and order) of elements in
    * a View cannot. Changing the structure of Elements can only be done by inserting, moving or
    * removing nested Views via a {@link ViewContainerRef}. Each View can contain many View Containers.
    * <!-- /TODO -->
-   *
+   * 
    * ### Example
-   *
+   * 
    * Given this template...
-   *
+   * 
    * ```
    * Count: {{items.length}}
    * <ul>
    *   <li *ngFor="var item of items">{{item}}</li>
    * </ul>
    * ```
-   *
+   * 
    * ... we have two {@link ProtoViewRef}s:
-   *
+   * 
    * Outer {@link ProtoViewRef}:
    * ```
    * Count: {{items.length}}
@@ -6651,16 +6651,16 @@ declare module core {
    *   <template ngFor var-item [ngForOf]="items"></template>
    * </ul>
    * ```
-   *
+   * 
    * Inner {@link ProtoViewRef}:
    * ```
    *   <li>{{item}}</li>
    * ```
-   *
+   * 
    * Notice that the original template is broken down into two separate {@link ProtoViewRef}s.
-   *
+   * 
    * The outer/inner {@link ProtoViewRef}s are then assembled into views like so:
-   *
+   * 
    * ```
    * <!-- ViewRef: outer-0 -->
    * Count: 2
@@ -6680,14 +6680,14 @@ declare module core {
     setLocal(variableName:string, value:any):void;
 
     changeDetectorRef:ChangeDetectorRef;
-
+    
   }
 
 
   /**
    * Represents a View containing a single Element that is the Host Element of a {@link Component}
    * instance.
-   *
+   * 
    * A Host View is created for every dynamically created Component that was compiled on its own (as
    * opposed to as a part of another Component's Template) via {@link Compiler#compileInHost} or one
    * of the higher-level APIs: {@link AppViewManager#createRootHostView},
@@ -6700,28 +6700,28 @@ declare module core {
 
   /**
    * Represents an Angular ProtoView.
-   *
+   * 
    * A ProtoView is a prototypical {@link ViewRef View} that is the result of Template compilation and
    * is used by Angular to efficiently create an instance of this View based on the compiled Template.
-   *
+   * 
    * Most ProtoViews are created and used internally by Angular and you don't need to know about them,
    * except in advanced use-cases where you compile components yourself via the low-level
    * {@link Compiler#compileInHost} API.
    *
-   *
+   * 
    * ### Example
-   *
+   * 
    * Given this template:
-   *
+   * 
    * ```
    * Count: {{items.length}}
    * <ul>
    *   <li *ngFor="var item of items">{{item}}</li>
    * </ul>
    * ```
-   *
+   * 
    * Angular desugars and compiles the template into two ProtoViews:
-   *
+   * 
    * Outer ProtoView:
    * ```
    * Count: {{items.length}}
@@ -6729,12 +6729,12 @@ declare module core {
    *   <template ngFor var-item [ngForOf]="items"></template>
    * </ul>
    * ```
-   *
+   * 
    * Inner ProtoView:
    * ```
    *   <li>{{item}}</li>
    * ```
-   *
+   * 
    * Notice that the original template is broken down into two separate ProtoViews.
    */
   abstract class ProtoViewRef {
@@ -6744,22 +6744,22 @@ declare module core {
 
   /**
    * Represents a container where one or more Views can be attached.
-   *
+   * 
    * The container can contain two kinds of Views. Host Views, created by instantiating a
    * {@link Component} via {@link #createHostView}, and Embedded Views, created by instantiating an
    * {@link TemplateRef Embedded Template} via {@link #createEmbeddedView}.
-   *
+   * 
    * The location of the View Container within the containing View is specified by the Anchor
    * `element`. Each View Container can have only one Anchor Element and each Anchor Element can only
    * have a single View Container.
-   *
+   * 
    * Root elements of Views attached to this container become siblings of the Anchor Element in
    * the Rendered View.
-   *
+   * 
    * To access a `ViewContainerRef` of an Element, you can either place a {@link Directive} injected
    * with `ViewContainerRef` on the Element, or you obtain it via
    * {@link AppViewManager#getViewContainer}.
-   *
+   * 
    * <!-- TODO(i): we are also considering ElementRef#viewContainer api -->
    */
   abstract class ViewContainerRef {
@@ -6779,73 +6779,73 @@ declare module core {
      * Returns the {@link ViewRef} for the View located in this container at the specified index.
      */
     get(index:number):ViewRef;
-
+    
     /**
      * Returns the number of Views currently attached to this container.
      */
     length:number;
-
+    
     /**
      * Instantiates an Embedded View based on the {@link TemplateRef `templateRef`} and inserts it
      * into this container at the specified `index`.
-     *
+     * 
      * If `index` is not specified, the new View will be inserted as the last View in the container.
-     *
+     * 
      * Returns the {@link ViewRef} for the newly created View.
      */
     createEmbeddedView(templateRef:TemplateRef, index?:number):ViewRef;
-
+    
     /**
      * Instantiates a single {@link Component} and inserts its Host View into this container at the
      * specified `index`.
-     *
+     * 
      * The component is instantiated using its {@link ProtoViewRef `protoView`} which can be
      * obtained via {@link Compiler#compileInHost}.
-     *
+     * 
      * If `index` is not specified, the new View will be inserted as the last View in the container.
-     *
+     * 
      * You can optionally specify `dynamicallyCreatedProviders`, which configure the {@link Injector}
      * that will be created for the Host View.
-     *
+     * 
      * Returns the {@link HostViewRef} of the Host View created for the newly instantiated Component.
      */
     createHostView(protoViewRef?:ProtoViewRef, index?:number, dynamicallyCreatedProviders?:ResolvedProvider[]):HostViewRef;
-
+    
     /**
      * Inserts a View identified by a {@link ViewRef} into the container at the specified `index`.
-     *
+     * 
      * If `index` is not specified, the new View will be inserted as the last View in the container.
-     *
+     * 
      * Returns the inserted {@link ViewRef}.
      */
     insert(viewRef:ViewRef, index?:number):ViewRef;
-
+    
     /**
      * Returns the index of the View, specified via {@link ViewRef}, within the current container or
      * `-1` if this container doesn't contain the View.
      */
     indexOf(viewRef:ViewRef):number;
-
+    
     /**
      * Destroys a View attached to this container at the specified `index`.
-     *
+     * 
      * If `index` is not specified, the last View in the container will be removed.
      */
     remove(index?:number):void;
-
+    
     /**
      * Use along with {@link #insert} to move a View within the current container.
-     *
+     * 
      * If the `index` param is omitted, the last {@link ViewRef} is detached.
      */
     detach(index?:number):ViewRef;
-
+    
   }
 
 
   /**
    * Represents an instance of a Component created via {@link DynamicComponentLoader}.
-   *
+   * 
    * `ComponentRef` provides access to the Component Instance as well other objects related to this
    * Component Instance and allows you to destroy the Component Instance via the {@link #dispose}
    * method.
@@ -6854,41 +6854,41 @@ declare module core {
     
     /**
      * The injector provided {@link DynamicComponentLoader#loadAsRoot}.
-     *
+     * 
      * TODO(i): this api is useless and should be replaced by an injector retrieved from
      *     the HostElementRef, which is currently not possible.
      */
     injector:Injector;
-
+    
     /**
      * Location of the Host Element of this Component Instance.
      */
     location:ElementRef;
-
+    
     /**
      * The instance of the Component.
      */
     instance:any;
-
+    
     /**
      * The user defined component type, represented via the constructor function.
-     *
+     * 
      * <!-- TODO: customize wording for Dart docs -->
      */
     componentType:Type;
-
+    
     /**
      * The {@link ViewRef} of the Host View of this Component instance.
      */
     hostView:HostViewRef;
-
+    
     /**
      * Destroys the component instance and all of the data structures associated with it.
-     *
+     * 
      * TODO(i): rename to destroy to be consistent with AppViewManager and ViewContainerRef
      */
     dispose():void;
-
+    
   }
 
 
@@ -6916,7 +6916,7 @@ declare module core {
     findBindings(using:any, provider:string, exactMatch:boolean):any[];
 
     findProviders(using:any, provider:string, exactMatch:boolean):any[];
-
+    
   }
 
 
@@ -6934,7 +6934,7 @@ declare module core {
     getAllTestabilities():Testability[];
 
     findTestabilityInTree(elem:Node, findInAncestors?:boolean):Testability;
-
+    
   }
 
 
@@ -6947,7 +6947,7 @@ declare module core {
     addToWindow(registry:TestabilityRegistry): void;
 
     findTestabilityInTree(registry:TestabilityRegistry, elem:any, findInAncestors:boolean): Testability;
-
+    
   }
 
 
@@ -7006,13 +7006,13 @@ declare module core {
 
   /**
    * An error thrown if application changes model breaking the top-down data flow.
-   *
+   * 
    * This exception is only thrown in dev mode.
-   *
+   * 
    * <!-- TODO: Add a link once the dev mode option is configurable -->
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'parent',
@@ -7024,7 +7024,7 @@ declare module core {
    * class Parent {
    *   parentProp = "init";
    * }
-   *
+   * 
    * @Directive({selector: 'child', inputs: ['prop']})
    * class Child {
    *   constructor(public parent: Parent) {}
@@ -7040,24 +7040,24 @@ declare module core {
   class ExpressionChangedAfterItHasBeenCheckedException extends BaseException {
 
     constructor(exp:string, oldValue:any, currValue:any, context:any);
-
+    
   }
 
 
   /**
    * Thrown when an expression evaluation raises an exception.
-   *
+   * 
    * This error wraps the original exception to attach additional contextual information that can
    * be useful for debugging.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/2Kywoz?p=preview))
-   *
+   * 
    * ```typescript
    * @Directive({selector: 'child', inputs: ['prop']})
    * class Child {
    *   prop;
    * }
-   *
+   * 
    * @Component({
    *   selector: 'app',
    *   template: `
@@ -7068,22 +7068,22 @@ declare module core {
    * class App {
    *   field = null;
    * }
-   *
+   * 
    * bootstrap(App);
    * ```
-   *
+   * 
    * You can access the original exception and stack through the `originalException` and
    * `originalStack` properties.
    */
   class ChangeDetectionError extends WrappedException {
 
     constructor(exp:string, originalException:any, originalStack:any, context:any);
-
+    
     /**
      * Information about the expression that triggered the exception.
      */
     location:string;
-
+    
   }
 
 
@@ -7091,11 +7091,11 @@ declare module core {
 
     /**
      * Marks all {@link ChangeDetectionStrategy#OnPush} ancestors as to be checked.
-     *
+     * 
      * <!-- TODO: Add a link to a chapter on OnPush components -->
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/GC512b?p=preview))
-     *
+     * 
      * ```typescript
      * @Component({
      *   selector: 'cmp',
@@ -7113,7 +7113,7 @@ declare module core {
      *     }, 1000);
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -7124,31 +7124,31 @@ declare module core {
      * })
      * class App {
      * }
-     *
+     * 
      * bootstrap(App);
      * ```
      */
     markForCheck():void;
-
+    
     /**
      * Detaches the change detector from the change detector tree.
-     *
+     * 
      * The detached change detector will not be checked until it is reattached.
-     *
+     * 
      * This can also be used in combination with {@link ChangeDetectorRef#detectChanges} to implement
      * local change
      * detection checks.
-     *
+     * 
      * <!-- TODO: Add a link to a chapter on detach/reattach/local digest -->
      * <!-- TODO: Add a live demo once ref.detectChanges is merged into master -->
-     *
+     * 
      * ### Example
-     *
+     * 
      * The following example defines a component with a large list of readonly data.
      * Imagine the data changes constantly, many times per second. For performance reasons,
      * we want to check and update the list every five seconds. We can do that by detaching
      * the component's change detector and doing a local check every five seconds.
-     *
+     * 
      * ```typescript
      * class DataProvider {
      *   // in a real application the returned data will be different every time
@@ -7156,7 +7156,7 @@ declare module core {
      *     return [1,2,3,4,5];
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'giant-list',
      *   template: `
@@ -7172,7 +7172,7 @@ declare module core {
      *     }, 5000);
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   providers: [DataProvider],
@@ -7183,58 +7183,58 @@ declare module core {
      * })
      * class App {
      * }
-     *
+     * 
      * bootstrap(App);
      * ```
      */
     detach():void;
-
+    
     /**
      * Checks the change detector and its children.
-     *
+     * 
      * This can also be used in combination with {@link ChangeDetectorRef#detach} to implement local
      * change detection
      * checks.
-     *
+     * 
      * <!-- TODO: Add a link to a chapter on detach/reattach/local digest -->
      * <!-- TODO: Add a live demo once ref.detectChanges is merged into master -->
-     *
+     * 
      * ### Example
-     *
+     * 
      * The following example defines a component with a large list of readonly data.
      * Imagine, the data changes constantly, many times per second. For performance reasons,
      * we want to check and update the list every five seconds.
-     *
+     * 
      * We can do that by detaching the component's change detector and doing a local change detection
      * check
      * every five seconds.
-     *
+     * 
      * See {@link ChangeDetectorRef#detach} for more information.
      */
     detectChanges():void;
-
+    
     /**
      * Checks the change detector and its children, and throws if any changes are detected.
-     *
+     * 
      * This is used in development mode to verify that running change detection doesn't introduce
      * other changes.
      */
     checkNoChanges():void;
-
+    
     /**
      * Reattach the change detector to the change detector tree.
-     *
+     * 
      * This also marks OnPush ancestors as to be checked. This reattached change detector will be
      * checked during the next change detection run.
-     *
+     * 
      * <!-- TODO: Add a link to a chapter on detach/reattach/local digest -->
-     *
+     * 
      * ### Example ([live demo](http://plnkr.co/edit/aUhZha?p=preview))
-     *
+     * 
      * The following example creates a component displaying `live` data. The component will detach
      * its change detector from the main change detector tree when the component's live property
      * is set to false.
-     *
+     * 
      * ```typescript
      * class DataProvider {
      *   data = 1;
@@ -7245,7 +7245,7 @@ declare module core {
      *     }, 500);
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'live-data',
      *   inputs: ['live'],
@@ -7261,7 +7261,7 @@ declare module core {
      *       this.ref.detach();
      *   }
      * }
-     *
+     * 
      * @Component({
      *   selector: 'app',
      *   providers: [DataProvider],
@@ -7274,12 +7274,12 @@ declare module core {
      * class App {
      *   live = true;
      * }
-     *
+     * 
      * bootstrap(App);
      * ```
      */
     reattach():void;
-
+    
   }
 
 
@@ -7287,11 +7287,11 @@ declare module core {
    * Indicates that the result of a {@link PipeMetadata} transformation has changed even though the
    * reference
    * has not changed.
-   *
+   * 
    * The wrapped value will be unwrapped by change detection, and the unwrapped value will be stored.
-   *
+   * 
    * Example:
-   *
+   * 
    * ```
    * if (this._latestValue === this._latestReturnedValue) {
    *    return this._latestReturnedValue;
@@ -7308,7 +7308,7 @@ declare module core {
     static wrap(value:any):WrappedValue;
 
     wrapped:any;
-
+    
   }
 
 
@@ -7327,27 +7327,27 @@ declare module core {
      * Check whether the new value is the first value assigned.
      */
     isFirstChange():boolean;
-
+    
   }
 
 
   /**
    * To create a Pipe, you must implement this interface.
-   *
+   * 
    * Angular invokes the `transform` method with the value of a binding
    * as the first argument, and any parameters as the second argument in list form.
-   *
+   * 
    * ## Syntax
-   *
+   * 
    * `value | pipeName[:arg0[:arg1...]]`
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/f5oyIked9M2cKzvZNKHV?p=preview))
-   *
+   * 
    * The `RepeatPipe` below repeats the value as many times as indicated by the first argument:
-   *
+   * 
    * ```
    * import {Pipe, PipeTransform} from 'angular2/core';
-   *
+   * 
    * @Pipe({name: 'repeat'})
    * export class RepeatPipe implements PipeTransform {
    *   transform(value: any, args: any[] = []) {
@@ -7359,13 +7359,13 @@ declare module core {
    *   }
    * }
    * ```
-   *
+   * 
    * Invoking `{{ 'ok' | repeat:3 }}` in a template produces `okokok`.
    */
   interface PipeTransform {
 
     transform(value:any, args:any[]): any;
-
+    
   }
 
 
@@ -7382,13 +7382,13 @@ declare module core {
      * Takes an array of {@link IterableDifferFactory} and returns a provider used to extend the
      * inherited {@link IterableDiffers} instance with the provided factories and return a new
      * {@link IterableDiffers} instance.
-     *
+     * 
      * The following example shows how to extend an existing list of factories,
      * which will only be applied to the injector for this component and its children.
      * This step is all that's required to make a new {@link IterableDiffer} available.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @Component({
      *   viewProviders: [
@@ -7402,7 +7402,7 @@ declare module core {
     factories:IterableDifferFactory[];
 
     find(iterable:Object):IterableDifferFactory;
-
+    
   }
 
 
@@ -7413,7 +7413,7 @@ declare module core {
   interface IterableDiffer {
 
     diff(object:Object): any;
-
+    
     onDestroy(): void;
 
   }
@@ -7427,7 +7427,7 @@ declare module core {
     supports(objects:Object): boolean;
 
     create(cdRef:ChangeDetectorRef): IterableDiffer;
-
+    
   }
 
 
@@ -7444,13 +7444,13 @@ declare module core {
      * Takes an array of {@link KeyValueDifferFactory} and returns a provider used to extend the
      * inherited {@link KeyValueDiffers} instance with the provided factories and return a new
      * {@link KeyValueDiffers} instance.
-     *
+     * 
      * The following example shows how to extend an existing list of factories,
      * which will only be applied to the injector for this component and its children.
      * This step is all that's required to make a new {@link KeyValueDiffer} available.
-     *
+     * 
      * ### Example
-     *
+     * 
      * ```
      * @Component({
      *   viewProviders: [
@@ -7464,7 +7464,7 @@ declare module core {
     factories:KeyValueDifferFactory[];
 
     find(kv:Object):KeyValueDifferFactory;
-
+    
   }
 
 
@@ -7474,7 +7474,7 @@ declare module core {
   interface KeyValueDiffer {
 
     diff(object:Object): void;
-
+    
     onDestroy(): void;
 
   }
@@ -7488,20 +7488,20 @@ declare module core {
     supports(objects:Object): boolean;
 
     create(cdRef:ChangeDetectorRef): KeyValueDiffer;
-
+    
   }
 
 
   /**
    * A token that can be provided when bootstraping an application to make an array of directives
    * available in every component of the application.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * import {PLATFORM_DIRECTIVES} from 'angular2/core';
    * import {OtherDirective} from './myDirectives';
-   *
+   * 
    * @Component({
    *   selector: 'my-component',
    *   template: `
@@ -7512,7 +7512,7 @@ declare module core {
    * export class MyComponent {
    *   ...
    * }
-   *
+   * 
    * bootstrap(MyComponent, [provide(PLATFORM_DIRECTIVES, {useValue: [OtherDirective], multi:true})]);
    * ```
    */
@@ -7522,13 +7522,13 @@ declare module core {
   /**
    * A token that can be provided when bootstraping an application to make an array of pipes
    * available in every component of the application.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * import {PLATFORM_PIPES} from 'angular2/core';
    * import {OtherPipe} from './myPipe';
-   *
+   * 
    * @Component({
    *   selector: 'my-component',
    *   template: `
@@ -7538,7 +7538,7 @@ declare module core {
    * export class MyComponent {
    *   ...
    * }
-   *
+   * 
    * bootstrap(MyComponent, [provide(PLATFORM_PIPES, {useValue: [OtherPipe], multi:true})]);
    * ```
    */
@@ -7610,7 +7610,7 @@ declare module core {
     method(name:string):MethodFn;
 
     importUri(type:Type):string;
-
+    
   }
 
 
@@ -7630,7 +7630,7 @@ declare module core {
     interfaces:any[];
 
     propMetadata:{[key: string]: any[]};
-
+    
   }
 
 

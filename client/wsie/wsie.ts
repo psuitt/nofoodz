@@ -1,11 +1,13 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 declare var Client:any;
 declare var jQuery:any;
@@ -19,7 +21,11 @@ declare var jQuery:any;
     directives: [Wsie, RouterLink]
 })
 
-export class Wsie implements OnDestroy {
+export class Wsie extends MeteorComponent implements OnDestroy {
+
+    constructor() {
+        super();
+    }
 
     ngOnDestroy() {
         jQuery('#wsie_random').off();
@@ -31,7 +37,7 @@ export class Wsie implements OnDestroy {
 
         jQuery('#wsie_random').off('click').removeClass('glyphicon glyphicon-gift').addClass('loading');
 
-        Meteor.call('getRandom', {type: Client.NoFoodz.consts.FOOD}, function (err, response) {
+        this.call('getRandom', {type: Client.NoFoodz.consts.FOOD}, function (err, response) {
 
             if (!err) {
                 if (response.rating) {

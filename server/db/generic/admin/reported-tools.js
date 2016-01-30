@@ -88,7 +88,6 @@ Meteor.methods({
                     break;
 
             }
-            ;
 
             // Remove the ratings.
             if (ratingRemoveObj && Items) {

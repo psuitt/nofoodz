@@ -178,7 +178,7 @@ span.foods-comment {
 }
 
 #foods_infodiv > div.open > ul.item-infolist {
-    display: block;
+    display: table;
 }
 
 #foods_infodiv > div > span {
@@ -189,14 +189,18 @@ span.foods-comment {
     display: block;
 }
 
+ul.item-infolist li {
+    display: table-row;
+}
+
 ul.item-infolist span {
-    width: 82%;
-    display: inline-block;
+    display: table-cell;
 }
 
 ul.item-infolist span:first-child {
-    text-align: center;
-    width: 18%;
+    text-align: right;
+    min-width: 125px;
+    padding: 0 20px 0 0;
 }
 
 #foods_infodiv h4 > span {

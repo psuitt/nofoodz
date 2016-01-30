@@ -1,9 +1,9 @@
 /**
  * Created by Sora on 11/30/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, Location, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -12,6 +12,7 @@ declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'add'
@@ -22,7 +23,7 @@ declare var _:any;
     directives: [Add, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Add implements OnDestroy {
+export class Add implements OnDestroy, AfterViewInit {
 
     location:Location;
 
@@ -33,8 +34,7 @@ export class Add implements OnDestroy {
 
         this.screenData = Client.NoFoodz.lib.getParameters(true);
 
-        this.setup();
-        this.loadListeners();
+
 
     }
 
@@ -48,6 +48,11 @@ export class Add implements OnDestroy {
 
         this.nofoodsRating.remove();
 
+    }
+
+    ngAfterViewInit() {
+        this.setup();
+        this.loadListeners();
     }
 
     setup() {
@@ -90,10 +95,6 @@ export class Add implements OnDestroy {
             });
 
         }
-
-        jQuery('[data-role=\'tagsinput\']').tagsinput({
-            tagClass: 'nofoodz-tag'
-        });
 
     }
 
@@ -238,7 +239,8 @@ export class Add implements OnDestroy {
                     group.find('.foodsadd-product-div').each(function () {
                         var productDiv = jQuery(this),
                             name = productDiv.find('.foodsadd-name-input').val(),
-                            tags = productDiv.find('.foodsadd-name-tags').tagsinput('items');
+                            tagString = productDiv.find('.foodsadd-name-tags').val(),
+                            tags = tagString.length > 0 ? productDiv.find('.foodsadd-name-tags').val().toLowerCase().split(' ') : [];
 
                         if (!item['brand'] || !name) {
                             return [];
@@ -287,14 +289,10 @@ export class Add implements OnDestroy {
         if (removeButton)
             divInput.append('<button type=\'button\' class=\'foodsadd-remove btn-default red-button\'><span class=\'button-icon glyphicon glyphicon-minus\'></span>Remove</button>');
 
-        divTags.append('<input type=\'text\' data-role=\'tagsinput\' class=\'foodsadd-name-tags\' />');
+        divTags.append('<input type=\'text\' class=\'foodsadd-name-tags\' />');
 
         div.append(divInput);
         div.append(divTags);
-
-        div.find('[data-role=\'tagsinput\']').tagsinput({
-            tagClass: 'nofoodz-tag'
-        });
 
         return div;
 

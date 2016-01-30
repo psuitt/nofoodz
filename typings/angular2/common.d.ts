@@ -21,17 +21,17 @@ declare module common {
    * The `async` pipe subscribes to an core.Observable or Promise and returns the latest value it has
    * emitted.
    * When a new value is emitted, the `async` pipe marks the component to be checked for changes.
-   *
+   * 
    * ### Example
-   *
+   * 
    * This example binds a `Promise` to the view. Clicking the `Resolve` button resolves the
    * promise.
-   *
+   * 
    * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipe'}
-   *
+   * 
    * It's also possible to use `async` with Observables. The example below binds the `time` core.Observable
    * to the view. Every 500ms, the `time` core.Observable updates the view with the current time.
-   *
+   * 
    * ```typescript
    * ```
    */
@@ -42,13 +42,13 @@ declare module common {
     ngOnDestroy():void;
 
     transform(obj:core.Observable<any>| Promise<any>| core.EventEmitter<any>, args?:any[]):any;
-
+    
   }
 
 
   /**
    * Formats a date value to a string based on the requested format.
-   *
+   * 
    * WARNINGS:
    * - this pipe is marked as pure hence it will not be re-evaluated when the input is mutated.
    *   Instead users should treat the date as an immutable object and change the reference when the
@@ -56,14 +56,14 @@ declare module common {
    *   which would be an expensive operation).
    * - this pipe uses the Internationalization API. Therefore it is only reliable in Chrome and Opera
    *   browsers.
-   *
+   * 
    * ## Usage
-   *
+   * 
    *     expression | date[:format]
-   *
+   * 
    * where `expression` is a date object or a number (milliseconds since UTC epoch) and
    * `format` indicates which date/time components to include:
-   *
+   * 
    *  | Component | Symbol | Short Form   | Long Form         | Numeric   | 2-digit   |
    *  |-----------|:------:|--------------|-------------------|-----------|-----------|
    *  | era       |   G    | G (AD)       | GGGG (Anno Domini)| -         | -         |
@@ -78,15 +78,15 @@ declare module common {
    *  | second    |   s    | -            | -                 | s (9)     | ss (09)   |
    *  | timezone  |   z    | -            | z (Pacific Standard Time)| -  | -         |
    *  | timezone  |   Z    | Z (GMT-8:00) | -                 | -         | -         |
-   *
+   * 
    * In javascript, only the components specified will be respected (not the ordering,
    * punctuations, ...) and details of the formatting will be dependent on the locale.
    * On the other hand in Dart version, you can also include quoted text as well as some extra
    * date/time components such as quarter. For more information see:
    * https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/intl/intl.DateFormat.
-   *
+   * 
    * `format` can also be one of the following predefined formats:
-   *
+   * 
    *  - `'medium'`: equivalent to `'yMMMdjms'` (e.g. Sep 3, 2010, 12:05:08 PM for en-US)
    *  - `'short'`: equivalent to `'yMdjm'` (e.g. 9/3/2010, 12:05 PM for en-US)
    *  - `'fullDate'`: equivalent to `'yMMMMEEEEd'` (e.g. Friday, September 3, 2010 for en-US)
@@ -95,21 +95,21 @@ declare module common {
    *  - `'shortDate'`: equivalent to `'yMd'` (e.g. 9/3/2010 for en-US)
    *  - `'mediumTime'`: equivalent to `'jms'` (e.g. 12:05:08 PM for en-US)
    *  - `'shortTime'`: equivalent to `'jm'` (e.g. 12:05 PM for en-US)
-   *
+   * 
    * Timezone of the formatted text will be the local system timezone of the end-users machine.
-   *
+   * 
    * ### Examples
-   *
+   * 
    * Assuming `dateObj` is (year: 2015, month: 6, day: 15, hour: 21, minute: 43, second: 11)
    * in the _local_ time and locale is 'en-US':
-   *
+   * 
    * ```
    *     {{ dateObj | date }}               // output is 'Jun 15, 2015'
    *     {{ dateObj | date:'medium' }}      // output is 'Jun 15, 2015, 9:43:11 PM'
    *     {{ dateObj | date:'shortTime' }}   // output is '9:43 PM'
    *     {{ dateObj | date:'mmss' }}        // output is '43:11'
    * ```
-   *
+   * 
    * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
    */
   class DatePipe implements core.PipeTransform {
@@ -117,40 +117,40 @@ declare module common {
     transform(value:any, args:any[]):string;
 
     supports(obj:any):boolean;
-
+    
   }
 
 
   /**
    * Transforms any input value using `JSON.stringify`. Useful for debugging.
-   *
+   * 
    * ### Example
    * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
    */
   class JsonPipe implements core.PipeTransform {
 
     transform(value:any, args?:any[]):string;
-
+    
   }
 
 
   /**
    * Creates a new List or String containing only a subset (slice) of the
    * elements.
-   *
+   * 
    * The starting index of the subset to return is specified by the `start` parameter.
-   *
+   * 
    * The ending index of the subset to return is specified by the optional `end` parameter.
-   *
+   * 
    * ### Usage
-   *
+   * 
    *     expression | slice:start[:end]
-   *
+   * 
    * All behavior is based on the expected behavior of the JavaScript API
    * Array.prototype.slice() and String.prototype.slice()
-   *
+   * 
    * Where the input expression is a [List] or [String], and `start` is:
-   *
+   * 
    * - **a positive integer**: return the item at _start_ index and all items after
    * in the list or string expression.
    * - **a negative integer**: return the item at _start_ index from the end and all items after
@@ -158,31 +158,31 @@ declare module common {
    * - **`|start|` greater than the size of the expression**: return an empty list or string.
    * - **`|start|` negative greater than the size of the expression**: return entire list or
    * string expression.
-   *
+   * 
    * and where `end` is:
-   *
+   * 
    * - **omitted**: return all items until the end of the input
    * - **a positive integer**: return all items before _end_ index of the list or string
    * expression.
    * - **a negative integer**: return all items before _end_ index from the end of the list
    * or string expression.
-   *
+   * 
    * When operating on a [List], the returned list is always a copy even when all
    * the elements are being returned.
-   *
+   * 
    * ## List Example
-   *
+   * 
    * This `ngFor` example:
-   *
+   * 
    * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_list'}
-   *
+   * 
    * produces the following:
-   *
+   * 
    *     <li>b</li>
    *     <li>c</li>
-   *
+   * 
    * ## String Examples
-   *
+   * 
    * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
    */
   class SlicePipe implements core.PipeTransform {
@@ -190,21 +190,21 @@ declare module common {
     transform(value:any, args?:any[]):any;
 
     supports(obj:any):boolean;
-
+    
   }
 
 
   /**
    * Transforms text to lowercase.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
    */
   class LowerCasePipe implements core.PipeTransform {
 
     transform(value:string, args?:any[]):string;
-
+    
   }
 
 
@@ -219,104 +219,104 @@ declare module common {
   /**
    * WARNING: this pipe uses the Internationalization API.
    * Therefore it is only reliable in Chrome and Opera browsers.
-   *
+   * 
    * Formats a number as local text. i.e. group sizing and separator and other locale-specific
    * configurations are based on the active locale.
-   *
+   * 
    * ### Usage
-   *
+   * 
    *     expression | number[:digitInfo]
-   *
+   * 
    * where `expression` is a number and `digitInfo` has the following format:
-   *
+   * 
    *     {minIntegerDigits}.{minFractionDigits}-{maxFractionDigits}
-   *
+   * 
    * - minIntegerDigits is the minimum number of integer digits to use. Defaults to 1.
    * - minFractionDigits is the minimum number of digits after fraction. Defaults to 0.
    * - maxFractionDigits is the maximum number of digits after fraction. Defaults to 3.
-   *
+   * 
    * For more information on the acceptable range for each of these numbers and other
    * details see your native internationalization library.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
    */
   class DecimalPipe extends NumberPipe implements core.PipeTransform {
 
     transform(value:any, args:any[]):string;
-
+    
   }
 
 
   /**
    * WARNING: this pipe uses the Internationalization API.
    * Therefore it is only reliable in Chrome and Opera browsers.
-   *
+   * 
    * Formats a number as local percent.
-   *
+   * 
    * ### Usage
-   *
+   * 
    *     expression | percent[:digitInfo]
-   *
+   * 
    * For more information about `digitInfo` see {@link DecimalPipe}
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
    */
   class PercentPipe extends NumberPipe implements core.PipeTransform {
 
     transform(value:any, args:any[]):string;
-
+    
   }
 
 
   /**
    * WARNING: this pipe uses the Internationalization API.
    * Therefore it is only reliable in Chrome and Opera browsers.
-   *
+   * 
    * Formats a number as local currency.
-   *
+   * 
    * ### Usage
-   *
+   * 
    *     expression | currency[:currencyCode[:symbolDisplay[:digitInfo]]]
-   *
+   * 
    * where `currencyCode` is the ISO 4217 currency code, such as "USD" for the US dollar and
    * "EUR" for the euro. `symbolDisplay` is a boolean indicating whether to use the currency
    * symbol (e.g. $) or the currency code (e.g. USD) in the output. The default for this value
    * is `false`.
    * For more information about `digitInfo` see {@link DecimalPipe}
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
    */
   class CurrencyPipe extends NumberPipe implements core.PipeTransform {
 
     transform(value:any, args:any[]):string;
-
+    
   }
 
 
   /**
    * Implements uppercase transforms to text.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
    */
   class UpperCasePipe implements core.PipeTransform {
 
     transform(value:string, args?:any[]):string;
-
+    
   }
 
 
   /**
    * A collection of Angular core pipes that are likely to be used in each and every
    * application.
-   *
+   * 
    * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
    * property of the `@Component` or `@View` decorators.
    */
@@ -326,7 +326,7 @@ declare module common {
   /**
    * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
    * an expression's evaluation result.
-   *
+   * 
    * The result of an expression evaluation is interpreted differently depending on type of
    * the expression evaluation result:
    * - `string` - all the CSS classes listed in a string (space delimited) are added
@@ -334,17 +334,17 @@ declare module common {
    * - `Object` - each key corresponds to a CSS class name while values are interpreted as expressions
    * evaluating to `Boolean`. If a given expression evaluates to `true` a corresponding CSS class
    * is added - otherwise it is removed.
-   *
+   * 
    * While the `NgClass` directive can interpret expressions evaluating to `string`, `Array`
    * or `Object`, the `Object`-based version is the most often used and has an advantage of keeping
    * all the CSS class names in a template.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/a4YdtmWywhJ33uqfpPPn?p=preview)):
-   *
+   * 
    * ```
    * import {Component} from 'angular2/core';
    * import {NgClass} from 'angular2/common';
-   *
+   * 
    * @Component({
    *   selector: 'toggle-button',
    *   inputs: ['isDisabled'],
@@ -393,7 +393,7 @@ declare module common {
     ngDoCheck():void;
 
     ngOnDestroy():void;
-
+    
   }
 
 
@@ -401,48 +401,48 @@ declare module common {
    * The `NgFor` directive instantiates a template once per item from an iterable. The context for
    * each instantiated template inherits from the outer context with the given loop variable set
    * to the current item from the iterable.
-   *
+   * 
    * # Local Variables
-   *
+   * 
    * `NgFor` provides several exported values that can be aliased to local variables:
-   *
+   * 
    * * `index` will be set to the current loop iteration for each template context.
    * * `last` will be set to a boolean value indicating whether the item is the last one in the
    *   iteration.
    * * `even` will be set to a boolean value indicating whether this item has an even index.
    * * `odd` will be set to a boolean value indicating whether this item has an odd index.
-   *
+   * 
    * # Change Propagation
-   *
+   * 
    * When the contents of the iterator changes, `NgFor` makes the corresponding changes to the DOM:
-   *
+   * 
    * * When an item is added, a new instance of the template is added to the DOM.
    * * When an item is removed, its template instance is removed from the DOM.
    * * When items are reordered, their respective templates are reordered in the DOM.
    * * Otherwise, the DOM element for that item will remain the same.
-   *
+   * 
    * Angular uses object identity to track insertions and deletions within the iterator and reproduce
    * those changes in the DOM. This has important implications for animations and any stateful
    * controls
    * (such as `<input>` elements which accept user input) that are present. Inserted rows can be
    * animated in, deleted rows can be animated out, and unchanged rows retain any unsaved state such
    * as user input.
-   *
+   * 
    * It is possible for the identities of elements in the iterator to change while the data does not.
    * This can happen, for example, if the iterator produced from an RPC to the server, and that
    * RPC is re-run. Even if the data hasn't changed, the second response will produce objects with
    * different identities, and Angular will tear down the entire DOM and rebuild it (as if all old
    * elements were deleted and all new elements inserted). This is an expensive operation and should
    * be avoided if possible.
-   *
+   * 
    * # Syntax
-   *
+   * 
    * - `<li *ngFor="#item of items; #i = index">...</li>`
    * - `<li template="ngFor #item of items; #i = index">...</li>`
    * - `<template ngFor #item [ngForOf]="items" #i="index"><li>...</li></template>`
-   *
+   * 
    * ### Example
-   *
+   * 
    * See a [live demo](http://plnkr.co/edit/KVuXxDp0qinGDyo307QW?p=preview) for a more detailed
    * example.
    */
@@ -455,18 +455,18 @@ declare module common {
     ngForTemplate:any;
 
     ngDoCheck():void;
-
+    
   }
 
 
   /**
    * Removes or recreates a portion of the DOM tree based on an {expression}.
-   *
+   * 
    * If the expression assigned to `ngIf` evaluates to a false value then the element
    * is removed from the DOM, otherwise a clone of the element is reinserted into the DOM.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/fe0kgemFBtmQOY31b4tw?p=preview)):
-   *
+   * 
    * ```
    * <div *ngIf="errorCount > 0" class="error">
    *   <!-- Error message displayed when the errorCount property on the current context is greater
@@ -474,9 +474,9 @@ declare module common {
    *   {{errorCount}} errors detected
    * </div>
    * ```
-   *
+   * 
    * ### Syntax
-   *
+   * 
    * - `<div *ngIf="condition">...</div>`
    * - `<div template="ngIf condition">...</div>`
    * - `<template [ngIf]="condition"><div>...</div></template>`
@@ -486,28 +486,28 @@ declare module common {
     constructor(_viewContainer:core.ViewContainerRef, _templateRef:core.TemplateRef);
 
     ngIf:any;
-
+    
   }
 
 
   /**
    * The `NgStyle` directive changes styles based on a result of expression evaluation.
-   *
+   * 
    * An expression assigned to the `ngStyle` property must evaluate to an object and the
    * corresponding element styles are updated based on changes to this object. Style names to update
    * are taken from the object's keys, and values - from the corresponding object's values.
-   *
+   * 
    * ### Syntax
-   *
+   * 
    * - `<div [ngStyle]="{'font-style': style}"></div>`
    * - `<div [ngStyle]="styleExp"></div>` - here the `styleExp` must evaluate to an object
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/YamGS6GkUh9GqWNQhCyM?p=preview)):
-   *
+   * 
    * ```
    * import {Component} from 'angular2/core';
    * import {NgStyle} from 'angular2/common';
-   *
+   * 
    * @Component({
    *  selector: 'ngStyle-example',
    *  template: `
@@ -537,7 +537,7 @@ declare module common {
    *    }
    * }
    * ```
-   *
+   * 
    * In this example the `font-style`, `font-size` and `font-weight` styles will be updated
    * based on the `style` property's value changes.
    */
@@ -548,28 +548,28 @@ declare module common {
     rawStyle:any;
 
     ngDoCheck():void;
-
+    
   }
 
 
   /**
    * Adds or removes DOM sub-trees when their match expressions match the switch expression.
-   *
+   * 
    * Elements within `NgSwitch` but without `NgSwitchWhen` or `NgSwitchDefault` directives will be
    * preserved at the location as specified in the template.
-   *
+   * 
    * `NgSwitch` simply inserts nested elements based on which match expression matches the value
    * obtained from the evaluated switch expression. In other words, you define a container element
    * (where you place the directive with a switch expression on the
    * **`[ngSwitch]="..."` attribute**), define any inner elements inside of the directive and
    * place a `[ngSwitchWhen]` attribute per element.
-   *
+   * 
    * The `ngSwitchWhen` property is used to inform `NgSwitch` which element to display when the
    * expression is evaluated. If a matching expression is not found via a `ngSwitchWhen` property
    * then an element with the `ngSwitchDefault` attribute is displayed.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/DQMTII95CbuqWrl3lYAs?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({selector: 'app'})
    * @View({
@@ -604,23 +604,23 @@ declare module common {
    *     this.value = this.value === 'init' ? 0 : this.value + 1;
    *   }
    * }
-   *
+   * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
    */
   class NgSwitch {
 
     ngSwitch:any;
-
+    
   }
 
 
   /**
    * Insert the sub-tree when the `ngSwitchWhen` expression evaluates to the same value as the
    * enclosing switch expression.
-   *
+   * 
    * If multiple match expression match the switch expression value, all of them are displayed.
-   *
+   * 
    * See {@link NgSwitch} for more details and example.
    */
   class NgSwitchWhen {
@@ -628,38 +628,38 @@ declare module common {
     constructor(viewContainer:core.ViewContainerRef, templateRef:core.TemplateRef, ngSwitch:NgSwitch);
 
     ngSwitchWhen:any;
-
+    
   }
 
 
   /**
    * Default case statements are displayed when no match expression matches the switch expression
    * value.
-   *
+   * 
    * See {@link NgSwitch} for more details and example.
    */
   class NgSwitchDefault {
 
     constructor(viewContainer:core.ViewContainerRef, templateRef:core.TemplateRef, sswitch:NgSwitch);
-
+    
   }
 
 
   /**
    * A collection of Angular core directives that are likely to be used in each and every Angular
    * application.
-   *
+   * 
    * This collection can be used to quickly enumerate all the built-in directives in the `directives`
    * property of the `@View` annotation.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/yakGwpCdUkg0qfzX5m8g?p=preview))
-   *
+   * 
    * Instead of writing:
-   *
+   * 
    * ```typescript
    * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from 'angular2/common';
    * import {OtherDirective} from './myDirectives';
-   *
+   * 
    * @Component({
    *   selector: 'my-component',
    *   templateUrl: 'myComponent.html',
@@ -670,11 +670,11 @@ declare module common {
    * }
    * ```
    * one could import all the core directives at once:
-   *
+   * 
    * ```typescript
    * import {CORE_DIRECTIVES} from 'angular2/common';
    * import {OtherDirective} from './myDirectives';
-   *
+   * 
    * @Component({
    *   selector: 'my-component',
    *   templateUrl: 'myComponent.html',
@@ -708,7 +708,7 @@ declare module common {
     status:string;
 
     valid:boolean;
-
+    
     /**
      * Returns the errors of this control.
      */
@@ -737,27 +737,27 @@ declare module common {
     setParent(parent:ControlGroup | ControlArray):void;
 
     updateValueAndValidity({onlySelf, emitEvent}?: {onlySelf?: boolean, emitEvent?: boolean}):void;
-
+    
     /**
      * Sets errors on a control.
-     *
+     * 
      * This is used when validations are run not automatically, but manually by the user.
-     *
+     * 
      * Calling `setErrors` will also update the validity of the parent control.
-     *
+     * 
      * ## Usage
-     *
+     * 
      * ```
      * var login = new Control("someLogin");
      * login.setErrors({
      *   "notUnique": true
      * });
-     *
+     * 
      * expect(login.valid).toEqual(false);
      * expect(login.errors).toEqual({"notUnique": true});
-     *
+     * 
      * login.updateValue("someOtherLogin");
-     *
+     * 
      * expect(login.valid).toEqual(true);
      * ```
      */
@@ -768,24 +768,24 @@ declare module common {
     getError(errorCode:string, path?:string[]):any;
 
     hasError(errorCode:string, path?:string[]):boolean;
-
+    
   }
 
 
   /**
    * Defines a part of a form that cannot be divided into other controls. `Control`s have values and
    * validation state, which is determined by an optional validation function.
-   *
+   * 
    * `Control` is one of the three fundamental building blocks used to define forms in Angular, along
    * with {@link ControlGroup} and {@link ControlArray}.
-   *
+   * 
    * ## Usage
-   *
+   * 
    * By default, a `Control` is created for every `<input>` or other form component.
    * With {@link NgFormControl} or {@link NgFormModel} an existing {@link Control} can be
    * bound to a DOM element instead. This `Control` can be configured with a custom
    * validation function.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
    */
   class Control extends AbstractControl {
@@ -794,12 +794,12 @@ declare module common {
     
     /**
      * Set the value of the control to `value`.
-     *
+     * 
      * If `onlySelf` is `true`, this change will only affect the validation of this `Control`
      * and not its parent component. If `emitEvent` is `true`, this change will cause a
      * `valueChanges` event on the `Control` to be emitted. Both of these options default to
      * `false`.
-     *
+     * 
      * If `emitModelToViewChange` is `true`, the view will be notified about the new value
      * via an `onChange` event. This is the default behavior if `emitModelToViewChange` is not
      * specified.
@@ -814,21 +814,21 @@ declare module common {
      * Register a listener for change events.
      */
     registerOnChange(fn:Function):void;
-
+    
   }
 
 
   /**
    * Defines a part of a form, of fixed length, that can contain other controls.
-   *
+   * 
    * A `ControlGroup` aggregates the values and errors of each {@link Control} in the group. Thus, if
    * one of the controls in a group is invalid, the entire group is invalid. Similarly, if a control
    * changes its value, the entire group changes as well.
-   *
+   * 
    * `ControlGroup` is one of the three fundamental building blocks used to define forms in Angular,
    * along with {@link Control} and {@link ControlArray}. {@link ControlArray} can also contain other
    * controls, but is of variable length.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
    */
   class ControlGroup extends AbstractControl {
@@ -846,44 +846,44 @@ declare module common {
      * Remove a control from this group.
      */
     removeControl(name:string):void;
-
+    
     /**
      * Mark the named control as non-optional.
      */
     include(controlName:string):void;
-
+    
     /**
      * Mark the named control as optional.
      */
     exclude(controlName:string):void;
-
+    
     /**
      * Check whether there is a control with the given name in the group.
      */
     contains(controlName:string):boolean;
-
+    
   }
 
 
   /**
    * Defines a part of a form, of variable length, that can contain other controls.
-   *
+   * 
    * A `ControlArray` aggregates the values and errors of each {@link Control} in the group. Thus, if
    * one of the controls in a group is invalid, the entire group is invalid. Similarly, if a control
    * changes its value, the entire group changes as well.
-   *
+   * 
    * `ControlArray` is one of the three fundamental building blocks used to define forms in Angular,
    * along with {@link Control} and {@link ControlGroup}. {@link ControlGroup} can also contain
    * other controls, but is of fixed length.
-   *
+   * 
    * ## Adding or removing controls
-   *
+   * 
    * To change the controls in the array, use the `push`, `insert`, or `removeAt` methods
    * in `ControlArray` itself. These methods ensure the controls are properly tracked in the
    * form's hierarchy. Do not modify the array of `AbstractControl`s used to instantiate
    * the `ControlArray` directly, as that will result in strange and unexpected behavior such
    * as broken change detection.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
    */
   class ControlArray extends AbstractControl {
@@ -896,33 +896,33 @@ declare module common {
      * Get the {@link AbstractControl} at the given `index` in the array.
      */
     at(index:number):AbstractControl;
-
+    
     /**
      * Insert a new {@link AbstractControl} at the end of the array.
      */
     push(control:AbstractControl):void;
-
+    
     /**
      * Insert a new {@link AbstractControl} at the given `index` in the array.
      */
     insert(index:number, control:AbstractControl):void;
-
+    
     /**
      * Remove the control at the given `index` in the array.
      */
     removeAt(index:number):void;
-
+    
     /**
      * Length of the control array.
      */
     length:number;
-
+    
   }
 
 
   /**
    * Base class for control directives.
-   *
+   * 
    * Only used internally in the forms module.
    */
   abstract class AbstractControlDirective {
@@ -944,13 +944,13 @@ declare module common {
     untouched:boolean;
 
     path:string[];
-
+    
   }
 
 
   /**
    * An interface that {@link NgFormModel} and {@link NgForm} implement.
-   *
+   * 
    * Only used by the forms module.
    */
   interface Form {
@@ -959,43 +959,43 @@ declare module common {
      * Add a control to this form.
      */
     addControl(dir:NgControl): void;
-
+    
     /**
      * Remove a control from this form.
      */
     removeControl(dir:NgControl): void;
-
+    
     /**
      * Look up the {@link Control} associated with a particular {@link NgControl}.
      */
     getControl(dir:NgControl): Control;
-
+    
     /**
      * Add a group of controls to this form.
      */
     addControlGroup(dir:NgControlGroup): void;
-
+    
     /**
      * Remove a group of controls from this form.
      */
     removeControlGroup(dir:NgControlGroup): void;
-
+    
     /**
      * Look up the {@link ControlGroup} associated with a particular {@link NgControlGroup}.
      */
     getControlGroup(dir:NgControlGroup): ControlGroup;
-
+    
     /**
      * Update the model for a particular control with a new value.
      */
     updateModel(dir:NgControl, value:any): void;
-
+    
   }
 
 
   /**
    * A directive that contains multiple {@link NgControl}s.
-   *
+   * 
    * Only used by the forms module.
    */
   class ControlContainer extends AbstractControlDirective {
@@ -1006,26 +1006,26 @@ declare module common {
      * Get the form to which this container belongs.
      */
     formDirective:Form;
-
+    
     /**
      * Get the path to this container.
      */
     path:string[];
-
+    
   }
 
 
   /**
    * Creates and binds a control with a specified name to a DOM element.
-   *
+   * 
    * This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.
-   *
+   * 
    * ### Example
-   *
+   * 
    * In this example, we create the login and password controls.
    * We can work with each control separately: check its validity, get its value, listen to its
    * changes.
-   *
+   * 
    *  ```
    * @Component({
    *      selector: "login-comp",
@@ -1045,9 +1045,9 @@ declare module common {
    *  }
    * }
    *  ```
-   *
+   * 
    * We can also use ngModel to bind a domain model to the form.
-   *
+   * 
    *  ```
    * @Component({
    *      selector: "login-comp",
@@ -1070,7 +1070,7 @@ declare module common {
    * }
    *  ```
    */
-  class NgControlName extends NgControl implements core.OnChanges,
+  class NgControlName extends NgControl implements core.OnChanges, 
       core.OnDestroy {
 
     constructor(_parent:ControlContainer, _validators:/* Array<Validator|Function> */ any[], _asyncValidators:/* Array<Validator|Function> */ any[], valueAccessors:ControlValueAccessor[]);
@@ -1094,19 +1094,19 @@ declare module common {
     asyncValidator:Function;
 
     control:Control;
-
+    
   }
 
 
   /**
    * Binds an existing {@link Control} to a DOM element.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/jcQlZ2tTh22BZZ2ucNAT?p=preview))
-   *
+   * 
    * In this example, we bind the control to an input element. When the value of the input element
    * changes, the value of the control will reflect that change. Likewise, if the value of the
    * control changes, the input element reflects that change.
-   *
+   * 
    *  ```typescript
    * @Component({
    *   selector: 'my-app',
@@ -1126,13 +1126,13 @@ declare module common {
    *   loginControl: Control = new Control('');
    * }
    *  ```
-   *
+   * 
    * ###ngModel
-   *
+   * 
    * We can also use `ngModel` to bind a domain model to the form.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/yHMLuHO7DNgT8XvtjTDH?p=preview))
-   *
+   * 
    *  ```typescript
    * @Component({
    *      selector: "login-comp",
@@ -1168,19 +1168,19 @@ declare module common {
     control:Control;
 
     viewToModelUpdate(newValue:any):void;
-
+    
   }
 
 
   /**
    * Binds a domain model to a form control.
-   *
+   * 
    * ### Usage
-   *
+   * 
    * `ngModel` binds an existing domain model to a form control. For a
    * two-way binding, use `[(ngModel)]` to ensure the model updates in
    * both directions.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/R3UX5qDaUqFO2VYR0UzH?p=preview))
    *  ```typescript
    * @Component({
@@ -1214,14 +1214,14 @@ declare module common {
     asyncValidator:Function;
 
     viewToModelUpdate(newValue:any):void;
-
+    
   }
 
 
   /**
    * A base class that all control directive extend.
    * It binds a {@link Control} object to a DOM element.
-   *
+   * 
    * Used internally by Angular forms.
    */
   abstract class NgControl extends AbstractControlDirective {
@@ -1235,17 +1235,17 @@ declare module common {
     asyncValidator:Function;
 
     viewToModelUpdate(newValue:any):void;
-
+    
   }
 
 
   /**
    * Creates and binds a control group to a DOM element.
-   *
+   * 
    * This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/7EJ11uGeaggViYM6T5nq?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'my-app',
@@ -1283,11 +1283,11 @@ declare module common {
    *   }
    * }
    * ```
-   *
+   * 
    * This example declares a control group for a user's name. The value and validation state of
    * this group can be accessed separately from the overall form.
    */
-  class NgControlGroup extends ControlContainer implements core.OnInit,
+  class NgControlGroup extends ControlContainer implements core.OnInit, 
       core.OnDestroy {
 
     constructor(parent:ControlContainer, _validators:any[], _asyncValidators:any[]);
@@ -1295,7 +1295,7 @@ declare module common {
     ngOnInit():void;
 
     ngOnDestroy():void;
-
+    
     /**
      * Get the {@link ControlGroup} backing this binding.
      */
@@ -1305,7 +1305,7 @@ declare module common {
      * Get the path to this control group.
      */
     path:string[];
-
+    
     /**
      * Get the {@link Form} to which this group belongs.
      */
@@ -1314,18 +1314,18 @@ declare module common {
     validator:Function;
 
     asyncValidator:Function;
-
+    
   }
 
 
   /**
    * Binds an existing control group to a DOM element.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/jqrVirudY8anJxTMUjTP?p=preview))
-   *
+   * 
    * In this example, we bind the control group to the form element, and we bind the login and
    * password controls to the login and password elements.
-   *
+   * 
    *  ```typescript
    * @Component({
    *   selector: 'my-app',
@@ -1357,9 +1357,9 @@ declare module common {
    *   }
    * }
    *  ```
-   *
+   * 
    * We can also use ngModel to bind a domain model to the form.
-   *
+   * 
    *  ```typescript
    * @Component({
    *      selector: "login-comp",
@@ -1390,7 +1390,7 @@ declare module common {
    * }
    *  ```
    */
-  class NgFormModel extends ControlContainer implements Form,
+  class NgFormModel extends ControlContainer implements Form, 
       core.OnChanges {
 
     constructor(_validators:any[], _asyncValidators:any[]);
@@ -1424,32 +1424,32 @@ declare module common {
     updateModel(dir:NgControl, value:any):void;
 
     onSubmit():boolean;
-
+    
   }
 
 
   /**
    * If `NgForm` is bound in a component, `<form>` elements in that component will be
    * upgraded to use the Angular form system.
-   *
+   * 
    * ### Typical Use
-   *
+   * 
    * Include `FORM_DIRECTIVES` in the `directives` section of a {@link View} annotation
    * to use `NgForm` and its associated controls.
-   *
+   * 
    * ### Structure
-   *
+   * 
    * An Angular form is a collection of `Control`s in some hierarchy.
    * `Control`s can be at the top level or can be organized in `ControlGroup`s
    * or `ControlArray`s. This hierarchy is reflected in the form's `value`, a
    * JSON object that mirrors the form structure.
-   *
+   * 
    * ### Submission
-   *
+   * 
    * The `ngSubmit` event signals when the user triggers a form submission.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/ltdgYj4P0iY64AR71EpL?p=preview))
-   *
+   * 
    *  ```typescript
    * @Component({
    *   selector: 'my-app',
@@ -1518,16 +1518,16 @@ declare module common {
     updateModel(dir:NgControl, value:any):void;
 
     onSubmit():boolean;
-
+    
   }
 
 
   /**
    * A bridge between a control and a native element.
-   *
+   * 
    * A `ControlValueAccessor` abstracts the operations of writing a new value to a
    * DOM element representing an input control.
-   *
+   * 
    * Please see {@link DefaultValueAccessor} for more information.
    */
   interface ControlValueAccessor {
@@ -1546,13 +1546,13 @@ declare module common {
      * Set the function to be called when the control receives a touch event.
      */
     registerOnTouched(fn:any): void;
-
+    
   }
 
 
   /**
    * Used to provide a {@link ControlValueAccessor} for form controls.
-   *
+   * 
    * See {@link DefaultValueAccessor} for how to implement one.
    */
   let NG_VALUE_ACCESSOR:core.OpaqueToken;
@@ -1561,7 +1561,7 @@ declare module common {
   /**
    * The default accessor for writing a value and listening to changes that is used by the
    * {@link NgModel}, {@link NgFormControl}, and {@link NgControlName} directives.
-   *
+   * 
    *  ### Example
    *  ```
    *  <input type="text" ngControl="searchQuery">
@@ -1580,7 +1580,7 @@ declare module common {
     registerOnChange(fn:(_:any) => void):void;
 
     registerOnTouched(fn:() => void):void;
-
+    
   }
 
 
@@ -1603,13 +1603,13 @@ declare module common {
     ngClassValid:boolean;
 
     ngClassInvalid:boolean;
-
+    
   }
 
 
   /**
    * The accessor for writing a value and listening to changes on a checkbox input element.
-   *
+   * 
    *  ### Example
    *  ```
    *  <input type="checkbox" ngControl="rememberLogin">
@@ -1628,15 +1628,15 @@ declare module common {
     registerOnChange(fn:(_:any) => {}):void;
 
     registerOnTouched(fn:() => {}):void;
-
+    
   }
 
 
   /**
    * Marks `<option>` as dynamic, so Angular can be notified when options change.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * <select ngControl="city">
    *   <option *ngFor="#c of cities" [value]="c"></option>
@@ -1666,17 +1666,17 @@ declare module common {
     registerOnChange(fn:() => any):void;
 
     registerOnTouched(fn:() => any):void;
-
+    
   }
 
 
   /**
    * A list of all the form directives used as part of a `@View` annotation.
-   *
+   * 
    *  This is a shorthand for importing them each individually.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'my-app',
@@ -1690,11 +1690,11 @@ declare module common {
 
   /**
    * Providers for validators to be used for {@link Control}s in a form.
-   *
+   * 
    * Provide this using `multi: true` to add validators.
-   *
+   * 
    * ### Example
-   *
+   * 
    * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
    */
   let NG_VALIDATORS:core.OpaqueToken;
@@ -1703,9 +1703,9 @@ declare module common {
   /**
    * Providers for asynchronous validators to be used for {@link Control}s
    * in a form.
-   *
+   * 
    * Provide this using `multi: true` to add validators.
-   *
+   * 
    * See {@link NG_VALIDATORS} for more details.
    */
   let NG_ASYNC_VALIDATORS:core.OpaqueToken;
@@ -1713,12 +1713,12 @@ declare module common {
 
   /**
    * Provides a set of validators used by form controls.
-   *
+   * 
    * A validator is a function that processes a {@link Control} or collection of
    * controls and returns a map of errors. A null map means that validation has passed.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * var loginControl = new Control("", Validators.required)
    * ```
@@ -1752,16 +1752,16 @@ declare module common {
     static compose(validators:Function[]):Function;
 
     static composeAsync(validators:Function[]):Function;
-
+    
   }
 
 
   /**
    * A Directive that adds the `required` validator to any controls marked with the
    * `required` attribute, via the {@link NG_VALIDATORS} binding.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```
    * <input ngControl="fullName" required>
    * ```
@@ -1780,7 +1780,7 @@ declare module common {
     constructor(minLength:string);
 
     validate(c:Control):{[key: string]: any};
-
+    
   }
 
 
@@ -1793,15 +1793,15 @@ declare module common {
     constructor(maxLength:string);
 
     validate(c:Control):{[key: string]: any};
-
+    
   }
 
 
   /**
    * An interface that can be implemented by classes that can act as validators.
-   *
+   * 
    * ## Usage
-   *
+   * 
    * ```typescript
    * @Directive({
    *   selector: '[custom-validator]',
@@ -1823,9 +1823,9 @@ declare module common {
 
   /**
    * Creates a form object from a user-specified configuration.
-   *
+   * 
    * ### Example ([live demo](http://plnkr.co/edit/ENgZo8EuIECZNensZCVr?p=preview))
-   *
+   * 
    * ```typescript
    * @Component({
    *   selector: 'my-app',
@@ -1867,7 +1867,7 @@ declare module common {
     /**
      * Construct a new {@link ControlGroup} with the given map of configuration.
      * Valid keys for the `extra` parameter map are `optionals` and `validator`.
-     *
+     * 
      * See the {@link ControlGroup} constructor for more details.
      */
     group(controlsConfig:{[key: string]: any}, extra?:{[key: string]: any}):ControlGroup;
@@ -1882,15 +1882,15 @@ declare module common {
      * configuration, with the given optional `validator` and `asyncValidator`.
      */
     array(controlsConfig:any[], validator?:Function, asyncValidator?:Function):ControlArray;
-
+    
   }
 
 
   /**
    * Shorthand set of providers used for building Angular forms.
-   *
+   * 
    * ### Example
-   *
+   * 
    * ```typescript
    * bootstrap(MyApp, [FORM_PROVIDERS]);
    * ```
@@ -1900,7 +1900,7 @@ declare module common {
 
   /**
    * See {@link FORM_PROVIDERS} instead.
-   *
+   * 
    * @deprecated
    */
   let FORM_BINDINGS:any;
@@ -1910,19 +1910,19 @@ declare module common {
    * A collection of Angular core directives that are likely to be used in each and every Angular
    * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
    * NgModel).
-   *
+   * 
    * This collection can be used to quickly enumerate all the built-in directives in the `directives`
    * property of the `@Component` or `@View` decorators.
-   *
+   * 
    * ### Example
-   *
+   * 
    * Instead of writing:
-   *
+   * 
    * ```typescript
    * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm} from
    * 'angular2/common';
    * import {OtherDirective} from './myDirectives';
-   *
+   * 
    * @Component({
    *   selector: 'my-component',
    *   templateUrl: 'myComponent.html',
@@ -1934,11 +1934,11 @@ declare module common {
    * }
    * ```
    * one could import all the common directives at once:
-   *
+   * 
    * ```typescript
    * import {COMMON_DIRECTIVES} from 'angular2/common';
    * import {OtherDirective} from './myDirectives';
-   *
+   * 
    * @Component({
    *   selector: 'my-component',
    *   templateUrl: 'myComponent.html',

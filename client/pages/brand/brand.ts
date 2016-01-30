@@ -1,9 +1,9 @@
 /**
  * Created by Sora on 11/29/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -11,6 +11,7 @@ declare var jQuery:any;
 declare var Client:any;
 declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'brand'
@@ -21,7 +22,7 @@ declare var _:any;
     directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Brand implements OnDestroy {
+export class Brand implements OnDestroy, AfterViewInit {
 
     screenData:any;
 
@@ -31,8 +32,7 @@ export class Brand implements OnDestroy {
             _id: params.get('_id')
         };
 
-        this.setup();
-        this.loadListeners();
+
 
     }
 
@@ -40,6 +40,11 @@ export class Brand implements OnDestroy {
 
         jQuery(document).off('click', '#brands-nav a');
 
+    }
+
+    ngAfterViewInit() {
+        this.setup();
+        this.loadListeners();
     }
 
     setup() {

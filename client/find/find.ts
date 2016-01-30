@@ -1,6 +1,6 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/core';
+import {Component, View, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, RouteParams} from 'angular2/router';
 
@@ -9,6 +9,7 @@ import {bootstrap} from 'angular2-meteor';
 declare var jQuery:any;
 declare var _:any;
 declare var Client:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'find'
@@ -19,8 +20,9 @@ declare var Client:any;
     directives: [RouterLink]
 })
 
-export class Find {
+export class Find implements AfterViewInit {
 
+    private params:any;
     query:any;
     results:any;
     MAX_RESULTS:number;
@@ -28,12 +30,17 @@ export class Find {
 
     constructor(params:RouteParams) {
 
+        this.params = params;
         this.query = Client.NoFoodz.lib.getParameters(true);
         this.results = [];
         this.MAX_RESULTS = 3;
 
-        this.search(params.get('type'), params.get('search'));
 
+
+    }
+
+    ngAfterViewInit() {
+        this.search(this.params.get('type'), this.params.get('search'));
     }
 
     search(type, search) {

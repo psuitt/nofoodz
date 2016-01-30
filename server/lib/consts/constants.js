@@ -28,9 +28,11 @@ NoFoodz.consts.filters = {
 };
 
 NoFoodz.consts.admin = {
+    // Admin Can do everything
     SUPER: 'S',
-    // Roles
+    // Can only add single items
     NORMAL: 'N',
+    // Can add multiple items
     MOD: 'M'
 };
 
