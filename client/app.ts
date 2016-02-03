@@ -30,6 +30,8 @@ import {List} from "./list";
 
 declare var jQuery:any;
 declare var NoFoodz:any;
+declare var _:any;
+declare var Client:any;
 declare var Meteor:any;
 declare var Accounts:any;
 
@@ -107,6 +109,8 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     loadListeners(router) {
 
+        var self = this;
+
         jQuery('.searchbar input').nofoodssearch({router: router});
 
         jQuery('#logout_button').on('click', function () {
@@ -140,6 +144,153 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
         jQuery(document).on('click', 'register_account', function () {
             jQuery('#register_form').submit();
+        });
+
+        // Hide listener
+        jQuery(document).on('click', 'body', function (e) {
+            //jQuery('#menu_close').click();
+            if (jQuery(e.target).closest('#notificationsList').length === 0
+                && jQuery(e.target).closest('#notifications').length === 0
+                && jQuery('#notifications').hasClass('open')) {
+                jQuery('#notifications').removeClass('open');
+                jQuery('#notificationsList').removeClass('open');
+            }
+
+            if (jQuery(e.target).closest('.menu-secondary-nav').length === 0
+                && jQuery(e.target).closest('.primary-nav').length === 0) {
+                self.closeNav();
+            }
+
+        });
+
+        jQuery(document).on('click', '#notifications', function (event) {
+
+            event.stopPropagation();
+
+            if (!jQuery(this).hasClass('open')) {
+                jQuery(this).addClass('open');
+                jQuery('#notificationsList').html('').addClass('open');
+                self.loadNotifications();
+            } else {
+                jQuery(this).removeClass('open');
+                jQuery('#notificationsList').removeClass('open');
+            }
+
+        });
+
+        jQuery(document).on('click', '.close-nav', this.closeAll);
+
+        jQuery(document).on('click', '.has-children a', function (event) {
+            event.preventDefault();
+
+            var selected = jQuery(this);
+
+            if (selected.next('ul').hasClass('is-hidden')) {
+                //desktop version only
+                selected.addClass('selected').next('ul').removeClass('is-hidden').end().parent('.has-children').parent('ul').addClass('moves-out');
+                selected.parent('.has-children').siblings('.has-children').children('ul').addClass('is-hidden').end().children('a').removeClass('selected');
+            } else {
+                selected.removeClass('selected').next('ul').addClass('is-hidden').end().parent('.has-children').parent('ul').removeClass('moves-out');
+            }
+            //toggleSearch('close');
+        });
+
+        jQuery(document).on('click', '.back', function () {
+            jQuery(this).parent('ul').addClass('is-hidden').parent('.has-children').parent('ul').removeClass('moves-out');
+        });
+
+        jQuery(document).on('click', '#menu_searchbutton', function () {
+            jQuery('#header_searchdiv').toggleClass('is-visible');
+        });
+
+        jQuery(document).on('click', '.menu-secondary-nav .menu-link', function (event) {
+            if (this.href[this.href.length - 1] !== '#') {
+                self.closeAll(event);
+            } else if (self.isNotMobile() && this.className.indexOf('menu-header') !== -1) {
+                event.preventDefault();
+                return false;
+            }
+            if (this.href.indexOf('?') !== -1) {
+                // manually redirect
+                window.location = this.href;
+            }
+
+        });
+
+    }
+
+    closeNav() {
+        //jQuery('.cd-nav-trigger').removeClass('nav-is-visible');
+        // jQuery('.cd-main-header').removeClass('nav-is-visible');
+        //jQuery('.cd-primary-nav').removeClass('nav-is-visible');
+        jQuery('.has-children ul').addClass('is-hidden').removeClass('moves-out');
+        jQuery('.has-children a').removeClass('selected');
+        //jQuery('.moves-out').removeClass('moves-out');
+        //jQuery('.cd-main-content').removeClass('nav-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
+        //    jQuery('body').removeClass('overflow-hidden');
+        //});
+    }
+
+    closeAll(event) {
+
+        event.preventDefault();
+        jQuery('#menu-navbar').removeClass('in');
+        jQuery('.has-children ul').addClass('is-hidden').removeClass('moves-out');
+        jQuery('.has-children a').removeClass('selected');
+
+    }
+
+    isNotMobile() {
+
+        //check window width (scrollbar included)
+        var e:any = window,
+            a = 'inner';
+        if (!('innerWidth' in window )) {
+            a = 'client';
+            e = document.documentElement || document.body;
+        }
+
+        return (e[a + 'Width'] >= 767);
+
+    }
+
+    loadNotifications() {
+
+        var li = jQuery('<li class=\'title\'></li>');
+        li.html("Notifications");
+        jQuery('#notificationsList').append(li);
+
+        Meteor.call('getUserNotifications', function (err, data) {
+
+            if (!err) {
+
+                if (data && data.length > 0) {
+
+                    _.each(data.reverse(), function (notification, index, list) {
+                        if (notification.message) {
+                            var li = jQuery('<li></li>'),
+                                span = jQuery('<span></span>');
+
+                            li.html(notification.message);
+                            span.html(Client.NoFoodz.lib.formatDate(notification.date));
+
+                            li.prepend(span);
+                            jQuery('#notificationsList').append(li);
+                        }
+                    });
+
+                } else {
+                    var li = jQuery('<li></li>');
+                    li.html("No notifications available");
+                    jQuery('#notificationsList').append(li);
+                }
+
+            } else {
+                var li = jQuery('<li></li>');
+                li.html(err);
+                jQuery('#notificationsList').append(li);
+            }
+
         });
 
     }
