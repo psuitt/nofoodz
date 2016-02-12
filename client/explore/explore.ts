@@ -94,7 +94,7 @@ export class Explore implements OnInit {
                     div.append(title);
                     div.append(brand);
 
-                    var avg = NoFoodz.format.calculateAverageDisplay(item);
+                    var avg = Client.NoFoodz.format.calculateAverageDisplay(item);
 
                     div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
 

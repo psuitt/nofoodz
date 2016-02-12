@@ -239,7 +239,7 @@ export class Item implements OnDestroy, AfterViewInit {
                     var liItem = jQuery('<li></li');
 
                     var fieldTitle = jQuery('<span></span');
-                    fieldTitle.text(NoFoodz.format.camelCase(field));
+                    fieldTitle.text(Client.NoFoodz.format.camelCase(field));
 
                     var detail = jQuery('<span></span');
                     detail.text(infoItem[field]);
@@ -356,7 +356,7 @@ export class Item implements OnDestroy, AfterViewInit {
             _.each(response, function (comment, index) {
 
                 words.push({
-                    text: NoFoodz.format.camelCase(comment.comment),
+                    text: Client.NoFoodz.format.camelCase(comment.comment),
                     weight: comment.value
                 });
 

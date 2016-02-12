@@ -147,17 +147,11 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
         });
 
         // Hide listener
-        jQuery(document).on('click', 'body', function (e) {
+        jQuery(document).on('click', 'body', function (event) {
             //jQuery('#menu_close').click();
-            if (jQuery(e.target).closest('#notificationsList').length === 0
-                && jQuery(e.target).closest('#notifications').length === 0
-                && jQuery('#notifications').hasClass('open')) {
-                jQuery('#notifications').removeClass('open');
-                jQuery('#notificationsList').removeClass('open');
-            }
 
-            if (jQuery(e.target).closest('.menu-secondary-nav').length === 0
-                && jQuery(e.target).closest('.primary-nav').length === 0) {
+            if (jQuery(event.target).closest('.menu-secondary-nav').length === 0
+                && jQuery(event.target).closest('.primary-nav').length === 0) {
                 self.closeNav();
             }
 
@@ -165,22 +159,19 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
         jQuery(document).on('click', '#notifications', function (event) {
 
-            event.stopPropagation();
-
-            if (!jQuery(this).hasClass('open')) {
-                jQuery(this).addClass('open');
-                jQuery('#notificationsList').html('').addClass('open');
-                self.loadNotifications();
-            } else {
-                jQuery(this).removeClass('open');
-                jQuery('#notificationsList').removeClass('open');
-            }
+            self.loadNotifications();
 
         });
 
         jQuery(document).on('click', '.close-nav', this.closeAll);
 
         jQuery(document).on('click', '.has-children a', function (event) {
+
+            if (jQuery(event.target).closest('ul').attr('id') == 'notificationsList') {
+                self.closeNav();
+                return;
+            }
+
             event.preventDefault();
 
             var selected = jQuery(this);
@@ -192,7 +183,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
             } else {
                 selected.removeClass('selected').next('ul').addClass('is-hidden').end().parent('.has-children').parent('ul').removeClass('moves-out');
             }
-            //toggleSearch('close');
+
         });
 
         jQuery(document).on('click', '.back', function () {
@@ -217,18 +208,18 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
         });
 
+        jQuery('#user_menu_icons .back').on('click', function () {
+            jQuery('#user_menu_icons').removeClass('wide');
+        });
+
     }
 
     closeNav() {
-        //jQuery('.cd-nav-trigger').removeClass('nav-is-visible');
-        // jQuery('.cd-main-header').removeClass('nav-is-visible');
-        //jQuery('.cd-primary-nav').removeClass('nav-is-visible');
+
         jQuery('.has-children ul').addClass('is-hidden').removeClass('moves-out');
         jQuery('.has-children a').removeClass('selected');
-        //jQuery('.moves-out').removeClass('moves-out');
-        //jQuery('.cd-main-content').removeClass('nav-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-        //    jQuery('body').removeClass('overflow-hidden');
-        //});
+        jQuery('#user_menu_icons').removeClass('wide');
+
     }
 
     closeAll(event) {
@@ -237,6 +228,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
         jQuery('#menu-navbar').removeClass('in');
         jQuery('.has-children ul').addClass('is-hidden').removeClass('moves-out');
         jQuery('.has-children a').removeClass('selected');
+        jQuery('#user_menu_icons').removeClass('wide');
 
     }
 
@@ -256,9 +248,16 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     loadNotifications() {
 
-        var li = jQuery('<li class=\'title\'></li>');
-        li.html("Notifications");
-        jQuery('#notificationsList').append(li);
+        jQuery('#notificationsList').removeClass('is-hidden').html('');
+        jQuery('#user_menu_icons').addClass('wide');
+
+        if (jQuery('#usernameDisplay span.notification-flag').length > 0) {
+            Meteor.call('readNotifications', function (err) {
+                if (!err) {
+                    jQuery('#usernameDisplay span.notification-flag, #usernameDisplaySub span.notification-flag').remove();
+                }
+            });
+        }
 
         Meteor.call('getUserNotifications', function (err, data) {
 
@@ -327,7 +326,11 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
                 jQuery('#login_menu, #register_menu').hide();
                 jQuery('#user_menu').show();
 
-                jQuery('.username').text(this.username);
+                jQuery('#usernameDisplay, #usernameDisplaySub').text(this.username);
+
+                if (currentUser.profile.isnotification) {
+                    jQuery('#usernameDisplay, #usernameDisplaySub').prepend('<span class=\'notification-flag glyphicon glyphicon-bell\' title=\'Unread Notifications\'></span>');
+                }
 
             } else {
                 jQuery('#user_menu').hide();

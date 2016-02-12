@@ -87,15 +87,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="text-center hidden-xs hidden-sm">
-                    <span id="notifications" class="button-icon glyphicon glyphicon-flag"></span>
-                    <ul id="notificationsList"></ul>
-                </li>
                 <li id="app_login_menu" class="has-children">
-                    <a class="menu-link username" href="#">Login</a>
+                    <a id="usernameDisplay" class="menu-link username" href="#">Login</a>
                     <ul class="menu-secondary-nav is-hidden">
                         <li id="login_close" class="close-nav"><a href="#">Close</a></li>
-                        <li class="back"><a class="menu-link username" href="#">Login</a></li>
+                        <li class="back"><a id="usernameDisplaySub" class="menu-link username" href="#">Login</a></li>
                         <li id="login_menu" class="has-children">
                             <a class="menu-link menu-header" href="#">Login</a>
                             <ul class="is-hidden">
@@ -158,7 +154,15 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">User Links</a></li>
-                                <li><a class="menu-link nav-icon" [routerLink]="['/Users/MyFoods']">Notifications</a>
+                                <li class="has-children">
+                                    <a id="notifications" class="menu-link nav-icon" href="#">Notifications</a>
+                                    <ul class="is-hidden">
+                                        <li class="close-nav"><a href="#">Close</a></li>
+                                        <li class="back"><a class="menu-link" href="#">Notifications</a></li>
+                                        <li>
+                                            <ul id="notificationsList"></ul>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>

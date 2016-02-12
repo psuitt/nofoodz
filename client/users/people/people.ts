@@ -24,7 +24,10 @@ declare var Meteor:any;
 
 export class People implements OnDestroy, AfterViewInit {
 
+    itemSearch:any;
+
     screenData:any;
+    user_id:any;
 
     constructor(private router:Router, params:RouteParams) {
 
@@ -49,7 +52,13 @@ export class People implements OnDestroy, AfterViewInit {
 
     setup() {
 
-        Client.NoFoodz.widgetlib.floatMenu(jQuery('#people_nav'));
+        if (!jQuery('#people_ratingsearch_input').hasClass('nofoodssearch')) {
+            this.itemSearch = jQuery('#people_ratingsearch_input').nofoodssearch({
+                values: ['Food', 'Drink', 'Product', 'Media', 'Other'],
+                searchPlaceholder: 'Search your items',
+                select: this.getPageFunction()
+            });
+        }
 
     }
 
@@ -74,9 +83,11 @@ export class People implements OnDestroy, AfterViewInit {
 
                 var displayName = user.profile.name ? user.profile.name : user.username;
 
+                self.user_id = user._id;
+
                 jQuery('.people-name').html(displayName);
 
-                self.findUserRatings(user);
+                self.itemSearch.go();
 
                 self.loadFollowingFlag(user._id, self.screenData.username);
 
@@ -111,36 +122,20 @@ export class People implements OnDestroy, AfterViewInit {
 
     }
 
-    findUserRatings(user) {
+    getPageFunction() {
 
-        this.getFoodsPage(user, 1, true);
-        this.getDrinksPage(user, 1, true);
-        this.getProductsPage(user, 1, true);
+        var self = this;
 
-    }
-
-    getFoodsPage(pagingObj, page, count) {
-
-        this.getGenericPage(this.getProductsPage, pagingObj, page, count, 'FOOD', false);
-
-    }
-
-    getDrinksPage(pagingObj, page, count) {
-
-        this.getGenericPage(this.getProductsPage, pagingObj, page, count, 'DRINK', false);
-
-    }
-
-    getProductsPage(pagingObj, page, count) {
-
-        this.getGenericPage(this.getProductsPage, pagingObj, page, count, 'PRODUCT', false);
+        return function (pagingObj, page, count) {
+            self.getGenericPage(self.getGenericPage, {_id: self.user_id}, page, count, self.itemSearch.getType(), self.itemSearch.getSearch());
+        };
 
     }
 
     getGenericPage(func, pagingObj, page, count, type, search) {
 
         var obj = {
-                'page': page,
+                'page': page ? page : 1,
                 'type': type.toLowerCase(),
                 'user_id': pagingObj._id
             },
@@ -153,38 +148,26 @@ export class People implements OnDestroy, AfterViewInit {
 
         Meteor.call('getUserRatings', obj, function (err, data) {
 
-            if (!err && data.items) {
+            var itemDiv = jQuery('#people_ratingsitem');
 
-                var itemDiv = jQuery('#people_ratings' + t);
+            itemDiv.html('');
 
-                itemDiv.html('');
+            if (!err && data.ratings && data.ratings.length !== 0) {
 
-                var len = data.items.length;
-
-                if (len !== 0) {
-
-                    _.each(data.ratings, function (rating, index, list) {
-                        var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
-                        div.attr(t, rating.item_id);
-                        itemDiv.append(div);
-                    });
-
-                    _.each(data.items, function (item, index, list) {
-                        jQuery('[' + t + '=\'' + item._id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type] + item._id).html(item.name);
-                        jQuery('[' + t + '=\'' + item._id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-                    });
-
-                } else {
-                    itemDiv.append('No ratings found');
-                }
+                _.each(data.ratings, function (rating, index, list) {
+                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating, type);
+                    itemDiv.append(div);
+                });
 
                 if (count) {
-                    jQuery('#people_' + t + ' .myfoods-paging').nofoodspaging({
+                    jQuery('.myfoods-paging').nofoodspaging({
                         max: data.count / data.maxPageSize,
                         select: func
                     });
                 }
 
+            } else {
+                itemDiv.append('No ratings found');
             }
 
         });

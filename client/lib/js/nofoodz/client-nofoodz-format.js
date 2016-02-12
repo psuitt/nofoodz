@@ -1,6 +1,8 @@
-NoFoodz = typeof NoFoodz === 'undefined' ? {} : NoFoodz;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoodz.format = function () {
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
+
+Client.NoFoodz.format = function () {
 
     return {
 

@@ -23,7 +23,7 @@ declare namespace common {
    * promise.
    * 
    * {@example core/pipes/ts/async_pipe/async_pipe_example.ts region='AsyncPipe'}
-   *
+   * 
    * It's also possible to use `async` with Observables. The example below binds the `time` Observable
    * to the view. Every 500ms, the `time` Observable updates the view with the current time.
    * 

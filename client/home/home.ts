@@ -32,7 +32,7 @@ export class Home implements OnDestroy {
         var types = [];
 
         _.each(Client.NoFoodz.consts.types, function (value, key) {
-            types.push(NoFoodz.format.camelCase(value));
+            types.push(Client.NoFoodz.format.camelCase(value));
         });
 
         this.types = types;

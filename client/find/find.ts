@@ -212,10 +212,11 @@ export class Find implements AfterViewInit {
         }
 
         var obj = {
-            'search': search
+            'search': search,
+            'type': type
         };
 
-        Meteor.call('itemBrandSearch', obj, function (err, response) {
+        Meteor.call('itemSearch', obj, function (err, response) {
 
             if (!err) {
 

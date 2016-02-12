@@ -46,8 +46,6 @@ export class MyFoods implements OnDestroy, AfterViewInit {
         this.FOLLOWING = 5;
         this.FOLLOWERS = 6;
 
-
-
     }
 
     ngOnDestroy() {
@@ -329,11 +327,8 @@ export class MyFoods implements OnDestroy, AfterViewInit {
             if (!err && data.ratings && data.ratings.length !== 0) {
 
                 _.each(data.ratings, function (rating, index, list) {
-                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
-                    div.attr(t, rating.item_id);
+                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating, type);
                     itemDiv.append(div);
-                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + rating.item_id).html(rating.name_view);
-                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + rating.brand_id).html(rating.brand_view);
                 });
 
                 if (count) {

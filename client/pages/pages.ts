@@ -3,7 +3,7 @@
  */
 /// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/core';
+import {Component, View, AfterViewInit} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route} from 'angular2/router';
@@ -18,6 +18,7 @@ import {Item} from "./item/item";
 import {Brand} from "./brand/brand";
 import {Add} from "./add/add";
 
+declare var Client:any;
 declare var jQuery:any;
 
 @Component({
@@ -36,21 +37,19 @@ declare var jQuery:any;
     {path: '/add', component: Add, as: 'Add'},
 ])
 
-export class PagesPage implements CanReuse {
+export class PagesPage implements CanReuse, AfterViewInit {
 
     location:Location;
 
     constructor(location:Location) {
+
         this.location = location;
 
         var reportDialog = jQuery('#report-dialog').modal({
             show: false,
             keyboard: false
         });
-    }
 
-    getLinkStyle(path) {
-        return this.location.path().indexOf(path) > -1;
     }
 
     /*
@@ -63,7 +62,11 @@ export class PagesPage implements CanReuse {
      If canReuse throws or rejects, the navigation will be cancelled.
      */
     routerCanReuse(next:ComponentInstruction, prev:ComponentInstruction) {
-        return false;
+        return true;
+    }
+
+    ngAfterViewInit() {
+        Client.NoFoodz.lib.scrollTop();
     }
 
 }

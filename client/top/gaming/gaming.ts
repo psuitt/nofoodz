@@ -34,7 +34,7 @@ export class Gaming implements AfterViewInit {
 
     ngAfterViewInit() {
 
-        this.screenData.title && jQuery('span.pagetitle-subtext').text(NoFoodz.format.camelCase(this.screenData.title));
+        this.screenData.title && jQuery('span.pagetitle-subtext').text(Client.NoFoodz.format.camelCase(this.screenData.title));
         this.loadItems(this.screenData);
 
         this.setup();
@@ -75,7 +75,7 @@ export class Gaming implements AfterViewInit {
                     div.append(title);
                     div.append(brand);
 
-                    var avg = NoFoodz.format.calculateAverageDisplay(item);
+                    var avg = Client.NoFoodz.format.calculateAverageDisplay(item);
 
                     div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
 

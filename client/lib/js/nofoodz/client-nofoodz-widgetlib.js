@@ -56,8 +56,8 @@ Client.NoFoodz.widgetlib = function () {
 		staticOffCanvasMenu: function(div) {
 			_staticOffCanvasMenu(div);
 		},
-		
-		createRatingDiv: function(rating) {
+
+		createRatingDiv: function (rating, type) {
 
 			var div = $("<div class='myrating myfoods'></div>"),
 					name = $("<span class='name myfoods item-color'></span>"),
@@ -68,7 +68,13 @@ Client.NoFoodz.widgetlib = function () {
 					toAdd = null;
 			
 			name.addClass("lower");
-		
+
+			nameLink.attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + rating.item_id);
+			nameLink.text(rating.name_view);
+
+			brandLink.attr('href', Client.NoFoodz.consts.urls.BRAND + rating.brand_id);
+			brandLink.text(rating.brand_view);
+
 			var i = (Math.round((rating.rating * 2))*10).toString();
 
 			ratingSpan.addClass('x' + i).text(rating.rating);
@@ -78,6 +84,8 @@ Client.NoFoodz.widgetlib = function () {
 			div.append(name);
 			div.append(brand);
 			div.append(ratingSpan);
+
+			div.attr(type.toLowerCase(), rating.item_id);
 			
 			return div;
 		
@@ -95,13 +103,15 @@ Client.NoFoodz.widgetlib = function () {
 			span.attr('title', val);
 			
 			div.append(span);
-			
-			if(count) {
-				var totalSpan =  $("<span class='totalRating'></span>");
-				totalSpan.text('(' + count + ')');
-				div.append(totalSpan);		
+
+			if (!count) {
+				count = 0;
 			}
-			
+
+			var totalSpan = $("<span class='totalRating'></span>");
+			totalSpan.text('(' + count + ')');
+			div.append(totalSpan);
+
 			return div;
 		
 		},

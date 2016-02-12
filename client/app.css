@@ -361,14 +361,12 @@ button.nofoodssearch.btn.btn-default:focus {
         margin-right: 2.66%;
         border-right: 1px solid #DDDDDD;
         overflow: hidden;
-        overflow-x: hidden;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         z-index: 3;
     }
 
     .navbar-default .navbar-nav.nav .menu-secondary-nav > li.nav-icons {
-        width: auto;
         border-right: none;
     }
 
@@ -618,12 +616,7 @@ button.nofoodssearch.btn.btn-default:focus {
 /* Notifications */
 
 #notifications {
-    cursor: pointer;
-    vertical-align: top;
-    padding: 0 8px 0 8px;
-    margin: 0;
-    line-height: 50px;
-    display: inline-block;
+
 }
 
 #notifications.new {
@@ -641,22 +634,14 @@ button.nofoodssearch.btn.btn-default:focus {
 
 #notificationsList {
     width: 400px;
-    display: none;
-    position: absolute;
-    background: #FFFFFF;
-    border: 2px solid #4CAF50;
-    top: 50px;
-    right: 0;
+    height: auto;
     list-style: none;
-    z-index: 100;
-}
-
-#notificationsList.open {
-    display: block;
+    position: relative;
+    display: table;
 }
 
 #notificationsList li {
-    display: block;
+    display: table-row;
     text-align: left;
     padding: 5px 25px 5px 5px;
     font-size: 14px;
@@ -676,9 +661,11 @@ button.nofoodssearch.btn.btn-default:focus {
 }
 
 #notificationsList li span {
+    display: table-cell;
     color: #795548;
     font-weight: 500;
-    margin: 0 15px;
+    padding: 0 15px 0 0;
+    text-align: right;
 }
 
 #login-buttons {
