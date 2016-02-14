@@ -29,7 +29,8 @@ export class Brand extends MeteorComponent implements OnDestroy, AfterViewInit {
     screenData:any;
     ITEMS_TO_READ:Array<String> = [
         "food",
-        "drink"
+        "drink",
+        "product"
     ];
 
     constructor(private router:Router, params:RouteParams) {
@@ -112,8 +113,6 @@ export class Brand extends MeteorComponent implements OnDestroy, AfterViewInit {
                     self.loadItems(data[item + 's'], item);
                 });
 
-                jQuery('[data-toggle=\'tooltip\']').tooltip();
-
             }
 
         });
@@ -138,34 +137,23 @@ export class Brand extends MeteorComponent implements OnDestroy, AfterViewInit {
 
             _.each(items, function (item, index) {
 
-                var div = jQuery('<div></div>'),
-                    link = jQuery('<a></a>'),
-                    ratingTotal = parseInt(item.ratingtotal_calc, 10),
+                var ratingTotal = parseInt(item.ratingtotal_calc, 10),
                     ratingCount = parseInt(item.ratingcount_calc, 10);
-
-                link.addClass('item-color');
-                link.attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + item._id).html(item.name);
-
-                var avgRating = Client.NoFoodz.format.calculateAverageDisplay(item);
-
-                div.append(Client.NoFoodz.widgetlib.createHeart(avgRating, item.ratingcount_calc));
 
                 total += isNaN(ratingTotal) ? 0 : ratingTotal;
                 count += isNaN(ratingCount) ? 0 : ratingCount;
 
-                div.append(link);
-
-                content.append(div);
+                content.append(Client.NoFoodz.widgetlib.createDisplay(item, type));
 
             });
 
             if (total > 0) {
-                avg = (total / parseFloat(count.toString())).toFixed(2);
+                avg = Client.NoFoodz.format.calculateAverageDisplay({ratingtotal_calc: total, ratingcount_calc: count});
             }
 
             var avgSpan = jQuery('<span></span>');
 
-            avgSpan.addClass('sub-section-title')
+            avgSpan.addClass('sub-section-title');
 
             avgSpan.text(avg);
 

@@ -9,7 +9,6 @@ import {RouterLink, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 declare var jQuery:any;
 declare var Client:any;
-declare var NoFoodz:any;
 declare var _:any;
 declare var Meteor:any;
 
@@ -52,8 +51,8 @@ export class MyFoods implements OnDestroy, AfterViewInit {
 
         jQuery(document).off('click', '#myfoods_edit');
         jQuery(document).off('click', '#myfoods_save');
-        jQuery('#myfoods-wishlist').off('click', 'a.remove', this.unlike);
-        jQuery('#myfoods_following').off('click', 'a.remove', this.unfollow);
+        jQuery('#myfoods-wishlist').off('click', 'button.remove', this.unlike);
+        jQuery('#myfoods_following').off('click', 'button.remove', this.unfollow);
         jQuery('#mainContent').off('swiperight')
             .off('swipeleft')
             .removeClass('default');
@@ -85,7 +84,7 @@ export class MyFoods implements OnDestroy, AfterViewInit {
                     jQuery('#myfoods-joined').html('Joined ' + Client.NoFoodz.lib.formatDate(user.profile.date));
                     jQuery('#myfoods_bonus').html(user.profile.bonusHearts);
 
-                    if (NoFoodz.client.permissions.isAdmin(user) && jQuery('#myfoods-nav .nav-list .admin').length === 0) {
+                    if (Client.NoFoodz.permissions.isAdmin(user) && jQuery('#myfoods-nav .nav-list .admin').length === 0) {
                         var adminHeader = jQuery('<li class=\'nav-header\'>Admin</li>');
                         var adminReported = jQuery('<li class=\'admin\'><a href=\'/#/admin/reported\'>Reported</a></li>');
                         jQuery('#myfoods-nav .nav-list').append(adminHeader)
@@ -134,17 +133,17 @@ export class MyFoods implements OnDestroy, AfterViewInit {
             Meteor.call('updateProfile', profile, function (err) {
 
                 if (!err) {
-                    NoFoodz.alert.msg('success', 'Save was successful!');
+                    Client.NoFoodz.alert.msg('success', 'Save was successful!');
                 } else {
-                    NoFoodz.alert.msg('danger', err.reason);
+                    Client.NoFoodz.alert.msg('danger', err.reason);
                 }
 
             });
         });
 
-        jQuery('#myfoods-wishlist').on('click', 'a.remove', this.unlike);
+        jQuery('#myfoods-wishlist').on('click', 'button.remove', this.unlike);
 
-        jQuery('#myfoods_following').on('click', 'a.remove', this.unfollow);
+        jQuery('#myfoods_following').on('click', 'button.remove', this.unfollow);
 
         jQuery('#mainContent').removeClass('default')
             .on('swiperight', function () {
@@ -233,7 +232,7 @@ export class MyFoods implements OnDestroy, AfterViewInit {
 
                     var div = jQuery('<div class=\'myrating myfoods\'></div>');
                     var title = jQuery('<a class=\'name myfoods user-color\'></a>');
-                    var removeLink = jQuery('<a class=\'remove myfoods remove-color\' href=\'#\'>Unfollow</a>');
+                    var removeLink = jQuery('<button class=\'red-button remove myfoods remove-color\' href=\'#\'>Unfollow</button>');
                     var username = following.username;
 
                     title.addClass('lower');
@@ -327,7 +326,7 @@ export class MyFoods implements OnDestroy, AfterViewInit {
             if (!err && data.ratings && data.ratings.length !== 0) {
 
                 _.each(data.ratings, function (rating, index, list) {
-                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating, type);
+                    var div = Client.NoFoodz.widgetlib.createDisplay(rating, type, true);
                     itemDiv.append(div);
                 });
 
@@ -374,7 +373,7 @@ export class MyFoods implements OnDestroy, AfterViewInit {
                         var div = jQuery('<div class=\'myrating myfoods\'></div>');
                         var title = jQuery('<span class=\'name myfoods item-color\'><a></a></span>');
                         var brand = jQuery('<span class=\'brand myfoods brand-color\'><a></a></span>');
-                        var removeLink = jQuery('<a class=\'remove myfoods remove-color\' href=\'#\'>Remove</a>');
+                        var removeLink = jQuery('<button class=\'red-button remove myfoods remove-color\' href=\'#\'>Remove</button>');
 
                         title.addClass('lower');
 

@@ -58,38 +58,15 @@ export class Gaming implements AfterViewInit {
 
             if (!err && response) {
 
-                var list = jQuery('#gaming_list').html('');
+                var div = jQuery('#gaming_list').html('');
 
                 _.each(response, function (item, index) {
 
-                    var listItem = jQuery('<li></li>');
-                    var div = jQuery('<div class=\'myrating myfoods\'></div>');
-
-                    var title = jQuery('<span class=\'name item-color myfoods\'><a></a></span>');
-
-                    var brand = jQuery('<span class=\'brand brand-color myfoods\'><a></a></span>');
-                    brand.find('a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-
-                    title.addClass('lower');
-
-                    div.append(title);
-                    div.append(brand);
-
-                    var avg = Client.NoFoodz.format.calculateAverageDisplay(item);
-
-                    div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
-
-                    title.find('a').attr('href', Client.NoFoodz.consts.urls[typeUpper] + item._id).html(item.name);
-
-
-                    listItem.append(div);
-                    list.append(listItem);
+                    div.append(Client.NoFoodz.widgetlib.createDisplay(item, query.type, true));
 
                 });
 
             }
-
-            jQuery('[data-toggle=\'tooltip\']').tooltip();
 
         });
 

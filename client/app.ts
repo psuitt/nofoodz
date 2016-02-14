@@ -29,7 +29,6 @@ import {InfoPage} from "./info/info";
 import {List} from "./list";
 
 declare var jQuery:any;
-declare var NoFoodz:any;
 declare var _:any;
 declare var Client:any;
 declare var Meteor:any;
@@ -310,7 +309,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
             if (!err && currentUser) {
 
-                if (!NoFoodz.client.permissions.addAccess(currentUser)) {
+                if (!Client.NoFoodz.permissions.addAccess(currentUser)) {
                     jQuery('#menu_addbutton').hide();
                 }
 

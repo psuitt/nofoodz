@@ -9,7 +9,6 @@ import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/route
 
 declare var jQuery:any;
 declare var Client:any;
-declare var NoFoodz:any;
 declare var _:any;
 declare var Meteor:any;
 
@@ -146,11 +145,11 @@ export class Item implements OnDestroy, AfterViewInit {
             Meteor.call('updateComments', obj, function (err) {
 
                 if (!err) {
-                    NoFoodz.alert.msg('success', 'Save was successful!');
+                    Client.NoFoodz.alert.msg('success', 'Save was successful!');
                     self.setCommentsInputs(comments);
                     self.reloadComments();
                 } else {
-                    NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
+                    Client.NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
                 }
 
             });

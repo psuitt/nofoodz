@@ -10,7 +10,6 @@ import {RouterLink, Router, RouteParams, Location, ROUTER_DIRECTIVES} from 'angu
 declare var window:any;
 declare var jQuery:any;
 declare var Client:any;
-declare var NoFoodz:any;
 declare var _:any;
 declare var Meteor:any;
 
@@ -66,7 +65,7 @@ export class Add implements OnDestroy, AfterViewInit {
 
             if (!err) {
 
-                if (NoFoodz.client.permissions.createMultiple(currentUser))
+                if (Client.NoFoodz.permissions.createMultiple(currentUser))
                     jQuery('#foodsadd_numberselect').removeClass('hide');
 
             }
@@ -168,7 +167,7 @@ export class Add implements OnDestroy, AfterViewInit {
         var data = this.getData();
 
         if (data.length < 1) {
-            NoFoodz.alert.msg('danger', 'Invalid data');
+            Client.NoFoodz.alert.msg('danger', 'Invalid data');
             return;
         }
 
@@ -183,11 +182,11 @@ export class Add implements OnDestroy, AfterViewInit {
     saveFinished(response, type) {
 
         if (response.error) {
-            NoFoodz.alert.msg('danger', response.error.reason);
+            Client.NoFoodz.alert.msg('danger', response.error.reason);
         } else if (response._id) {
             this.router.navigate(['/Pages/Item', {_id: response._id, type: type}]);
         } else {
-            NoFoodz.alert.msg('success', 'Successfully added');
+            Client.NoFoodz.alert.msg('success', 'Successfully added');
             jQuery('.foodsadd-brand-remove').click();
         }
 

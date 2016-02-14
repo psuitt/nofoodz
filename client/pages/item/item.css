@@ -2,6 +2,28 @@
     min-height: 200px;
 }
 
+#foods_bodydiv span.name {
+    color: #4CAF50;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 32px;
+    margin: 10px 10px 10px 0;
+}
+
+#foods_bodydiv span.brand {
+    display: block;
+    vertical-align: middle;
+    font-size: 24px;
+    margin: 0 0 40px 0;
+}
+
+#foods_bodydiv span.totalRating {
+    color: #E91E63;
+    margin: 0 5px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
 #foods_commentsinputs {
     text-align: center;
 }

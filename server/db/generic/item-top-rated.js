@@ -23,7 +23,7 @@ Meteor.methods({
                 ratingcount_calc: -1
             },
             limit: 25
-        }
+        };
 
         var db = NoFoodz.db.typeToDb(options.type);
 

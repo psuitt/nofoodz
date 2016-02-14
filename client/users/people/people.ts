@@ -155,7 +155,7 @@ export class People implements OnDestroy, AfterViewInit {
             if (!err && data.ratings && data.ratings.length !== 0) {
 
                 _.each(data.ratings, function (rating, index, list) {
-                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating, type);
+                    var div = Client.NoFoodz.widgetlib.createDisplay(rating, type, true);
                     itemDiv.append(div);
                 });
 

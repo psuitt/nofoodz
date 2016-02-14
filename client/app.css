@@ -3,6 +3,14 @@
     box-sizing: border-box;
 }
 
+#tooltip {
+    overflow: visible;
+    height: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+}
+
 #menu ul,
 #menu ol {
     list-style: none;

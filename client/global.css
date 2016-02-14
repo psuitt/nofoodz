@@ -647,24 +647,8 @@ div.nofoods-navpages {
     width: 100%;
 }
 
-div.myfoods span.brand,
-div.myfoods span.name {
-    width: 200px;
-    text-overflow: ellipsis;
-}
-
-div.myfoods a.name {
-    width: 200px;
-    display: inline-block;
-    text-overflow: ellipsis;
-}
-
 div.myfoods.rating {
     cursor: default;
-}
-
-.myfoods.remove {
-    font-weight: bold;
 }
 
 /* Report Dialog */

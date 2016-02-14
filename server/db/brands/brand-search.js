@@ -105,12 +105,15 @@ Meteor.methods({
             },
             sort: {
                 name: -1
-            }
+            },
+            limit: 25
         };
 
-        response.drinks = Drinks.find(query, itemFilter).fetch();
-        response.foods = Foods.find(query, itemFilter).fetch();
-        response.products = Products.find(query, itemFilter).fetch();
+        for (var type in NoFoodz.consts.db) {
+            if (NoFoodz.consts.db.hasOwnProperty(type) && NoFoodz.consts.db.BRAND !== NoFoodz.consts.db[type]) {
+                response[NoFoodz.consts.db[type] + 's'] = NoFoodz.db.typeToDb(NoFoodz.consts.db[type]).find(query, itemFilter).fetch();
+            }
+        }
 
         return response;
     }

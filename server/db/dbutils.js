@@ -43,11 +43,10 @@ NoFoodz.db = function () {
                 db = Medias;
             } else if (t === NoFoodz.consts.db.OTHER) {
                 db = Others;
-            }
-            if (t === NoFoodz.consts.db.BRAND) {
+            } else if (t === NoFoodz.consts.db.BRAND) {
                 db = Brands;
             } else {
-                throw new Meteor.Error(500, 'A type is required to do a rating insert.');
+                throw new Meteor.Error(500, 'A type is required to get a database object.');
             }
 
             return db;

@@ -11,7 +11,6 @@ import {MeteorComponent} from 'angular2-meteor';
 
 declare var jQuery:any;
 declare var Client:any;
-declare var NoFoodz:any;
 declare var _:any;
 declare var Meteor:any;
 
@@ -43,7 +42,7 @@ class RemoveDirective {
 
         Meteor.call('removeItems', options, function (err) {
             if (!err) {
-                NoFoodz.alert.msg('success', 'Remove was successful');
+                Client.NoFoodz.alert.msg('success', 'Remove was successful');
             }
         });
         jQuery(btn).parent().remove();
@@ -110,7 +109,7 @@ export class Reported extends MeteorComponent implements OnInit {
                     }
 
                 } else {
-                    NoFoodz.alert.msg('danger', err.message);
+                    Client.NoFoodz.alert.msg('danger', err.message);
                 }
 
             });
