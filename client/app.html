@@ -16,9 +16,12 @@
             </button>
             <button id="menu_searchbutton"
                     class="btn btn-default simple glyphicon glyphicon-search hidden-md hidden-lg"></button>
-            <a class="navbar-brand logo" [routerLink]="['/Home']">NoFoodz<span
+            <a class="navbar-brand logo" href="/#/home">NoFoodz<span
                     class="title-separator hidden-xs hidden-sm"> | </span><span
                     class="sub-title  hidden-xs hidden-sm">alpha</span></a>
+            <!--<a class="navbar-brand logo" [routerLink]="['/Home']">NoFoodz<span-->
+            <!--class="title-separator hidden-xs hidden-sm"> | </span><span-->
+            <!--class="sub-title  hidden-xs hidden-sm">alpha</span></a>-->
         </div>
         <div class="collapse navbar-collapse navbar-right" id="menu-navbar">
             <ul class="nav navbar-nav primary-nav">
@@ -32,8 +35,10 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Wsie']">What Should I Eat?</a></li>
+                                <li><a class="menu-link" href="/#/explore" redirect="true">Explore</a></li>
+                                <li><a class="menu-link" href="/#/wsie" redirect="true">What Should I Eat?</a></li>
+                                <!--<li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>-->
+                                <!--<li><a class="menu-link" [routerLink]="['/Wsie']">What Should I Eat?</a></li>-->
                             </ul>
                         </li>
                         <li class="has-children">
@@ -142,8 +147,10 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">My Account</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>
+                                <li><a class="menu-link" href="/#/users/myfoods" redirect="true">MyFoodz</a></li>
+                                <li><a class="menu-link" href="/#/pages/add" redirect="true">Add</a></li>
+                                <!--<li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>-->
+                                <!--<li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>-->
                                 <li>
                                     <button id="logout_button" class="green-button">Logout</button>
                                 </li>
@@ -194,8 +201,10 @@
         <div>
             <ul class="footer-list">
                 <li class="footer-header">Info</li>
-                <li><a [routerLink]="['/Info/About']">About</a></li>
-                <li><a [routerLink]="['/Info/ChangeLog']">Change Log</a></li>
+                <li><a href="/#/info/about">About</a></li>
+                <li><a href="/#/info/changelog">Change Log</a></li>
+                <!--<li><a [routerLink]="['/Info/About']">About</a></li>-->
+                <!--<li><a [routerLink]="['/Info/ChangeLog']">Change Log</a></li>-->
                 <li id='totalusers'></li>
                 <li>Version alpha-1.3.0</li>
             </ul>

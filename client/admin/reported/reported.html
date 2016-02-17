@@ -1,6 +1,11 @@
 <div class="content middle">
-    <h3 class="pagetitle" removeitem>Reported</h3>
-
+    <h3 class="pagetitle">Reported</h3>
+    <div *ngFor="#item of items">
+        <span class='name item-color myfoods'><a
+                [routerLink]="['/Pages/Item', {type: 'food', _id: item._id}]">{{item.name}}</a></span>
+        <span class='brand brand-color myfoods'>{{item.brand_view}}</span>
+        <button class='remove red-button' (click)="remove($event, 'food', item._id)">Remove</button>
+    </div>
     <div id="reported-content"></div>
     <div class="myfoods-paging"></div>
 </div>

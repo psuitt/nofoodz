@@ -27,8 +27,8 @@ import {ChangeLog} from "./changelog/changelog";
 })
 
 @RouteConfig([
-    {path: '/about', component: About, as: 'About'},
-    {path: '/changelog', component: ChangeLog, as: 'ChangeLog'}
+    {path: '/about', component: About, name: 'About'},
+    {path: '/changelog', component: ChangeLog, name: 'ChangeLog'}
 ])
 
 export class InfoPage implements CanReuse {

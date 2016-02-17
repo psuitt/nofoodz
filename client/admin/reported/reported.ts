@@ -5,6 +5,8 @@
 
 import {Component, View, Directive, HostListener, OnInit} from 'angular2/core';
 
+import {NgFor} from 'angular2/common';
+
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {MeteorComponent} from 'angular2-meteor';
@@ -14,66 +16,34 @@ declare var Client:any;
 declare var _:any;
 declare var Meteor:any;
 
-@Directive({
-    selector: '[removeitem]'
-})
-class RemoveDirective {
-
-    @HostListener('click', ['$event.target'])
-    onClick(btn) {
-
-        console.log('THis works');
-
-        return false;
-
-        var options = {
-            items: []
-        };
-
-        var item = {
-            _id: '',
-            type: ''
-        };
-
-        item._id = jQuery(this).data('_id');
-        item.type = jQuery(this).data('type');
-
-        options.items.push(item);
-
-        Meteor.call('removeItems', options, function (err) {
-            if (!err) {
-                Client.NoFoodz.alert.msg('success', 'Remove was successful');
-            }
-        });
-        jQuery(btn).parent().remove();
-
-        // Prevent default
-        return false;
-
-    }
-}
-
 @Component({
     selector: 'reported'
 })
 
 @View({
     templateUrl: 'client/admin/reported/reported.html',
-    directives: [RemoveDirective, RouterLink, ROUTER_DIRECTIVES]
+    directives: [Reported, RouterLink, ROUTER_DIRECTIVES, NgFor]
 })
-
 export class Reported extends MeteorComponent implements OnInit {
 
     screenData:any;
-    reportedItems:any;
+    items:any;
 
     constructor(private router:Router, params:RouteParams) {
         super();
+
+        var obj = {
+            page: 1
+        };
+
+        this.autorun(() => {
+            this.call('findReportedItems', obj, (err, data) => {
+                this.items = data.foods;
+            });
+        });
     }
 
     ngOnInit() {
-
-        this.createGetReportedPage()(1, false);
 
     }
 
@@ -90,7 +60,7 @@ export class Reported extends MeteorComponent implements OnInit {
             if (count)
                 obj['count'] = true;
 
-            Meteor.call('findReportedItems', obj, function (err, data) {
+            self.call('findReportedItems', obj, function (err, data) {
 
                 var contentDiv = jQuery("#reported-content");
 
@@ -115,6 +85,30 @@ export class Reported extends MeteorComponent implements OnInit {
             });
 
         };
+    }
+
+    remove(event, type, id) {
+
+        var options = {
+            items: []
+        };
+
+        var item = {
+            _id: id,
+            type: type
+        };
+
+        options.items.push(item);
+
+        alert('Removing item. ' + item._id + ' type: ' + item.type);
+
+        //  Meteor.call('removeItems', options, function (err) {
+        //   if (!err) {
+        //       Client.NoFoodz.alert.msg('success', 'Remove was successful');
+        //    }
+        //});
+        jQuery(event.target).parent().remove();
+
     }
 
     createItemsRow(list, type) {

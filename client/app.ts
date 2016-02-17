@@ -8,9 +8,19 @@ import {bootstrap} from 'angular2/platform/browser';
 
 import {Component, View, provide, enableProdMode, AfterViewInit} from 'angular2/core';
 
-import {RouterLink, ROUTER_DIRECTIVES, RouterOutlet, RouteConfig, Location, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy, Route, AsyncRoute, Router, APP_BASE_HREF} from 'angular2/router';
-
-import { ComponentInstruction, CanReuse } from 'angular2/router';
+import {RouterLink,
+    ROUTER_DIRECTIVES,
+    RouterOutlet,
+    RouteConfig,
+    Location,
+    ROUTER_PROVIDERS,
+    LocationStrategy,
+    HashLocationStrategy,
+    Router,
+    Route,
+    APP_BASE_HREF,
+    ComponentInstruction,
+    CanReuse} from 'angular2/router';
 
 import {MeteorComponent} from 'angular2-meteor';
 
@@ -34,26 +44,23 @@ declare var Client:any;
 declare var Meteor:any;
 declare var Accounts:any;
 
-declare var System:any;
-
 @Component({
     selector: 'app',
     templateUrl: 'client/app.html',
-    directives: [UsersPage, Find, ROUTER_DIRECTIVES, RouterLink, RouterOutlet]
+    directives: [ROUTER_DIRECTIVES, RouterLink, RouterOutlet, UsersPage, Find]
 })
 
 @RouteConfig([
-    //{path: '/', redirectTo: '/home'},
-    {path: '/', component: Home, as: 'Home'},
-    {path: '/404', component: Error404, as: 'Error404'},
-    {path: '/wsie', component: Wsie, as: 'Wsie'},
-    {path: '/explore', component: Explore, as: 'Explore'},
-    {path: '/find/:type/:search', component: Find, as: 'Find'},
-    {path: '/users/...', component: UsersPage, as: 'Users'},
-    {path: '/pages/...', component: PagesPage, as: 'Pages'},
-    {path: '/top/...', component: TopPage, as: 'Top'},
-    {path: '/info/...', component: InfoPage, as: 'Info'},
-    {path: '/admin/...', component: AdminPage, as: 'Admin'}
+    {path: '/', name: 'Home', component: Home},
+    {path: '/404', name: 'Error404', component: Error404},
+    {path: '/wsie', name: 'Wsie', component: Wsie},
+    {path: '/explore', name: 'Explore', component: Explore},
+    {path: '/find/:type/:search', name: 'Find', component: Find},
+    {path: '/users/...', name: 'Users', component: UsersPage},
+    {path: '/pages/...', name: 'Pages', component: PagesPage},
+    {path: '/top/...', name: 'Top', component: TopPage},
+    {path: '/info/...', name: 'Info', component: InfoPage},
+    {path: '/admin/...', name: 'Admin', component: AdminPage}
 ])
 
 class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
@@ -166,7 +173,16 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
         jQuery(document).on('click', '.has-children a', function (event) {
 
-            if (jQuery(event.target).closest('ul').attr('id') == 'notificationsList') {
+            var href = event.target.href,
+                hrefSkip = false;
+
+            if (href && href.length > 1) {
+                href = href.substring(href.indexOf('#'));
+                hrefSkip = href.length > 3;
+            }
+
+            if (jQuery(event.target).closest('ul').attr('id') == 'notificationsList'
+                || hrefSkip) {
                 self.closeNav();
                 return;
             }
@@ -200,7 +216,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
                 event.preventDefault();
                 return false;
             }
-            if (this.href.indexOf('?') !== -1) {
+            if (this.href.indexOf('?') !== -1 || jQuery(this).attr('redirect') === 'true') {
                 // manually redirect
                 window.location = this.href;
             }
@@ -405,13 +421,6 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     }
 
-}
-
-class ComponentHelper {
-
-    static LoadComponentAsync(name, path) {
-        return System.import(path).then(c => c[name]);
-    }
 }
 
 //enableProdMode();

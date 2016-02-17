@@ -13,7 +13,7 @@ import {RouterLink} from 'angular2/router';
 
 @View({
     templateUrl: 'client/info/about/about.html',
-    directives: [RouterLink]
+    directives: []
 })
 
 export class About {

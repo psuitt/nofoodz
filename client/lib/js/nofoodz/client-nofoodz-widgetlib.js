@@ -109,6 +109,8 @@ Client.NoFoodz.widgetlib = function () {
                 totalSpan.text('(' + count + ')');
                 div.prepend(totalSpan);
 
+                totalSpan.tooltip({container: '#tooltip'});
+
             }
 
             var i = (Math.round((ratingVal * 2)) * 10).toString();
@@ -131,7 +133,6 @@ Client.NoFoodz.widgetlib = function () {
                 div.prepend(numberSpan);
             }
 
-            totalSpan.tooltip({container: '#tooltip'});
             ratingSpan.tooltip({container: '#tooltip'});
 
             return div;
