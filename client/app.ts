@@ -18,6 +18,7 @@ import {RouterLink,
     HashLocationStrategy,
     Router,
     Route,
+    Redirect,
     APP_BASE_HREF,
     ComponentInstruction,
     CanReuse} from 'angular2/router';
@@ -45,12 +46,16 @@ declare var Meteor:any;
 declare var Accounts:any;
 
 @Component({
-    selector: 'app',
+    selector: 'app'
+})
+
+@View({
     templateUrl: 'client/app.html',
-    directives: [ROUTER_DIRECTIVES, RouterLink, RouterOutlet, UsersPage, Find]
+    directives: [ROUTER_DIRECTIVES, RouterLink, RouterOutlet, MainLayout, UsersPage, Find]
 })
 
 @RouteConfig([
+    new Redirect({path: '/home', redirectTo: ['/Home']}),
     {path: '/', name: 'Home', component: Home},
     {path: '/404', name: 'Error404', component: Error404},
     {path: '/wsie', name: 'Wsie', component: Wsie},
@@ -423,6 +428,6 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
 }
 
-//enableProdMode();
+enableProdMode();
 
 bootstrap(MainLayout, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);
