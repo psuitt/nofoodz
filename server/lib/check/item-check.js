@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/11/2015.
  */
-var ITEM_NAME_REGEX = /^[0-9a-z][0-9a-z'&\s()+\.]+$/i;
+var ITEM_NAME_REGEX = /^[0-9a-z][0-9a-z\-'&\s()+\.]+$/i;
 
 ItemNameCheck = Match.Where(function (x) {
     check(x, String);
@@ -19,7 +19,7 @@ ProductsArrayCheck = Match.Where(function (products) {
 ProductsCheck = Match.Where(function (product) {
     check(product, Object);
     check(product, {
-        brand: NonEmptyStringNoSpecialCharacters,
+        brand: ItemNameCheck,
         brand_id: Match.Optional(NonEmptyStringNoSpaceCharacters),
         type: TypeCheck,
         items: ItemsArrayCheck

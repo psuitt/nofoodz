@@ -3,7 +3,7 @@
  */
 /// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy, AfterViewInit} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit, OnInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -21,7 +21,7 @@ declare var Meteor:any;
     directives: [Item, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Item implements OnDestroy, AfterViewInit {
+export class Item implements OnDestroy, OnInit {
 
     nofoodsRating:any;
     idField:string;
@@ -58,7 +58,7 @@ export class Item implements OnDestroy, AfterViewInit {
 
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         this.setup(this.router);
         this.loadListeners();
     }
