@@ -1,6 +1,6 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View} from 'angular2/core';
+import {Component, View, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, RouteParams} from 'angular2/router';
 
@@ -9,6 +9,7 @@ import {bootstrap} from 'angular2-meteor';
 declare var jQuery:any;
 declare var _:any;
 declare var Client:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'find'
@@ -19,19 +20,27 @@ declare var Client:any;
     directives: [RouterLink]
 })
 
-export class Find {
+export class Find implements AfterViewInit {
 
+    private params:any;
+    query:any;
     results:any;
     MAX_RESULTS:number;
     paging:any;
 
     constructor(params:RouteParams) {
 
+        this.params = params;
+        this.query = Client.NoFoodz.lib.getParameters(true);
         this.results = [];
         this.MAX_RESULTS = 3;
 
-        this.search(params.get('type'), params.get('search'));
 
+
+    }
+
+    ngAfterViewInit() {
+        this.search(this.params.get('type'), this.params.get('search'));
     }
 
     search(type, search) {
@@ -49,9 +58,11 @@ export class Find {
         jQuery('div.loading').removeClass('hide');
 
         switch (type) {
-            case 'food':
-            case 'drink':
-            case 'product':
+            case Client.NoFoodz.consts.FOOD:
+            case Client.NoFoodz.consts.DRINK:
+            case Client.NoFoodz.consts.PRODUCT:
+            case Client.NoFoodz.consts.MEDIA:
+            case Client.NoFoodz.consts.OTHER:
                 this.doSearch(search, type);
                 break;
             case 'brand':
@@ -201,10 +212,11 @@ export class Find {
         }
 
         var obj = {
-            'search': search
+            'search': search,
+            'type': type
         };
 
-        Meteor.call('itemBrandSearch', obj, function (err, response) {
+        Meteor.call('itemSearch', obj, function (err, response) {
 
             if (!err) {
 

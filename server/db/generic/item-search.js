@@ -23,17 +23,6 @@ Meteor.methods({
 
         var db = NoFoodz.db.typeToDb(options.type);
 
-        if (options.type.toLowerCase() === 'brand') {
-            var query = {
-                brand_view: {
-                    $regex: ".*" + NoFoodz.utils.StripCharacters(options.search) + ".*",
-                    $options: 'i'
-                }
-            };
-            response.data = db.find(query, filter).fetch();
-            return response;
-        }
-
         filter.fields.score = {
             $meta: 'textScore'
         };
@@ -51,40 +40,6 @@ Meteor.methods({
         };
 
         response.data = db.find(query, filter).fetch();
-        return response;
-
-    },
-
-    itemBrandSearch: function (options) {
-
-        check(options, {
-            'search': NonEmptyStringNoSpecialCharacters
-        });
-
-        var response = {};
-
-        var filter = {
-            limit: 50,
-            fields: {
-                name: 1,
-                score: {
-                    $meta: 'textScore'
-                }
-            },
-            sort: {
-                score: {
-                    $meta: 'textScore'
-                }
-            }
-        };
-
-        var query = {
-            $text: {
-                $search: options.search
-            }
-        };
-
-        response.data = Brands.find(query, filter).fetch();
         return response;
 
     },

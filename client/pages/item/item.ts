@@ -1,16 +1,16 @@
 /**
  * Created by Sora on 11/28/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit, OnInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
 declare var jQuery:any;
 declare var Client:any;
-declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'item'
@@ -21,7 +21,7 @@ declare var _:any;
     directives: [Item, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Item implements OnDestroy {
+export class Item implements OnDestroy, OnInit {
 
     nofoodsRating:any;
     idField:string;
@@ -35,9 +35,6 @@ export class Item implements OnDestroy {
             _id: params.get('_id'),
             type: params.get('type')
         };
-
-        this.setup(router);
-        this.loadListeners();
 
     }
 
@@ -53,6 +50,17 @@ export class Item implements OnDestroy {
 
         jQuery('#foods_infodiv').off('click', 'h4', this.toggleInfo);
 
+        jQuery('.list-add-button').attr({
+            'item-id': '',
+            'item-type': '',
+            'item-name': ''
+        }).hide();
+
+    }
+
+    ngOnInit() {
+        this.setup(this.router);
+        this.loadListeners();
     }
 
     setup(router) {
@@ -64,13 +72,7 @@ export class Item implements OnDestroy {
             type: this.screenData.type
         };
 
-        if (this.screenData.type === Client.NoFoodz.consts.FOOD) {
-            this.idField = 'food_id';
-        } else if (this.screenData.type === Client.NoFoodz.consts.DRINK) {
-            this.idField = 'drink_id';
-        } else {
-            this.idField = 'product_id';
-        }
+        this.idField = this.screenData.type + '_id';
 
         Meteor.call('getItemById', obj, function (err, response) {
 
@@ -143,11 +145,11 @@ export class Item implements OnDestroy {
             Meteor.call('updateComments', obj, function (err) {
 
                 if (!err) {
-                    NoFoodz.alert.msg('success', 'Save was successful!');
+                    Client.NoFoodz.alert.msg('success', 'Save was successful!');
                     self.setCommentsInputs(comments);
                     self.reloadComments();
                 } else {
-                    NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
+                    Client.NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
                 }
 
             });
@@ -191,8 +193,14 @@ export class Item implements OnDestroy {
         }
 
         self.loadInformation(item.info);
-
+        self.loadImages(item.images);
         self.loadUserData(item._id);
+
+        jQuery('.list-add-button').attr({
+            'item-id': self.screenData._id,
+            'item-type': self.screenData.type,
+            'item-name': item.name
+        }).show();
 
     }
 
@@ -230,7 +238,7 @@ export class Item implements OnDestroy {
                     var liItem = jQuery('<li></li');
 
                     var fieldTitle = jQuery('<span></span');
-                    fieldTitle.text(NoFoodz.format.camelCase(field));
+                    fieldTitle.text(Client.NoFoodz.format.camelCase(field));
 
                     var detail = jQuery('<span></span');
                     detail.text(infoItem[field]);
@@ -247,6 +255,12 @@ export class Item implements OnDestroy {
             infoDiv.append(div);
 
         });
+
+    }
+
+    loadImages() {
+
+
 
     }
 
@@ -341,7 +355,7 @@ export class Item implements OnDestroy {
             _.each(response, function (comment, index) {
 
                 words.push({
-                    text: NoFoodz.format.camelCase(comment.comment),
+                    text: Client.NoFoodz.format.camelCase(comment.comment),
                     weight: comment.value
                 });
 

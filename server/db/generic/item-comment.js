@@ -11,6 +11,9 @@ Meteor.methods({
 
         var db = NoFoodz.db.typeToCommentsDB(options.type);
 
+        if (!db)
+            return response;
+
         var query = {
             item_id: options.item_id,
             type: options.type,

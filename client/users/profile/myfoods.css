@@ -23,9 +23,9 @@
     position: relative;
 }
 
-#myfoods-pages a.remove {
-    margin-left: 10px;
-    font-weight: bold;
+#myfoods-pages button.remove {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #myfoods-pages h3 {

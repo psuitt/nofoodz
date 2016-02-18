@@ -33,9 +33,12 @@ Meteor.methods({
 
         var response = {};
 
-        // Return a reponse of reported items
-        response.foods = Foods.find(query, filter).fetch();
-        response.drinks = Drinks.find(query, filter).fetch();
+        // Return a response of reported items
+        for (var type in NoFoodz.consts.db) {
+            if (NoFoodz.consts.db.hasOwnProperty(type) && NoFoodz.consts.db.BRAND !== NoFoodz.consts.db[type]) {
+                response[NoFoodz.consts.db[type] + 's'] = NoFoodz.db.typeToDb(NoFoodz.consts.db[type]).find(query, filter).fetch();
+            }
+        }
 
         return response;
 
@@ -47,12 +50,11 @@ Meteor.methods({
             items: Array
         });
 
-        for (var i = 0, len = options.items.length; i < len; i += 1) {
-            var item = options.items[i];
-            check(item, NullCheck);
-            check(item._id, NonEmptyStringNoSpaceCharacters);
-            check(item.type, FoodTypeCheck);
-        }
+        _.each(options.items, function (obj, index) {
+            check(obj, NullCheck);
+            check(obj._id, NonEmptyStringNoSpaceCharacters);
+            check(obj.type, FoodTypeCheck);
+        });
 
         if (!this.userId)
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
@@ -63,54 +65,52 @@ Meteor.methods({
             throw new Meteor.Error(403, NoFoodz.messages.errors.ADMIN_TYPE);
 
         for (var i = 0, len = options.items.length; i < len; i += 1) {
+
             var item = options.items[i];
-            var ratingRemoveObj = false;
-            var brand_id = false;
-            var Items = false;
 
-            switch (item.type) {
+            var db = NoFoodz.db.typeToDb(item.type);
+            var dbRating = NoFoodz.db.typeToRatingsDb(item.type);
+            var dbComments = NoFoodz.db.typeToCommentsDB(item.type);
 
-                case NoFoodz.consts.db.FOOD:
-                    var food = Foods.findOne({_id: item._id});
-                    if (food) {
-                        brand_id = food.brand_id;
+            var dbItem = db.findOne({_id: item._id});
+
+            dbRating.remove({item_id: item._id});
+            dbComments.remove({item_id: item._id});
+            db.remove({_id: item._id});
+
+            if (dbItem) {
+
+                var deleteBrand = true;
+
+                var query = {
+                    brand_id: dbItem.brand_id
+                };
+
+                var filter = {
+                    fields: {
+                        _id: 1
                     }
-                    Items = Foods;
-                    ratingRemoveObj = {food_id: food._id};
-                    break;
-                case NoFoodz.consts.db.DRINK:
-                    var drink = Drinks.findOne({_id: item._id});
-                    if (drink) {
-                        brand_id = drink.brand_id;
+                };
+
+                for (var type in NoFoodz.consts.db) {
+                    if (NoFoodz.consts.db.hasOwnProperty(type) && NoFoodz.consts.db.BRAND !== NoFoodz.consts.db[type]) {
+                        var one = NoFoodz.db.typeToDb(NoFoodz.consts.db[type]).findOne(query, filter);
+
+                        if (one && one._id) {
+                            deleteBrand = false;
+                            break;
+                        }
                     }
-                    Items = Drinks;
-                    ratingRemoveObj = {drink_id: drink._id};
-                    break;
+                }
 
-            }
-            ;
+                // Remove the brand if there are no more rating attached.
+                if (deleteBrand) {
+                    Brands.remove({_id: brand_id});
+                }
 
-            // Remove the ratings.
-            if (ratingRemoveObj && Items) {
-                NoFoodz.rating.remove(ratingRemoveObj);
-                Items.remove({_id: item._id});
-            }
-
-            var brandCount = Foods.find({brand_id: brand_id}).count()
-                + Drinks.find({brand_id: brand_id}).count();
-
-            // Remove the brand if there are no more rating attached.
-            if (brandCount === 0) {
-                Brands.remove({_id: brand_id});
             }
 
         }
-
-        // Delete all ratings
-
-        // Delete the item
-
-        // Brand
 
     }
 

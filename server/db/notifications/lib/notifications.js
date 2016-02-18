@@ -80,6 +80,7 @@ NoFoodz.notifications = function () {
         var notification = {
             user_id: options.user_id,
             message: message,
+            isread: false,
             date: new Date()
         };
 
@@ -101,8 +102,11 @@ NoFoodz.notifications = function () {
 
         _.each(Followers.find(query, filter).fetch(), function (element, index, list) {
             Meteor.users.update({_id: element.follower_id}, {
+                $set: {
+                    'profile.isnotification': true
+                },
                 $push: {
-                    "profile.notifications": {
+                    'profile.notifications': {
                         $each: [notification],
                         $slice: -MAX_NOTIFICATIONS
                     }
@@ -115,6 +119,9 @@ NoFoodz.notifications = function () {
     var _notify = function (notification) {
 
         Meteor.users.update({_id: notification.user_id}, {
+            $set: {
+                'profile.isnotification': true
+            },
             $push: {
                 "profile.notifications": {
                     $each: [notification],

@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, OnDestroy} from 'angular2/core';
 
@@ -32,7 +32,7 @@ export class Home implements OnDestroy {
         var types = [];
 
         _.each(Client.NoFoodz.consts.types, function (value, key) {
-            types.push(NoFoodz.format.camelCase(value));
+            types.push(Client.NoFoodz.format.camelCase(value));
         });
 
         this.types = types;

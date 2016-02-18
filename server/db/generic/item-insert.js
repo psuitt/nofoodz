@@ -12,15 +12,18 @@ Meteor.methods({
             throw new Meteor.Error(403, NoFoodz.messages.errors.LOGGED_IN);
 
         var user = Meteor.users.findOne({_id: userId}, {fields: {
-            roles: 1
+            roles: 1,
+            'profile.name': 1
         }});
 
         check(products, ProductsArrayCheck);
 
-        if (!NoFoodz.utils.user.isMod(user) && products.length > 1)
+        if (products.length > 1) {
+            if (!NoFoodz.utils.user.isMod(user) && !NoFoodz.utils.user.isAdmin(user))
+                throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+        } else if (!NoFoodz.utils.user.isMod(user) && !NoFoodz.utils.user.isAdmin(user) && !NoFoodz.utils.user.isNormalUser(user)) {
             throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
-        if (!NoFoodz.utils.user.isNormalUser(user))
-            throw new Meteor.Error(403, NoFoodz.messages.errors.MOD_TYPE);
+        }
 
         _.each(products, function (brand) {
 
@@ -54,6 +57,7 @@ Meteor.methods({
                     ratingDao.brand_id = brand._id;
                     ratingDao.name_view = item.name;
                     ratingDao.brand_view = brand.brand;
+                    ratingDao.username_view = user.profile.name;
                     ratingDao.insert();
                 }
 

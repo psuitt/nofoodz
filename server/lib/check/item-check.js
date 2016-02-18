@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/11/2015.
  */
-var ITEM_NAME_REGEX = /^[0-9a-z][0-9a-z\s()+]+$/i;
+var ITEM_NAME_REGEX = /^[0-9a-z][0-9a-z\-'&\s()+\.]+$/i;
 
 ItemNameCheck = Match.Where(function (x) {
     check(x, String);
@@ -19,7 +19,7 @@ ProductsArrayCheck = Match.Where(function (products) {
 ProductsCheck = Match.Where(function (product) {
     check(product, Object);
     check(product, {
-        brand: NonEmptyStringNoSpecialCharacters,
+        brand: ItemNameCheck,
         brand_id: Match.Optional(NonEmptyStringNoSpaceCharacters),
         type: TypeCheck,
         items: ItemsArrayCheck
@@ -62,4 +62,15 @@ LowerCaseCheck = Match.Where(function (s) {
 RatingCheck = Match.Where(function (x) {
     check(x, Number);
     return x === 0 || x === 1 || x === 2 || x === 3 || x === 4 || x === 5 || x === 6;
+});
+
+TypeCheck = Match.Where(function (x) {
+    check(x, String);
+    var type = x.toLowerCase();
+    return type === NoFoodz.consts.db.FOOD
+        || type === NoFoodz.consts.db.DRINK
+        || type === NoFoodz.consts.db.PRODUCT
+        || type === NoFoodz.consts.db.MEDIA
+        || type === NoFoodz.consts.db.OTHER
+        || type === NoFoodz.consts.db.BRAND;
 });

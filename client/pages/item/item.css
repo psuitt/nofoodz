@@ -2,6 +2,28 @@
     min-height: 200px;
 }
 
+#foods_bodydiv span.name {
+    color: #4CAF50;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 32px;
+    margin: 10px 10px 10px 0;
+}
+
+#foods_bodydiv span.brand {
+    display: block;
+    vertical-align: middle;
+    font-size: 24px;
+    margin: 0 0 40px 0;
+}
+
+#foods_bodydiv span.totalRating {
+    color: #E91E63;
+    margin: 0 5px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
 #foods_commentsinputs {
     text-align: center;
 }
@@ -75,32 +97,32 @@ span.foods-comment {
     height: 60%;
 }
 
-#item_raterstablist {
+.tab-list {
     list-style: none;
     margin-bottom: 0;
 }
 
-#item_raterstablist li {
+.tab-list li {
     display: inline-block;
     padding: 10px 20px;
     font-size: 20px;
 }
 
-#item_raterstablist li.close,
-#item_raterstablist li.close:hover {
+.tab-list li.close,
+.tab-list li.close:hover {
     height: 48px;
     float: right;
     color: transparent;
     opacity: 1;
 }
 
-#item_raterstablist li.close a {
+.tab-list li.close a {
     color: transparent;
     padding-bottom: 5px;
 }
 
 #foods_infodiv h4 > span::before,
-#item_raterstablist li.close a::before {
+.tab-list li.close a::before {
     content: '';
     position: relative;
     right: -3px;
@@ -126,7 +148,7 @@ span.foods-comment {
 }
 
 #foods_infodiv h4 > span::after,
-#item_raterstablist li.close a::after {
+.tab-list li.close a::after {
     content: '';
     position: relative;
     right: 3px;
@@ -151,14 +173,14 @@ span.foods-comment {
     transition: width 0.3s, transform 0.3s;
 }
 
-#item_raterstablist li.close a:hover::before,
-#item_raterstablist li.close a:hover::after,
+.tab-list li.close a:hover::before,
+.tab-list li.close a:hover::after,
 #foods_infodiv h4:hover > span::before,
 #foods_infodiv h4:hover > span::after {
     background: #E91E63;
 }
 
-#item_raterstablist li a.active {
+.tab-list li a.active {
     color: #424242;
     border-bottom: 2px solid #424242;
 }
@@ -178,7 +200,7 @@ span.foods-comment {
 }
 
 #foods_infodiv > div.open > ul.item-infolist {
-    display: block;
+    display: table;
 }
 
 #foods_infodiv > div > span {
@@ -189,14 +211,18 @@ span.foods-comment {
     display: block;
 }
 
+ul.item-infolist li {
+    display: table-row;
+}
+
 ul.item-infolist span {
-    width: 82%;
-    display: inline-block;
+    display: table-cell;
 }
 
 ul.item-infolist span:first-child {
-    text-align: center;
-    width: 18%;
+    text-align: right;
+    min-width: 125px;
+    padding: 0 20px 0 0;
 }
 
 #foods_infodiv h4 > span {

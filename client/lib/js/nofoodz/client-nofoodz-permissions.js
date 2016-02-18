@@ -1,8 +1,8 @@
-NoFoodz = typeof NoFoodz === 'undefined' ? {} : NoFoodz;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoodz.client = typeof NoFoodz.client === 'undefined' ? {} : NoFoodz.client;
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
 
-NoFoodz.client.permissions = function() {
+Client.NoFoodz.permissions = function () {
 
     return {
 

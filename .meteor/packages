@@ -10,13 +10,12 @@ audit-argument-checks
 jquery
 mrt:jquery-ui@1.9.2
 http
-underscore
 
 accounts-base
-ajduke:bootstrap-tagsinput
 standard-minifiers
 meteor-base
 check
 urigo:angular2-meteor
 mongo
 random
+underscore

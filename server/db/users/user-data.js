@@ -34,7 +34,8 @@ Meteor.methods({
             fields: {
                 roles: 1,
                 username: 1,
-                "profile.name": 1
+                "profile.name": 1,
+                "profile.isnotification": 1
             }
         };
 

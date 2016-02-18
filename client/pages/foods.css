@@ -4,36 +4,60 @@ div.tab-pane {
 
 div.myrating {
     width: 100%;
+    font-size: 18px;
+    display: table-row;
 }
 
-span.name {
-    color: #4CAF50;
-    display: inline-block;
+div.myrating span {
+    padding: 5px 0;
+    display: table-cell;
+}
+
+div.myrating span.rating {
+    cursor: default;
+    min-width: 49px;
+}
+
+div.myrating div.tooltip {
+    position: absolute;
+}
+
+div.myrating span.number {
+    color: #424242;
+    padding-right: 10px;
+    font-size: 20px;
+    text-align: right;
+}
+
+div.myrating span.name,
+div.myrating span.brand {
+    display: table-cell;
     vertical-align: middle;
-    font-size: 32px;
-    margin: 10px 10px 10px 0;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: normal;
 }
 
-span.name.lower {
-    font-size: 14px;
-}
-
-span.brand {
-    display: block;
-    vertical-align: middle;
-    font-size: 24px;
-    margin: 0 0 40px 0;
-}
-
-label.inputlabel {
-    font-weight: bold;
-}
-
-span.totalRating {
+div.myrating span.totalRating {
+    display: table-cell;
+    padding: 0 0 0 10px;
     color: #E91E63;
     margin: 0 5px;
     font-size: 18px;
     vertical-align: middle;
+}
+
+div.myrating a.user-color {
+    padding: 0 10px;
+}
+
+div.myrating button.remove {
+    font-size: 14px;
+    margin: 10px;
+}
+
+label.inputlabel {
+    font-weight: bold;
 }
 
 span.total-count,
@@ -67,4 +91,12 @@ div.side-section.right {
 
 div.side-section .nofoods-pagenav {
     margin: 45px 0 0 0;
+}
+
+@media only screen and (max-width: 766px) {
+    div.myrating span.name,
+    div.myrating span.brand {
+        float: left;
+        width: 100%;
+    }
 }

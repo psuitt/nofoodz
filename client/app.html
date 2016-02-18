@@ -1,9 +1,3 @@
-<title>NoFoodz: A Food Rating</title>
-<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-<meta name="google-site-verification" content="oFUzNJMbqgZgVJxxkqz7mT-ipWJptEuMjP9wWqDStsk"></meta>
-<base href="/"></base>
 <nav id="menu" class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -16,9 +10,12 @@
             </button>
             <button id="menu_searchbutton"
                     class="btn btn-default simple glyphicon glyphicon-search hidden-md hidden-lg"></button>
-            <a class="navbar-brand logo" href="/">NoFoodz<span
+            <a class="navbar-brand logo" href="/#/home">NoFoodz<span
                     class="title-separator hidden-xs hidden-sm"> | </span><span
                     class="sub-title  hidden-xs hidden-sm">alpha</span></a>
+            <!--<a class="navbar-brand logo" [routerLink]="['/Home']">NoFoodz<span-->
+            <!--class="title-separator hidden-xs hidden-sm"> | </span><span-->
+            <!--class="sub-title  hidden-xs hidden-sm">alpha</span></a>-->
         </div>
         <div class="collapse navbar-collapse navbar-right" id="menu-navbar">
             <ul class="nav navbar-nav primary-nav">
@@ -32,8 +29,10 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Wsie']">What should I Eat?</a></li>
+                                <li><a class="menu-link" href="/#/explore" redirect="true">Explore</a></li>
+                                <li><a class="menu-link" href="/#/wsie" redirect="true">What Should I Eat?</a></li>
+                                <!--<li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>-->
+                                <!--<li><a class="menu-link" [routerLink]="['/Wsie']">What Should I Eat?</a></li>-->
                             </ul>
                         </li>
                         <li class="has-children">
@@ -87,15 +86,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="text-center hidden-xs hidden-sm">
-                    <span id="notifications" class="button-icon glyphicon glyphicon-flag"></span>
-                    <ul id="notificationsList"></ul>
-                </li>
                 <li id="app_login_menu" class="has-children">
-                    <a class="menu-link username" href="#">Login</a>
+                    <a id="usernameDisplay" class="menu-link username" href="#">Login</a>
                     <ul class="menu-secondary-nav is-hidden">
                         <li id="login_close" class="close-nav"><a href="#">Close</a></li>
-                        <li class="back"><a class="menu-link username" href="#">Login</a></li>
+                        <li class="back"><a id="usernameDisplaySub" class="menu-link username" href="#">Login</a></li>
                         <li id="login_menu" class="has-children">
                             <a class="menu-link menu-header" href="#">Login</a>
                             <ul class="is-hidden">
@@ -142,14 +137,33 @@
                             </ul>
                         </li>
                         <li id="user_menu" class="has-children">
+                            <a class="menu-link menu-header" href="#">My Account</a>
+                            <ul class="is-hidden">
+                                <li class="close-nav"><a href="#">Close</a></li>
+                                <li class="back"><a class="menu-link" href="#">My Account</a></li>
+                                <li><a class="menu-link" href="/#/users/myfoods" redirect="true">MyFoodz</a></li>
+                                <li><a class="menu-link" href="/#/pages/add" redirect="true">Add</a></li>
+                                <!--<li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>-->
+                                <!--<li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>-->
+                                <li>
+                                    <button id="logout_button" class="green-button">Logout</button>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="user_menu_icons" class="has-children nav-icons">
                             <a class="menu-link menu-header" href="#">User Links</a>
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">User Links</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>
-                                <li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>
-                                <li>
-                                    <button id="logout_button" class="green-button">Logout</button>
+                                <li class="has-children">
+                                    <a id="notifications" class="menu-link nav-icon" href="#">Notifications</a>
+                                    <ul class="is-hidden">
+                                        <li class="close-nav"><a href="#">Close</a></li>
+                                        <li class="back"><a class="menu-link" href="#">Notifications</a></li>
+                                        <li>
+                                            <ul id="notificationsList"></ul>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </li>
@@ -168,6 +182,8 @@
     <router-outlet></router-outlet>
 </div>
 <div class="alertmessage alert alert-success"></div>
+<list></list>
+<div id="tooltip"></div>
 <footer>
     <div id="footer">
         <div id="footer_followlinks" class="footer-section">
@@ -179,14 +195,15 @@
         <div>
             <ul class="footer-list">
                 <li class="footer-header">Info</li>
-                <li><a [routerLink]="['/Info/About']">About</a></li>
-                <li><a [routerLink]="['/Info/ChangeLog']">Change Log</a></li>
+                <li><a href="/#/info/about">About</a></li>
+                <li><a href="/#/info/changelog">Change Log</a></li>
+                <!--<li><a [routerLink]="['/Info/About']">About</a></li>-->
+                <!--<li><a [routerLink]="['/Info/ChangeLog']">Change Log</a></li>-->
                 <li id='totalusers'></li>
-                <li>Version alpha-1.2.0</li>
+                <li>Version alpha-1.3.0</li>
             </ul>
             <ul class="footer-list">
                 <li class="footer-header">Company</li>
-                <li>Careers</li>
             </ul>
             <ul class="footer-list">
                 <li class="footer-header">Help</li>
@@ -197,6 +214,6 @@
                 <li>Suggestions</li>
             </ul>
         </div>
-        <div class="footer-section">Copyright &copy; 2015 &middot; All Rights Reserved &middot;</div>
+        <div class="footer-section">Copyright &copy; 2016 &middot; All Rights Reserved &middot;</div>
     </div>
 </footer>

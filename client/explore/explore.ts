@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, OnInit} from 'angular2/core';
 
@@ -11,6 +11,7 @@ declare var jQuery:any;
 declare var _:any;
 declare var Client:any;
 declare var NoFoodz:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'home'
@@ -24,6 +25,10 @@ declare var NoFoodz:any;
 export class Explore implements OnInit {
 
     constructor() {
+
+    }
+
+    ngOnInit() {
 
         jQuery("#explore-worldmap").vectorMap({
             map: 'world_en',
@@ -50,9 +55,6 @@ export class Explore implements OnInit {
 
         this.setup();
 
-    }
-
-    ngOnInit() {
         jQuery('.explore-options button').eq(0).click();
     }
 
@@ -74,7 +76,7 @@ export class Explore implements OnInit {
         if (!dataType)
             return;
 
-        var list = jQuery('<ol><ol>');
+        var div = jQuery('<div></div>');
 
         Meteor.call('itemTopRatedSearch', {type: dataType}, function (err, response) {
 
@@ -82,35 +84,15 @@ export class Explore implements OnInit {
 
                 _.each(response, function (item, index) {
 
-                    var listItem = jQuery("<li></li>");
-                    var div = jQuery("<div class='myrating myfoods'></div>");
-                    var title = jQuery("<span class='name item-color myfoods'><a></a></span>");
-                    var brand = jQuery("<span class='brand brand-color myfoods'><a></a></span>");
-
-                    title.addClass("lower");
-
-                    div.append(title);
-                    div.append(brand);
-
-                    var avg = NoFoodz.format.calculateAverageDisplay(item);
-
-                    div.append(Client.NoFoodz.widgetlib.createHeart(avg, item.ratingcount_calc));
-
-                    title.find('a').attr('href', Client.NoFoodz.consts.urls[dataType.toUpperCase()] + item._id).html(item.name);
-                    brand.find('a').attr('href', Client.NoFoodz.consts.urls.BRAND + item.brand_id).html(item.brand_view);
-
-                    listItem.append(div);
-                    list.append(listItem);
+                    div.append(Client.NoFoodz.widgetlib.createDisplay(item, dataType, true, index + 1));
 
                 });
 
             }
 
-            jQuery('#explore-content').append(list);
+            jQuery('#explore-content').append(div);
 
             jQuery(window).scrollTop(tempScrollTop);
-
-            jQuery('[data-toggle=\'tooltip\']').tooltip();
 
         });
 

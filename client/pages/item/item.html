@@ -9,6 +9,7 @@
 
 </div>
 <div class="content middle">
+    <div id="item_images"></div>
     <div id="foods_bodydiv" class="contentbody">
         <span class="item-color food-name name"></span><span class="wishstar"
                                                              title="Click to add to wishlist"></span>
@@ -37,7 +38,7 @@
         </div>
     </div>
     <div id="item_raters">
-        <ul id="item_raterstablist">
+        <ul id="item_raterstablist" class="tab-list">
             <li><a class="active" href="#" (click)="loadRaters($event, true)">All</a></li>
             <li><a href="#" (click)="loadRaters($event, false)">Following</a></li>
             <li class="close"><a href="#" (click)="toggleRaters($event)"></a></li>

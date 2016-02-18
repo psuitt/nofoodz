@@ -21,7 +21,9 @@ Meteor.methods({
 
         var following = Followers.findOne(query);
 
-        return following && following._id;
+        if (following && following._id)
+            return true;
+        return false;
 
     },
 

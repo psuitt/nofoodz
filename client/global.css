@@ -142,13 +142,21 @@ div.nofoodz-combo .caret {
 }
 
 /* DEFAULTS  */
-h3.pagetitle,
 div.pageheader {
     color: #2196F3;
     line-height: normal;
     padding: 10px 0;
     margin-bottom: 20px;
-    font-size: 30px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+h3.pagetitle {
+    color: #2196F3;
+    line-height: normal;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 28px;
     font-weight: 700;
     border-bottom: 2px solid #424242;
 }
@@ -163,9 +171,19 @@ h3.pagetitle span.wishstar {
 }
 
 h4.section-title {
-    color: #4CAF50;
+    color: #424242;
     font-size: 22px;
-    border-bottom: 1px dashed;
+    padding-bottom: 15px;
+}
+
+h4.section-title:not(:first-child) {
+    padding-top: 35px;
+}
+
+h4.section-title .sub-section-title {
+    color: #F44336;
+    display: inline-block;
+    margin-left: 20px;
 }
 
 div.page-message {
@@ -529,7 +547,7 @@ button.simple.blue-button {
     margin-top: 50px;
     min-height: 200px;
     background: rgb(245, 245, 245);
-    background-image: url('/backgrounds/denver_colorado.png');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/backgrounds/header-1700_1130.png');
     /*background-repeat: repeat-y;*/
     /*background-attachment: fixed;*/
     background-position: center bottom;
@@ -629,24 +647,8 @@ div.nofoods-navpages {
     width: 100%;
 }
 
-div.myfoods span.brand,
-div.myfoods span.name {
-    width: 200px;
-    text-overflow: ellipsis;
-}
-
-div.myfoods a.name {
-    width: 200px;
-    display: inline-block;
-    text-overflow: ellipsis;
-}
-
 div.myfoods.rating {
     cursor: default;
-}
-
-.myfoods.remove {
-    font-weight: bold;
 }
 
 /* Report Dialog */

@@ -55,4 +55,3 @@ ProductRatings.deny({
         return true;
     }
 });
-

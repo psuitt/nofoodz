@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/28/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
@@ -27,8 +27,8 @@ import {ChangeLog} from "./changelog/changelog";
 })
 
 @RouteConfig([
-    {path: '/about', component: About, as: 'About'},
-    {path: '/changelog', component: ChangeLog, as: 'ChangeLog'}
+    {path: '/about', component: About, name: 'About'},
+    {path: '/changelog', component: ChangeLog, name: 'ChangeLog'}
 ])
 
 export class InfoPage implements CanReuse {

@@ -64,6 +64,10 @@ Client.NoFoodz.lib = function () {
                 }
             });
             return result;
+        },
+
+        scrollTop: function () {
+            window.scrollTo(0, 0);
         }
 
     };

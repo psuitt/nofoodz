@@ -32,7 +32,7 @@ span.rating.selected {
 .foodsadd-add-item,
 .foodsadd-brand-remove,
 .foodsadd-remove,
-.bootstrap-tagsinput,
+.foodsadd-name-tags,
 div.input-spacing,
 #foodsadd_name,
 #foodsadd_brand {
@@ -41,7 +41,7 @@ div.input-spacing,
 
 .foodsadd-brand-input,
 .foodsadd-name-input,
-.bootstrap-tagsinput {
+.foodsadd-name-tags {
     width: 300px;
 }
 

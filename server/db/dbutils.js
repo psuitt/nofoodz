@@ -17,6 +17,10 @@ NoFoodz.db = function () {
                 o = Drink;
             } else if (t === NoFoodz.consts.db.PRODUCT) {
                 o = Product;
+            } else if (t === NoFoodz.consts.db.MEDIA) {
+                o = Media;
+            } else if (t === NoFoodz.consts.db.OTHER) {
+                o = Other;
             } else {
                 throw new Meteor.Error(500, 'A type is required to do a rating insert.');
             }
@@ -35,8 +39,14 @@ NoFoodz.db = function () {
                 db = Drinks;
             } else if (t === NoFoodz.consts.db.PRODUCT) {
                 db = Products;
+            } else if (t === NoFoodz.consts.db.MEDIA) {
+                db = Medias;
+            } else if (t === NoFoodz.consts.db.OTHER) {
+                db = Others;
+            } else if (t === NoFoodz.consts.db.BRAND) {
+                db = Brands;
             } else {
-                throw new Meteor.Error(500, 'A type is required to do a rating insert.');
+                throw new Meteor.Error(500, 'A type is required to get a database object.');
             }
 
             return db;
@@ -53,6 +63,10 @@ NoFoodz.db = function () {
                 db = DrinkRatings;
             } else if (t === NoFoodz.consts.db.PRODUCT) {
                 db = ProductRatings;
+            } else if (t === NoFoodz.consts.db.MEDIA) {
+                db = MediaRatings;
+            } else if (t === NoFoodz.consts.db.OTHER) {
+                db = OtherRatings;
             } else {
                 throw new Meteor.Error(500, 'A type is required to do a rating insert.');
             }

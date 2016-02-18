@@ -12,7 +12,8 @@ Meteor.methods({
     getRandom: function (options) {
 
         check(options, {
-            type: TypeCheck
+            type: TypeCheck,
+            brand_id: Match.Optional(NonEmptyStringNoSpaceCharacters)
         });
 
         if (!this.userId)
@@ -26,6 +27,10 @@ Meteor.methods({
             rating: {$gt: 2},
             random: {$gte: Math.random()}
         };
+
+        if (options.brand_id) {
+            query.brand_id = options.brand_id;
+        }
 
         var db = NoFoodz.db.typeToRatingsDb(t);
 

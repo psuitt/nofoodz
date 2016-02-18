@@ -1,11 +1,13 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, OnDestroy} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 declare var Client:any;
 declare var jQuery:any;
@@ -19,19 +21,39 @@ declare var jQuery:any;
     directives: [Wsie, RouterLink]
 })
 
-export class Wsie implements OnDestroy {
+export class Wsie extends MeteorComponent implements OnDestroy {
+
+    query:Object;
+
+    constructor() {
+        super();
+        this.query = Client.NoFoodz.lib.getParameters(true);
+    }
 
     ngOnDestroy() {
-        jQuery('#wsie_random').off();
     }
 
     doRandom() {
 
+        var button = jQuery('#wsie_random');
+
+        if (button.hasClass('loading')) {
+            return;
+        }
+
         var self = this;
 
-        jQuery('#wsie_random').off('click').removeClass('glyphicon glyphicon-gift').addClass('loading');
+        button.removeClass('glyphicon glyphicon-gift').addClass('loading');
 
-        Meteor.call('getRandom', {type: Client.NoFoodz.consts.FOOD}, function (err, response) {
+        var obj = {
+            type: Client.NoFoodz.consts.FOOD
+        };
+
+        if (this.query['brand_id']) {
+            obj['brand_id'] = this.query['brand_id'];
+        }
+
+        this.call('getRandom', obj, function (err, response) {
 
             if (!err) {
                 if (response.rating) {
@@ -55,13 +77,13 @@ export class Wsie implements OnDestroy {
     startItem(name) {
         var self = this;
         var func = function () {
-            jQuery('#wsie_result').shuffleLetters({step: 25, text: name, callback: self.addListener});
+            jQuery('#wsie_result').shuffleLetters({step: 25, text: name, callback: self.stop});
         };
         return func;
     }
 
-    addListener() {
-        jQuery('#wsie_random').on('click', this.doRandom).removeClass('loading').addClass('glyphicon glyphicon-gift');
+    stop() {
+        jQuery('#wsie_random').removeClass('loading').addClass('glyphicon glyphicon-gift');
     }
 
 }

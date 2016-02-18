@@ -1,16 +1,16 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, View, OnDestroy, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
 declare var jQuery:any;
 declare var Client:any;
-declare var NoFoodz:any;
 declare var _:any;
+declare var Meteor:any;
 
 @Component({
     selector: 'myfoods'
@@ -21,7 +21,7 @@ declare var _:any;
     directives: [MyFoods, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class MyFoods implements OnDestroy {
+export class MyFoods implements OnDestroy, AfterViewInit {
 
     itemSearch:any;
 
@@ -45,21 +45,23 @@ export class MyFoods implements OnDestroy {
         this.FOLLOWING = 5;
         this.FOLLOWERS = 6;
 
-        this.setup(router);
-        this.loadListeners();
-
     }
 
     ngOnDestroy() {
 
         jQuery(document).off('click', '#myfoods_edit');
         jQuery(document).off('click', '#myfoods_save');
-        jQuery('#myfoods-wishlist').off('click', 'a.remove', this.unlike);
-        jQuery('#myfoods_following').off('click', 'a.remove', this.unfollow);
+        jQuery('#myfoods-wishlist').off('click', 'button.remove', this.unlike);
+        jQuery('#myfoods_following').off('click', 'button.remove', this.unfollow);
         jQuery('#mainContent').off('swiperight')
             .off('swipeleft')
             .removeClass('default');
 
+    }
+
+    ngAfterViewInit() {
+        this.setup(this.router);
+        this.loadListeners();
     }
 
     setup(router) {
@@ -82,7 +84,7 @@ export class MyFoods implements OnDestroy {
                     jQuery('#myfoods-joined').html('Joined ' + Client.NoFoodz.lib.formatDate(user.profile.date));
                     jQuery('#myfoods_bonus').html(user.profile.bonusHearts);
 
-                    if (NoFoodz.client.permissions.isAdmin(user) && jQuery('#myfoods-nav .nav-list .admin').length === 0) {
+                    if (Client.NoFoodz.permissions.isAdmin(user) && jQuery('#myfoods-nav .nav-list .admin').length === 0) {
                         var adminHeader = jQuery('<li class=\'nav-header\'>Admin</li>');
                         var adminReported = jQuery('<li class=\'admin\'><a href=\'/#/admin/reported\'>Reported</a></li>');
                         jQuery('#myfoods-nav .nav-list').append(adminHeader)
@@ -101,7 +103,7 @@ export class MyFoods implements OnDestroy {
 
         if (!jQuery('#myfoods_item input').hasClass('nofoodssearch')) {
             this.itemSearch = jQuery('#myfoods_item input').nofoodssearch({
-                values: ['Food', 'Drink', 'Product'],
+                values: ['Food', 'Drink', 'Product', 'Media', 'Other'],
                 searchPlaceholder: 'Search your items',
                 select: this.getPageFunction()
             });
@@ -131,17 +133,17 @@ export class MyFoods implements OnDestroy {
             Meteor.call('updateProfile', profile, function (err) {
 
                 if (!err) {
-                    NoFoodz.alert.msg('success', 'Save was successful!');
+                    Client.NoFoodz.alert.msg('success', 'Save was successful!');
                 } else {
-                    NoFoodz.alert.msg('danger', err.reason);
+                    Client.NoFoodz.alert.msg('danger', err.reason);
                 }
 
             });
         });
 
-        jQuery('#myfoods-wishlist').on('click', 'a.remove', this.unlike);
+        jQuery('#myfoods-wishlist').on('click', 'button.remove', this.unlike);
 
-        jQuery('#myfoods_following').on('click', 'a.remove', this.unfollow);
+        jQuery('#myfoods_following').on('click', 'button.remove', this.unfollow);
 
         jQuery('#mainContent').removeClass('default')
             .on('swiperight', function () {
@@ -230,7 +232,7 @@ export class MyFoods implements OnDestroy {
 
                     var div = jQuery('<div class=\'myrating myfoods\'></div>');
                     var title = jQuery('<a class=\'name myfoods user-color\'></a>');
-                    var removeLink = jQuery('<a class=\'remove myfoods remove-color\' href=\'#\'>Unfollow</a>');
+                    var removeLink = jQuery('<button class=\'red-button remove myfoods remove-color\' href=\'#\'>Unfollow</button>');
                     var username = following.username;
 
                     title.addClass('lower');
@@ -324,11 +326,8 @@ export class MyFoods implements OnDestroy {
             if (!err && data.ratings && data.ratings.length !== 0) {
 
                 _.each(data.ratings, function (rating, index, list) {
-                    var div = Client.NoFoodz.widgetlib.createRatingDiv(rating);
-                    div.attr(t, rating.item_id);
+                    var div = Client.NoFoodz.widgetlib.createDisplay(rating, type, true);
                     itemDiv.append(div);
-                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .name a').attr('href', Client.NoFoodz.consts.urls[type.toUpperCase()] + rating.item_id).html(rating.name_view);
-                    jQuery('[' + t + '=\'' + rating.item_id + '\'] .brand a').attr('href', Client.NoFoodz.consts.urls.BRAND + rating.brand_id).html(rating.brand_view);
                 });
 
                 if (count) {
@@ -374,7 +373,7 @@ export class MyFoods implements OnDestroy {
                         var div = jQuery('<div class=\'myrating myfoods\'></div>');
                         var title = jQuery('<span class=\'name myfoods item-color\'><a></a></span>');
                         var brand = jQuery('<span class=\'brand myfoods brand-color\'><a></a></span>');
-                        var removeLink = jQuery('<a class=\'remove myfoods remove-color\' href=\'#\'>Remove</a>');
+                        var removeLink = jQuery('<button class=\'red-button remove myfoods remove-color\' href=\'#\'>Remove</button>');
 
                         title.addClass('lower');
 

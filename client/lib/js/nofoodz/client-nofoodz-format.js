@@ -1,6 +1,8 @@
-NoFoodz = typeof NoFoodz === 'undefined' ? {} : NoFoodz;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoodz.format = function () {
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
+
+Client.NoFoodz.format = function () {
 
     return {
 
@@ -11,15 +13,15 @@ NoFoodz.format = function () {
         },
 
         calculateAverage: function (item) {
-            return item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0;
+            return item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(1) : 0;
         },
 
         calculateAverageDisplay: function (item) {
 
             var avg = this.calculateAverage(item);
 
-            if (avg != 0 && avg.lastIndexOf('0') === 3) {
-                avg = avg.substring(0, 3);
+            if (avg != 0 && avg.lastIndexOf('0') === 2) {
+                // Don't show 4.0 show 4
                 avg = avg.replace('.0', '');
             }
 

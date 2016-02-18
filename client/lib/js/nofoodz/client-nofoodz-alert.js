@@ -1,9 +1,11 @@
 /**
  * Created by Sora on 10/30/2015.
  */
-NoFoodz = typeof NoFoodz === 'undefined' ? {} : NoFoodz;
+Client = typeof Client === 'undefined' ? {} : Client;
 
-NoFoodz.alert = function () {
+Client.NoFoodz = typeof Client.NoFoodz === 'undefined' ? {} : Client.NoFoodz;
+
+Client.NoFoodz.alert = function () {
     return {
 
         msg: function (type, message) {
@@ -13,6 +15,7 @@ NoFoodz.alert = function () {
             $('div.alertmessage').show().delay(3000).fadeOut(1000)
 
         }
+
     };
 
 }();

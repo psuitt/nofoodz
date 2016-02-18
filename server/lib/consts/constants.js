@@ -8,6 +8,8 @@ NoFoodz.consts.urls = {
     FOOD: '/#/pages/food/',
     DRINK: '/#/pages/drink/',
     PRODUCT: '/#/pages/product/',
+    MEDIA: '/#/pages/media/',
+    OTHER: '/#/pages/other/',
     BRAND: '/#/pages/brand/',
     PEOPLE: '/#/users/people/'
 };
@@ -26,9 +28,11 @@ NoFoodz.consts.filters = {
 };
 
 NoFoodz.consts.admin = {
+    // Admin Can do everything
     SUPER: 'S',
-    // Roles
+    // Can only add single items
     NORMAL: 'N',
+    // Can add multiple items
     MOD: 'M'
 };
 
@@ -36,5 +40,7 @@ NoFoodz.consts.db = {
     FOOD: 'food',
     DRINK: 'drink',
     PRODUCT: 'product',
+    MEDIA: 'media',
+    OTHER: 'other',
     BRAND: 'brand'
 };

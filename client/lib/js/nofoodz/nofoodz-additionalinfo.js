@@ -291,7 +291,7 @@
 				initialVal = list[0];
 				
 		if (this.field in _options.info)
-			initialVal = NoFoodz.format.camelCase(_options.info[this.field]);
+			initialVal = Client.NoFoodz.format.camelCase(_options.info[this.field]);
 		
 		combo.addClass('nofoodz-field')
 				 .attr('info-type', this.field)
@@ -322,8 +322,8 @@
 	// Create Display Functions
 	
 	var _basicDisplayCreate = function(val) {
-			var li = $('<li></li>');	
-			var camelCase = NoFoodz.format.camelCase(val);
+			var li = $('<li></li>');
+		var camelCase = Client.NoFoodz.format.camelCase(val);
 			li.html(camelCase);		
 			return li;
 	};
