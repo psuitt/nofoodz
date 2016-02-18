@@ -15,6 +15,7 @@ div.myrating span {
 
 div.myrating span.rating {
     cursor: default;
+    min-width: 49px;
 }
 
 div.myrating div.tooltip {
@@ -90,4 +91,12 @@ div.side-section.right {
 
 div.side-section .nofoods-pagenav {
     margin: 45px 0 0 0;
+}
+
+@media only screen and (max-width: 766px) {
+    div.myrating span.name,
+    div.myrating span.brand {
+        float: left;
+        width: 100%;
+    }
 }

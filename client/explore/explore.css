@@ -1,5 +1,6 @@
 div.explore-options {
 	margin-bottom: 15px;
+	text-align: center;
 }
 
 div.explore-options button {
@@ -8,4 +9,13 @@ div.explore-options button {
 
 #explore-info {
 	min-height: 400px;
+}
+
+@media only screen and (max-width: 766px) {
+
+	div.explore-options button {
+		display: block;
+		margin: 0 auto 10px auto;
+	}
+
 }

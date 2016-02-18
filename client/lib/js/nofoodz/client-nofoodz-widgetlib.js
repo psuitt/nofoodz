@@ -99,7 +99,7 @@ Client.NoFoodz.widgetlib = function () {
 
             if (addCount) {
 
-                var count = ratingOrItem.ratingtotal_calc;
+                var count = ratingOrItem.ratingcount_calc;
 
                 if (!count) {
                     count = 0;

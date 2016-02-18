@@ -1,7 +1,7 @@
 /**
  * Created by Sora on 11/11/2015.
  */
-var ITEM_NAME_REGEX = /^[0-9a-z][0-9a-z'\s()+\.]+$/i;
+var ITEM_NAME_REGEX = /^[0-9a-z][0-9a-z'&\s()+\.]+$/i;
 
 ItemNameCheck = Match.Where(function (x) {
     check(x, String);
