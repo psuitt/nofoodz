@@ -20,7 +20,7 @@ Accounts.validateNewUser(function (user) {
         }
     }
 
-    if (user.username && user.username.length > 3 && user.username.length < 16) {
+    if (user.username && user.username.length > 3 && user.username.length < 21) {
         check(user.username, UsernameCharacters);
         Statistics.upsert(
             {_type: NoFoodz.consts.statistics.USER_COUNT},
@@ -29,7 +29,7 @@ Accounts.validateNewUser(function (user) {
         return true;
     }
 
-    throw new Meteor.Error(403, 'Username must have at least 4-15 alphanumeric characters');
+    throw new Meteor.Error(403, 'Username must have at least 4-20 alphanumeric characters');
 });
 
 Accounts.onCreateUser(function (options, user) {
@@ -48,7 +48,7 @@ Accounts.onCreateUser(function (options, user) {
 // EMAIL CODE
 
 Accounts.emailTemplates.siteName = 'NoFoodz';
-Accounts.emailTemplates.from = 'NoFoodz Accounts <accounts@nofoodz.com>';
+Accounts.emailTemplates.from = 'NoFoodz Accounts <noreply@nofoodz.com>';
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
     return 'Welcome to NoFoodz, ' + user.profile.username;
 };

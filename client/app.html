@@ -99,12 +99,12 @@
                                 <li>
                                     <form id="login_form" action="action">
                                         <label>Username</label>
-                                        <input type="text" id="login_email"/>
+                                        <input type="text" id="login_email" [(ngModel)]="userForm.username"/>
                                         <label>Password</label>
-                                        <input type="password" id="login_password"/>
-
-                                        <div id="account_error" class="error-message"></div>
-                                        <input type="submit" id="login_button" value="Sign in" class="green-button"/>
+                                        <input type="password" id="login_password" [(ngModel)]="userForm.password"/>
+                                        <div id="login_error" class="error-message"></div>
+                                        <input type="submit" id="login_button" value="Sign in" class="green-button"
+                                               (click)="login(userForm)"/>
                                     </form>
                                 </li>
                             </ul>
@@ -117,21 +117,23 @@
                                 <li>
                                     <form id="register_form" action="action">
                                         <label>Username</label>
-                                        <input type="text" id="register_username" autocomplete="off"/>
-
+                                        <input type="text" id="register_username" autocomplete="off"
+                                               [(ngModel)]="registerForm.username"/>
                                         <div class="register-margin-bottom">Valid characters include a-z, 0-9, @, _, -,
                                             ~
                                         </div>
                                         <label>Email</label>
-                                        <input type="email" id="register_email" autocomplete="off"/>
+                                        <input type="email" id="register_email" autocomplete="off"
+                                               [(ngModel)]="registerForm.email"/>
                                         <label>Password</label>
-                                        <input type="password" id="register_password" autocomplete="off"/>
+                                        <input type="password" id="register_password" autocomplete="off"
+                                               [(ngModel)]="registerForm.password"/>
                                         <label>Confirm Password</label>
-                                        <input type="password" id="register_confirm_password" autocomplete="off"/>
-
-                                        <div id="account_error" class="error-message"></div>
+                                        <input type="password" id="register_confirm_password" autocomplete="off"
+                                               [(ngModel)]="registerForm.confirmPassword"/>
+                                        <div id="register_error" class="error-message"></div>
                                         <input type="submit" id="register_account" class="green-button"
-                                               value="Create an Account"/>
+                                               value="Create an Account" (click)="register(registerForm)"/>
                                     </form>
                                 </li>
                             </ul>

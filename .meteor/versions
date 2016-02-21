@@ -4,7 +4,7 @@ audit-argument-checks@1.0.4
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
-barbatus:angular2@0.8.5_2
+barbatus:angular2@0.8.6
 barbatus:ng2-compilers@0.1.1
 barbatus:ts-compilers@0.2.8_5
 barbatus:typescript@0.1.5_1
@@ -66,7 +66,7 @@ systemjs:systemjs@0.18.4
 tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
-urigo:angular2-meteor@0.4.2
+urigo:angular2-meteor@0.4.3_1
 url@1.0.5
 webapp@1.2.3
 webapp-hashing@1.0.5

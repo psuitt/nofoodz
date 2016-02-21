@@ -10,10 +10,18 @@ Client.NoFoodz.alert = function () {
 
         msg: function (type, message) {
             // Success, info, warning, danger
-            $('div.alertmessage').removeClass('alert-success alert-info alert-warning alert-danger').addClass('alert-' + type);
-            $('div.alertmessage').html(message);
-            $('div.alertmessage').show().delay(3000).fadeOut(1000)
+            $('div.alertmessage')
+                .removeClass('alert-success alert-info alert-warning alert-danger')
+                .addClass('alert-' + type)
+                .text(message)
+                .show()
+                .delay(3000)
+                .fadeOut(1000);
 
+        },
+
+        success: function (message) {
+            this.msg('success', message);
         }
 
     };
