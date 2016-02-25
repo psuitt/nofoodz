@@ -3,7 +3,8 @@
  */
 /// <reference path="../../typings/angular2/angular2.d.ts" />
 /// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-import {Component, View, OnInit} from 'angular2/core';
+import {Component, View} from 'angular2/core';
+import {FORM_DIRECTIVES} from 'angular2/common';
 import {RouteParams, Router} from 'angular2/router';
 import {MeteorComponent} from 'angular2-meteor';
 
@@ -12,17 +13,18 @@ declare var Meteor:any;
 declare var Accounts:any;
 
 @Component({
-    selector: 'verifyemail'
+    selector: 'resetpassword'
 })
 
 @View({
-    templateUrl: 'client/verify-email/verify-email.html',
-    directives: []
+    templateUrl: 'client/reset-password/reset-password.html',
+    directives: [FORM_DIRECTIVES, ResetPassword]
 })
-export class VerifyEmail extends MeteorComponent implements OnInit {
+export class ResetPassword extends MeteorComponent {
 
     token:String;
     router:Router;
+    newPassword:String;
 
     constructor(params:RouteParams, router:Router) {
         super();
@@ -30,19 +32,15 @@ export class VerifyEmail extends MeteorComponent implements OnInit {
         this.router = router;
     }
 
-    ngOnInit() {
+    reset() {
 
-        Accounts.verifyEmail(this.token, (error) => {
+        Accounts.resetPassword(this.token, this.newPassword, (error) => {
             if (!error) {
-                // This logs in so log out.
-                Meteor.logout(function (err) {
-                    // TODO - Do something if there is an error.
-                });
                 this.router.navigate(['/Home']);
-                Client.NoFoodz.alert.success('Verification successful!');
+                Client.NoFoodz.alert.success('Password updated!');
             } else {
                 this.router.navigate(['/Error404']);
-                Client.NoFoodz.alert.error('Verification failed.');
+                Client.NoFoodz.alert.error('Password update failed.');
             }
         });
     }

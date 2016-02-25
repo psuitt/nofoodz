@@ -20,6 +20,10 @@ Client.NoFoodz.alert = function () {
 
         },
 
+        error: function (message) {
+            this.msg('danger', message);
+        },
+
         success: function (message) {
             this.msg('success', message);
         }

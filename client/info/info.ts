@@ -16,6 +16,7 @@ import {
 
 import {About} from "./about/about";
 import {ChangeLog} from "./changelog/changelog";
+import {ForgotPassword} from "./forgotpassword/forgotpassword";
 
 @Component({
     selector: 'info',
@@ -28,7 +29,8 @@ import {ChangeLog} from "./changelog/changelog";
 
 @RouteConfig([
     {path: '/about', component: About, name: 'About'},
-    {path: '/changelog', component: ChangeLog, name: 'ChangeLog'}
+    {path: '/changelog', component: ChangeLog, name: 'ChangeLog'},
+    {path: '/forgotpassword', component: ForgotPassword, name: 'ForgotPassword'}
 ])
 
 export class InfoPage implements CanReuse {

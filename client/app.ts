@@ -41,6 +41,7 @@ import {AdminPage} from "./admin/admin";
 import {InfoPage} from "./info/info";
 import {List} from "./list";
 import {VerifyEmail} from "./verify-email/verify-email";
+import {ResetPassword} from "./reset-password/reset-password";
 
 declare var jQuery:any;
 declare var _:any;
@@ -69,7 +70,8 @@ declare var Accounts:any;
     {path: '/top/...', name: 'Top', component: TopPage},
     {path: '/info/...', name: 'Info', component: InfoPage},
     {path: '/admin/...', name: 'Admin', component: AdminPage},
-    //{path: '/verify-email/:id', name: 'VerifyEmail', component: VerifyEmail}
+    {path: '/verify-email/:token', name: 'VerifyEmail', component: VerifyEmail},
+    {path: '/reset-password/:token', name: 'ResetPassword', component: ResetPassword}
 ])
 
 class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
@@ -77,7 +79,10 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
     router:Router;
     location:Location;
 
-    userForm:{username:String, password: String};
+    userForm:{username:String, password: String} = {
+        username: '',
+        password: ''
+    };
     registerForm:{username:String, email:String, password:String, confirmPassword:String};
     username:string;
     usernameShort:string;
@@ -448,6 +453,6 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
 }
 
-enableProdMode();
+//enableProdMode();
 
 bootstrap(MainLayout, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);
