@@ -31,16 +31,16 @@ declare namespace common {
    * ```
    */
   class AsyncPipe implements core.PipeTransform,  core.OnDestroy {
-
-    constructor(_ref:core.ChangeDetectorRef);
-
-    ngOnDestroy():void;
-
-    transform(obj:Observable<any>| Promise<any>| core.EventEmitter<any>, args?:any[]):any;
+    
+    constructor(_ref: core.ChangeDetectorRef);
+    
+    ngOnDestroy(): void;
+    
+    transform(obj: Observable<any>| Promise<any>| core.EventEmitter<any>, args?: any[]): any;
     
   }
 
-
+    
   /**
    * Formats a date value to a string based on the requested format.
    * 
@@ -108,14 +108,14 @@ declare namespace common {
    * {@example core/pipes/ts/date_pipe/date_pipe_example.ts region='DatePipe'}
    */
   class DatePipe implements core.PipeTransform {
-
-    transform(value:any, args:any[]):string;
-
-    supports(obj:any):boolean;
+    
+    transform(value: any, args: any[]): string;
+    
+    supports(obj: any): boolean;
     
   }
 
-
+    
   /**
    * Transforms any input value using `JSON.stringify`. Useful for debugging.
    * 
@@ -123,12 +123,12 @@ declare namespace common {
    * {@example core/pipes/ts/json_pipe/json_pipe_example.ts region='JsonPipe'}
    */
   class JsonPipe implements core.PipeTransform {
-
-    transform(value:any, args?:any[]):string;
+    
+    transform(value: any, args?: any[]): string;
     
   }
 
-
+    
   /**
    * Creates a new List or String containing only a subset (slice) of the
    * elements.
@@ -181,14 +181,14 @@ declare namespace common {
    * {@example core/pipes/ts/slice_pipe/slice_pipe_example.ts region='SlicePipe_string'}
    */
   class SlicePipe implements core.PipeTransform {
-
-    transform(value:any, args?:any[]):any;
-
-    supports(obj:any):boolean;
+    
+    transform(value: any, args?: any[]): any;
+    
+    supports(obj: any): boolean;
     
   }
 
-
+    
   /**
    * Transforms text to lowercase.
    * 
@@ -197,20 +197,20 @@ declare namespace common {
    * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
    */
   class LowerCasePipe implements core.PipeTransform {
-
-    transform(value:string, args?:any[]):string;
+    
+    transform(value: string, args?: any[]): string;
     
   }
 
-
+    
   /**
    * Internal base class for numeric pipes.
    */
   class NumberPipe {
-
+    
   }
 
-
+    
   /**
    * WARNING: this pipe uses the Internationalization API.
    * Therefore it is only reliable in Chrome and Opera browsers.
@@ -238,12 +238,12 @@ declare namespace common {
    * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='NumberPipe'}
    */
   class DecimalPipe extends NumberPipe implements core.PipeTransform {
-
-    transform(value:any, args:any[]):string;
+    
+    transform(value: any, args: any[]): string;
     
   }
 
-
+    
   /**
    * WARNING: this pipe uses the Internationalization API.
    * Therefore it is only reliable in Chrome and Opera browsers.
@@ -261,12 +261,12 @@ declare namespace common {
    * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='PercentPipe'}
    */
   class PercentPipe extends NumberPipe implements core.PipeTransform {
-
-    transform(value:any, args:any[]):string;
+    
+    transform(value: any, args: any[]): string;
     
   }
 
-
+    
   /**
    * WARNING: this pipe uses the Internationalization API.
    * Therefore it is only reliable in Chrome and Opera browsers.
@@ -288,12 +288,12 @@ declare namespace common {
    * {@example core/pipes/ts/number_pipe/number_pipe_example.ts region='CurrencyPipe'}
    */
   class CurrencyPipe extends NumberPipe implements core.PipeTransform {
-
-    transform(value:any, args:any[]):string;
+    
+    transform(value: any, args: any[]): string;
     
   }
 
-
+    
   /**
    * Implements uppercase transforms to text.
    * 
@@ -302,12 +302,12 @@ declare namespace common {
    * {@example core/pipes/ts/lowerupper_pipe/lowerupper_pipe_example.ts region='LowerUpperPipe'}
    */
   class UpperCasePipe implements core.PipeTransform {
-
-    transform(value:string, args?:any[]):string;
+    
+    transform(value: string, args?: any[]): string;
     
   }
 
-
+    
   /**
    * A collection of Angular core pipes that are likely to be used in each and every
    * application.
@@ -315,9 +315,10 @@ declare namespace common {
    * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
    * property of the `@Component` or `@View` decorators.
    */
-  let COMMON_PIPES:any;
+  let COMMON_PIPES: any;
+  
 
-
+    
   /**
    * The `NgClass` directive conditionally adds and removes CSS classes on an HTML element based on
    * an expression's evaluation result.
@@ -378,20 +379,20 @@ declare namespace common {
    * ```
    */
   class NgClass implements core.DoCheck,  core.OnDestroy {
-
-    constructor(_iterableDiffers:core.IterableDiffers, _keyValueDiffers:core.KeyValueDiffers, _ngEl:core.ElementRef, _renderer:core.Renderer);
-
-    initialClasses:any;
-
-    rawClass:any;
-
-    ngDoCheck():void;
-
-    ngOnDestroy():void;
+    
+    constructor(_iterableDiffers: core.IterableDiffers, _keyValueDiffers: core.KeyValueDiffers, _ngEl: core.ElementRef, _renderer: core.Renderer);
+    
+    initialClasses: any;
+    
+    rawClass: any;
+    
+    ngDoCheck(): void;
+    
+    ngOnDestroy(): void;
     
   }
 
-
+    
   /**
    * The `NgFor` directive instantiates a template once per item from an iterable. The context for
    * each instantiated template inherits from the outer context with the given loop variable set
@@ -442,18 +443,18 @@ declare namespace common {
    * example.
    */
   class NgFor implements core.DoCheck {
-
-    constructor(_viewContainer:core.ViewContainerRef, _templateRef:core.TemplateRef, _iterableDiffers:core.IterableDiffers, _cdr:core.ChangeDetectorRef);
-
-    ngForOf:any;
-
-    ngForTemplate:any;
-
-    ngDoCheck():void;
+    
+    constructor(_viewContainer: core.ViewContainerRef, _templateRef: core.TemplateRef, _iterableDiffers: core.IterableDiffers, _cdr: core.ChangeDetectorRef);
+    
+    ngForOf: any;
+    
+    ngForTemplate: any;
+    
+    ngDoCheck(): void;
     
   }
 
-
+    
   /**
    * Removes or recreates a portion of the DOM tree based on an {expression}.
    * 
@@ -477,14 +478,14 @@ declare namespace common {
    * - `<template [ngIf]="condition"><div>...</div></template>`
    */
   class NgIf {
-
-    constructor(_viewContainer:core.ViewContainerRef, _templateRef:core.TemplateRef);
-
-    ngIf:any;
+    
+    constructor(_viewContainer: core.ViewContainerRef, _templateRef: core.TemplateRef);
+    
+    ngIf: any;
     
   }
 
-
+    
   /**
    * The `NgStyle` directive changes styles based on a result of expression evaluation.
    * 
@@ -537,16 +538,16 @@ declare namespace common {
    * based on the `style` property's value changes.
    */
   class NgStyle implements core.DoCheck {
-
-    constructor(_differs:core.KeyValueDiffers, _ngEl:core.ElementRef, _renderer:core.Renderer);
-
-    rawStyle:any;
-
-    ngDoCheck():void;
+    
+    constructor(_differs: core.KeyValueDiffers, _ngEl: core.ElementRef, _renderer: core.Renderer);
+    
+    rawStyle: any;
+    
+    ngDoCheck(): void;
     
   }
 
-
+    
   /**
    * Adds or removes DOM sub-trees when their match expressions match the switch expression.
    * 
@@ -604,12 +605,12 @@ declare namespace common {
    * ```
    */
   class NgSwitch {
-
-    ngSwitch:any;
+    
+    ngSwitch: any;
     
   }
 
-
+    
   /**
    * Insert the sub-tree when the `ngSwitchWhen` expression evaluates to the same value as the
    * enclosing switch expression.
@@ -619,14 +620,14 @@ declare namespace common {
    * See {@link NgSwitch} for more details and example.
    */
   class NgSwitchWhen {
-
-    constructor(viewContainer:core.ViewContainerRef, templateRef:core.TemplateRef, ngSwitch:NgSwitch);
-
-    ngSwitchWhen:any;
+    
+    constructor(viewContainer: core.ViewContainerRef, templateRef: core.TemplateRef, ngSwitch: NgSwitch);
+    
+    ngSwitchWhen: any;
     
   }
 
-
+    
   /**
    * Default case statements are displayed when no match expression matches the switch expression
    * value.
@@ -634,12 +635,12 @@ declare namespace common {
    * See {@link NgSwitch} for more details and example.
    */
   class NgSwitchDefault {
-
-    constructor(viewContainer:core.ViewContainerRef, templateRef:core.TemplateRef, sswitch:NgSwitch);
+    
+    constructor(viewContainer: core.ViewContainerRef, templateRef: core.TemplateRef, sswitch: NgSwitch);
     
   }
 
-
+    
   /**
    * A collection of Angular core directives that are likely to be used in each and every Angular
    * application.
@@ -680,58 +681,60 @@ declare namespace common {
    * }
    * ```
    */
-  let CORE_DIRECTIVES:core.Type[];
+  let CORE_DIRECTIVES: core.Type[];
+  
 
-
+    
   /**
    * This module exists in Dart, but not in Typescript. This exported symbol
    * is only here to help Typescript think this is a module.
    */
-  var workaround_empty_observable_list_diff:any;
+  var workaround_empty_observable_list_diff: any;
+  
 
-
+    
   abstract class AbstractControl {
-
-    constructor(validator:Function, asyncValidator:Function);
-
-    validator:Function;
-
-    asyncValidator:Function;
-
-    value:any;
-
-    status:string;
-
-    valid:boolean;
+    
+    constructor(validator: Function, asyncValidator: Function);
+    
+    validator: Function;
+    
+    asyncValidator: Function;
+    
+    value: any;
+    
+    status: string;
+    
+    valid: boolean;
     
     /**
      * Returns the errors of this control.
      */
-    errors:{[key: string]: any};
-
-    pristine:boolean;
-
-    dirty:boolean;
-
-    touched:boolean;
-
-    untouched:boolean;
-
-    valueChanges:Observable<any>;
-
-    statusChanges:Observable<any>;
-
-    pending:boolean;
-
-    markAsTouched():void;
-
-    markAsDirty({onlySelf}?: {onlySelf?: boolean}):void;
-
-    markAsPending({onlySelf}?: {onlySelf?: boolean}):void;
-
-    setParent(parent:ControlGroup | ControlArray):void;
-
-    updateValueAndValidity({onlySelf, emitEvent}?: {onlySelf?: boolean, emitEvent?: boolean}):void;
+    errors: {[key: string]: any};
+    
+    pristine: boolean;
+    
+    dirty: boolean;
+    
+    touched: boolean;
+    
+    untouched: boolean;
+    
+    valueChanges: Observable<any>;
+    
+    statusChanges: Observable<any>;
+    
+    pending: boolean;
+    
+    markAsTouched(): void;
+    
+    markAsDirty({onlySelf}?: {onlySelf?: boolean}): void;
+    
+    markAsPending({onlySelf}?: {onlySelf?: boolean}): void;
+    
+    setParent(parent: ControlGroup | ControlArray): void;
+    
+    updateValueAndValidity({onlySelf, emitEvent}?: {onlySelf?: boolean, emitEvent?: boolean}): void;
     
     /**
      * Sets errors on a control.
@@ -756,17 +759,17 @@ declare namespace common {
      * expect(login.valid).toEqual(true);
      * ```
      */
-    setErrors(errors:{[key: string]: any}, {emitEvent}?: {emitEvent?: boolean}):void;
-
-    find(path:Array<string | number>| string):AbstractControl;
-
-    getError(errorCode:string, path?:string[]):any;
-
-    hasError(errorCode:string, path?:string[]):boolean;
+    setErrors(errors: {[key: string]: any}, {emitEvent}?: {emitEvent?: boolean}): void;
+    
+    find(path: Array<string | number>| string): AbstractControl;
+    
+    getError(errorCode: string, path?: string[]): any;
+    
+    hasError(errorCode: string, path?: string[]): boolean;
     
   }
 
-
+    
   /**
    * Defines a part of a form that cannot be divided into other controls. `Control`s have values and
    * validation state, which is determined by an optional validation function.
@@ -784,8 +787,8 @@ declare namespace common {
    * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
    */
   class Control extends AbstractControl {
-
-    constructor(value?:any, validator?:Function, asyncValidator?:Function);
+    
+    constructor(value?: any, validator?: Function, asyncValidator?: Function);
     
     /**
      * Set the value of the control to `value`.
@@ -799,20 +802,20 @@ declare namespace common {
      * via an `onChange` event. This is the default behavior if `emitModelToViewChange` is not
      * specified.
      */
-    updateValue(value:any, {onlySelf, emitEvent, emitModelToViewChange}?: {
-      onlySelf?: boolean,
-      emitEvent?: boolean,
-      emitModelToViewChange?: boolean
-    }):void;
+    updateValue(value: any, {onlySelf, emitEvent, emitModelToViewChange}?: {
+        onlySelf?: boolean,
+        emitEvent?: boolean,
+        emitModelToViewChange?: boolean
+      }): void;
     
     /**
      * Register a listener for change events.
      */
-    registerOnChange(fn:Function):void;
+    registerOnChange(fn: Function): void;
     
   }
 
-
+    
   /**
    * Defines a part of a form, of fixed length, that can contain other controls.
    * 
@@ -827,39 +830,39 @@ declare namespace common {
    * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
    */
   class ControlGroup extends AbstractControl {
-
-    constructor(controls:{[key: string]: AbstractControl}, optionals?:{[key: string]: boolean}, validator?:Function, asyncValidator?:Function);
-
-    controls:{[key: string]: AbstractControl};
+    
+    constructor(controls: {[key: string]: AbstractControl}, optionals?: {[key: string]: boolean}, validator?: Function, asyncValidator?: Function);
+    
+    controls: {[key: string]: AbstractControl};
     
     /**
      * Add a control to this group.
      */
-    addControl(name:string, control:AbstractControl):void;
+    addControl(name: string, control: AbstractControl): void;
     
     /**
      * Remove a control from this group.
      */
-    removeControl(name:string):void;
+    removeControl(name: string): void;
     
     /**
      * Mark the named control as non-optional.
      */
-    include(controlName:string):void;
+    include(controlName: string): void;
     
     /**
      * Mark the named control as optional.
      */
-    exclude(controlName:string):void;
+    exclude(controlName: string): void;
     
     /**
      * Check whether there is a control with the given name in the group.
      */
-    contains(controlName:string):boolean;
+    contains(controlName: string): boolean;
     
   }
 
-
+    
   /**
    * Defines a part of a form, of variable length, that can contain other controls.
    * 
@@ -882,67 +885,67 @@ declare namespace common {
    * ### Example ([live demo](http://plnkr.co/edit/23DESOpbNnBpBHZt1BR4?p=preview))
    */
   class ControlArray extends AbstractControl {
-
-    constructor(controls:AbstractControl[], validator?:Function, asyncValidator?:Function);
-
-    controls:AbstractControl[];
+    
+    constructor(controls: AbstractControl[], validator?: Function, asyncValidator?: Function);
+    
+    controls: AbstractControl[];
     
     /**
      * Get the {@link AbstractControl} at the given `index` in the array.
      */
-    at(index:number):AbstractControl;
+    at(index: number): AbstractControl;
     
     /**
      * Insert a new {@link AbstractControl} at the end of the array.
      */
-    push(control:AbstractControl):void;
+    push(control: AbstractControl): void;
     
     /**
      * Insert a new {@link AbstractControl} at the given `index` in the array.
      */
-    insert(index:number, control:AbstractControl):void;
+    insert(index: number, control: AbstractControl): void;
     
     /**
      * Remove the control at the given `index` in the array.
      */
-    removeAt(index:number):void;
+    removeAt(index: number): void;
     
     /**
      * Length of the control array.
      */
-    length:number;
+    length: number;
     
   }
 
-
+    
   /**
    * Base class for control directives.
    * 
    * Only used internally in the forms module.
    */
   abstract class AbstractControlDirective {
-
-    control:AbstractControl;
-
-    value:any;
-
-    valid:boolean;
-
-    errors:{[key: string]: any};
-
-    pristine:boolean;
-
-    dirty:boolean;
-
-    touched:boolean;
-
-    untouched:boolean;
-
-    path:string[];
+    
+    control: AbstractControl;
+    
+    value: any;
+    
+    valid: boolean;
+    
+    errors: {[key: string]: any};
+    
+    pristine: boolean;
+    
+    dirty: boolean;
+    
+    touched: boolean;
+    
+    untouched: boolean;
+    
+    path: string[];
     
   }
 
-
+    
   /**
    * An interface that {@link NgFormModel} and {@link NgForm} implement.
    * 
@@ -953,63 +956,63 @@ declare namespace common {
     /**
      * Add a control to this form.
      */
-    addControl(dir:NgControl): void;
+    addControl(dir: NgControl): void;
     
     /**
      * Remove a control from this form.
      */
-    removeControl(dir:NgControl): void;
+    removeControl(dir: NgControl): void;
     
     /**
      * Look up the {@link Control} associated with a particular {@link NgControl}.
      */
-    getControl(dir:NgControl): Control;
+    getControl(dir: NgControl): Control;
     
     /**
      * Add a group of controls to this form.
      */
-    addControlGroup(dir:NgControlGroup): void;
+    addControlGroup(dir: NgControlGroup): void;
     
     /**
      * Remove a group of controls from this form.
      */
-    removeControlGroup(dir:NgControlGroup): void;
+    removeControlGroup(dir: NgControlGroup): void;
     
     /**
      * Look up the {@link ControlGroup} associated with a particular {@link NgControlGroup}.
      */
-    getControlGroup(dir:NgControlGroup): ControlGroup;
+    getControlGroup(dir: NgControlGroup): ControlGroup;
     
     /**
      * Update the model for a particular control with a new value.
      */
-    updateModel(dir:NgControl, value:any): void;
+    updateModel(dir: NgControl, value: any): void;
     
   }
 
-
+    
   /**
    * A directive that contains multiple {@link NgControl}s.
    * 
    * Only used by the forms module.
    */
   class ControlContainer extends AbstractControlDirective {
-
-    name:string;
+    
+    name: string;
     
     /**
      * Get the form to which this container belongs.
      */
-    formDirective:Form;
+    formDirective: Form;
     
     /**
      * Get the path to this container.
      */
-    path:string[];
+    path: string[];
     
   }
 
-
+    
   /**
    * Creates and binds a control with a specified name to a DOM element.
    * 
@@ -1067,32 +1070,34 @@ declare namespace common {
    */
   class NgControlName extends NgControl implements core.OnChanges, 
       core.OnDestroy {
-
-    constructor(_parent:ControlContainer, _validators:/* Array<Validator|Function> */ any[], _asyncValidators:/* Array<Validator|Function> */ any[], valueAccessors:ControlValueAccessor[]);
-
-    model:any;
-
-    viewModel:any;
-
-    ngOnChanges(changes:{[key: string]: core.SimpleChange}):void;
-
-    ngOnDestroy():void;
-
-    viewToModelUpdate(newValue:any):void;
-
-    path:string[];
-
-    formDirective:any;
-
-    validator:Function;
-
-    asyncValidator:Function;
-
-    control:Control;
+    
+    constructor(_parent: ControlContainer, _validators:
+                      /* Array<Validator|Function> */ any[], _asyncValidators:
+                      /* Array<Validator|Function> */ any[], valueAccessors: ControlValueAccessor[]);
+    
+    model: any;
+    
+    viewModel: any;
+    
+    ngOnChanges(changes: {[key: string]: core.SimpleChange}): void;
+    
+    ngOnDestroy(): void;
+    
+    viewToModelUpdate(newValue: any): void;
+    
+    path: string[];
+    
+    formDirective: any;
+    
+    validator: Function;
+    
+    asyncValidator: Function;
+    
+    control: Control;
     
   }
 
-
+    
   /**
    * Binds an existing {@link Control} to a DOM element.
    * 
@@ -1141,32 +1146,34 @@ declare namespace common {
    *  ```
    */
   class NgFormControl extends NgControl implements core.OnChanges {
-
-    constructor(_validators:/* Array<Validator|Function> */ any[], _asyncValidators:/* Array<Validator|Function> */ any[], valueAccessors:ControlValueAccessor[]);
-
-    form:Control;
-
-    update:any;
-
-    model:any;
-
-    viewModel:any;
-
-    ngOnChanges(changes:{[key: string]: core.SimpleChange}):void;
-
-    path:string[];
-
-    validator:Function;
-
-    asyncValidator:Function;
-
-    control:Control;
-
-    viewToModelUpdate(newValue:any):void;
+    
+    constructor(_validators:
+                      /* Array<Validator|Function> */ any[], _asyncValidators:
+                      /* Array<Validator|Function> */ any[], valueAccessors: ControlValueAccessor[]);
+    
+    form: Control;
+    
+    update: any;
+    
+    model: any;
+    
+    viewModel: any;
+    
+    ngOnChanges(changes: {[key: string]: core.SimpleChange}): void;
+    
+    path: string[];
+    
+    validator: Function;
+    
+    asyncValidator: Function;
+    
+    control: Control;
+    
+    viewToModelUpdate(newValue: any): void;
     
   }
 
-
+    
   /**
    * Binds a domain model to a form control.
    * 
@@ -1189,30 +1196,30 @@ declare namespace common {
    *  ```
    */
   class NgModel extends NgControl implements core.OnChanges {
-
-    constructor(_validators:any[], _asyncValidators:any[], valueAccessors:ControlValueAccessor[]);
-
-    update:any;
-
-    model:any;
-
-    viewModel:any;
-
-    ngOnChanges(changes:{[key: string]: core.SimpleChange}):void;
-
-    control:Control;
-
-    path:string[];
-
-    validator:Function;
-
-    asyncValidator:Function;
-
-    viewToModelUpdate(newValue:any):void;
+    
+    constructor(_validators: any[], _asyncValidators: any[], valueAccessors: ControlValueAccessor[]);
+    
+    update: any;
+    
+    model: any;
+    
+    viewModel: any;
+    
+    ngOnChanges(changes: {[key: string]: core.SimpleChange}): void;
+    
+    control: Control;
+    
+    path: string[];
+    
+    validator: Function;
+    
+    asyncValidator: Function;
+    
+    viewToModelUpdate(newValue: any): void;
     
   }
 
-
+    
   /**
    * A base class that all control directive extend.
    * It binds a {@link Control} object to a DOM element.
@@ -1220,20 +1227,20 @@ declare namespace common {
    * Used internally by Angular forms.
    */
   abstract class NgControl extends AbstractControlDirective {
-
-    name:string;
-
-    valueAccessor:ControlValueAccessor;
-
-    validator:Function;
-
-    asyncValidator:Function;
-
-    viewToModelUpdate(newValue:any):void;
+    
+    name: string;
+    
+    valueAccessor: ControlValueAccessor;
+    
+    validator: Function;
+    
+    asyncValidator: Function;
+    
+    viewToModelUpdate(newValue: any): void;
     
   }
 
-
+    
   /**
    * Creates and binds a control group to a DOM element.
    * 
@@ -1284,35 +1291,35 @@ declare namespace common {
    */
   class NgControlGroup extends ControlContainer implements core.OnInit, 
       core.OnDestroy {
-
-    constructor(parent:ControlContainer, _validators:any[], _asyncValidators:any[]);
-
-    ngOnInit():void;
-
-    ngOnDestroy():void;
+    
+    constructor(parent: ControlContainer, _validators: any[], _asyncValidators: any[]);
+    
+    ngOnInit(): void;
+    
+    ngOnDestroy(): void;
     
     /**
      * Get the {@link ControlGroup} backing this binding.
      */
-    control:ControlGroup;
+    control: ControlGroup;
     
     /**
      * Get the path to this control group.
      */
-    path:string[];
+    path: string[];
     
     /**
      * Get the {@link Form} to which this group belongs.
      */
-    formDirective:Form;
-
-    validator:Function;
-
-    asyncValidator:Function;
+    formDirective: Form;
+    
+    validator: Function;
+    
+    asyncValidator: Function;
     
   }
 
-
+    
   /**
    * Binds an existing control group to a DOM element.
    * 
@@ -1387,42 +1394,42 @@ declare namespace common {
    */
   class NgFormModel extends ControlContainer implements Form, 
       core.OnChanges {
-
-    constructor(_validators:any[], _asyncValidators:any[]);
-
-    form:ControlGroup;
-
-    directives:NgControl[];
-
-    ngSubmit:any;
-
-    ngOnChanges(changes:{[key: string]: core.SimpleChange}):void;
-
-    formDirective:Form;
-
-    control:ControlGroup;
-
-    path:string[];
-
-    addControl(dir:NgControl):void;
-
-    getControl(dir:NgControl):Control;
-
-    removeControl(dir:NgControl):void;
-
-    addControlGroup(dir:NgControlGroup):void;
-
-    removeControlGroup(dir:NgControlGroup):void;
-
-    getControlGroup(dir:NgControlGroup):ControlGroup;
-
-    updateModel(dir:NgControl, value:any):void;
-
-    onSubmit():boolean;
+    
+    constructor(_validators: any[], _asyncValidators: any[]);
+    
+    form: ControlGroup;
+    
+    directives: NgControl[];
+    
+    ngSubmit: any;
+    
+    ngOnChanges(changes: {[key: string]: core.SimpleChange}): void;
+    
+    formDirective: Form;
+    
+    control: ControlGroup;
+    
+    path: string[];
+    
+    addControl(dir: NgControl): void;
+    
+    getControl(dir: NgControl): Control;
+    
+    removeControl(dir: NgControl): void;
+    
+    addControlGroup(dir: NgControlGroup): void;
+    
+    removeControlGroup(dir: NgControlGroup): void;
+    
+    getControlGroup(dir: NgControlGroup): ControlGroup;
+    
+    updateModel(dir: NgControl, value: any): void;
+    
+    onSubmit(): boolean;
     
   }
 
-
+    
   /**
    * If `NgForm` is bound in a component, `<form>` elements in that component will be
    * upgraded to use the Angular form system.
@@ -1483,40 +1490,40 @@ declare namespace common {
    *  ```
    */
   class NgForm extends ControlContainer implements Form {
-
-    constructor(validators:any[], asyncValidators:any[]);
-
-    form:ControlGroup;
-
-    ngSubmit:any;
-
-    formDirective:Form;
-
-    control:ControlGroup;
-
-    path:string[];
-
-    controls:{[key: string]: AbstractControl};
-
-    addControl(dir:NgControl):void;
-
-    getControl(dir:NgControl):Control;
-
-    removeControl(dir:NgControl):void;
-
-    addControlGroup(dir:NgControlGroup):void;
-
-    removeControlGroup(dir:NgControlGroup):void;
-
-    getControlGroup(dir:NgControlGroup):ControlGroup;
-
-    updateModel(dir:NgControl, value:any):void;
-
-    onSubmit():boolean;
+    
+    constructor(validators: any[], asyncValidators: any[]);
+    
+    form: ControlGroup;
+    
+    ngSubmit: any;
+    
+    formDirective: Form;
+    
+    control: ControlGroup;
+    
+    path: string[];
+    
+    controls: {[key: string]: AbstractControl};
+    
+    addControl(dir: NgControl): void;
+    
+    getControl(dir: NgControl): Control;
+    
+    removeControl(dir: NgControl): void;
+    
+    addControlGroup(dir: NgControlGroup): void;
+    
+    removeControlGroup(dir: NgControlGroup): void;
+    
+    getControlGroup(dir: NgControlGroup): ControlGroup;
+    
+    updateModel(dir: NgControl, value: any): void;
+    
+    onSubmit(): boolean;
     
   }
 
-
+    
   /**
    * A bridge between a control and a native element.
    * 
@@ -1530,29 +1537,30 @@ declare namespace common {
     /**
      * Write a new value to the element.
      */
-    writeValue(obj:any): void;
+    writeValue(obj: any): void;
     
     /**
      * Set the function to be called when the control receives a change event.
      */
-    registerOnChange(fn:any): void;
+    registerOnChange(fn: any): void;
     
     /**
      * Set the function to be called when the control receives a touch event.
      */
-    registerOnTouched(fn:any): void;
+    registerOnTouched(fn: any): void;
     
   }
 
-
+    
   /**
    * Used to provide a {@link ControlValueAccessor} for form controls.
    * 
    * See {@link DefaultValueAccessor} for how to implement one.
    */
-  let NG_VALUE_ACCESSOR:core.OpaqueToken;
+  let NG_VALUE_ACCESSOR: core.OpaqueToken;
+  
 
-
+    
   /**
    * The default accessor for writing a value and listening to changes that is used by the
    * {@link NgModel}, {@link NgFormControl}, and {@link NgControlName} directives.
@@ -1563,45 +1571,45 @@ declare namespace common {
    *  ```
    */
   class DefaultValueAccessor implements ControlValueAccessor {
-
-    constructor(_renderer:core.Renderer, _elementRef:core.ElementRef);
-
-    onChange:any;
-
-    onTouched:any;
-
-    writeValue(value:any):void;
-
-    registerOnChange(fn:(_:any) => void):void;
-
-    registerOnTouched(fn:() => void):void;
+    
+    constructor(_renderer: core.Renderer, _elementRef: core.ElementRef);
+    
+    onChange: any;
+    
+    onTouched: any;
+    
+    writeValue(value: any): void;
+    
+    registerOnChange(fn: (_: any) => void): void;
+    
+    registerOnTouched(fn: () => void): void;
     
   }
 
-
+    
   /**
    * Directive automatically applied to Angular forms that sets CSS classes
    * based on control status (valid/invalid/dirty/etc).
    */
   class NgControlStatus {
-
-    constructor(cd:NgControl);
-
-    ngClassUntouched:boolean;
-
-    ngClassTouched:boolean;
-
-    ngClassPristine:boolean;
-
-    ngClassDirty:boolean;
-
-    ngClassValid:boolean;
-
-    ngClassInvalid:boolean;
+    
+    constructor(cd: NgControl);
+    
+    ngClassUntouched: boolean;
+    
+    ngClassTouched: boolean;
+    
+    ngClassPristine: boolean;
+    
+    ngClassDirty: boolean;
+    
+    ngClassValid: boolean;
+    
+    ngClassInvalid: boolean;
     
   }
 
-
+    
   /**
    * The accessor for writing a value and listening to changes on a checkbox input element.
    * 
@@ -1611,22 +1619,22 @@ declare namespace common {
    *  ```
    */
   class CheckboxControlValueAccessor implements ControlValueAccessor {
-
-    constructor(_renderer:core.Renderer, _elementRef:core.ElementRef);
-
-    onChange:any;
-
-    onTouched:any;
-
-    writeValue(value:any):void;
-
-    registerOnChange(fn:(_:any) => {}):void;
-
-    registerOnTouched(fn:() => {}):void;
+    
+    constructor(_renderer: core.Renderer, _elementRef: core.ElementRef);
+    
+    onChange: any;
+    
+    onTouched: any;
+    
+    writeValue(value: any): void;
+    
+    registerOnChange(fn: (_: any) => {}): void;
+    
+    registerOnTouched(fn: () => {}): void;
     
   }
 
-
+    
   /**
    * Marks `<option>` as dynamic, so Angular can be notified when options change.
    * 
@@ -1639,32 +1647,32 @@ declare namespace common {
    * ```
    */
   class NgSelectOption {
-
+    
   }
 
-
+    
   /**
    * The accessor for writing a value and listening to changes on a select element.
    */
   class SelectControlValueAccessor implements ControlValueAccessor {
-
-    constructor(_renderer:core.Renderer, _elementRef:core.ElementRef, query:core.QueryList<NgSelectOption>);
-
-    value:string;
-
-    onChange:any;
-
-    onTouched:any;
-
-    writeValue(value:any):void;
-
-    registerOnChange(fn:() => any):void;
-
-    registerOnTouched(fn:() => any):void;
+    
+    constructor(_renderer: core.Renderer, _elementRef: core.ElementRef, query: core.QueryList<NgSelectOption>);
+    
+    value: string;
+    
+    onChange: any;
+    
+    onTouched: any;
+    
+    writeValue(value: any): void;
+    
+    registerOnChange(fn: () => any): void;
+    
+    registerOnTouched(fn: () => any): void;
     
   }
 
-
+    
   /**
    * A list of all the form directives used as part of a `@View` annotation.
    * 
@@ -1680,9 +1688,10 @@ declare namespace common {
    * class MyApp {}
    * ```
    */
-  let FORM_DIRECTIVES:core.Type[];
+  let FORM_DIRECTIVES: core.Type[];
+  
 
-
+    
   /**
    * Providers for validators to be used for {@link Control}s in a form.
    * 
@@ -1692,9 +1701,10 @@ declare namespace common {
    * 
    * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
    */
-  let NG_VALIDATORS:core.OpaqueToken;
+  let NG_VALIDATORS: core.OpaqueToken;
+  
 
-
+    
   /**
    * Providers for asynchronous validators to be used for {@link Control}s
    * in a form.
@@ -1703,9 +1713,10 @@ declare namespace common {
    * 
    * See {@link NG_VALIDATORS} for more details.
    */
-  let NG_ASYNC_VALIDATORS:core.OpaqueToken;
+  let NG_ASYNC_VALIDATORS: core.OpaqueToken;
+  
 
-
+    
   /**
    * Provides a set of validators used by form controls.
    * 
@@ -1723,34 +1734,34 @@ declare namespace common {
     /**
      * Validator that requires controls to have a non-empty value.
      */
-    static required(control:Control):{[key: string]: boolean};
+    static required(control:Control): {[key: string]: boolean};
     
     /**
      * Validator that requires controls to have a value of a minimum length.
      */
-    static minLength(minLength:number):Function;
+    static minLength(minLength: number): Function;
     
     /**
      * Validator that requires controls to have a value of a maximum length.
      */
-    static maxLength(maxLength:number):Function;
+    static maxLength(maxLength: number): Function;
     
     /**
      * No-op validator.
      */
-    static nullValidator(c:any):{[key: string]: boolean};
+    static nullValidator(c: any): {[key: string]: boolean};
     
     /**
      * Compose multiple validators into a single function that returns the union
      * of the individual error maps.
      */
-    static compose(validators:Function[]):Function;
-
-    static composeAsync(validators:Function[]):Function;
+    static compose(validators: Function[]): Function;
+    
+    static composeAsync(validators: Function[]): Function;
     
   }
 
-
+    
   /**
    * A Directive that adds the `required` validator to any controls marked with the
    * `required` attribute, via the {@link NG_VALIDATORS} binding.
@@ -1762,36 +1773,36 @@ declare namespace common {
    * ```
    */
   class RequiredValidator {
-
+    
   }
 
-
+    
   /**
    * A directive which installs the {@link MinLengthValidator} for any `ngControl`,
    * `ngFormControl`, or control with `ngModel` that also has a `minlength` attribute.
    */
   class MinLengthValidator implements Validator {
-
-    constructor(minLength:string);
-
-    validate(c:Control):{[key: string]: any};
+    
+    constructor(minLength: string);
+    
+    validate(c: Control): {[key: string]: any};
     
   }
 
-
+    
   /**
    * A directive which installs the {@link MaxLengthValidator} for any `ngControl, `ngFormControl`,
    * or control with `ngModel` that also has a `maxlength` attribute.
    */
   class MaxLengthValidator implements Validator {
-
-    constructor(maxLength:string);
-
-    validate(c:Control):{[key: string]: any};
+    
+    constructor(maxLength: string);
+    
+    validate(c: Control): {[key: string]: any};
     
   }
 
-
+    
   /**
    * An interface that can be implemented by classes that can act as validators.
    * 
@@ -1810,12 +1821,12 @@ declare namespace common {
    * ```
    */
   interface Validator {
-
+    
     validate(c:Control): {[key: string]: any};
-
+    
   }
 
-
+    
   /**
    * Creates a form object from a user-specified configuration.
    * 
@@ -1858,29 +1869,29 @@ declare namespace common {
    * ```
    */
   class FormBuilder {
-
+    
     /**
      * Construct a new {@link ControlGroup} with the given map of configuration.
      * Valid keys for the `extra` parameter map are `optionals` and `validator`.
      * 
      * See the {@link ControlGroup} constructor for more details.
      */
-    group(controlsConfig:{[key: string]: any}, extra?:{[key: string]: any}):ControlGroup;
+    group(controlsConfig: {[key: string]: any}, extra?: {[key: string]: any}): ControlGroup;
     
     /**
      * Construct a new {@link Control} with the given `value`,`validator`, and `asyncValidator`.
      */
-    control(value:Object, validator?:Function, asyncValidator?:Function):Control;
+    control(value: Object, validator?: Function, asyncValidator?: Function): Control;
     
     /**
      * Construct an array of {@link Control}s from the given `controlsConfig` array of
      * configuration, with the given optional `validator` and `asyncValidator`.
      */
-    array(controlsConfig:any[], validator?:Function, asyncValidator?:Function):ControlArray;
+    array(controlsConfig: any[], validator?: Function, asyncValidator?: Function): ControlArray;
     
   }
 
-
+    
   /**
    * Shorthand set of providers used for building Angular forms.
    * 
@@ -1890,17 +1901,19 @@ declare namespace common {
    * bootstrap(MyApp, [FORM_PROVIDERS]);
    * ```
    */
-  let FORM_PROVIDERS:core.Type[];
+  let FORM_PROVIDERS: core.Type[];
+  
 
-
+    
   /**
    * See {@link FORM_PROVIDERS} instead.
    * 
    * @deprecated
    */
-  let FORM_BINDINGS:any;
+  let FORM_BINDINGS: any;
+  
 
-
+    
   /**
    * A collection of Angular core directives that are likely to be used in each and every Angular
    * application. This includes core directives (e.g., NgIf and NgFor), and forms directives (e.g.,
@@ -1944,7 +1957,7 @@ declare namespace common {
    * }
    * ```
    */
-  let COMMON_DIRECTIVES:core.Type[][];
+  let COMMON_DIRECTIVES: core.Type[][];
 }
 
 export = common;

@@ -26,9 +26,10 @@ declare namespace core {
    * does not result in additional changes to any bindings (also known as
    * unidirectional data flow).
    */
-  function enableProdMode():void;
+  function enableProdMode(): void;
+  
 
-
+    
   /**
    * Initialize the Angular 'platform' on the page.
    * 
@@ -43,15 +44,17 @@ declare namespace core {
    * is passed into each call. If the platform function is called with a different set of
    * provides, Angular will throw an exception.
    */
-  function platform(providers?:Array<Type | Provider | any[]>):PlatformRef;
+  function platform(providers?: Array<Type | Provider | any[]>): PlatformRef;
+  
 
-
+    
   /**
    * Create an Angular zone.
    */
-  function createNgZone():NgZone;
+  function createNgZone(): NgZone;
+  
 
-
+    
   /**
    * The Angular platform is the entry point for Angular on a web page. Each page
    * has exactly one platform, and services (such as reflection) which are common
@@ -65,13 +68,13 @@ declare namespace core {
     /**
      * Register a listener to be called when the platform is disposed.
      */
-    registerDisposeListener(dispose:() => void):void;
+    registerDisposeListener(dispose: () => void): void;
     
     /**
      * Retrieve the platform {@link Injector}, which is the parent injector for
      * every Angular application on the page and provides singleton providers.
      */
-    injector:Injector;
+    injector: Injector;
     
     /**
      * Instantiate a new Angular application on the page.
@@ -96,7 +99,7 @@ declare namespace core {
      * 
      * See the {@link bootstrap} documentation for more details.
      */
-    application(providers:Array<Type | Provider | any[]>):ApplicationRef;
+    application(providers: Array<Type | Provider | any[]>): ApplicationRef;
     
     /**
      * Instantiate a new Angular application on the page, using providers which
@@ -110,16 +113,16 @@ declare namespace core {
      * new application. Once this promise resolves, the application will be
      * constructed in the same manner as a normal `application()`.
      */
-    asyncApplication(bindingFn:(zone:NgZone) => Promise<Array<Type | Provider | any[]>>, providers?:Array<Type | Provider | any[]>):Promise<ApplicationRef>;
+    asyncApplication(bindingFn: (zone: NgZone) => Promise<Array<Type | Provider | any[]>>, providers?: Array<Type | Provider | any[]>): Promise<ApplicationRef>;
     
     /**
      * Destroy the Angular platform and all Angular applications on the page.
      */
-    dispose():void;
+    dispose(): void;
     
   }
 
-
+    
   /**
    * A reference to an Angular application running on a page.
    * 
@@ -131,12 +134,12 @@ declare namespace core {
      * Register a listener to be called each time `bootstrap()` is called to bootstrap
      * a new root component.
      */
-    registerBootstrapListener(listener:(ref:ComponentRef) => void):void;
+    registerBootstrapListener(listener: (ref: ComponentRef) => void): void;
     
     /**
      * Register a listener to be called when the application is disposed.
      */
-    registerDisposeListener(dispose:() => void):void;
+    registerDisposeListener(dispose: () => void): void;
     
     /**
      * Bootstrap a new component at the root level of the application.
@@ -156,22 +159,22 @@ declare namespace core {
      * ### Example
      * {@example core/ts/platform/platform.ts region='longform'}
      */
-    bootstrap(componentType:Type, providers?:Array<Type | Provider | any[]>):Promise<ComponentRef>;
+    bootstrap(componentType: Type, providers?: Array<Type | Provider | any[]>): Promise<ComponentRef>;
     
     /**
      * Retrieve the application {@link Injector}.
      */
-    injector:Injector;
+    injector: Injector;
     
     /**
      * Retrieve the application {@link NgZone}.
      */
-    zone:NgZone;
+    zone: NgZone;
     
     /**
      * Dispose of this application and all of its components.
      */
-    dispose():void;
+    dispose(): void;
     
     /**
      * Invoke this method to explicitly process change detection and its side-effects.
@@ -183,16 +186,16 @@ declare namespace core {
      * In this case, Angular throws an error, since an Angular application can only have one change
      * detection pass during which all change detection must complete.
      */
-    tick():void;
+    tick(): void;
     
     /**
      * Get a list of component types registered to this application.
      */
-    componentTypes:Type[];
+    componentTypes: Type[];
     
   }
 
-
+    
   /**
    * A DI Token representing a unique string id assigned to the application by Angular and used
    * primarily for prefixing application attributes and CSS styles when
@@ -202,12 +205,13 @@ declare namespace core {
    * a custom value via a DI provider <!-- TODO: provider --> configuring the root {@link Injector}
    * using this token.
    */
-  let APP_ID:OpaqueToken;
+  let APP_ID: OpaqueToken;
+  
 
-
+    
   /**
    * An {@link angular2/di/OpaqueToken} representing the application root type in the {@link
-      * Injector}.
+   * Injector}.
    * 
    * ```
    * @Component(...)
@@ -221,27 +225,31 @@ declare namespace core {
    * 
    * ```
    */
-  let APP_COMPONENT:OpaqueToken;
+  let APP_COMPONENT: OpaqueToken;
+  
 
-
+    
   /**
    * A function that will be executed when an application is initialized.
    */
-  let APP_INITIALIZER:OpaqueToken;
+  let APP_INITIALIZER: OpaqueToken;
+  
 
-
+    
   /**
    * A token which indicates the root directory of the application
    */
-  let PACKAGE_ROOT_URL:OpaqueToken;
+  let PACKAGE_ROOT_URL: OpaqueToken;
+  
 
-
+    
   /**
    * A function that will be executed when a platform is initialized.
    */
-  let PLATFORM_INITIALIZER:OpaqueToken;
+  let PLATFORM_INITIALIZER: OpaqueToken;
+  
 
-
+    
   /**
    * A DebugElement contains information from the Angular compiler about an
    * element and provides access to the corresponding ElementInjector and
@@ -255,29 +263,29 @@ declare namespace core {
     /**
      * Return the instance of the component associated with this element, if any.
      */
-    componentInstance:any;
+    componentInstance: any;
     
     /**
      * Return the native HTML element for this DebugElement.
      */
-    nativeElement:any;
+    nativeElement: any;
     
     /**
      * Return an Angular {@link ElementRef} for this element.
      */
-    elementRef:ElementRef;
+    elementRef: ElementRef;
     
     /**
      * Get the directive active for this element with the given index, if any.
      */
-    getDirectiveInstance(directiveIndex:number):any;
+    getDirectiveInstance(directiveIndex: number): any;
     
     /**
      * Get child DebugElements from within the Light DOM.
      * 
      * @return {DebugElement[]}
      */
-    children:DebugElement[];
+    children: DebugElement[];
     
     /**
      * Get the root DebugElement children of a component. Returns an empty
@@ -285,28 +293,28 @@ declare namespace core {
      * 
      * @return {DebugElement[]}
      */
-    componentViewChildren:DebugElement[];
+    componentViewChildren: DebugElement[];
     
     /**
      * Simulate an event from this element as if the user had caused
      * this event to fire from the page.
      */
-    triggerEventHandler(eventName:string, eventObj:Event):void;
+    triggerEventHandler(eventName: string, eventObj: Event): void;
     
     /**
      * Check whether the element has a directive with the given type.
      */
-    hasDirective(type:Type):boolean;
+    hasDirective(type: Type): boolean;
     
     /**
      * Inject the given type from the element injector.
      */
-    inject(type:Type):any;
+    inject(type: Type): any;
     
     /**
      * Read a local variable from the element (e.g. one defined with `#variable`).
      */
-    getLocal(name:string):any;
+    getLocal(name: string): any;
     
     /**
      * Return the first descendant TestElement matching the given predicate
@@ -317,7 +325,7 @@ declare namespace core {
      * 
      * @return {DebugElement}
      */
-    query(predicate:Predicate<DebugElement>, scope?:Function):DebugElement;
+    query(predicate: Predicate<DebugElement>, scope?: Function): DebugElement;
     
     /**
      * Return descendant TestElememts matching the given predicate
@@ -328,16 +336,16 @@ declare namespace core {
      * 
      * @return {DebugElement[]}
      */
-    queryAll(predicate:Predicate<DebugElement>, scope?:Function):DebugElement[];
+    queryAll(predicate: Predicate<DebugElement>, scope?: Function): DebugElement[];
     
   }
 
-
+    
   /**
    * Set of scope functions used with {@link DebugElement}'s query functionality.
    */
   class Scope {
-
+    
     /**
      * Scope queries to both the light dom and view of an element and its
      * children.
@@ -346,7 +354,7 @@ declare namespace core {
      * 
      * {@example core/debug/ts/debug_element/debug_element.ts region='scope_all'}
      */
-    static all(debugElement:DebugElement):DebugElement[];
+    static all(debugElement: DebugElement): DebugElement[];
     
     /**
      * Scope queries to the light dom of an element and its children.
@@ -355,7 +363,7 @@ declare namespace core {
      * 
      * {@example core/debug/ts/debug_element/debug_element.ts region='scope_light'}
      */
-    static light(debugElement:DebugElement):DebugElement[];
+    static light(debugElement: DebugElement): DebugElement[];
     
     /**
      * Scope queries to the view of an element of its children.
@@ -364,26 +372,28 @@ declare namespace core {
      * 
      * {@example core/debug/ts/debug_element/debug_element.ts region='scope_view'}
      */
-    static view(debugElement:DebugElement):DebugElement[];
+    static view(debugElement: DebugElement): DebugElement[];
     
   }
 
-
+    
   /**
    * Returns a {@link DebugElement} for an {@link ElementRef}.
    * 
    * @param {ElementRef}: elementRef
    * @return {DebugElement}
    */
-  function inspectElement(elementRef:ElementRef):DebugElement;
+  function inspectElement(elementRef: ElementRef): DebugElement;
+  
 
-
+    
   /**
    * Maps an array of {@link DebugElement}s to an array of native DOM elements.
    */
-  function asNativeElements(arr:DebugElement[]):any[];
+  function asNativeElements(arr: DebugElement[]): any[];
+  
 
-
+    
   /**
    * Declares an injectable parameter to be a live list of directives or variable
    * bindings from the content children of a directive.
@@ -492,43 +502,43 @@ declare namespace core {
    * See {@link QueryList} for more details.
    */
   class QueryMetadata extends DependencyMetadata {
-
-    constructor(_selector:Type | string, {descendants, first}?: {descendants?: boolean, first?: boolean});
+    
+    constructor(_selector: Type | string, {descendants, first}?: {descendants?: boolean, first?: boolean});
     
     /**
      * whether we want to query only direct children (false) or all
      * children (true).
      */
-    descendants:boolean;
-
-    first:boolean;
+    descendants: boolean;
+    
+    first: boolean;
     
     /**
      * always `false` to differentiate it with {@link ViewQueryMetadata}.
      */
-    isViewQuery:boolean;
+    isViewQuery: boolean;
     
     /**
      * what this is querying for.
      */
-    selector:any;
+    selector: any;
     
     /**
      * whether this is querying for a variable binding or a directive.
      */
-    isVarBindingQuery:boolean;
+    isVarBindingQuery: boolean;
     
     /**
      * returns a list of variable bindings this is querying for.
      * Only applicable if this is a variable bindings query.
      */
-    varBindings:string[];
-
-    toString():string;
+    varBindings: string[];
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Configures a content query.
    * 
@@ -550,12 +560,12 @@ declare namespace core {
    * ```
    */
   class ContentChildrenMetadata extends QueryMetadata {
-
-    constructor(_selector:Type | string, {descendants}?: {descendants?: boolean});
+    
+    constructor(_selector: Type | string, {descendants}?: {descendants?: boolean});
     
   }
 
-
+    
   /**
    * Configures a content query.
    * 
@@ -577,12 +587,12 @@ declare namespace core {
    * ```
    */
   class ContentChildMetadata extends QueryMetadata {
-
-    constructor(_selector:Type | string);
+    
+    constructor(_selector: Type | string);
     
   }
 
-
+    
   /**
    * Configures a view query.
    * 
@@ -606,12 +616,12 @@ declare namespace core {
    * ```
    */
   class ViewChildrenMetadata extends ViewQueryMetadata {
-
-    constructor(_selector:Type | string);
+    
+    constructor(_selector: Type | string);
     
   }
 
-
+    
   /**
    * Similar to {@link QueryMetadata}, but querying the component view, instead of
    * the content children.
@@ -648,19 +658,19 @@ declare namespace core {
    * See {@link QueryList} for more details.
    */
   class ViewQueryMetadata extends QueryMetadata {
-
-    constructor(_selector:Type | string, {descendants, first}?: {descendants?: boolean, first?: boolean});
+    
+    constructor(_selector: Type | string, {descendants, first}?: {descendants?: boolean, first?: boolean});
     
     /**
      * always `true` to differentiate it with {@link QueryMetadata}.
      */
-    isViewQuery:any;
-
-    toString():string;
+    isViewQuery: any;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Configures a view query.
    * 
@@ -684,12 +694,12 @@ declare namespace core {
    * ```
    */
   class ViewChildMetadata extends ViewQueryMetadata {
-
-    constructor(_selector:Type | string);
+    
+    constructor(_selector: Type | string);
     
   }
 
-
+    
   /**
    * Specifies that a constant attribute value should be injected.
    * 
@@ -708,18 +718,18 @@ declare namespace core {
    * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
    */
   class AttributeMetadata extends DependencyMetadata {
-
-    constructor(attributeName:string);
-
-    attributeName:string;
-
-    token:AttributeMetadata;
-
-    toString():string;
+    
+    constructor(attributeName: string);
+    
+    attributeName: string;
+    
+    token: AttributeMetadata;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Declare reusable UI building blocks for an application.
    * 
@@ -747,33 +757,33 @@ declare namespace core {
    * {@example core/ts/metadata/metadata.ts region='component'}
    */
   class ComponentMetadata extends DirectiveMetadata {
-
+    
     constructor({selector, inputs, outputs, properties, events, host, exportAs, moduleId, bindings,
-        providers, viewBindings, viewProviders,
-        changeDetection, queries, templateUrl, template,
-        styleUrls, styles, directives, pipes, encapsulation}?: {
-      selector?: string,
-      inputs?: string[],
-      outputs?: string[],
-      properties?: string[],
-      events?: string[],
-      host?: {[key: string]: string},
-      /** @deprecated */ bindings?: any[],
-      providers?: any[],
-      exportAs?: string,
-      moduleId?: string,
-      /** @deprecated */ viewBindings?: any[],
-      viewProviders?: any[],
-      queries?: {[key: string]: any},
-      changeDetection?: ChangeDetectionStrategy,
-      templateUrl?: string,
-      template?: string,
-      styleUrls?: string[],
-      styles?: string[],
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      encapsulation?: ViewEncapsulation
-    });
+                   providers, viewBindings, viewProviders,
+                   changeDetection, queries, templateUrl, template,
+                   styleUrls, styles, directives, pipes, encapsulation}?: {
+        selector?: string,
+        inputs?: string[],
+        outputs?: string[],
+        properties?: string[],
+        events?: string[],
+        host?: {[key: string]: string},
+        /** @deprecated */ bindings?: any[],
+        providers?: any[],
+        exportAs?: string,
+        moduleId?: string,
+        /** @deprecated */ viewBindings?: any[],
+        viewProviders?: any[],
+        queries?: {[key: string]: any},
+        changeDetection?: ChangeDetectionStrategy,
+        templateUrl?: string,
+        template?: string,
+        styleUrls?: string[],
+        styles?: string[],
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        encapsulation?: ViewEncapsulation
+      });
     
     /**
      * Defines the used change detection strategy.
@@ -784,7 +794,7 @@ declare namespace core {
      * The `changeDetection` property defines, whether the change detection will be checked every time
      * or only when the component tells it to do so.
      */
-    changeDetection:ChangeDetectionStrategy;
+    changeDetection: ChangeDetectionStrategy;
     
     /**
      * Defines the set of injectable objects that are visible to its view DOM children.
@@ -824,9 +834,9 @@ declare namespace core {
      * 
      * ```
      */
-    viewProviders:any[];
-
-    viewBindings:any[];
+    viewProviders: any[];
+    
+    viewBindings: any[];
     
     /**
      * The module id of the module that contains the component.
@@ -846,25 +856,25 @@ declare namespace core {
      * 
      * ```
      */
-    moduleId:string;
-
-    templateUrl:string;
-
-    template:string;
-
-    styleUrls:string[];
-
-    styles:string[];
-
-    directives:Array<Type | any[]>;
-
-    pipes:Array<Type | any[]>;
-
-    encapsulation:ViewEncapsulation;
+    moduleId: string;
+    
+    templateUrl: string;
+    
+    template: string;
+    
+    styleUrls: string[];
+    
+    styles: string[];
+    
+    directives: Array<Type | any[]>;
+    
+    pipes: Array<Type | any[]>;
+    
+    encapsulation: ViewEncapsulation;
     
   }
 
-
+    
   /**
    * Directives allow you to attach behavior to elements in the DOM.
    * 
@@ -907,7 +917,7 @@ declare namespace core {
    * 2. Dependencies on element injectors and their parents until it encounters a Shadow DOM boundary
    * 3. Dependencies on component injectors and their parents until it encounters the root component
    * 4. Dependencies on pre-existing injectors
-   *
+   * 
    * 
    * The `ElementInjector` can inject other directives, element-specific special objects, or it can
    * delegate to the parent
@@ -933,7 +943,7 @@ declare namespace core {
    * 
    * The following example demonstrates how dependency injection resolves constructor arguments in
    * practice.
-   *
+   * 
    * 
    * Assume this HTML template:
    * 
@@ -969,7 +979,7 @@ declare namespace core {
    * ```
    * 
    * Let's step through the different ways in which `MyDirective` could be declared...
-   *
+   * 
    * 
    * ### No injection
    * 
@@ -985,7 +995,7 @@ declare namespace core {
    * ```
    * 
    * This directive would be instantiated with no dependencies.
-   *
+   * 
    * 
    * ### Component-level injection
    * 
@@ -1004,7 +1014,7 @@ declare namespace core {
    * ```
    * 
    * This directive would be instantiated with a dependency on `SomeService`.
-   *
+   * 
    * 
    * ### Injecting a directive from the current element
    * 
@@ -1040,10 +1050,10 @@ declare namespace core {
    * exist on the direct parent, this injection would
    * have returned
    * `dependency="1"`.
-   *
+   * 
    * 
    * ### Injecting a live collection of direct child directives
-   *
+   * 
    * 
    * A directive can also query for other child directives. Since parent directives are instantiated
    * before child directives, a directive can't simply inject the list of child directives. Instead,
@@ -1244,20 +1254,20 @@ declare namespace core {
    * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
    */
   class DirectiveMetadata extends InjectableMetadata {
-
+    
     constructor({selector, inputs, outputs, properties, events, host, bindings, providers, exportAs,
-        queries}?: {
-      selector?: string,
-      inputs?: string[],
-      outputs?: string[],
-      properties?: string[],
-      events?: string[],
-      host?: {[key: string]: string},
-      providers?: any[],
-      /** @deprecated */ bindings?: any[],
-      exportAs?: string,
-      queries?: {[key: string]: any}
-    });
+                   queries}?: {
+        selector?: string,
+        inputs?: string[],
+        outputs?: string[],
+        properties?: string[],
+        events?: string[],
+        host?: {[key: string]: string},
+        providers?: any[],
+        /** @deprecated */ bindings?: any[],
+        exportAs?: string,
+        queries?: {[key: string]: any}
+      });
     
     /**
      * The CSS selector that triggers the instantiation of a directive.
@@ -1273,7 +1283,7 @@ declare namespace core {
      * - `[attribute=value]`: select by attribute name and value.
      * - `:not(sub_selector)`: select only if the element does not match the `sub_selector`.
      * - `selector1, selector2`: select if either `selector1` or `selector2` matches.
-     *
+     * 
      * 
      * ### Example
      * 
@@ -1290,7 +1300,7 @@ declare namespace core {
      * 
      * The directive would only be instantiated on the `<input type="text">` element.
      */
-    selector:string;
+    selector: string;
     
     /**
      * Enumerates the set of data-bound input properties for a directive
@@ -1338,9 +1348,9 @@ declare namespace core {
      * bootstrap(App);
      * ```
      */
-    inputs:string[];
-
-    properties:string[];
+    inputs: string[];
+    
+    properties: string[];
     
     /**
      * Enumerates the set of event-bound output properties.
@@ -1386,9 +1396,9 @@ declare namespace core {
      * bootstrap(App);
      * ```
      */
-    outputs:string[];
-
-    events:string[];
+    outputs: string[];
+    
+    events: string[];
     
     /**
      * Specify the events, actions, properties and attributes related to the host element.
@@ -1496,7 +1506,7 @@ declare namespace core {
      * }
      * ```
      */
-    host:{[key: string]: string};
+    host: {[key: string]: string};
     
     /**
      * Defines the set of injectable objects that are visible to a Directive and its light DOM
@@ -1528,12 +1538,12 @@ declare namespace core {
      * }
      * ```
      */
-    providers:any[];
+    providers: any[];
     
     /**
      * @deprecated
      */
-    bindings:any[];
+    bindings: any[];
     
     /**
      * Defines the name that can be used in the template to assign this directive to a variable.
@@ -1558,7 +1568,7 @@ declare namespace core {
      * 
      * ```
      */
-    exportAs:string;
+    exportAs: string;
     
     /**
      * Configures the queries that will be injected into the directive.
@@ -1592,11 +1602,11 @@ declare namespace core {
      * }
      * ```
      */
-    queries:{[key: string]: any};
+    queries: {[key: string]: any};
     
   }
 
-
+    
   /**
    * Declare reusable pipe function.
    * 
@@ -1609,16 +1619,16 @@ declare namespace core {
    * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   class PipeMetadata extends InjectableMetadata {
-
+    
     constructor({name, pure}: {name: string, pure?: boolean});
-
-    name:string;
-
-    pure:boolean;
+    
+    name: string;
+    
+    pure: boolean;
     
   }
 
-
+    
   /**
    * Declares a data-bound input property.
    * 
@@ -1661,17 +1671,17 @@ declare namespace core {
    * ```
    */
   class InputMetadata {
-
-    constructor(bindingPropertyName?:string);
+    
+    constructor(bindingPropertyName?: string);
     
     /**
      * Name used when instantiating a component in the temlate.
      */
-    bindingPropertyName:string;
+    bindingPropertyName: string;
     
   }
 
-
+    
   /**
    * Declares an event-bound output property.
    * 
@@ -1714,14 +1724,14 @@ declare namespace core {
    * ```
    */
   class OutputMetadata {
-
-    constructor(bindingPropertyName?:string);
-
-    bindingPropertyName:string;
+    
+    constructor(bindingPropertyName?: string);
+    
+    bindingPropertyName: string;
     
   }
 
-
+    
   /**
    * Declares a host property binding.
    * 
@@ -1758,14 +1768,14 @@ declare namespace core {
    * ```
    */
   class HostBindingMetadata {
-
-    constructor(hostPropertyName?:string);
-
-    hostPropertyName:string;
+    
+    constructor(hostPropertyName?: string);
+    
+    hostPropertyName: string;
     
   }
 
-
+    
   /**
    * Declares a host listener.
    * 
@@ -1801,16 +1811,16 @@ declare namespace core {
    * ```
    */
   class HostListenerMetadata {
-
-    constructor(eventName:string, args?:string[]);
-
-    eventName:string;
-
-    args:string[];
+    
+    constructor(eventName: string, args?: string[]);
+    
+    eventName: string;
+    
+    args: string[];
     
   }
 
-
+    
   /**
    * Metadata properties available for configuring Views.
    * 
@@ -1841,16 +1851,16 @@ declare namespace core {
    * ```
    */
   class ViewMetadata {
-
+    
     constructor({templateUrl, template, directives, pipes, encapsulation, styles, styleUrls}?: {
-      templateUrl?: string,
-      template?: string,
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      encapsulation?: ViewEncapsulation,
-      styles?: string[],
-      styleUrls?: string[],
-    });
+        templateUrl?: string,
+        template?: string,
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        encapsulation?: ViewEncapsulation,
+        styles?: string[],
+        styleUrls?: string[],
+      });
     
     /**
      * Specifies a template URL for an Angular component.
@@ -1859,26 +1869,26 @@ declare namespace core {
      * 
      * <!-- TODO: what's the url relative to? -->
      */
-    templateUrl:string;
+    templateUrl: string;
     
     /**
      * Specifies an inline template for an Angular component.
      * 
      * NOTE: Only one of `templateUrl` or `template` can be defined per View.
      */
-    template:string;
+    template: string;
     
     /**
      * Specifies stylesheet URLs for an Angular component.
      * 
      * <!-- TODO: what's the url relative to? -->
      */
-    styleUrls:string[];
+    styleUrls: string[];
     
     /**
      * Specifies an inline stylesheet for an Angular component.
      */
-    styles:string[];
+    styles: string[];
     
     /**
      * Specifies a list of directives that can be used within a template.
@@ -1900,9 +1910,9 @@ declare namespace core {
      * }
      * ```
      */
-    directives:Array<Type | any[]>;
-
-    pipes:Array<Type | any[]>;
+    directives: Array<Type | any[]>;
+    
+    pipes: Array<Type | any[]>;
     
     /**
      * Specify how the template and the styles should be encapsulated.
@@ -1910,11 +1920,11 @@ declare namespace core {
      * has styles,
      * otherwise {@link ViewEncapsulation#None `ViewEncapsulation.None`}.
      */
-    encapsulation:ViewEncapsulation;
+    encapsulation: ViewEncapsulation;
     
   }
 
-
+    
   /**
    * Defines template and style encapsulation options available for Component's {@link View}.
    * 
@@ -1939,24 +1949,25 @@ declare namespace core {
      * creating a ShadowRoot for Component's Host Element.
      */
     Native,
-
+    
     /**
      * Don't provide any template or style encapsulation.
      */
     None
   }
+  
 
-
+    
   /**
    * Interface for the {@link DirectiveMetadata} decorator function.
    * 
    * See {@link DirectiveFactory}.
    */
   interface DirectiveDecorator extends TypeDecorator {
-
+    
   }
 
-
+    
   /**
    * Interface for the {@link ComponentMetadata} decorator function.
    * 
@@ -1967,19 +1978,19 @@ declare namespace core {
     /**
      * Chain {@link ViewMetadata} annotation.
      */
-    View(obj:{
-      templateUrl?: string,
-      template?: string,
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      renderer?: string,
-      styles?: string[],
-      styleUrls?: string[],
-    }): ViewDecorator;
+    View(obj: {
+        templateUrl?: string,
+        template?: string,
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        renderer?: string,
+        styles?: string[],
+        styleUrls?: string[],
+      }): ViewDecorator;
     
   }
 
-
+    
   /**
    * Interface for the {@link ViewMetadata} decorator function.
    * 
@@ -1990,19 +2001,19 @@ declare namespace core {
     /**
      * Chain {@link ViewMetadata} annotation.
      */
-    View(obj:{
-      templateUrl?: string,
-      template?: string,
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      renderer?: string,
-      styles?: string[],
-      styleUrls?: string[],
-    }): ViewDecorator;
+    View(obj: {
+        templateUrl?: string,
+        template?: string,
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        renderer?: string,
+        styles?: string[],
+        styleUrls?: string[],
+      }): ViewDecorator;
     
   }
 
-
+    
   /**
    * {@link DirectiveMetadata} factory for creating annotations, decorators or DSL.
    * 
@@ -2035,36 +2046,36 @@ declare namespace core {
    * ```
    */
   interface DirectiveFactory {
-
-    new(obj:{
-      selector?: string,
-      inputs?: string[],
-      outputs?: string[],
-      properties?: string[],
-      events?: string[],
-      host?: {[key: string]: string},
-      bindings?: any[],
-      providers?: any[],
-      exportAs?: string,
-      queries?: {[key: string]: any}
-    }): DirectiveMetadata;
-
-    (obj:{
-      selector?: string,
-      inputs?: string[],
-      outputs?: string[],
-      properties?: string[],
-      events?: string[],
-      host?: {[key: string]: string},
-      bindings?: any[],
-      providers?: any[],
-      exportAs?: string,
-      queries?: {[key: string]: any}
-    }): DirectiveDecorator;
+    
+    new(obj: {
+        selector?: string,
+        inputs?: string[],
+        outputs?: string[],
+        properties?: string[],
+        events?: string[],
+        host?: {[key: string]: string},
+        bindings?: any[],
+        providers?: any[],
+        exportAs?: string,
+        queries?: {[key: string]: any}
+      }): DirectiveMetadata;
+    
+    (obj: {
+        selector?: string,
+        inputs?: string[],
+        outputs?: string[],
+        properties?: string[],
+        events?: string[],
+        host?: {[key: string]: string},
+        bindings?: any[],
+        providers?: any[],
+        exportAs?: string,
+        queries?: {[key: string]: any}
+      }): DirectiveDecorator;
     
   }
 
-
+    
   /**
    * {@link ComponentMetadata} factory for creating annotations, decorators or DSL.
    * 
@@ -2097,61 +2108,61 @@ declare namespace core {
    * ```
    */
   interface ComponentFactory {
-
-    new(obj:{
-      selector?: string,
-      inputs?: string[],
-      outputs?: string[],
-      properties?: string[],
-      events?: string[],
-      host?: {[key: string]: string},
-      /* @deprecated */
-      bindings?: any[],
-      providers?: any[],
-      exportAs?: string,
-      moduleId?: string,
-      queries?: {[key: string]: any},
-      /* @deprecated */
-      viewBindings?: any[],
-      viewProviders?: any[],
-      changeDetection?: ChangeDetectionStrategy,
-      templateUrl?: string,
-      template?: string,
-      styleUrls?: string[],
-      styles?: string[],
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      encapsulation?: ViewEncapsulation
-    }): ComponentMetadata;
-
-    (obj:{
-      selector?: string,
-      inputs?: string[],
-      outputs?: string[],
-      properties?: string[],
-      events?: string[],
-      host?: {[key: string]: string},
-      /* @deprecated */
-      bindings?: any[],
-      providers?: any[],
-      exportAs?: string,
-      moduleId?: string,
-      queries?: {[key: string]: any},
-      viewBindings?: any[],
-      viewProviders?: any[],
-      changeDetection?: ChangeDetectionStrategy,
-      templateUrl?: string,
-      template?: string,
-      styleUrls?: string[],
-      styles?: string[],
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      encapsulation?: ViewEncapsulation
-    }): ComponentDecorator;
+    
+    new(obj: {
+        selector?: string,
+        inputs?: string[],
+        outputs?: string[],
+        properties?: string[],
+        events?: string[],
+        host?: {[key: string]: string},
+        /* @deprecated */
+        bindings?: any[],
+        providers?: any[],
+        exportAs?: string,
+        moduleId?: string,
+        queries?: {[key: string]: any},
+        /* @deprecated */
+        viewBindings?: any[],
+        viewProviders?: any[],
+        changeDetection?: ChangeDetectionStrategy,
+        templateUrl?: string,
+        template?: string,
+        styleUrls?: string[],
+        styles?: string[],
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        encapsulation?: ViewEncapsulation
+      }): ComponentMetadata;
+    
+    (obj: {
+        selector?: string,
+        inputs?: string[],
+        outputs?: string[],
+        properties?: string[],
+        events?: string[],
+        host?: {[key: string]: string},
+        /* @deprecated */
+        bindings?: any[],
+        providers?: any[],
+        exportAs?: string,
+        moduleId?: string,
+        queries?: {[key: string]: any},
+        viewBindings?: any[],
+        viewProviders?: any[],
+        changeDetection?: ChangeDetectionStrategy,
+        templateUrl?: string,
+        template?: string,
+        styleUrls?: string[],
+        styles?: string[],
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        encapsulation?: ViewEncapsulation
+      }): ComponentDecorator;
     
   }
 
-
+    
   /**
    * {@link ViewMetadata} factory for creating annotations, decorators or DSL.
    * 
@@ -2196,30 +2207,30 @@ declare namespace core {
    * ```
    */
   interface ViewFactory {
-
-    new(obj:{
-      templateUrl?: string,
-      template?: string,
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      encapsulation?: ViewEncapsulation,
-      styles?: string[],
-      styleUrls?: string[],
-    }): ViewMetadata;
-
-    (obj:{
-      templateUrl?: string,
-      template?: string,
-      directives?: Array<Type | any[]>,
-      pipes?: Array<Type | any[]>,
-      encapsulation?: ViewEncapsulation,
-      styles?: string[],
-      styleUrls?: string[],
-    }): ViewDecorator;
+    
+    new(obj: {
+        templateUrl?: string,
+        template?: string,
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        encapsulation?: ViewEncapsulation,
+        styles?: string[],
+        styleUrls?: string[],
+      }): ViewMetadata;
+    
+    (obj: {
+        templateUrl?: string,
+        template?: string,
+        directives?: Array<Type | any[]>,
+        pipes?: Array<Type | any[]>,
+        encapsulation?: ViewEncapsulation,
+        styles?: string[],
+        styleUrls?: string[],
+      }): ViewDecorator;
     
   }
 
-
+    
   /**
    * {@link AttributeMetadata} factory for creating annotations, decorators or DSL.
    * 
@@ -2255,14 +2266,14 @@ declare namespace core {
    * ```
    */
   interface AttributeFactory {
-
-    new(name:string): AttributeMetadata;
-
-    (name:string): TypeDecorator;
+    
+    new(name: string): AttributeMetadata;
+    
+    (name: string): TypeDecorator;
     
   }
 
-
+    
   /**
    * {@link QueryMetadata} factory for creating annotations, decorators or DSL.
    * 
@@ -2307,62 +2318,62 @@ declare namespace core {
    * ```
    */
   interface QueryFactory {
-
-    new(selector:Type | string, {descendants}?: {descendants?: boolean}): QueryMetadata;
-
-    (selector:Type | string, {descendants}?: {descendants?: boolean}): ParameterDecorator;
+    
+    new(selector: Type | string, {descendants}?: {descendants?: boolean}): QueryMetadata;
+    
+    (selector: Type | string, {descendants}?: {descendants?: boolean}): ParameterDecorator;
     
   }
 
-
+    
   /**
    * Factory for {@link ContentChildren}.
    */
   interface ContentChildrenFactory {
-
-    new(selector:Type | string, {descendants}?: {descendants?: boolean}): ContentChildrenMetadata;
-
-    (selector:Type | string, {descendants}?: {descendants?: boolean}): any;
+    
+    new(selector: Type | string, {descendants}?: {descendants?: boolean}): ContentChildrenMetadata;
+    
+    (selector: Type | string, {descendants}?: {descendants?: boolean}): any;
     
   }
 
-
+    
   /**
    * Factory for {@link ContentChild}.
    */
   interface ContentChildFactory {
-
-    new(selector:Type | string): ContentChildFactory;
-
-    (selector:Type | string): any;
+    
+    new(selector: Type | string): ContentChildFactory;
+    
+    (selector: Type | string): any;
     
   }
 
-
+    
   /**
    * Factory for {@link ViewChildren}.
    */
   interface ViewChildrenFactory {
-
-    new(selector:Type | string): ViewChildrenMetadata;
-
-    (selector:Type | string): any;
+    
+    new(selector: Type | string): ViewChildrenMetadata;
+    
+    (selector: Type | string): any;
     
   }
 
-
+    
   /**
    * Factory for {@link ViewChild}.
    */
   interface ViewChildFactory {
-
-    new(selector:Type | string): ViewChildFactory;
-
-    (selector:Type | string): any;
+    
+    new(selector: Type | string): ViewChildFactory;
+    
+    (selector: Type | string): any;
     
   }
 
-
+    
   /**
    * {@link PipeMetadata} factory for creating decorators.
    * 
@@ -2371,66 +2382,66 @@ declare namespace core {
    * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
   interface PipeFactory {
-
-    new(obj:{name: string, pure?: boolean}): any;
-
-    (obj:{name: string, pure?: boolean}): any;
+    
+    new(obj: {name: string, pure?: boolean}): any;
+    
+    (obj: {name: string, pure?: boolean}): any;
     
   }
 
-
+    
   /**
    * {@link InputMetadata} factory for creating decorators.
    * 
    * See {@link InputMetadata}.
    */
   interface InputFactory {
-
-    new(bindingPropertyName?:string): any;
-
-    (bindingPropertyName?:string): any;
+    
+    new(bindingPropertyName?: string): any;
+    
+    (bindingPropertyName?: string): any;
     
   }
 
-
+    
   /**
    * {@link OutputMetadata} factory for creating decorators.
    * 
    * See {@link OutputMetadata}.
    */
   interface OutputFactory {
-
-    new(bindingPropertyName?:string): any;
-
-    (bindingPropertyName?:string): any;
+    
+    new(bindingPropertyName?: string): any;
+    
+    (bindingPropertyName?: string): any;
     
   }
 
-
+    
   /**
    * {@link HostBindingMetadata} factory function.
    */
   interface HostBindingFactory {
-
-    new(hostPropertyName?:string): any;
-
-    (hostPropertyName?:string): any;
+    
+    new(hostPropertyName?: string): any;
+    
+    (hostPropertyName?: string): any;
     
   }
 
-
+    
   /**
    * {@link HostListenerMetadata} factory function.
    */
   interface HostListenerFactory {
-
-    new(eventName:string, args?:string[]): any;
-
-    (eventName:string, args?:string[]): any;
+    
+    new(eventName: string, args?: string[]): any;
+    
+    (eventName: string, args?: string[]): any;
     
   }
 
-
+    
   /**
    * Declare reusable UI building blocks for an application.
    * 
@@ -2457,9 +2468,10 @@ declare namespace core {
    * 
    * {@example core/ts/metadata/metadata.ts region='component'}
    */
-  var Component:ComponentFactory;
+  var Component: ComponentFactory;
+  
 
-
+    
   /**
    * Directives allow you to attach behavior to elements in the DOM.
    * 
@@ -2502,7 +2514,7 @@ declare namespace core {
    * 2. Dependencies on element injectors and their parents until it encounters a Shadow DOM boundary
    * 3. Dependencies on component injectors and their parents until it encounters the root component
    * 4. Dependencies on pre-existing injectors
-   *
+   * 
    * 
    * The `ElementInjector` can inject other directives, element-specific special objects, or it can
    * delegate to the parent
@@ -2528,7 +2540,7 @@ declare namespace core {
    * 
    * The following example demonstrates how dependency injection resolves constructor arguments in
    * practice.
-   *
+   * 
    * 
    * Assume this HTML template:
    * 
@@ -2564,7 +2576,7 @@ declare namespace core {
    * ```
    * 
    * Let's step through the different ways in which `MyDirective` could be declared...
-   *
+   * 
    * 
    * ### No injection
    * 
@@ -2580,7 +2592,7 @@ declare namespace core {
    * ```
    * 
    * This directive would be instantiated with no dependencies.
-   *
+   * 
    * 
    * ### Component-level injection
    * 
@@ -2599,7 +2611,7 @@ declare namespace core {
    * ```
    * 
    * This directive would be instantiated with a dependency on `SomeService`.
-   *
+   * 
    * 
    * ### Injecting a directive from the current element
    * 
@@ -2635,10 +2647,10 @@ declare namespace core {
    * exist on the direct parent, this injection would
    * have returned
    * `dependency="1"`.
-   *
+   * 
    * 
    * ### Injecting a live collection of direct child directives
-   *
+   * 
    * 
    * A directive can also query for other child directives. Since parent directives are instantiated
    * before child directives, a directive can't simply inject the list of child directives. Instead,
@@ -2838,9 +2850,10 @@ declare namespace core {
    * the instantiated
    * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
    */
-  var Directive:DirectiveFactory;
+  var Directive: DirectiveFactory;
+  
 
-
+    
   /**
    * Metadata properties available for configuring Views.
    * 
@@ -2870,9 +2883,10 @@ declare namespace core {
    * }
    * ```
    */
-  var View:ViewFactory;
+  var View: ViewFactory;
+  
 
-
+    
   /**
    * Specifies that a constant attribute value should be injected.
    * 
@@ -2890,9 +2904,10 @@ declare namespace core {
    * 
    * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
    */
-  var Attribute:AttributeFactory;
+  var Attribute: AttributeFactory;
+  
 
-
+    
   /**
    * Declares an injectable parameter to be a live list of directives or variable
    * bindings from the content children of a directive.
@@ -3000,9 +3015,10 @@ declare namespace core {
    * The injected object is an unmodifiable live list.
    * See {@link QueryList} for more details.
    */
-  var Query:QueryFactory;
+  var Query: QueryFactory;
+  
 
-
+    
   /**
    * Configures a content query.
    * 
@@ -3023,9 +3039,10 @@ declare namespace core {
    * }
    * ```
    */
-  var ContentChildren:ContentChildrenFactory;
+  var ContentChildren: ContentChildrenFactory;
+  
 
-
+    
   /**
    * Configures a content query.
    * 
@@ -3046,9 +3063,10 @@ declare namespace core {
    * }
    * ```
    */
-  var ContentChild:ContentChildFactory;
+  var ContentChild: ContentChildFactory;
+  
 
-
+    
   /**
    * Configures a view query.
    * 
@@ -3071,9 +3089,10 @@ declare namespace core {
    * }
    * ```
    */
-  var ViewChildren:ViewChildrenFactory;
+  var ViewChildren: ViewChildrenFactory;
+  
 
-
+    
   /**
    * Configures a view query.
    * 
@@ -3096,9 +3115,10 @@ declare namespace core {
    * }
    * ```
    */
-  var ViewChild:ViewChildFactory;
+  var ViewChild: ViewChildFactory;
+  
 
-
+    
   /**
    * Similar to {@link QueryMetadata}, but querying the component view, instead of
    * the content children.
@@ -3134,9 +3154,10 @@ declare namespace core {
    * The injected object is an iterable and observable live list.
    * See {@link QueryList} for more details.
    */
-  var ViewQuery:QueryFactory;
+  var ViewQuery: QueryFactory;
+  
 
-
+    
   /**
    * Declare reusable pipe function.
    * 
@@ -3144,9 +3165,10 @@ declare namespace core {
    * 
    * {@example core/ts/metadata/metadata.ts region='pipe'}
    */
-  var Pipe:PipeFactory;
+  var Pipe: PipeFactory;
+  
 
-
+    
   /**
    * Declares a data-bound input property.
    * 
@@ -3188,9 +3210,10 @@ declare namespace core {
    * bootstrap(App);
    * ```
    */
-  var Input:InputFactory;
+  var Input: InputFactory;
+  
 
-
+    
   /**
    * Declares an event-bound output property.
    * 
@@ -3232,9 +3255,10 @@ declare namespace core {
    * bootstrap(App);
    * ```
    */
-  var Output:OutputFactory;
+  var Output: OutputFactory;
+  
 
-
+    
   /**
    * Declares a host property binding.
    * 
@@ -3270,9 +3294,10 @@ declare namespace core {
    * bootstrap(App);
    * ```
    */
-  var HostBinding:HostBindingFactory;
+  var HostBinding: HostBindingFactory;
+  
 
-
+    
   /**
    * Declares a host listener.
    * 
@@ -3307,9 +3332,10 @@ declare namespace core {
    * bootstrap(App);
    * ```
    */
-  var HostListener:HostListenerFactory;
+  var HostListener: HostListenerFactory;
+  
 
-
+    
   /**
    * Provides a way for expressing ES6 classes with parameter annotations in ES5.
    * 
@@ -3391,9 +3417,10 @@ declare namespace core {
    * });
    * ```
    */
-  function Class(clsDef:ClassDefinition):ConcreteType;
+  function Class(clsDef: ClassDefinition): ConcreteType;
+  
 
-
+    
   /**
    * Declares the interface to be used with {@link Class}.
    */
@@ -3402,7 +3429,7 @@ declare namespace core {
     /**
      * Optional argument for specifying the superclass.
      */
-        extends?: Type;
+    extends?: Type;
     
     /**
      * Required constructor function for a class.
@@ -3414,10 +3441,10 @@ declare namespace core {
      * See {@link Class} for example of usage.
      */
     constructor: Function | any[];
-
+    
   }
 
-
+    
   /**
    * An interface implemented by all Angular type decorators, which allows them to be used as ES7
    * decorators as well as
@@ -3445,7 +3472,7 @@ declare namespace core {
     /**
      * Invoke as ES7 decorator.
      */
-    <T extends Type>(type:T): T;
+    <T extends Type>(type: T): T;
     
     /**
      * Storage for the accumulated annotations so far used by the DSL syntax.
@@ -3453,15 +3480,15 @@ declare namespace core {
      * Used by {@link Class} to annotate the generated class.
      */
     annotations: any[];
-
+    
     /**
      * Generate a class from the definition and annotate it with {@link TypeDecorator#annotations}.
      */
-    Class(obj:ClassDefinition): ConcreteType;
+    Class(obj: ClassDefinition): ConcreteType;
     
   }
 
-
+    
   /**
    * A parameter metadata that specifies a dependency.
    * 
@@ -3503,16 +3530,16 @@ declare namespace core {
    * ```
    */
   class InjectMetadata {
-
-    constructor(token:any);
-
-    token:any;
-
-    toString():string;
+    
+    constructor(token: any);
+    
+    token: any;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * A parameter metadata that marks a dependency as optional. {@link Injector} provides `null` if
    * the dependency is not found.
@@ -3535,12 +3562,12 @@ declare namespace core {
    * ```
    */
   class OptionalMetadata {
-
-    toString():string;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * A marker metadata that marks a class as available to {@link Injector} for creation.
    * 
@@ -3573,12 +3600,12 @@ declare namespace core {
    * ```
    */
   class InjectableMetadata {
-
+    
     constructor();
-
+    
   }
 
-
+    
   /**
    * Specifies that an {@link Injector} should retrieve a dependency only from itself.
    * 
@@ -3607,12 +3634,12 @@ declare namespace core {
    * ```
    */
   class SelfMetadata {
-
-    toString():string;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Specifies that an injector should retrieve a dependency from any injector until reaching the
    * closest host.
@@ -3668,12 +3695,12 @@ declare namespace core {
    * ```
    */
   class HostMetadata {
-
-    toString():string;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Specifies that the dependency resolution should start from the parent injector.
    * 
@@ -3700,23 +3727,23 @@ declare namespace core {
    * ```
    */
   class SkipSelfMetadata {
-
-    toString():string;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * `DependencyMetadata` is used by the framework to extend DI.
    * This is internal to Angular and should not be used directly.
    */
   class DependencyMetadata {
-
-    token:any;
+    
+    token: any;
     
   }
 
-
+    
   /**
    * Allows to refer to references which are not yet defined.
    * 
@@ -3728,9 +3755,10 @@ declare namespace core {
    * ### Example
    * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref'}
    */
-  function forwardRef(forwardRefFn:ForwardRefFn):Type;
+  function forwardRef(forwardRefFn: ForwardRefFn): Type;
+  
 
-
+    
   /**
    * Lazily retrieves the reference value from a forwardRef.
    * 
@@ -3746,9 +3774,10 @@ declare namespace core {
    * 
    * See: {@link forwardRef}
    */
-  function resolveForwardRef(type:any):any;
+  function resolveForwardRef(type: any): any;
+  
 
-
+    
   /**
    * An interface that a function passed into {@link forwardRef} has to implement.
    * 
@@ -3757,12 +3786,12 @@ declare namespace core {
    * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref_fn'}
    */
   interface ForwardRefFn {
-
+    
     (): any;
-
+    
   }
 
-
+    
   /**
    * A dependency injection container used for instantiating objects and resolving dependencies.
    * 
@@ -3800,7 +3829,7 @@ declare namespace core {
     /**
      * Private
      */
-    constructor(_proto:any, _parent?:Injector, _depProvider?:any, _debugContext?:Function);
+    constructor(_proto: any, _parent?: Injector, _depProvider?: any, _debugContext?: Function);
     
     /**
      * Turns an array of provider definitions into an array of resolved providers.
@@ -3835,7 +3864,7 @@ declare namespace core {
      * 
      * See {@link Injector#fromResolvedProviders} for more info.
      */
-    static resolve(providers:Array<Type | Provider | any[]>):ResolvedProvider[];
+    static resolve(providers: Array<Type | Provider | any[]>): ResolvedProvider[];
     
     /**
      * Resolves an array of providers and creates an injector from those providers.
@@ -3863,7 +3892,7 @@ declare namespace core {
      * because it needs to resolve the passed-in providers first.
      * See {@link Injector#resolve} and {@link Injector#fromResolvedProviders}.
      */
-    static resolveAndCreate(providers:Array<Type | Provider | any[]>):Injector;
+    static resolveAndCreate(providers: Array<Type | Provider | any[]>): Injector;
     
     /**
      * Creates an injector from previously resolved providers.
@@ -3887,12 +3916,12 @@ declare namespace core {
      * expect(injector.get(Car) instanceof Car).toBe(true);
      * ```
      */
-    static fromResolvedProviders(providers:ResolvedProvider[]):Injector;
+    static fromResolvedProviders(providers: ResolvedProvider[]): Injector;
     
     /**
      * @deprecated
      */
-    static fromResolvedBindings(providers:ResolvedProvider[]):Injector;
+    static fromResolvedBindings(providers: ResolvedProvider[]): Injector;
     
     /**
      * Retrieves an instance from the injector based on the provided token.
@@ -3915,7 +3944,7 @@ declare namespace core {
      * expect(injector.get(Injector)).toBe(injector);
      * ```
      */
-    get(token:any):any;
+    get(token: any): any;
     
     /**
      * Retrieves an instance from the injector based on the provided token.
@@ -3938,7 +3967,7 @@ declare namespace core {
      * expect(injector.getOptional(Injector)).toBe(injector);
      * ```
      */
-    getOptional(token:any):any;
+    getOptional(token: any): any;
     
     /**
      * Parent of this injector.
@@ -3954,7 +3983,7 @@ declare namespace core {
      * expect(child.parent).toBe(parent);
      * ```
      */
-    parent:Injector;
+    parent: Injector;
     
     /**
      * Resolves an array of providers and creates a child injector from those providers.
@@ -3983,7 +4012,7 @@ declare namespace core {
      * because it needs to resolve the passed-in providers first.
      * See {@link Injector#resolve} and {@link Injector#createChildFromResolved}.
      */
-    resolveAndCreateChild(providers:Array<Type | Provider | any[]>):Injector;
+    resolveAndCreateChild(providers: Array<Type | Provider | any[]>): Injector;
     
     /**
      * Creates a child injector from previously resolved providers.
@@ -4010,7 +4039,7 @@ declare namespace core {
      * expect(child.get(ParentProvider)).toBe(parent.get(ParentProvider));
      * ```
      */
-    createChildFromResolved(providers:ResolvedProvider[]):Injector;
+    createChildFromResolved(providers: ResolvedProvider[]): Injector;
     
     /**
      * Resolves a provider and instantiates an object in the context of the injector.
@@ -4036,7 +4065,7 @@ declare namespace core {
      * expect(car).not.toBe(injector.resolveAndInstantiate(Car));
      * ```
      */
-    resolveAndInstantiate(provider:Type | Provider):any;
+    resolveAndInstantiate(provider: Type | Provider): any;
     
     /**
      * Instantiates an object using a resolved provider in the context of the injector.
@@ -4062,60 +4091,60 @@ declare namespace core {
      * expect(car).not.toBe(injector.instantiateResolved(carProvider));
      * ```
      */
-    instantiateResolved(provider:ResolvedProvider):any;
-
-    displayName:string;
-
-    toString():string;
+    instantiateResolved(provider: ResolvedProvider): any;
+    
+    displayName: string;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * See {@link Provider} instead.
    * 
    * @deprecated
    */
   class Binding extends Provider {
-
-    constructor(token:any, {toClass, toValue, toAlias, toFactory, deps, multi}: {
-      toClass?: Type,
-      toValue?: any,
-      toAlias?: any,
-      toFactory: Function, deps?: Object[], multi?: boolean
-    });
+    
+    constructor(token: any, {toClass, toValue, toAlias, toFactory, deps, multi}: {
+        toClass?: Type,
+        toValue?: any,
+        toAlias?: any,
+        toFactory: Function, deps?: Object[], multi?: boolean
+      });
     
     /**
      * @deprecated
      */
-    toClass:any;
+    toClass: any;
     
     /**
      * @deprecated
      */
-    toAlias:any;
+    toAlias: any;
     
     /**
      * @deprecated
      */
-    toFactory:any;
+    toFactory: any;
     
     /**
      * @deprecated
      */
-    toValue:any;
+    toValue: any;
     
   }
 
-
+    
   /**
    * Helper class for the {@link bind} function.
    */
   class ProviderBuilder {
-
-    constructor(token:any);
-
-    token:any;
+    
+    constructor(token: any);
+    
+    token: any;
     
     /**
      * Binds a DI token to a class.
@@ -4146,7 +4175,7 @@ declare namespace core {
      * expect(injectorAlias.get(Vehicle) instanceof Car).toBe(true);
      * ```
      */
-    toClass(type:Type):Provider;
+    toClass(type: Type): Provider;
     
     /**
      * Binds a DI token to a value.
@@ -4161,7 +4190,7 @@ declare namespace core {
      * expect(injector.get('message')).toEqual('Hello');
      * ```
      */
-    toValue(value:any):Provider;
+    toValue(value: any): Provider;
     
     /**
      * Binds a DI token to an existing token.
@@ -4195,7 +4224,7 @@ declare namespace core {
      * expect(injectorClass.get(Vehicle) instanceof Car).toBe(true);
      * ```
      */
-    toAlias(aliasToken:/*Type*/ any):Provider;
+    toAlias(aliasToken: /*Type*/ any): Provider;
     
     /**
      * Binds a DI token to a function which computes the value.
@@ -4212,64 +4241,64 @@ declare namespace core {
      * expect(injector.get(String)).toEqual('Value: 3');
      * ```
      */
-    toFactory(factory:Function, dependencies?:any[]):Provider;
+    toFactory(factory: Function, dependencies?: any[]): Provider;
     
   }
 
-
+    
   /**
    * See {@link ResolvedProvider} instead.
    * 
    * @deprecated
    */
   interface ResolvedBinding extends ResolvedProvider {
-
+    
   }
 
-
+    
   /**
    * An internal resolved representation of a factory function created by resolving {@link Provider}.
    */
   class ResolvedFactory {
-
-    constructor(factory:Function, dependencies:Dependency[]);
+    
+    constructor(factory: Function, dependencies: Dependency[]);
     
     /**
      * Factory function which can return an instance of an object represented by a key.
      */
-    factory:Function;
+    factory: Function;
     
     /**
      * Arguments (dependencies) to the `factory` function.
      */
-    dependencies:Dependency[];
+    dependencies: Dependency[];
     
   }
 
-
+    
   /**
    * `Dependency` is used by the framework to extend DI.
    * This is internal to Angular and should not be used directly.
    */
   class Dependency {
-
-    constructor(key:Key, optional:boolean, lowerBoundVisibility:any, upperBoundVisibility:any, properties:any[]);
-
-    static fromKey(key:Key):Dependency;
-
-    key:Key;
-
-    optional:boolean;
-
-    lowerBoundVisibility:any;
-
-    upperBoundVisibility:any;
-
-    properties:any[];
+    
+    constructor(key: Key, optional: boolean, lowerBoundVisibility: any, upperBoundVisibility: any, properties: any[]);
+    
+    static fromKey(key: Key): Dependency;
+    
+    key: Key;
+    
+    optional: boolean;
+    
+    lowerBoundVisibility: any;
+    
+    upperBoundVisibility: any;
+    
+    properties: any[];
     
   }
 
-
+    
   /**
    * Creates a {@link Provider}.
    * 
@@ -4282,9 +4311,10 @@ declare namespace core {
    * 
    * @deprecated
    */
-  function bind(token:any):ProviderBuilder;
+  function bind(token: any): ProviderBuilder;
+  
 
-
+    
   /**
    * Describes how the {@link Injector} should instantiate a given token.
    * 
@@ -4301,20 +4331,20 @@ declare namespace core {
    * ```
    */
   class Provider {
-
-    constructor(token:any, {useClass, useValue, useExisting, useFactory, deps, multi}: {
+    
+    constructor(token: any, {useClass, useValue, useExisting, useFactory, deps, multi}: {
         useClass?: Type,
         useValue?: any,
         useExisting?: any,
         useFactory?: Function,
         deps?: Object[],
         multi?: boolean
-    });
+      });
     
     /**
      * Token used when retrieving this provider. Usually, it is a type {@link Type}.
      */
-    token:any;
+    token: any;
     
     /**
      * Binds a DI token to an implementation class.
@@ -4345,7 +4375,7 @@ declare namespace core {
      * expect(injectorAlias.get(Vehicle) instanceof Car).toBe(true);
      * ```
      */
-    useClass:Type;
+    useClass: Type;
     
     /**
      * Binds a DI token to a value.
@@ -4360,7 +4390,7 @@ declare namespace core {
      * expect(injector.get("message")).toEqual('Hello');
      * ```
      */
-    useValue:any;
+    useValue: any;
     
     /**
      * Binds a DI token to an existing token.
@@ -4394,7 +4424,7 @@ declare namespace core {
      * expect(injectorClass.get(Vehicle) instanceof Car).toBe(true);
      * ```
      */
-    useExisting:any;
+    useExisting: any;
     
     /**
      * Binds a DI token to a function which computes the value.
@@ -4414,7 +4444,7 @@ declare namespace core {
      * 
      * Used in conjuction with dependencies.
      */
-    useFactory:Function;
+    useFactory: Function;
     
     /**
      * Specifies a set of dependencies
@@ -4435,7 +4465,7 @@ declare namespace core {
      * 
      * Used in conjunction with `useFactory`.
      */
-    dependencies:Object[];
+    dependencies: Object[];
     
     /**
      * Creates multiple providers matching the same token (a multi-provider).
@@ -4466,11 +4496,11 @@ declare namespace core {
      * ]);
      * ```
      */
-    multi:boolean;
+    multi: boolean;
     
   }
 
-
+    
   /**
    * An internal resolved representation of a {@link Provider} used by the {@link Injector}.
    * 
@@ -4503,10 +4533,10 @@ declare namespace core {
      * Indicates if the provider is a multi-provider or a regular provider.
      */
     multiProvider: boolean;
-
+    
   }
 
-
+    
   /**
    * Creates a {@link Provider}.
    * 
@@ -4514,16 +4544,17 @@ declare namespace core {
    * 
    * <!-- TODO: improve the docs -->
    */
-  function provide(token:any, {useClass, useValue, useExisting, useFactory, deps, multi}: {
+  function provide(token: any, {useClass, useValue, useExisting, useFactory, deps, multi}: {
     useClass?: Type,
     useValue?: any,
     useExisting?: any,
     useFactory?: Function,
     deps?: Object[],
     multi?: boolean
-  }):Provider;
+  }): Provider;
+  
 
-
+    
   /**
    * A unique object used for retrieving items from the {@link Injector}.
    * 
@@ -4542,41 +4573,41 @@ declare namespace core {
     /**
      * Private
      */
-    constructor(token:Object, id:number);
+    constructor(token: Object, id: number);
     
     /**
      * Retrieves a `Key` for a token.
      */
-    static get(token:Object):Key;
+    static get(token: Object): Key;
     
     /**
      * @returns the number of keys registered in the system.
      */
-    static numberOfKeys:number;
-
-    token:Object;
-
-    id:number;
+    static numberOfKeys: number;
+    
+    token: Object;
+    
+    id: number;
     
     /**
      * Returns a stringified token.
      */
-    displayName:string;
+    displayName: string;
     
   }
 
-
+    
   /**
    * Type literals is a Dart-only feature. This is here only so we can x-compile
    * to multiple languages.
    */
   class TypeLiteral {
-
-    type:any;
+    
+    type: any;
     
   }
 
-
+    
   /**
    * Thrown when trying to retrieve a dependency by `Key` from {@link Injector}, but the
    * {@link Injector} does not have a {@link Provider} for {@link Key}.
@@ -4592,26 +4623,26 @@ declare namespace core {
    * ```
    */
   class NoProviderError extends AbstractProviderError {
-
-    constructor(injector:Injector, key:Key);
+    
+    constructor(injector: Injector, key: Key);
     
   }
 
-
+    
   /**
    * Base class for all errors arising from misconfigured providers.
    */
   class AbstractProviderError extends BaseException {
-
-    constructor(injector:Injector, key:Key, constructResolvingMessage:Function);
-
-    addKey(injector:Injector, key:Key):void;
-
-    context:any;
+    
+    constructor(injector: Injector, key: Key, constructResolvingMessage: Function);
+    
+    addKey(injector: Injector, key: Key): void;
+    
+    context: any;
     
   }
 
-
+    
   /**
    * Thrown when dependencies form a cycle.
    * 
@@ -4629,12 +4660,12 @@ declare namespace core {
    * Retrieving `A` or `B` throws a `CyclicDependencyError` as the graph above cannot be constructed.
    */
   class CyclicDependencyError extends AbstractProviderError {
-
-    constructor(injector:Injector, key:Key);
+    
+    constructor(injector: Injector, key: Key);
     
   }
 
-
+    
   /**
    * Thrown when a constructing type returns with an Error.
    * 
@@ -4662,20 +4693,20 @@ declare namespace core {
    * ```
    */
   class InstantiationError extends WrappedException {
-
-    constructor(injector:Injector, originalException:any, originalStack:any, key:Key);
-
-    addKey(injector:Injector, key:Key):void;
-
-    wrapperMessage:string;
-
-    causeKey:Key;
-
-    context:any;
+    
+    constructor(injector: Injector, originalException: any, originalStack: any, key: Key);
+    
+    addKey(injector: Injector, key: Key): void;
+    
+    wrapperMessage: string;
+    
+    causeKey: Key;
+    
+    context: any;
     
   }
 
-
+    
   /**
    * Thrown when an object other then {@link Provider} (or `Type`) is passed to {@link Injector}
    * creation.
@@ -4687,12 +4718,12 @@ declare namespace core {
    * ```
    */
   class InvalidProviderError extends BaseException {
-
-    constructor(provider:any);
+    
+    constructor(provider: any);
     
   }
 
-
+    
   /**
    * Thrown when the class has no annotation information.
    * 
@@ -4722,12 +4753,12 @@ declare namespace core {
    * ```
    */
   class NoAnnotationError extends BaseException {
-
-    constructor(typeOrFunc:any, params:any[][]);
+    
+    constructor(typeOrFunc: any, params: any[][]);
     
   }
 
-
+    
   /**
    * Thrown when getting an object by index.
    * 
@@ -4742,12 +4773,12 @@ declare namespace core {
    * ```
    */
   class OutOfBoundsError extends BaseException {
-
-    constructor(index:any);
+    
+    constructor(index: any);
     
   }
 
-
+    
   /**
    * Creates a token that can be used in a DI Provider.
    * 
@@ -4770,132 +4801,138 @@ declare namespace core {
    * error messages.
    */
   class OpaqueToken {
-
-    constructor(_desc:string);
-
-    toString():string;
+    
+    constructor(_desc: string);
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Factory for creating {@link InjectMetadata}.
    */
   interface InjectFactory {
-
-    new(token:any): InjectMetadata;
-
-    (token:any): any;
+    
+    new(token: any): InjectMetadata;
+    
+    (token: any): any;
     
   }
 
-
+    
   /**
    * Factory for creating {@link OptionalMetadata}.
    */
   interface OptionalFactory {
-
+    
     new(): OptionalMetadata;
-
+    
     (): any;
-
+    
   }
 
-
+    
   /**
    * Factory for creating {@link InjectableMetadata}.
    */
   interface InjectableFactory {
-
+    
     new(): InjectableMetadata;
-
+    
     (): any;
-
+    
   }
 
-
+    
   /**
    * Factory for creating {@link SelfMetadata}.
    */
   interface SelfFactory {
-
+    
     new(): SelfMetadata;
-
+    
     (): any;
-
+    
   }
 
-
+    
   /**
    * Factory for creating {@link HostMetadata}.
    */
   interface HostFactory {
-
+    
     new(): HostMetadata;
-
+    
     (): any;
-
+    
   }
 
-
+    
   /**
    * Factory for creating {@link SkipSelfMetadata}.
    */
   interface SkipSelfFactory {
-
+    
     new(): SkipSelfMetadata;
-
+    
     (): any;
-
+    
   }
 
-
+    
   /**
    * Factory for creating {@link InjectMetadata}.
    */
-  var Inject:InjectFactory;
+  var Inject: InjectFactory;
+  
 
-
+    
   /**
    * Factory for creating {@link OptionalMetadata}.
    */
-  var Optional:OptionalFactory;
+  var Optional: OptionalFactory;
+  
 
-
+    
   /**
    * Factory for creating {@link InjectableMetadata}.
    */
-  var Injectable:InjectableFactory;
+  var Injectable: InjectableFactory;
+  
 
-
+    
   /**
    * Factory for creating {@link SelfMetadata}.
    */
-  var Self:SelfFactory;
+  var Self: SelfFactory;
+  
 
-
+    
   /**
    * Factory for creating {@link HostMetadata}.
    */
-  var Host:HostFactory;
+  var Host: HostFactory;
+  
 
-
+    
   /**
    * Factory for creating {@link SkipSelfMetadata}.
    */
-  var SkipSelf:SkipSelfFactory;
+  var SkipSelf: SkipSelfFactory;
+  
 
-
+    
   /**
    * Runtime representation of a type that is constructable (non-abstract).
    */
   interface ConcreteType extends Type {
-
-    new(...args:any[]): any;
+    
+    new(...args: any[]): any;
     
   }
 
-
+    
   /**
    * 
    * Runtime representation a type that a Component or other object is instances of.
@@ -4904,10 +4941,10 @@ declare namespace core {
    * the `MyCustomComponent` constructor function.
    */
   interface Type extends Function {
-
+    
   }
 
-
+    
   /**
    * Use by directives and components to emit custom Events.
    * 
@@ -4948,49 +4985,49 @@ declare namespace core {
    * Once a reference implementation of the spec is available, switch to it.
    */
   class EventEmitter<T> extends Subject<T> {
-
+    
     /**
      * Creates an instance of [EventEmitter], which depending on [isAsync],
      * delivers events synchronously or asynchronously.
      */
-    constructor(isAsync?:boolean);
-
-    emit(value:T):void;
+    constructor(isAsync?: boolean);
+    
+    emit(value: T): void;
     
     /**
      * @deprecated - use .emit(value) instead
      */
-    next(value:any):void;
-
-    subscribe(generatorOrNext?:any, error?:any, complete?:any):any;
+    next(value: any): void;
+    
+    subscribe(generatorOrNext?: any, error?: any, complete?: any): any;
     
   }
 
-
+    
   /**
    * Wraps an exception and provides additional context or information.
    */
   class WrappedException extends Error {
-
-    constructor(_wrapperMessage:string, _originalException:any, _originalStack?:any, _context?:any);
-
-    wrapperMessage:string;
-
-    wrapperStack:any;
-
-    originalException:any;
-
-    originalStack:any;
-
-    context:any;
-
-    message:string;
-
-    toString():string;
+    
+    constructor(_wrapperMessage: string, _originalException: any, _originalStack?: any, _context?: any);
+    
+    wrapperMessage: string;
+    
+    wrapperStack: any;
+    
+    originalException: any;
+    
+    originalStack: any;
+    
+    context: any;
+    
+    message: string;
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Provides a hook for centralized exception handling.
    * 
@@ -5013,16 +5050,16 @@ declare namespace core {
    * ```
    */
   class ExceptionHandler {
-
-    constructor(_logger:any, _rethrowException?:boolean);
-
-    static exceptionToString(exception:any, stackTrace?:any, reason?:string):string;
-
-    call(exception:any, stackTrace?:any, reason?:string):void;
+    
+    constructor(_logger: any, _rethrowException?: boolean);
+    
+    static exceptionToString(exception: any, stackTrace?: any, reason?: string): string;
+    
+    call(exception: any, stackTrace?: any, reason?: string): void;
     
   }
 
-
+    
   /**
    * An injectable service for executing work inside or outside of the Angular zone.
    * 
@@ -5095,7 +5132,7 @@ declare namespace core {
    * ```
    */
   class NgZone {
-
+    
     /**
      * @param {bool} enableLongStackTrace whether to enable long stack trace. They should only be
      *               enabled in development mode as they significantly impact perf.
@@ -5112,14 +5149,14 @@ declare namespace core {
      * 
      * @deprecated this API will be removed in the future. Use `onTurnStart` instead.
      */
-    overrideOnTurnStart(onTurnStartHook:ZeroArgFunction):void;
+    overrideOnTurnStart(onTurnStartHook: ZeroArgFunction): void;
     
     /**
      * Notifies subscribers just before Angular event turn starts.
      * 
      * Emits an event once per browser task that is handled by Angular.
      */
-    onTurnStart:/* Subject */ any;
+    onTurnStart: /* Subject */ any;
     
     /**
      * Sets the zone hook that is called immediately after Angular zone is done processing the current
@@ -5133,7 +5170,7 @@ declare namespace core {
      * 
      * @deprecated this API will be removed in the future. Use `onTurnDone` instead.
      */
-    overrideOnTurnDone(onTurnDoneHook:ZeroArgFunction):void;
+    overrideOnTurnDone(onTurnDoneHook: ZeroArgFunction): void;
     
     /**
      * Notifies subscribers immediately after Angular zone is done processing
@@ -5141,7 +5178,7 @@ declare namespace core {
      * 
      * Used by Angular as a signal to kick off change-detection.
      */
-    onTurnDone:any;
+    onTurnDone: any;
     
     /**
      * Sets the zone hook that is called immediately after the `onTurnDone` callback is called and any
@@ -5156,7 +5193,7 @@ declare namespace core {
      * 
      * @deprecated this API will be removed in the future. Use `onEventDone` instead.
      */
-    overrideOnEventDone(onEventDoneFn:ZeroArgFunction, opt_waitForAsync?:boolean):void;
+    overrideOnEventDone(onEventDoneFn: ZeroArgFunction, opt_waitForAsync?: boolean): void;
     
     /**
      * Notifies subscribers immediately after the final `onTurnDone` callback
@@ -5164,17 +5201,17 @@ declare namespace core {
      * 
      * This event is useful for validating application state (e.g. in a test).
      */
-    onEventDone:any;
+    onEventDone: any;
     
     /**
      * Whether there are any outstanding microtasks.
      */
-    hasPendingMicrotasks:boolean;
+    hasPendingMicrotasks: boolean;
     
     /**
      * Whether there are any outstanding timers.
      */
-    hasPendingTimers:boolean;
+    hasPendingTimers: boolean;
     
     /**
      * Whether there are any outstanding asychnronous tasks of any kind that are
@@ -5184,7 +5221,7 @@ declare namespace core {
      * point when [hasPendingAsyncTasks] is `false` it might be a good time to run
      * test expectations.
      */
-    hasPendingAsyncTasks:boolean;
+    hasPendingAsyncTasks: boolean;
     
     /**
      * Sets the zone hook that is called when an error is thrown in the Angular zone.
@@ -5193,9 +5230,9 @@ declare namespace core {
      * 
      * @deprecated this API will be removed in the future. Use `onError` instead.
      */
-    overrideOnErrorHandler(errorHandler:ErrorHandlingFn):void;
-
-    onError:any;
+    overrideOnErrorHandler(errorHandler: ErrorHandlingFn): void;
+    
+    onError: any;
     
     /**
      * Executes the `fn` function synchronously within the Angular zone and returns value returned by
@@ -5207,7 +5244,7 @@ declare namespace core {
      * Any future tasks or microtasks scheduled from within this function will continue executing from
      * within the Angular zone.
      */
-    run(fn:() => any):any;
+    run(fn: () => any): any;
     
     /**
      * Executes the `fn` function synchronously in Angular's parent zone and returns value returned by
@@ -5221,45 +5258,45 @@ declare namespace core {
      * 
      * Use {@link #run} to reenter the Angular zone and do work that updates the application model.
      */
-    runOutsideAngular(fn:() => any):any;
+    runOutsideAngular(fn: () => any): any;
     
   }
 
-
+    
   /**
    * Interface for a function with zero arguments.
    */
   interface ZeroArgFunction {
-
+    
     (): void;
-
+    
   }
 
-
+    
   /**
    * Function type for an error handler, which takes an error and a stack trace.
    */
   interface ErrorHandlingFn {
-
-    (error:any, stackTrace:any): void;
+    
+    (error: any, stackTrace: any): void;
     
   }
 
-
+    
   /**
    * Stores error information; delivered via [NgZone.onError] stream.
    */
   class NgZoneError {
-
-    constructor(error:any, stackTrace:any);
-
-    error:any;
-
-    stackTrace:any;
+    
+    constructor(error: any, stackTrace: any);
+    
+    error: any;
+    
+    stackTrace: any;
     
   }
 
-
+    
   /**
    * A dispatcher that relays all events that occur in a Render View.
    * 
@@ -5279,11 +5316,11 @@ declare namespace core {
      * Returns `false` if `preventDefault` should be called to stop the default behavior of the Event
      * in the Rendering Context.
      */
-    dispatchRenderEvent(elementIndex:number, eventName:string, locals:Map<string, any>): boolean;
+    dispatchRenderEvent(elementIndex: number, eventName: string, locals: Map<string, any>): boolean;
     
   }
 
-
+    
   /**
    * Injectable service that provides a low-level interface for modifying the UI.
    * 
@@ -5305,12 +5342,12 @@ declare namespace core {
      * Once a template is registered it can be referenced via {@link RenderBeginComponentCmd} when
      * {@link #createProtoView creating Render ProtoView}.
      */
-    registerComponentTemplate(template:RenderComponentTemplate):void;
+    registerComponentTemplate(template: RenderComponentTemplate): void;
     
     /**
      * Creates a {@link RenderProtoViewRef} from an array of {@link RenderTemplateCmd}`s.
      */
-    createProtoView(componentTemplateId:string, cmds:RenderTemplateCmd[]):RenderProtoViewRef;
+    createProtoView(componentTemplateId: string, cmds: RenderTemplateCmd[]): RenderProtoViewRef;
     
     /**
      * Creates a Root Host View based on the provided `hostProtoViewRef`.
@@ -5324,7 +5361,7 @@ declare namespace core {
      * 
      * Returns an instance of {@link RenderViewWithFragments}, representing the Render View.
      */
-    createRootHostView(hostProtoViewRef:RenderProtoViewRef, fragmentCount:number, hostElementSelector:string):RenderViewWithFragments;
+    createRootHostView(hostProtoViewRef: RenderProtoViewRef, fragmentCount: number, hostElementSelector: string): RenderViewWithFragments;
     
     /**
      * Creates a Render View based on the provided `protoViewRef`.
@@ -5335,7 +5372,7 @@ declare namespace core {
      * 
      * Returns an instance of {@link RenderViewWithFragments}, representing the Render View.
      */
-    createView(protoViewRef:RenderProtoViewRef, fragmentCount:number):RenderViewWithFragments;
+    createView(protoViewRef: RenderProtoViewRef, fragmentCount: number): RenderViewWithFragments;
     
     /**
      * Destroys a Render View specified via `viewRef`.
@@ -5347,17 +5384,17 @@ declare namespace core {
      * future operations. If the Renderer created any renderer-specific objects for this View, these
      * objects should now be destroyed to prevent memory leaks.
      */
-    destroyView(viewRef:RenderViewRef):void;
+    destroyView(viewRef: RenderViewRef): void;
     
     /**
      * Attaches the Nodes of a Render Fragment after the last Node of `previousFragmentRef`.
      */
-    attachFragmentAfterFragment(previousFragmentRef:RenderFragmentRef, fragmentRef:RenderFragmentRef):void;
+    attachFragmentAfterFragment(previousFragmentRef: RenderFragmentRef, fragmentRef: RenderFragmentRef): void;
     
     /**
      * Attaches the Nodes of the Render Fragment after an Element.
      */
-    attachFragmentAfterElement(elementRef:RenderElementRef, fragmentRef:RenderFragmentRef):void;
+    attachFragmentAfterElement(elementRef: RenderElementRef, fragmentRef: RenderFragmentRef): void;
     
     /**
      * Detaches the Nodes of a Render Fragment from their parent.
@@ -5365,7 +5402,7 @@ declare namespace core {
      * This operations should be called only on a View that has been already
      * {@link #dehydrateView dehydrated}.
      */
-    detachFragment(fragmentRef:RenderFragmentRef):void;
+    detachFragment(fragmentRef: RenderFragmentRef): void;
     
     /**
      * Notifies a custom Renderer to initialize a Render View.
@@ -5373,7 +5410,7 @@ declare namespace core {
      * This method is called by Angular after a Render View has been created, or when a previously
      * dehydrated Render View is about to be reused.
      */
-    hydrateView(viewRef:RenderViewRef):void;
+    hydrateView(viewRef: RenderViewRef): void;
     
     /**
      * Notifies a custom Renderer that a Render View is no longer active.
@@ -5381,7 +5418,7 @@ declare namespace core {
      * This method is called by Angular before a Render View will be destroyed, or when a hydrated
      * Render View is about to be put into a pool for future reuse.
      */
-    dehydrateView(viewRef:RenderViewRef):void;
+    dehydrateView(viewRef: RenderViewRef): void;
     
     /**
      * Returns the underlying native element at the specified `location`, or `null` if direct access
@@ -5400,40 +5437,40 @@ declare namespace core {
      *   </p>
      * </div>
      */
-    getNativeElementSync(location:RenderElementRef):any;
+    getNativeElementSync(location: RenderElementRef): any;
     
     /**
      * Sets a property on the Element specified via `location`.
      */
-    setElementProperty(location:RenderElementRef, propertyName:string, propertyValue:any):void;
+    setElementProperty(location: RenderElementRef, propertyName: string, propertyValue: any): void;
     
     /**
      * Sets an attribute on the Element specified via `location`.
      * 
      * If `attributeValue` is `null`, the attribute is removed.
      */
-    setElementAttribute(location:RenderElementRef, attributeName:string, attributeValue:string):void;
-
-    setBindingDebugInfo(location:RenderElementRef, propertyName:string, propertyValue:string):void;
+    setElementAttribute(location: RenderElementRef, attributeName: string, attributeValue: string): void;
+    
+    setBindingDebugInfo(location: RenderElementRef, propertyName: string, propertyValue: string): void;
     
     /**
      * Sets a (CSS) class on the Element specified via `location`.
      * 
      * `isAdd` specifies if the class should be added or removed.
      */
-    setElementClass(location:RenderElementRef, className:string, isAdd:boolean):void;
+    setElementClass(location: RenderElementRef, className: string, isAdd: boolean): void;
     
     /**
      * Sets a (CSS) inline style on the Element specified via `location`.
      * 
      * If `styleValue` is `null`, the style is removed.
      */
-    setElementStyle(location:RenderElementRef, styleName:string, styleValue:string):void;
+    setElementStyle(location: RenderElementRef, styleName: string, styleValue: string): void;
     
     /**
      * Calls a method on the Element specified via `location`.
      */
-    invokeElementMethod(location:RenderElementRef, methodName:string, args:any[]):void;
+    invokeElementMethod(location: RenderElementRef, methodName: string, args: any[]): void;
     
     /**
      * Sets the value of an interpolated TextNode at the specified index to the `text` value.
@@ -5441,7 +5478,7 @@ declare namespace core {
      * `textNodeIndex` is the depth-first index of the Node among interpolated Nodes in the Render
      * View.
      */
-    setText(viewRef:RenderViewRef, textNodeIndex:number, text:string):void;
+    setText(viewRef: RenderViewRef, textNodeIndex: number, text: string): void;
     
     /**
      * Sets a dispatcher to relay all events triggered in the given Render View.
@@ -5449,11 +5486,11 @@ declare namespace core {
      * Each Render View can have only one Event Dispatcher, if this method is called multiple times,
      * the last provided dispatcher will be used.
      */
-    setEventDispatcher(viewRef:RenderViewRef, dispatcher:RenderEventDispatcher):void;
+    setEventDispatcher(viewRef: RenderViewRef, dispatcher: RenderEventDispatcher): void;
     
   }
 
-
+    
   /**
    * Represents an Element that is part of a {@link RenderViewRef Render View}.
    * 
@@ -5468,10 +5505,10 @@ declare namespace core {
      * Reference to the Render View that contains this Element.
      */
     renderView: RenderViewRef;
-
+    
   }
 
-
+    
   /**
    * Represents an Angular View in the Rendering Context.
    * 
@@ -5485,10 +5522,10 @@ declare namespace core {
    * View.
    */
   class RenderViewRef {
-
+    
   }
 
-
+    
   /**
    * Represents an Angular ProtoView in the Rendering Context.
    * 
@@ -5498,15 +5535,15 @@ declare namespace core {
    * `RenderProtoViewRef` is a counterpart to {@link ProtoViewRef} available in the Application
    * Context. But unlike `ProtoViewRef`, `RenderProtoViewRef` contains all static nested Proto Views
    * that are recursively merged into a single Render Proto View.
-   *
+   * 
    * 
    * <!-- TODO: this is created by Renderer#createProtoView in the new compiler -->
    */
   class RenderProtoViewRef {
-
+    
   }
 
-
+    
   /**
    * Represents a list of sibling Nodes that can be moved by the {@link Renderer} independently of
    * other Render Fragments.
@@ -5517,10 +5554,10 @@ declare namespace core {
    * results in additional Render Fragment.
    */
   class RenderFragmentRef {
-
+    
   }
 
-
+    
   /**
    * Container class produced by a {@link Renderer} when creating a Render View.
    * 
@@ -5528,144 +5565,144 @@ declare namespace core {
    * {@link RenderFragmentRef}s belonging to this Render View.
    */
   class RenderViewWithFragments {
-
-    constructor(viewRef:RenderViewRef, fragmentRefs:RenderFragmentRef[]);
+    
+    constructor(viewRef: RenderViewRef, fragmentRefs: RenderFragmentRef[]);
     
     /**
      * Reference to the {@link RenderViewRef}.
      */
-    viewRef:RenderViewRef;
+    viewRef: RenderViewRef;
     
     /**
      * Array of {@link RenderFragmentRef}s ordered in the depth-first order.
      */
-    fragmentRefs:RenderFragmentRef[];
+    fragmentRefs: RenderFragmentRef[];
     
   }
 
-
+    
   /**
    * Abstract base class for commands to the Angular renderer, using the visitor pattern.
    */
   abstract class RenderTemplateCmd {
-
-    visit(visitor:RenderCommandVisitor, context:any):any;
+    
+    visit(visitor: RenderCommandVisitor, context: any): any;
     
   }
 
-
+    
   /**
    * Visitor for a {@link RenderTemplateCmd}.
    */
   interface RenderCommandVisitor {
-
-    visitText(cmd:RenderTextCmd, context:any): any;
-
-    visitNgContent(cmd:RenderNgContentCmd, context:any): any;
-
-    visitBeginElement(cmd:RenderBeginElementCmd, context:any): any;
-
-    visitEndElement(context:any): any;
-
-    visitBeginComponent(cmd:RenderBeginComponentCmd, context:any): any;
-
-    visitEndComponent(context:any): any;
-
-    visitEmbeddedTemplate(cmd:RenderEmbeddedTemplateCmd, context:any): any;
+    
+    visitText(cmd: RenderTextCmd, context: any): any;
+    
+    visitNgContent(cmd: RenderNgContentCmd, context: any): any;
+    
+    visitBeginElement(cmd: RenderBeginElementCmd, context: any): any;
+    
+    visitEndElement(context: any): any;
+    
+    visitBeginComponent(cmd: RenderBeginComponentCmd, context: any): any;
+    
+    visitEndComponent(context: any): any;
+    
+    visitEmbeddedTemplate(cmd: RenderEmbeddedTemplateCmd, context: any): any;
     
   }
 
-
+    
   /**
    * Command to render text.
    */
   abstract class RenderTextCmd extends RenderBeginCmd {
-
-    value:string;
+    
+    value: string;
     
   }
 
-
+    
   /**
    * Command to render projected content.
    */
   abstract class RenderNgContentCmd extends RenderTemplateCmd {
-
-    index:number;
-
-    ngContentIndex:number;
+    
+    index: number;
+    
+    ngContentIndex: number;
     
   }
 
-
+    
   /**
    * Command to begin rendering an element.
    */
   abstract class RenderBeginElementCmd extends RenderBeginCmd {
-
-    name:string;
-
-    attrNameAndValues:string[];
-
-    eventTargetAndNames:string[];
+    
+    name: string;
+    
+    attrNameAndValues: string[];
+    
+    eventTargetAndNames: string[];
     
   }
 
-
+    
   /**
    * Command to begin rendering a component.
    */
   abstract class RenderBeginComponentCmd extends RenderBeginElementCmd {
-
-    templateId:string;
+    
+    templateId: string;
     
   }
 
-
+    
   /**
    * Command to render a component's template.
    */
   abstract class RenderEmbeddedTemplateCmd extends RenderBeginElementCmd {
-
-    isMerged:boolean;
-
-    children:RenderTemplateCmd[];
+    
+    isMerged: boolean;
+    
+    children: RenderTemplateCmd[];
     
   }
 
-
+    
   /**
    * Command to begin rendering.
    */
   abstract class RenderBeginCmd extends RenderTemplateCmd {
-
-    ngContentIndex:number;
-
-    isBound:boolean;
+    
+    ngContentIndex: number;
+    
+    isBound: boolean;
     
   }
 
-
+    
   /**
    * Template for rendering a component, including commands and styles.
    */
   class RenderComponentTemplate {
-
-    constructor(id:string, shortId:string, encapsulation:ViewEncapsulation, commands:RenderTemplateCmd[], styles:string[]);
-
-    id:string;
-
-    shortId:string;
-
-    encapsulation:ViewEncapsulation;
-
-    commands:RenderTemplateCmd[];
-
-    styles:string[];
+    
+    constructor(id: string, shortId: string, encapsulation: ViewEncapsulation, commands: RenderTemplateCmd[], styles: string[]);
+    
+    id: string;
+    
+    shortId: string;
+    
+    encapsulation: ViewEncapsulation;
+    
+    commands: RenderTemplateCmd[];
+    
+    styles: string[];
     
   }
 
-
+    
   /**
    * Implement this interface to get notified when your directive's content has been fully
    * initialized.
@@ -5718,12 +5755,12 @@ declare namespace core {
    * ```
    */
   interface AfterContentInit {
-
+    
     ngAfterContentInit(): void;
-
+    
   }
 
-
+    
   /**
    * Implement this interface to get notified after every check of your directive's content.
    * 
@@ -5771,12 +5808,12 @@ declare namespace core {
    * ```
    */
   interface AfterContentChecked {
-
+    
     ngAfterContentChecked(): void;
-
+    
   }
 
-
+    
   /**
    * Implement this interface to get notified when your component's view has been fully initialized.
    * 
@@ -5823,12 +5860,12 @@ declare namespace core {
    * ```
    */
   interface AfterViewInit {
-
+    
     ngAfterViewInit(): void;
-
+    
   }
 
-
+    
   /**
    * Implement this interface to get notified after every check of your component's view.
    * 
@@ -5878,12 +5915,12 @@ declare namespace core {
    * ```
    */
   interface AfterViewChecked {
-
+    
     ngAfterViewChecked(): void;
-
+    
   }
 
-
+    
   /**
    * Lifecycle hooks are guaranteed to be called in the following order:
    * - `OnChanges` (if any bindings have changed),
@@ -5932,12 +5969,12 @@ declare namespace core {
    * ```
    */
   interface OnChanges {
-
-    ngOnChanges(changes:{[key: string]: SimpleChange}): void;
+    
+    ngOnChanges(changes: {[key: string]: SimpleChange}): void;
     
   }
 
-
+    
   /**
    * Implement this interface to get notified when your directive is destroyed.
    * 
@@ -5976,7 +6013,7 @@ declare namespace core {
    * 
    * bootstrap(App).catch(err => console.error(err));
    * ```
-   *
+   * 
    * 
    * To create a stateful Pipe, you should implement this interface and set the `pure`
    * parameter to `false` in the {@link PipeMetadata}.
@@ -6027,12 +6064,12 @@ declare namespace core {
    * every 50ms, until it reaches 0.
    */
   interface OnDestroy {
-
+    
     ngOnDestroy(): void;
-
+    
   }
 
-
+    
   /**
    * Implement this interface to execute custom initialization logic after your directive's
    * data-bound properties have been initialized.
@@ -6075,12 +6112,12 @@ declare namespace core {
    *  ```
    */
   interface OnInit {
-
+    
     ngOnInit(): void;
-
+    
   }
 
-
+    
   /**
    * Implement this interface to override the default change detection algorithm for your directive.
    * 
@@ -6147,32 +6184,32 @@ declare namespace core {
    * ```
    */
   interface DoCheck {
-
+    
     ngDoCheck(): void;
-
+    
   }
 
-
+    
   class DirectiveResolver {
     
     /**
      * Return {@link DirectiveMetadata} for a given `Type`.
      */
-    resolve(type:Type):DirectiveMetadata;
+    resolve(type: Type): DirectiveMetadata;
     
   }
 
-
+    
   /**
    * Resolves types to {@link ViewMetadata}.
    */
   class ViewResolver {
-
-    resolve(component:Type):ViewMetadata;
+    
+    resolve(component: Type): ViewMetadata;
     
   }
 
-
+    
   /**
    * Low-level service for compiling {@link Component}s into {@link ProtoViewRef ProtoViews}s, which
    * can later be used to create and render a Component instance.
@@ -6181,14 +6218,14 @@ declare namespace core {
    * both compiles and instantiates a Component.
    */
   abstract class Compiler {
-
-    compileInHost(componentType:Type):Promise<ProtoViewRef>;
-
-    clearCache():void;
+    
+    compileInHost(componentType: Type): Promise<ProtoViewRef>;
+    
+    clearCache(): void;
     
   }
 
-
+    
   /**
    * Service exposing low level API for creating, moving and destroying Views.
    * 
@@ -6200,12 +6237,12 @@ declare namespace core {
     /**
      * Returns a {@link ViewContainerRef} of the View Container at the specified location.
      */
-    getViewContainer(location:ElementRef):ViewContainerRef;
+    getViewContainer(location: ElementRef): ViewContainerRef;
     
     /**
      * Returns the {@link ElementRef} that makes up the specified Host View.
      */
-    getHostElement(hostViewRef:HostViewRef):ElementRef;
+    getHostElement(hostViewRef: HostViewRef): ElementRef;
     
     /**
      * Searches the Component View of the Component specified via `hostLocation` and returns the
@@ -6214,12 +6251,12 @@ declare namespace core {
      * Throws an exception if the specified `hostLocation` is not a Host Element of a Component, or if
      * variable `variableName` couldn't be found in the Component View of this Component.
      */
-    getNamedElementInComponentView(hostLocation:ElementRef, variableName:string):ElementRef;
+    getNamedElementInComponentView(hostLocation: ElementRef, variableName: string): ElementRef;
     
     /**
      * Returns the component instance for the provided Host Element.
      */
-    getComponent(hostLocation:ElementRef):any;
+    getComponent(hostLocation: ElementRef): any;
     
     /**
      * Creates an instance of a Component and attaches it to the first element in the global View
@@ -6273,7 +6310,7 @@ declare namespace core {
      * ng.bootstrap(MyApp);
      * ```
      */
-    createRootHostView(hostProtoViewRef:ProtoViewRef, overrideSelector:string, injector:Injector):HostViewRef;
+    createRootHostView(hostProtoViewRef: ProtoViewRef, overrideSelector: string, injector: Injector): HostViewRef;
     
     /**
      * Destroys the Host View created via {@link AppViewManager#createRootHostView}.
@@ -6281,7 +6318,7 @@ declare namespace core {
      * Along with the Host View, the Component Instance as well as all nested View and Components are
      * destroyed as well.
      */
-    destroyRootHostView(hostViewRef:HostViewRef):void;
+    destroyRootHostView(hostViewRef: HostViewRef): void;
     
     /**
      * Instantiates an Embedded View based on the {@link TemplateRef `templateRef`} and inserts it
@@ -6294,7 +6331,7 @@ declare namespace core {
      * 
      * Use {@link AppViewManager#destroyViewInContainer} to destroy the created Embedded View.
      */
-    createEmbeddedViewInContainer(viewContainerLocation:ElementRef, index:number, templateRef:TemplateRef):ViewRef;
+    createEmbeddedViewInContainer(viewContainerLocation: ElementRef, index: number, templateRef: TemplateRef): ViewRef;
     
     /**
      * Instantiates a single {@link Component} and inserts its Host View into the View Container
@@ -6311,28 +6348,28 @@ declare namespace core {
      * 
      * Use {@link AppViewManager#destroyViewInContainer} to destroy the created Host View.
      */
-    createHostViewInContainer(viewContainerLocation:ElementRef, index:number, protoViewRef:ProtoViewRef, imperativelyCreatedInjector:ResolvedProvider[]):HostViewRef;
+    createHostViewInContainer(viewContainerLocation: ElementRef, index: number, protoViewRef: ProtoViewRef, imperativelyCreatedInjector: ResolvedProvider[]): HostViewRef;
     
     /**
      * Destroys an Embedded or Host View attached to a View Container at the specified `index`.
      * 
      * The View Container is located via `viewContainerLocation`.
      */
-    destroyViewInContainer(viewContainerLocation:ElementRef, index:number):void;
+    destroyViewInContainer(viewContainerLocation: ElementRef, index: number): void;
     
     /**
      * See {@link AppViewManager#detachViewInContainer}.
      */
-    attachViewInContainer(viewContainerLocation:ElementRef, index:number, viewRef:ViewRef):ViewRef;
+    attachViewInContainer(viewContainerLocation: ElementRef, index: number, viewRef: ViewRef): ViewRef;
     
     /**
      * See {@link AppViewManager#attachViewInContainer}.
      */
-    detachViewInContainer(viewContainerLocation:ElementRef, index:number):ViewRef;
+    detachViewInContainer(viewContainerLocation: ElementRef, index: number): ViewRef;
     
   }
 
-
+    
   /**
    * An unmodifiable list of items that Angular keeps up to date when the state
    * of the application changes.
@@ -6358,45 +6395,45 @@ declare namespace core {
    * ```
    */
   class QueryList<T> {
-
-    changes:Observable<any>;
-
-    length:number;
-
-    first:T;
-
-    last:T;
+    
+    changes: Observable<any>;
+    
+    length: number;
+    
+    first: T;
+    
+    last: T;
     
     /**
      * returns a new array with the passed in function applied to each element.
      */
-    map<U>(fn:(item:T) => U):U[];
+    map<U>(fn: (item: T) => U): U[];
     
     /**
      * returns a filtered array.
      */
-    filter(fn:(item:T) => boolean):T[];
+    filter(fn: (item: T) => boolean): T[];
     
     /**
      * returns a reduced value.
      */
-    reduce<U>(fn:(acc:U, item:T) => U, init:U):U;
+    reduce<U>(fn: (acc: U, item: T) => U, init: U): U;
     
     /**
      * converts QueryList into an array
      */
-    toArray():T[];
-
-    toString():string;
+    toArray(): T[];
+    
+    toString(): string;
     
   }
 
-
+    
   /**
    * Service for instantiating a Component and attaching it to a View at a specified location.
    */
   abstract class DynamicComponentLoader {
-
+    
     /**
      * Creates an instance of a Component `type` and attaches it to the first element in the
      * platform-specific global view that matches the component's selector.
@@ -6446,7 +6483,7 @@ declare namespace core {
      * </my-app>
      * ```
      */
-    loadAsRoot(type:Type, overrideSelector:string, injector:Injector, onDispose?:() => void):Promise<ComponentRef>;
+    loadAsRoot(type: Type, overrideSelector: string, injector: Injector, onDispose?: () => void): Promise<ComponentRef>;
     
     /**
      * Creates an instance of a Component and attaches it to a View Container located inside of the
@@ -6495,7 +6532,7 @@ declare namespace core {
      * </my-app>
      * ```
      */
-    loadIntoLocation(type:Type, hostLocation:ElementRef, anchorName:string, providers?:ResolvedProvider[]):Promise<ComponentRef>;
+    loadIntoLocation(type: Type, hostLocation: ElementRef, anchorName: string, providers?: ResolvedProvider[]): Promise<ComponentRef>;
     
     /**
      * Creates an instance of a Component and attaches it to the View Container found at the
@@ -6505,7 +6542,7 @@ declare namespace core {
      * Component Instance.
      * 
      * Returns a promise for the {@link ComponentRef} representing the newly created Component.
-     *
+     * 
      * 
      * ### Example
      * 
@@ -6537,11 +6574,11 @@ declare namespace core {
      * <child-component>Child</child-component>
      * ```
      */
-    loadNextToLocation(type:Type, location:ElementRef, providers?:ResolvedProvider[]):Promise<ComponentRef>;
+    loadNextToLocation(type: Type, location: ElementRef, providers?: ResolvedProvider[]): Promise<ComponentRef>;
     
   }
 
-
+    
   /**
    * Represents a location in a View that has an injection, change-detection and render context
    * associated with it.
@@ -6573,13 +6610,13 @@ declare namespace core {
      *   </p>
      * </div>
      */
-    nativeElement:any;
-
-    renderView:RenderViewRef;
+    nativeElement: any;
+    
+    renderView: RenderViewRef;
     
   }
 
-
+    
   /**
    * Represents an Embedded Template that can be used to instantiate Embedded Views.
    * 
@@ -6604,16 +6641,16 @@ declare namespace core {
      * advanced use-cases, the View can be attached to a different container while keeping the
      * data-binding and injection context from the original location.
      */
-    elementRef:ElementRef;
+    elementRef: ElementRef;
     
     /**
      * Allows you to check if this Embedded Template defines Local Variable with name matching `name`.
      */
-    hasLocal(name:string):boolean;
+    hasLocal(name: string): boolean;
     
   }
 
-
+    
   /**
    * Represents an Angular View.
    * 
@@ -6672,13 +6709,13 @@ declare namespace core {
     /**
      * Sets `value` of local variable called `variableName` in this View.
      */
-    setLocal(variableName:string, value:any):void;
-
-    changeDetectorRef:ChangeDetectorRef;
+    setLocal(variableName: string, value: any): void;
+    
+    changeDetectorRef: ChangeDetectorRef;
     
   }
 
-
+    
   /**
    * Represents a View containing a single Element that is the Host Element of a {@link Component}
    * instance.
@@ -6689,10 +6726,10 @@ declare namespace core {
    * {@link AppViewManager#createHostViewInContainer}, {@link ViewContainerRef#createHostView}.
    */
   interface HostViewRef {
-
+    
   }
 
-
+    
   /**
    * Represents an Angular ProtoView.
    * 
@@ -6702,7 +6739,7 @@ declare namespace core {
    * Most ProtoViews are created and used internally by Angular and you don't need to know about them,
    * except in advanced use-cases where you compile components yourself via the low-level
    * {@link Compiler#compileInHost} API.
-   *
+   * 
    * 
    * ### Example
    * 
@@ -6733,10 +6770,10 @@ declare namespace core {
    * Notice that the original template is broken down into two separate ProtoViews.
    */
   abstract class ProtoViewRef {
-
+    
   }
 
-
+    
   /**
    * Represents a container where one or more Views can be attached.
    * 
@@ -6763,22 +6800,22 @@ declare namespace core {
      * Anchor element that specifies the location of this container in the containing View.
      * <!-- TODO: rename to anchorElement -->
      */
-    element:ElementRef;
+    element: ElementRef;
     
     /**
      * Destroys all Views in this container.
      */
-    clear():void;
+    clear(): void;
     
     /**
      * Returns the {@link ViewRef} for the View located in this container at the specified index.
      */
-    get(index:number):ViewRef;
+    get(index: number): ViewRef;
     
     /**
      * Returns the number of Views currently attached to this container.
      */
-    length:number;
+    length: number;
     
     /**
      * Instantiates an Embedded View based on the {@link TemplateRef `templateRef`} and inserts it
@@ -6788,7 +6825,7 @@ declare namespace core {
      * 
      * Returns the {@link ViewRef} for the newly created View.
      */
-    createEmbeddedView(templateRef:TemplateRef, index?:number):ViewRef;
+    createEmbeddedView(templateRef: TemplateRef, index?: number): ViewRef;
     
     /**
      * Instantiates a single {@link Component} and inserts its Host View into this container at the
@@ -6804,7 +6841,7 @@ declare namespace core {
      * 
      * Returns the {@link HostViewRef} of the Host View created for the newly instantiated Component.
      */
-    createHostView(protoViewRef?:ProtoViewRef, index?:number, dynamicallyCreatedProviders?:ResolvedProvider[]):HostViewRef;
+    createHostView(protoViewRef?: ProtoViewRef, index?: number, dynamicallyCreatedProviders?: ResolvedProvider[]): HostViewRef;
     
     /**
      * Inserts a View identified by a {@link ViewRef} into the container at the specified `index`.
@@ -6813,31 +6850,31 @@ declare namespace core {
      * 
      * Returns the inserted {@link ViewRef}.
      */
-    insert(viewRef:ViewRef, index?:number):ViewRef;
+    insert(viewRef: ViewRef, index?: number): ViewRef;
     
     /**
      * Returns the index of the View, specified via {@link ViewRef}, within the current container or
      * `-1` if this container doesn't contain the View.
      */
-    indexOf(viewRef:ViewRef):number;
+    indexOf(viewRef: ViewRef): number;
     
     /**
      * Destroys a View attached to this container at the specified `index`.
      * 
      * If `index` is not specified, the last View in the container will be removed.
      */
-    remove(index?:number):void;
+    remove(index?: number): void;
     
     /**
      * Use along with {@link #insert} to move a View within the current container.
      * 
      * If the `index` param is omitted, the last {@link ViewRef} is detached.
      */
-    detach(index?:number):ViewRef;
+    detach(index?: number): ViewRef;
     
   }
 
-
+    
   /**
    * Represents an instance of a Component created via {@link DynamicComponentLoader}.
    * 
@@ -6853,105 +6890,106 @@ declare namespace core {
      * TODO(i): this api is useless and should be replaced by an injector retrieved from
      *     the HostElementRef, which is currently not possible.
      */
-    injector:Injector;
+    injector: Injector;
     
     /**
      * Location of the Host Element of this Component Instance.
      */
-    location:ElementRef;
+    location: ElementRef;
     
     /**
      * The instance of the Component.
      */
-    instance:any;
+    instance: any;
     
     /**
      * The user defined component type, represented via the constructor function.
      * 
      * <!-- TODO: customize wording for Dart docs -->
      */
-    componentType:Type;
+    componentType: Type;
     
     /**
      * The {@link ViewRef} of the Host View of this Component instance.
      */
-    hostView:HostViewRef;
+    hostView: HostViewRef;
     
     /**
      * Destroys the component instance and all of the data structures associated with it.
      * 
      * TODO(i): rename to destroy to be consistent with AppViewManager and ViewContainerRef
      */
-    dispose():void;
+    dispose(): void;
     
   }
 
-
+    
   /**
    * The Testability service provides testing hooks that can be accessed from
    * the browser and by services such as Protractor. Each bootstrapped Angular
    * application on the page will have an instance of Testability.
    */
   class Testability {
-
-    constructor(_ngZone:NgZone);
-
-    increasePendingRequestCount():number;
-
-    decreasePendingRequestCount():number;
-
-    isStable():boolean;
-
-    whenStable(callback:Function):void;
-
-    getPendingRequestCount():number;
-
-    isAngularEventPending():boolean;
-
-    findBindings(using:any, provider:string, exactMatch:boolean):any[];
-
-    findProviders(using:any, provider:string, exactMatch:boolean):any[];
+    
+    constructor(_ngZone: NgZone);
+    
+    increasePendingRequestCount(): number;
+    
+    decreasePendingRequestCount(): number;
+    
+    isStable(): boolean;
+    
+    whenStable(callback: Function): void;
+    
+    getPendingRequestCount(): number;
+    
+    isAngularEventPending(): boolean;
+    
+    findBindings(using: any, provider: string, exactMatch: boolean): any[];
+    
+    findProviders(using: any, provider: string, exactMatch: boolean): any[];
     
   }
 
-
+    
   /**
    * A global registry of {@link Testability} instances for specific elements.
    */
   class TestabilityRegistry {
-
+    
     constructor();
-
-    registerApplication(token:any, testability:Testability):void;
-
-    getTestability(elem:any):Testability;
-
-    getAllTestabilities():Testability[];
-
-    findTestabilityInTree(elem:Node, findInAncestors?:boolean):Testability;
+    
+    registerApplication(token: any, testability: Testability): void;
+    
+    getTestability(elem: any): Testability;
+    
+    getAllTestabilities(): Testability[];
+    
+    findTestabilityInTree(elem: Node, findInAncestors?: boolean): Testability;
     
   }
 
-
+    
   /**
    * Adapter interface for retrieving the `Testability` service associated for a
    * particular context.
    */
   interface GetTestability {
-
-    addToWindow(registry:TestabilityRegistry): void;
-
-    findTestabilityInTree(registry:TestabilityRegistry, elem:any, findInAncestors:boolean): Testability;
+    
+    addToWindow(registry: TestabilityRegistry): void;
+    
+    findTestabilityInTree(registry: TestabilityRegistry, elem: any, findInAncestors: boolean): Testability;
     
   }
 
-
+    
   /**
    * Set the {@link GetTestability} implementation used by the Angular testing framework.
    */
-  function setTestabilityGetter(getter:GetTestability):void;
+  function setTestabilityGetter(getter: GetTestability): void;
+  
 
-
+    
   /**
    * Describes within the change detector which strategy will be used the next time change
    * detection is triggered.
@@ -6963,42 +7001,43 @@ declare namespace core {
      * will become `Checked`.
      */
     CheckOnce,
-
+    
     /**
      * `Checked` means that the change detector should be skipped until its mode changes to
      * `CheckOnce`.
      */
     Checked,
-
+    
     /**
      * `CheckAlways` means that after calling detectChanges the mode of the change detector
      * will remain `CheckAlways`.
      */
     CheckAlways,
-
+    
     /**
      * `Detached` means that the change detector sub tree is not a part of the main tree and
      * should be skipped.
      */
     Detached,
-
+    
     /**
      * `OnPush` means that the change detector's mode will be set to `CheckOnce` during hydration.
      */
     OnPush,
-
+    
     /**
      * `Default` means that the change detector's mode will be set to `CheckAlways` during hydration.
      */
     Default,
-
+    
     /**
      * This is an experimental feature. Works only in Dart.
      */
     OnPushObserve
   }
+  
 
-
+    
   /**
    * An error thrown if application changes model breaking the top-down data flow.
    * 
@@ -7033,12 +7072,12 @@ declare namespace core {
    * ```
    */
   class ExpressionChangedAfterItHasBeenCheckedException extends BaseException {
-
-    constructor(exp:string, oldValue:any, currValue:any, context:any);
+    
+    constructor(exp: string, oldValue: any, currValue: any, context: any);
     
   }
 
-
+    
   /**
    * Thrown when an expression evaluation raises an exception.
    * 
@@ -7071,19 +7110,19 @@ declare namespace core {
    * `originalStack` properties.
    */
   class ChangeDetectionError extends WrappedException {
-
-    constructor(exp:string, originalException:any, originalStack:any, context:any);
+    
+    constructor(exp: string, originalException: any, originalStack: any, context: any);
     
     /**
      * Information about the expression that triggered the exception.
      */
-    location:string;
+    location: string;
     
   }
 
-
+    
   abstract class ChangeDetectorRef {
-
+    
     /**
      * Marks all {@link ChangeDetectionStrategy#OnPush} ancestors as to be checked.
      * 
@@ -7123,7 +7162,7 @@ declare namespace core {
      * bootstrap(App);
      * ```
      */
-    markForCheck():void;
+    markForCheck(): void;
     
     /**
      * Detaches the change detector from the change detector tree.
@@ -7182,7 +7221,7 @@ declare namespace core {
      * bootstrap(App);
      * ```
      */
-    detach():void;
+    detach(): void;
     
     /**
      * Checks the change detector and its children.
@@ -7206,7 +7245,7 @@ declare namespace core {
      * 
      * See {@link ChangeDetectorRef#detach} for more information.
      */
-    detectChanges():void;
+    detectChanges(): void;
     
     /**
      * Checks the change detector and its children, and throws if any changes are detected.
@@ -7214,7 +7253,7 @@ declare namespace core {
      * This is used in development mode to verify that running change detection doesn't introduce
      * other changes.
      */
-    checkNoChanges():void;
+    checkNoChanges(): void;
     
     /**
      * Reattach the change detector to the change detector tree.
@@ -7273,11 +7312,11 @@ declare namespace core {
      * bootstrap(App);
      * ```
      */
-    reattach():void;
+    reattach(): void;
     
   }
 
-
+    
   /**
    * Indicates that the result of a {@link PipeMetadata} transformation has changed even though the
    * reference
@@ -7297,35 +7336,35 @@ declare namespace core {
    * ```
    */
   class WrappedValue {
-
-    constructor(wrapped:any);
-
-    static wrap(value:any):WrappedValue;
-
-    wrapped:any;
+    
+    constructor(wrapped: any);
+    
+    static wrap(value: any): WrappedValue;
+    
+    wrapped: any;
     
   }
 
-
+    
   /**
    * Represents a basic change from a previous to a new value.
    */
   class SimpleChange {
-
-    constructor(previousValue:any, currentValue:any);
-
-    previousValue:any;
-
-    currentValue:any;
+    
+    constructor(previousValue: any, currentValue: any);
+    
+    previousValue: any;
+    
+    currentValue: any;
     
     /**
      * Check whether the new value is the first value assigned.
      */
-    isFirstChange():boolean;
+    isFirstChange(): boolean;
     
   }
 
-
+    
   /**
    * To create a Pipe, you must implement this interface.
    * 
@@ -7358,20 +7397,20 @@ declare namespace core {
    * Invoking `{{ 'ok' | repeat:3 }}` in a template produces `okokok`.
    */
   interface PipeTransform {
-
-    transform(value:any, args:any[]): any;
+    
+    transform(value: any, args: any[]): any;
     
   }
 
-
+    
   /**
    * A repository of different iterable diffing strategies used by NgFor, NgClass, and others.
    */
   class IterableDiffers {
-
-    constructor(factories:IterableDifferFactory[]);
-
-    static create(factories:IterableDifferFactory[], parent?:IterableDiffers):IterableDiffers;
+    
+    constructor(factories: IterableDifferFactory[]);
+    
+    static create(factories: IterableDifferFactory[], parent?: IterableDiffers): IterableDiffers;
     
     /**
      * Takes an array of {@link IterableDifferFactory} and returns a provider used to extend the
@@ -7392,48 +7431,48 @@ declare namespace core {
      * })
      * ```
      */
-    static extend(factories:IterableDifferFactory[]):Provider;
-
-    factories:IterableDifferFactory[];
-
-    find(iterable:Object):IterableDifferFactory;
+    static extend(factories: IterableDifferFactory[]): Provider;
+    
+    factories: IterableDifferFactory[];
+    
+    find(iterable: Object): IterableDifferFactory;
     
   }
 
-
+    
   /**
    * A strategy for tracking changes over time to an iterable. Used for {@link NgFor} to
    * respond to changes in an iterable by effecting equivalent changes in the DOM.
    */
   interface IterableDiffer {
-
-    diff(object:Object): any;
+    
+    diff(object: Object): any;
     
     onDestroy(): void;
-
+    
   }
 
-
+    
   /**
    * Provides a factory for {@link IterableDiffer}.
    */
   interface IterableDifferFactory {
-
-    supports(objects:Object): boolean;
-
-    create(cdRef:ChangeDetectorRef): IterableDiffer;
+    
+    supports(objects: Object): boolean;
+    
+    create(cdRef: ChangeDetectorRef): IterableDiffer;
     
   }
 
-
+    
   /**
    * A repository of different Map diffing strategies used by NgClass, NgStyle, and others.
    */
   class KeyValueDiffers {
-
-    constructor(factories:KeyValueDifferFactory[]);
-
-    static create(factories:KeyValueDifferFactory[], parent?:KeyValueDiffers):KeyValueDiffers;
+    
+    constructor(factories: KeyValueDifferFactory[]);
+    
+    static create(factories: KeyValueDifferFactory[], parent?: KeyValueDiffers): KeyValueDiffers;
     
     /**
      * Takes an array of {@link KeyValueDifferFactory} and returns a provider used to extend the
@@ -7454,39 +7493,39 @@ declare namespace core {
      * })
      * ```
      */
-    static extend(factories:KeyValueDifferFactory[]):Provider;
-
-    factories:KeyValueDifferFactory[];
-
-    find(kv:Object):KeyValueDifferFactory;
+    static extend(factories: KeyValueDifferFactory[]): Provider;
+    
+    factories: KeyValueDifferFactory[];
+    
+    find(kv: Object): KeyValueDifferFactory;
     
   }
 
-
+    
   /**
    * A differ that tracks changes made to an object over time.
    */
   interface KeyValueDiffer {
-
-    diff(object:Object): void;
+    
+    diff(object: Object): void;
     
     onDestroy(): void;
-
+    
   }
 
-
+    
   /**
    * Provides a factory for {@link KeyValueDiffer}.
    */
   interface KeyValueDifferFactory {
-
-    supports(objects:Object): boolean;
-
-    create(cdRef:ChangeDetectorRef): KeyValueDiffer;
+    
+    supports(objects: Object): boolean;
+    
+    create(cdRef: ChangeDetectorRef): KeyValueDiffer;
     
   }
 
-
+    
   /**
    * A token that can be provided when bootstraping an application to make an array of directives
    * available in every component of the application.
@@ -7511,9 +7550,10 @@ declare namespace core {
    * bootstrap(MyComponent, [provide(PLATFORM_DIRECTIVES, {useValue: [OtherDirective], multi:true})]);
    * ```
    */
-  let PLATFORM_DIRECTIVES:OpaqueToken;
+  let PLATFORM_DIRECTIVES: OpaqueToken;
+  
 
-
+    
   /**
    * A token that can be provided when bootstraping an application to make an array of pipes
    * available in every component of the application.
@@ -7537,103 +7577,106 @@ declare namespace core {
    * bootstrap(MyComponent, [provide(PLATFORM_PIPES, {useValue: [OtherPipe], multi:true})]);
    * ```
    */
-  let PLATFORM_PIPES:OpaqueToken;
+  let PLATFORM_PIPES: OpaqueToken;
+  
 
-
+    
   /**
    * A default set of providers which should be included in any Angular platform.
    */
-  let PLATFORM_COMMON_PROVIDERS:Array<Type | Provider | any[]>;
+  let PLATFORM_COMMON_PROVIDERS: Array<Type | Provider | any[]>;
+  
 
-
+    
   /**
    * A default set of providers which should be included in any Angular
    * application, regardless of the platform it runs onto.
    */
-  let APPLICATION_COMMON_PROVIDERS:Array<Type | Provider | any[]>;
+  let APPLICATION_COMMON_PROVIDERS: Array<Type | Provider | any[]>;
+  
 
-
+    
   /**
    * Provides access to reflection data about symbols. Used internally by Angular
    * to power dependency injection and compilation.
    */
   class Reflector {
-
-    constructor(reflectionCapabilities:PlatformReflectionCapabilities);
-
-    reflectionCapabilities:PlatformReflectionCapabilities;
-
-    isReflectionEnabled():boolean;
+    
+    constructor(reflectionCapabilities: PlatformReflectionCapabilities);
+    
+    reflectionCapabilities: PlatformReflectionCapabilities;
+    
+    isReflectionEnabled(): boolean;
     
     /**
      * Causes `this` reflector to track keys used to access
      * {@link ReflectionInfo} objects.
      */
-    trackUsage():void;
+    trackUsage(): void;
     
     /**
      * Lists types for which reflection information was not requested since
      * {@link #trackUsage} was called. This list could later be audited as
      * potential dead code.
      */
-    listUnusedKeys():any[];
-
-    registerFunction(func:Function, funcInfo:ReflectionInfo):void;
-
-    registerType(type:Type, typeInfo:ReflectionInfo):void;
-
-    registerGetters(getters:{[key: string]: GetterFn}):void;
-
-    registerSetters(setters:{[key: string]: SetterFn}):void;
-
-    registerMethods(methods:{[key: string]: MethodFn}):void;
-
-    factory(type:Type):Function;
-
-    parameters(typeOrFunc:/*Type*/ any):any[];
-
-    annotations(typeOrFunc:/*Type*/ any):any[];
-
-    propMetadata(typeOrFunc:/*Type*/ any):{[key: string]: any[]};
-
-    interfaces(type:Type):any[];
-
-    getter(name:string):GetterFn;
-
-    setter(name:string):SetterFn;
-
-    method(name:string):MethodFn;
-
-    importUri(type:Type):string;
+    listUnusedKeys(): any[];
+    
+    registerFunction(func: Function, funcInfo: ReflectionInfo): void;
+    
+    registerType(type: Type, typeInfo: ReflectionInfo): void;
+    
+    registerGetters(getters: {[key: string]: GetterFn}): void;
+    
+    registerSetters(setters: {[key: string]: SetterFn}): void;
+    
+    registerMethods(methods: {[key: string]: MethodFn}): void;
+    
+    factory(type: Type): Function;
+    
+    parameters(typeOrFunc: /*Type*/ any): any[];
+    
+    annotations(typeOrFunc: /*Type*/ any): any[];
+    
+    propMetadata(typeOrFunc: /*Type*/ any): {[key: string]: any[]};
+    
+    interfaces(type: Type): any[];
+    
+    getter(name: string): GetterFn;
+    
+    setter(name: string): SetterFn;
+    
+    method(name: string): MethodFn;
+    
+    importUri(type: Type): string;
     
   }
 
-
+    
   /**
    * Reflective information about a symbol, including annotations, interfaces, and other metadata.
    */
   class ReflectionInfo {
-
-    constructor(annotations?:any[], parameters?:any[][], factory?:Function, interfaces?:any[], propMetadata?:{[key: string]: any[]});
-
-    annotations:any[];
-
-    parameters:any[][];
-
-    factory:Function;
-
-    interfaces:any[];
-
-    propMetadata:{[key: string]: any[]};
+    
+    constructor(annotations?: any[], parameters?: any[][], factory?: Function, interfaces?: any[], propMetadata?: {[key: string]: any[]});
+    
+    annotations: any[];
+    
+    parameters: any[][];
+    
+    factory: Function;
+    
+    interfaces: any[];
+    
+    propMetadata: {[key: string]: any[]};
     
   }
 
-
+    
   /**
    * The {@link Reflector} used internally in Angular to access metadata
    * about symbols.
    */
-  var reflector:any;
+  var reflector: any;
 }
 
 export = core;

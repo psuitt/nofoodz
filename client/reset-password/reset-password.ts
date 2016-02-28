@@ -11,6 +11,7 @@ import {MeteorComponent} from 'angular2-meteor';
 declare var Client:any;
 declare var Meteor:any;
 declare var Accounts:any;
+declare var jQuery:any;
 
 @Component({
     selector: 'resetpassword'
@@ -25,6 +26,7 @@ export class ResetPassword extends MeteorComponent {
     token:String;
     router:Router;
     newPassword:String;
+    confirmNewPassword:String;
 
     constructor(params:RouteParams, router:Router) {
         super();
@@ -33,6 +35,18 @@ export class ResetPassword extends MeteorComponent {
     }
 
     reset() {
+
+        var errorText = jQuery('#resetpassword_error');
+
+        if (!this.newPassword || this.newPassword.length === 0) {
+            errorText.text('A new password is required');
+            return;
+        }
+
+        if (this.newPassword !== this.confirmNewPassword) {
+            errorText.text('Passwords do not match');
+            return;
+        }
 
         Accounts.resetPassword(this.token, this.newPassword, (error) => {
             if (!error) {

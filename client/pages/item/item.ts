@@ -284,6 +284,7 @@ export class Item implements OnDestroy, OnInit {
         if (comments && comments.length > 0) {
 
             jQuery('#foods_commentsdiv').removeClass('comment-mode no-comments').addClass('display-mode');
+            jQuery('#foods_comment').attr('value', 'Update Comment');
 
             var inputs = jQuery('.foods-comment-input');
             var spans = jQuery('.foods-comment');

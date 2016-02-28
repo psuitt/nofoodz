@@ -161,6 +161,10 @@ h3.pagetitle {
     border-bottom: 2px solid #424242;
 }
 
+h3.pagetitle:first-child {
+    margin-bottom: 50px;
+}
+
 h3.pagetitle.no-border {
     border: none;
 }
