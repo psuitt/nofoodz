@@ -12,10 +12,12 @@ mrt:jquery-ui@1.9.2
 http
 
 accounts-base
-standard-minifiers
 meteor-base
 check
 urigo:angular2-meteor
 mongo
 random
 underscore
+standard-minifier-css
+standard-minifier-js
+ecmascript

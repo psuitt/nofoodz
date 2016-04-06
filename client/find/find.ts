@@ -34,9 +34,7 @@ export class Find implements AfterViewInit {
         this.query = Client.NoFoodz.lib.getParameters(true);
         this.results = [];
         this.MAX_RESULTS = 3;
-
-
-
+        
     }
 
     ngAfterViewInit() {

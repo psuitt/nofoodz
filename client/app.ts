@@ -326,7 +326,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     loadUserInfo() {
 
-        var currentUser = this.call('userDataSimple', function (err, currentUser) {
+        var currentUser = this.call('userDataSimple', (err, currentUser) => {
 
             if (!err && currentUser) {
 
