@@ -43,3 +43,14 @@ db.getCollection('product_ratings').ensureIndex({'random' : 1});
 
 db.getCollection('product_ratings').ensureIndex({'name_view' : 'text'});
 
+db.getCollection('medias').ensureIndex({'name' : 'text'});
+
+db.getCollection('media_ratings').ensureIndex({'random' : 1});
+
+db.getCollection('media_ratings').ensureIndex({'name_view' : 'text'});
+
+db.getCollection('others').ensureIndex({'name' : 'text'});
+
+db.getCollection('other_ratings').ensureIndex({'random' : 1});
+
+db.getCollection('other_ratings').ensureIndex({'name_view' : 'text'});
