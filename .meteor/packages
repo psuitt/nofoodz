@@ -19,5 +19,5 @@ mongo
 random
 underscore
 standard-minifier-css
-standard-minifier-js
 ecmascript
+barbatus:ng2-minifier-js

@@ -2967,7 +2967,7 @@ declare module 'angular2/core/src/core/metadata/directives' {
          */
         queries:{
             [key:string]:any;
-        };
+            };
 
         constructor({selector, inputs, outputs, properties, events, host, bindings, providers, exportAs, queries}?: {
             selector?:string;
@@ -4688,7 +4688,8 @@ declare module 'angular2/core/src/core/di/provider' {
          */
         dependencies:Dependency[];
 
-        constructor(/**
+        constructor(
+                    /**
                      * Factory function which can return an instance of an object represented by a key.
                      */
                     factory:Function,
@@ -5183,7 +5184,6 @@ declare module 'angular2/core/src/facade/lang' {
     export function serializeEnum(val:any):number;
 
     export function deserializeEnum(val:any, values:Map<number, any>):any;
-
     export class StringWrapper {
         static fromCharCode(code:number):string;
 
@@ -5276,7 +5276,6 @@ declare module 'angular2/core/src/facade/lang' {
     export function isJsObject(o:any):boolean;
 
     export function print(obj:Error | Object):void;
-
     export class Json {
         static parse(s:string):Object;
 
@@ -7249,7 +7248,6 @@ declare module 'angular2/core/src/core/linker/element' {
         changeDetectorRefId:number;
         elementRefId:number;
         rendererId:number;
-
         constructor();
 
         static instance():StaticKeys;
@@ -8716,7 +8714,6 @@ declare module 'angular2/core/src/core/change_detection/proto_change_detector' {
     export function createPropertyRecords(definition:ChangeDetectorDefinition):ProtoRecord[];
 
     export function createEventRecords(definition:ChangeDetectorDefinition):EventBinding[];
-
     export class ProtoRecordBuilder {
         records:ProtoRecord[];
 
@@ -8835,7 +8832,6 @@ declare module 'angular2/core/src/core/change_detection/directive_record' {
         callOnDestroy:boolean;
         changeDetection:ChangeDetectionStrategy;
         outputs:string[][];
-
         constructor({directiveIndex, callAfterContentInit, callAfterContentChecked, callAfterViewInit, callAfterViewChecked, callOnChanges, callDoCheck, callOnInit, callOnDestroy, changeDetection, outputs}?: {
             directiveIndex?:DirectiveIndex;
             callAfterContentInit?:boolean;

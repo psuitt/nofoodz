@@ -29,10 +29,8 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">Random</a></li>
-                                <li><a class="menu-link" href="/#/explore" redirect="true">Explore</a></li>
-                                <li><a class="menu-link" href="/#/wsie" redirect="true">What Should I Eat?</a></li>
-                                <!--<li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>-->
-                                <!--<li><a class="menu-link" [routerLink]="['/Wsie']">What Should I Eat?</a></li>-->
+                                <li><a class="menu-link" [routerLink]="['/Explore']">Explore</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Wsie']">What Should I Eat?</a></li>
                             </ul>
                         </li>
                         <li class="has-children">
@@ -145,10 +143,8 @@
                             <ul class="is-hidden">
                                 <li class="close-nav"><a href="#">Close</a></li>
                                 <li class="back"><a class="menu-link" href="#">My Account</a></li>
-                                <li><a class="menu-link" href="/#/users/myfoods" redirect="true">MyFoodz</a></li>
-                                <li><a class="menu-link" href="/#/pages/add" redirect="true">Add</a></li>
-                                <!--<li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>-->
-                                <!--<li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>-->
+                                <li><a class="menu-link" [routerLink]="['/Users/MyFoods']">MyFoodz</a></li>
+                                <li><a class="menu-link" [routerLink]="['/Pages/Add']">Add</a></li>
                                 <li>
                                     <button id="logout_button" class="green-button">Logout</button>
                                 </li>
@@ -199,10 +195,8 @@
         <div>
             <ul class="footer-list">
                 <li class="footer-header">Info</li>
-                <li><a href="/#/info/about">About</a></li>
-                <li><a href="/#/info/changelog">Change Log</a></li>
-                <!--<li><a [routerLink]="['/Info/About']">About</a></li>-->
-                <!--<li><a [routerLink]="['/Info/ChangeLog']">Change Log</a></li>-->
+                <li><a [routerLink]="['/Info/About']">About</a></li>
+                <li><a [routerLink]="['/Info/ChangeLog']">Change Log</a></li>
                 <li id='totalusers'></li>
                 <li>Version alpha-1.4.0</li>
             </ul>
@@ -211,7 +205,7 @@
             </ul>
             <ul class="footer-list">
                 <li class="footer-header">Help</li>
-                <li><a href="/#/info/faq">FAQ</a></li>
+                <li><a [routerLink]="['/Info/Faq']">FAQ</a></li>
             </ul>
             <ul class="footer-list">
                 <li class="footer-header">Share</li>

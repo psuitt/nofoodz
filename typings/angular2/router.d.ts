@@ -1347,7 +1347,6 @@ declare module 'angular2/router/src/router/url_parser' {
     export function serializeParams(urlParams:{
         [key:string]:any;
     }, joiner?:string):string;
-
     /**
      * This class represents a parsed URL
      */
@@ -1377,7 +1376,6 @@ declare module 'angular2/router/src/router/url_parser' {
         segmentToString():string;
     }
     export function pathSegmentsToUrl(pathSegments:string[]):Url;
-
     export class UrlParser {
         peekStartsWith(str:string):boolean;
 

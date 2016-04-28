@@ -55,7 +55,7 @@ export class People implements OnDestroy, AfterViewInit {
         if (!jQuery('#people_ratingsearch_input').hasClass('nofoodssearch')) {
             this.itemSearch = jQuery('#people_ratingsearch_input').nofoodssearch({
                 values: ['Food', 'Drink', 'Product', 'Media', 'Other'],
-                searchPlaceholder: 'Search your items',
+                searchPlaceholder: 'Search items',
                 select: this.getPageFunction()
             });
         }
