@@ -19,8 +19,8 @@ Meteor.methods({
                 ratingcount_calc: 1
             },
             sort: {
-                ratingtotal_calc: -1,
-                ratingcount_calc: -1
+                rating_calc: -1,
+                ratingtotal_calc: -1
             },
             limit: 25
         };

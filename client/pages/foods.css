@@ -47,6 +47,10 @@ div.myrating span.totalRating {
     vertical-align: middle;
 }
 
+div.myrating > a {
+    display: table-cell;
+}
+
 div.myrating a.user-color {
     padding: 0 10px;
 }

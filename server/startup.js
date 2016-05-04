@@ -14,78 +14,64 @@ Meteor.startup(function () {
      */
     var setting = Settings.findOne({'_type': 'version'});
 
-    if (!setting || setting.version !== 'alpha-1.3.0') {
+    if (!setting || setting.version !== 'alpha-1.4.0') {
         Settings.upsert({'_type': 'version'}, {
             '_type': 'version',
-            'version': 'alpha-1.3.0'
+            'version': 'alpha-1.4.0'
         });
-        fixRatings();
+        runBatchFixes();
     }
 
 });
 
 
 var query = function (item) {
-    return {item_id: item._id};
+    return {_id: item._id};
 };
 
 var update = function (item) {
     return {
+        $unset: {
+            rating: ''
+        },
         $set: {
-            brand_id: item.brand_id,
-            name_view: item.name,
-            brand_view: item.brand_view
+            rating_calc: NoFoodz.utils.calculateRating(item)
         }
     };
 };
 
 var runBatchFixes = function () {
 
-    var filter = {multi: true};
+    var filter = {};
 
     Foods.find({}).forEach(function (item) {
 
-        FoodRatings.update(query(item), update(item), filter);
+        Foods.update(query(item), update(item), filter);
 
     });
 
     Drinks.find({}).forEach(function (item) {
 
-        DrinkRatings.update(query(item), update(item), filter);
+        Drinks.update(query(item), update(item), filter);
 
     });
 
     Products.find({}).forEach(function (item) {
 
-        ProductRatings.update(query(item), update(item), filter);
+        Products.update(query(item), update(item), filter);
+
+    });
+
+    Medias.find({}).forEach(function (item) {
+
+        Medias.update(query(item), update(item), filter);
+
+    });
+
+    Others.find({}).forEach(function (item) {
+
+        Others.update(query(item), update(item), filter);
 
     });
 
 };
-
-var fixRatings = function () {
-
-    Meteor.users.find({}).forEach(function (user) {
-
-        FoodRatings.update({user_id: user._id}, {
-            $set: {
-                username_view: user.profile.name
-            }
-        }, {multi: true});
-
-        DrinkRatings.update({user_id: user._id}, {
-            $set: {
-                username_view: user.profile.name
-            }
-        }, {multi: true});
-
-        ProductRatings.update({user_id: user._id}, {
-            $set: {
-                username_view: user.profile.name
-            }
-        }, {multi: true});
-
-    });
-
-};
-

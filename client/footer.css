@@ -75,17 +75,17 @@ li.footer-header {
 }
 
 a.facebook {
-    background-image: url('/facebook-48x48.png');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/facebook-48x48.png');
 }
 
 a.google-plus {
-    background-image: url('/google-plus-48x48.png');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/google-plus-48x48.png');
 }
 
 a.pinterest {
-    background-image: url('/pinterest-48x48.png');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/pinterest-48x48.png');
 }
 
 a.twitter {
-    background-image: url('/twitter-48x48.png');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/twitter-48x48.png');
 }

@@ -5,13 +5,14 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route, RouterLink} from 'angular2/router';
 
-import {
-    ComponentInstruction,
-    CanReuse,
-    Location
-} from 'angular2/router';
+import {MeteorComponent} from 'angular2-meteor';
+
+import {ComponentInstruction, CanReuse, Router} from 'angular2/router';
+
 import {Reported} from "./reported/reported";
 
+declare var Meteor:any;
+declare var Client:any;
 declare var jQuery:any;
 
 @Component({
@@ -27,16 +28,29 @@ declare var jQuery:any;
     {path: '/reported', component: Reported, as: 'Reported'}
 ])
 
-export class AdminPage implements CanReuse {
+export class AdminPage extends MeteorComponent implements CanReuse {
 
     location:Location;
 
-    constructor(location:Location) {
-        this.location = location;
-    }
+    constructor(private router:Router) {
+        super();
 
-    getLinkStyle(path) {
-        return this.location.path().indexOf(path) > -1;
+        this.location = location;
+
+        if (!Meteor.userId()) {
+            this.router.navigate(['/Error404']);
+            return;
+        }
+
+        this.call('userDataSimple', function (err, currentUser) {
+
+            if (err || !Client.NoFoodz.permissions.isAdmin(currentUser)) {
+
+                this.router.navigate(['/Error404']);
+
+            }
+
+        });
     }
 
     /*

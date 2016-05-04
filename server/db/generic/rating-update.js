@@ -44,7 +44,7 @@ Meteor.methods({
         var item = itemDao.find();
 
         var ratingDiff = options.rating,
-            countDiff = options.rating > 0 ? 1 : 0;
+            countDiff = 0;
 
         var rating = new Rating(options.rating, this.userId, options.type);
 
@@ -66,10 +66,13 @@ Meteor.methods({
             if (options.rating === 6)
                 Meteor.users.update({_id: this.userId}, {$inc: {"profile.bonusHearts": -1}});
 
+            // No rating prior so if greater than 0 count this.
+            if (options.rating > 0)
+                countDiff = 1;
+
         } else {
 
             // No adjustments are needed.
-            countDiff = 0;
             ratingDiff -= userRating.rating;
 
             if (userRating.rating === 6 && options.rating !== 6) {
@@ -79,32 +82,21 @@ Meteor.methods({
             }
 
             if (userRating.rating > 0 && options.rating == 0) {
+                // If previous was higher than 0 and new is 0 decrement.
                 countDiff = -1;
             } else if (userRating.rating === 0 && options.rating > 0) {
+                // If the previous was 0 and the new is greater increment.
                 countDiff = 1;
             }
 
         }
 
-        //Recalculate Rating total
-        var total = item.ratingtotal_calc ? item.ratingtotal_calc : 0,
-            count = item.ratingcount_calc + countDiff;
+        itemDao.incrementRating(countDiff, ratingDiff);
 
-        if (count > 0) {
+        itemDao.ratingcount_calc = item.ratingcount_calc + countDiff;
+        itemDao.ratingtotal_calc = item.ratingtotal_calc + ratingDiff;
 
-            total += ratingDiff;
-            itemDao.ratingtotal_calc = total;
-            itemDao.ratingcount_calc = count;
-
-        } else if (options.rating === 0) {
-            itemDao.ratingtotal_calc = options.rating;
-            itemDao.ratingcount_calc = 0;
-        } else {
-            itemDao.ratingtotal_calc = options.rating;
-            itemDao.ratingcount_calc = 1;
-        }
-
-        itemDao.rating = NoFoodz.utils.calculateRating(itemDao);
+        itemDao.rating_calc = NoFoodz.utils.calculateRating(itemDao);
         itemDao.updateRating();
 
         if (upsertObj.isInsert) {

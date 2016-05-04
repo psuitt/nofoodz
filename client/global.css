@@ -161,6 +161,10 @@ h3.pagetitle {
     border-bottom: 2px solid #424242;
 }
 
+h3.pagetitle:first-child {
+    margin-bottom: 50px;
+}
+
 h3.pagetitle.no-border {
     border: none;
 }
@@ -610,7 +614,7 @@ span.wishstar {
     width: 24px;
     display: inline-block;
     vertical-align: middle;
-    background-image: url('/rating/star_empty.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/star_empty.svg');
     background-position: center center;
     background-size: 24px 22px;
     background-repeat: no-repeat;
@@ -618,7 +622,7 @@ span.wishstar {
 }
 
 span.wishstar.x100 {
-    background-image: url('/rating/star_full.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/star_full.svg');
 }
 
 span.date {
@@ -630,7 +634,7 @@ div.loading {
     width: 42px;
     min-height: 42px;
     position: absolute;
-    background-image: url('ajax-loader.gif');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/ajax-loader.gif');
     background-position: center top;
     background-repeat: no-repeat;
 }
@@ -821,7 +825,7 @@ span.rating {
     height: 24px;
     width: 24px;
     display: inline-block;
-    background-image: url('/rating/heart_empty.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_empty.svg');
     background-position: center center;
     background-size: 24px 22px;
     background-repeat: no-repeat;
@@ -831,137 +835,137 @@ span.rating {
 }
 
 span.rating.dashed {
-    background-image: url('/rating/heart_empty_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_empty_dashed.svg');
 }
 
 span.rating.x10 {
-    background-image: url('/rating/heart_1.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_1.svg');
 }
 
 span.rating.dashed.x10 {
-    background-image: url('/rating/heart_1_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_1_gold_dashed.svg');
 }
 
 span.rating.x10.blue {
-    background-image: url('/rating/heart_1_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_1_blue.svg');
 }
 
 span.rating.x20 {
-    background-image: url('/rating/heart_2.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_2.svg');
 }
 
 span.rating.dashed.x20 {
-    background-image: url('/rating/heart_2_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_2_gold_dashed.svg');
 }
 
 span.rating.x20.blue {
-    background-image: url('/rating/heart_2_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_2_blue.svg');
 }
 
 span.rating.x30 {
-    background-image: url('/rating/heart_3.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_3.svg');
 }
 
 span.rating.dashed.x30 {
-    background-image: url('/rating/heart_3_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_3_gold_dashed.svg');
 }
 
 span.rating.x30.blue {
-    background-image: url('/rating/heart_3_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_3_blue.svg');
 }
 
 span.rating.x40 {
-    background-image: url('/rating/heart_4.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_4.svg');
 }
 
 span.rating.dashed.x40 {
-    background-image: url('/rating/heart_4_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_4_gold_dashed.svg');
 }
 
 span.rating.x40.blue {
-    background-image: url('/rating/heart_4_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_4_blue.svg');
 }
 
 span.rating.x50 {
-    background-image: url('/rating/heart_half.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_half.svg');
 }
 
 span.rating.dashed.x50 {
-    background-image: url('/rating/heart_half_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_half_gold_dashed.svg');
 }
 
 span.rating.x50.blue {
-    background-image: url('/rating/heart_half_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_half_blue.svg');
 }
 
 span.rating.x60 {
-    background-image: url('/rating/heart_6.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_6.svg');
 }
 
 span.rating.dashed.x60 {
-    background-image: url('/rating/heart_6_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_6_gold_dashed.svg');
 }
 
 span.rating.x60.blue {
-    background-image: url('/rating/heart_6_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_6_blue.svg');
 }
 
 span.rating.x70 {
-    background-image: url('/rating/heart_7.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_7.svg');
 }
 
 span.rating.dashed.x70 {
-    background-image: url('/rating/heart_7_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_7_gold_dashed.svg');
 }
 
 span.rating.x70.blue {
-    background-image: url('/rating/heart_7_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_7_blue.svg');
 }
 
 span.rating.x80 {
-    background-image: url('/rating/heart_8.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_8.svg');
 }
 
 span.rating.dashed.x80 {
-    background-image: url('/rating/heart_8_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_8_gold_dashed.svg');
 }
 
 span.rating.x80.blue {
-    background-image: url('/rating/heart_8_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_8_blue.svg');
 }
 
 span.rating.x90 {
-    background-image: url('/rating/heart_9.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_9.svg');
 }
 
 span.rating.dashed.x90 {
-    background-image: url('/rating/heart_9_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_9_gold_dashed.svg');
 }
 
 span.rating.x90.blue {
-    background-image: url('/rating/heart_9_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_9_blue.svg');
 }
 
 span.rating.x100 {
-    background-image: url('/rating/heart_full.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_full.svg');
 }
 
 span.rating.x100.blue {
-    background-image: url('/rating/heart_full_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_full_blue.svg');
 }
 
 span.rating.dashed.x100,
 span.rating.x110,
 span.rating.x120 {
-    background-image: url('/rating/heart_full_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_full_gold_dashed.svg');
 }
 
 span.rating.tempx100 {
-    background-image: url('/rating/heart_full_blue.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_full_blue.svg');
 }
 
 span.rating.dashed.tempx100 {
-    background-image: url('/rating/heart_full_gold_dashed.svg');
+    background-image: url('https://s3.amazonaws.com/nofoodz/_main/icons/rating/heart_full_gold_dashed.svg');
 }
 
 /* Bootstrapper 3 Fixes */

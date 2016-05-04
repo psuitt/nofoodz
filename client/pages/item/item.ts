@@ -3,9 +3,11 @@
  */
 /// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
 
-import {Component, View, OnDestroy, AfterViewInit, OnInit} from 'angular2/core';
+import {Component, View, OnDestroy} from 'angular2/core';
 
-import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES, OnActivate} from 'angular2/router';
+
+import {MeteorComponent} from 'angular2-meteor';
 
 declare var jQuery:any;
 declare var Client:any;
@@ -21,7 +23,7 @@ declare var Meteor:any;
     directives: [Item, RouterLink, ROUTER_DIRECTIVES]
 })
 
-export class Item implements OnDestroy, OnInit {
+export class Item extends MeteorComponent implements OnDestroy, OnActivate {
 
     nofoodsRating:any;
     idField:string;
@@ -30,25 +32,22 @@ export class Item implements OnDestroy, OnInit {
     firstLoad:boolean = false;
 
     constructor(private router:Router, params:RouteParams) {
+        super();
 
         this.screenData = {
             _id: params.get('_id'),
             type: params.get('type')
         };
 
+        this.loadListeners();
+
     }
 
     ngOnDestroy() {
+
         this.nofoodsRating.remove();
 
-        jQuery('span.wishstar').off('click');
-
-        jQuery(document).off('click', '#foods_comment');
-        jQuery(document).off('click', '#foods_editcomments');
-
-        jQuery(document).off('click', 'body', this.hideRaters);
-
-        jQuery('#foods_infodiv').off('click', 'h4', this.toggleInfo);
+        jQuery(document).off('click', '#foods_infodiv h4', this.toggleInfo);
 
         jQuery('.list-add-button').attr({
             'item-id': '',
@@ -58,114 +57,65 @@ export class Item implements OnDestroy, OnInit {
 
     }
 
-    ngOnInit() {
+    routerOnActivate() {
         this.setup(this.router);
-        this.loadListeners();
     }
 
     setup(router) {
 
-        var self = this;
+        this.autorun(() => {
 
-        var obj = {
-            _id: this.screenData._id,
-            type: this.screenData.type
-        };
+            var self = this;
 
-        this.idField = this.screenData.type + '_id';
+            var obj = {
+                _id: this.screenData._id,
+                type: this.screenData.type
+            };
 
-        Meteor.call('getItemById', obj, function (err, response) {
+            this.idField = this.screenData.type + '_id';
 
-            if (err || !response || !response.item) {
-                router.navigate(['/Error404']);
-            }
+            this.call('getItemById', obj, function (err, response) {
 
-            self.done(self, err, response);
+                if (err || !response || !response.item) {
+                    router.navigate(['/Error404']);
+                }
 
+                self.done(self, err, response);
+
+            });
+
+            this.reloadComments();
+
+            this.nofoodsRating = jQuery('#foods_bodydiv div.ratingDiv').nofoodsrating({
+                hearts: 6,
+                select: function (rating) {
+
+                    var options = {
+                        rating: rating,
+                        _id: self.screenData._id,
+                        type: self.screenData.type
+                    };
+
+                    Meteor.call('updateRating', options, function (err, data) {
+
+                        if (!err) {
+                            self.reloadRating(data);
+                            jQuery('#foods_commentsdiv').removeClass('no-user-rating');
+                        }
+
+                    });
+
+                }
+            });
+
+            jQuery('#foods-nav .button.report').attr('item-id', self.screenData._id).attr('item-type', self.screenData.type);
         });
-
-        this.reloadComments();
-
-        this.nofoodsRating = jQuery('#foods_bodydiv div.ratingDiv').nofoodsrating({
-            hearts: 6,
-            select: function (rating) {
-
-                var options = {
-                    rating: rating,
-                    _id: self.screenData._id,
-                    type: self.screenData.type
-                };
-
-                Meteor.call('updateRating', options, function (err, data) {
-
-                    if (!err) {
-                        self.reloadRating(data);
-                        jQuery('#foods_commentsdiv').removeClass('no-user-rating');
-                    }
-
-                });
-
-            }
-        });
-
-        jQuery('#foods-nav .button.report').attr('item-id', self.screenData._id).attr('item-type', self.screenData.type);
 
     }
 
     loadListeners() {
 
-        var self = this;
-
-        jQuery('span.wishstar').on('click', function () {
-            var options = {};
-
-            options[self.idField] = self.screenData._id;
-
-            Meteor.call('addToWishList', options);
-
-            jQuery('.wishstar').toggleClass('x100', true);
-        });
-
-        jQuery(document).on('click', '#foods_comment', function (event) {
-
-            var comments = [];
-
-            jQuery('.foods-comment-input').each(function () {
-                var val = jQuery(this).val();
-                if (val)
-                    comments.push(val);
-            });
-
-            var obj = {
-                item_id: self.screenData._id,
-                type: self.screenData.type,
-                comments: comments
-            };
-
-            Meteor.call('updateComments', obj, function (err) {
-
-                if (!err) {
-                    Client.NoFoodz.alert.msg('success', 'Save was successful!');
-                    self.setCommentsInputs(comments);
-                    self.reloadComments();
-                } else {
-                    Client.NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
-                }
-
-            });
-
-        });
-
-        jQuery(document).on('click', '#foods_editcomments', function (event) {
-
-            jQuery('#foods_commentsdiv').toggleClass('comment-mode').toggleClass('display-mode');
-
-        });
-
-        // Hide listener
-        jQuery(document).on('click', 'body', this.hideRaters);
-
-        jQuery('#foods_infodiv').on('click', 'h4', this.toggleInfo);
+        jQuery(document).on('click', '#foods_infodiv h4', this.toggleInfo);
 
     }
 
@@ -284,6 +234,7 @@ export class Item implements OnDestroy, OnInit {
         if (comments && comments.length > 0) {
 
             jQuery('#foods_commentsdiv').removeClass('comment-mode no-comments').addClass('display-mode');
+            jQuery('#foods_comment').attr('value', 'Update Comment');
 
             var inputs = jQuery('.foods-comment-input');
             var spans = jQuery('.foods-comment');
@@ -438,6 +389,52 @@ export class Item implements OnDestroy, OnInit {
             && jQuery('#item_raters').hasClass('visible')) {
             jQuery('#item_raters').removeClass('visible');
         }
+
+    }
+
+    wishstarClick() {
+        var options = {};
+
+        options[this.idField] = this.screenData._id;
+
+        this.call('addToWishList', options);
+
+        jQuery('.wishstar').toggleClass('x100', true);
+    }
+
+    commentClick(event) {
+
+        var comments = [];
+
+        jQuery('.foods-comment-input').each(function () {
+            var val = jQuery(this).val();
+            if (val)
+                comments.push(val.trim());
+        });
+
+        var obj = {
+            item_id: this.screenData._id,
+            type: this.screenData.type,
+            comments: comments
+        };
+
+        this.call('updateComments', obj, (err) => {
+
+            if (!err) {
+                Client.NoFoodz.alert.msg('success', 'Save was successful!');
+                this.setCommentsInputs(comments);
+                this.reloadComments();
+            } else {
+                Client.NoFoodz.alert.msg('danger', 'Save was unsuccessful!');
+            }
+
+        });
+
+    }
+
+    editCommentsClick(event) {
+
+        jQuery('#foods_commentsdiv').toggleClass('comment-mode').toggleClass('display-mode');
 
     }
 

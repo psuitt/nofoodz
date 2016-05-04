@@ -20,16 +20,17 @@ Accounts.validateNewUser(function (user) {
         }
     }
 
-    if (user.username && user.username.length > 3 && user.username.length < 16) {
-        check(user.username, UsernameCharacters);
-        Statistics.upsert(
-            {_type: NoFoodz.consts.statistics.USER_COUNT},
-            {$inc: {count: 1}}
-        );
-        return true;
+    if (!user.username || user.username.length < 4 || user.username.length > 20) {
+        throw new Meteor.Error(403, 'Username must have at least 4-20 alphanumeric characters');
     }
 
-    throw new Meteor.Error(403, 'Username must have at least 4-15 alphanumeric characters');
+    check(user.username, UsernameCharacters);
+    Statistics.upsert(
+        {_type: NoFoodz.consts.statistics.USER_COUNT},
+        {$inc: {count: 1}}
+    );
+
+    return true
 });
 
 Accounts.onCreateUser(function (options, user) {
@@ -48,7 +49,7 @@ Accounts.onCreateUser(function (options, user) {
 // EMAIL CODE
 
 Accounts.emailTemplates.siteName = 'NoFoodz';
-Accounts.emailTemplates.from = 'NoFoodz Accounts <accounts@nofoodz.com>';
+Accounts.emailTemplates.from = 'NoFoodz Accounts <noreply@nofoodz.com>';
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
     return 'Welcome to NoFoodz, ' + user.profile.username;
 };

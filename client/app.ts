@@ -23,6 +23,8 @@ import {RouterLink,
     ComponentInstruction,
     CanReuse} from 'angular2/router';
 
+import {FORM_DIRECTIVES} from 'angular2/common';
+
 import {MeteorComponent} from 'angular2-meteor';
 
 import {Error404} from "./error/404/Error404";
@@ -38,6 +40,8 @@ import {TopPage} from "./top/top";
 import {AdminPage} from "./admin/admin";
 import {InfoPage} from "./info/info";
 import {List} from "./list";
+import {VerifyEmail} from "./verify-email/verify-email";
+import {ResetPassword} from "./reset-password/reset-password";
 
 declare var jQuery:any;
 declare var _:any;
@@ -51,7 +55,7 @@ declare var Accounts:any;
 
 @View({
     templateUrl: 'client/app.html',
-    directives: [ROUTER_DIRECTIVES, RouterLink, RouterOutlet, MainLayout, UsersPage, Find]
+    directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, RouterLink, RouterOutlet, MainLayout, UsersPage, Find]
 })
 
 @RouteConfig([
@@ -65,7 +69,9 @@ declare var Accounts:any;
     {path: '/pages/...', name: 'Pages', component: PagesPage},
     {path: '/top/...', name: 'Top', component: TopPage},
     {path: '/info/...', name: 'Info', component: InfoPage},
-    {path: '/admin/...', name: 'Admin', component: AdminPage}
+    {path: '/admin/...', name: 'Admin', component: AdminPage},
+    {path: '/verify-email/:token', name: 'VerifyEmail', component: VerifyEmail},
+    {path: '/reset-password/:token', name: 'ResetPassword', component: ResetPassword}
 ])
 
 class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
@@ -73,8 +79,14 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
     router:Router;
     location:Location;
 
+    userForm:{username:String, password: String} = {
+        username: '',
+        password: ''
+    };
+    registerForm:{username:String, email:String, password:String, confirmPassword:String};
     username:string;
     usernameShort:string;
+    usernameRegex:RegExp = /^[0-9a-z_\.@\-~]{4,20}$/;
 
     constructor(router:Router, location:Location) {
 
@@ -82,6 +94,16 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
         this.router = router;
         this.location = location;
+        this.userForm = {
+            username: '',
+            password: ''
+        };
+        this.registerForm = {
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        };
 
         window.scrollTo(0, 0);
 
@@ -129,32 +151,20 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
                 // TODO - Do something if there is an error.
             });
             jQuery('#login_menu, #register_menu').show();
-            jQuery('#user_menu').hide();
+            jQuery('#user_menu, #user_menu_icons').hide();
             jQuery('.username').text('Login');
         });
 
-        jQuery(document).on('submit', '#login_form', this.createSubmitLogin());
-
         jQuery(document).on('keypress', '#login_email, #login_password', function (evt) {
             if (evt.which === 13) {
-                jQuery('#login_form').submit();
+                self.login();
             }
         });
-
-        jQuery(document).on('click', 'login_button', function () {
-            jQuery('#login_form').submit();
-        });
-
-        jQuery(document).on('submit', '#register_form', this.createSubmitRegister());
 
         jQuery(document).on('keypress', '#register_username, #register_email, #register_password, #register_confirm_password', function (evt) {
             if (evt.which === 13) {
-                jQuery('#register_form').submit();
+                self.register();
             }
-        });
-
-        jQuery(document).on('click', 'register_account', function () {
-            jQuery('#register_form').submit();
         });
 
         // Hide listener
@@ -314,19 +324,9 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     }
 
-    getLinkStyle(path) {
-
-        if (path === this.location.path()) {
-            return true;
-        }
-        else if (path.length > 0) {
-            return this.location.path().indexOf(path) > -1;
-        }
-    }
-
     loadUserInfo() {
 
-        var currentUser = this.call('userDataSimple', function (err, currentUser) {
+        var currentUser = this.call('userDataSimple', (err, currentUser) => {
 
             if (!err && currentUser) {
 
@@ -344,7 +344,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
                 this.usernameShort = currentUser.username.substring(0, 2).toUpperCase();
 
                 jQuery('#login_menu, #register_menu').hide();
-                jQuery('#user_menu').show();
+                jQuery('#user_menu, #user_menu_icons').show();
 
                 jQuery('#usernameDisplay, #usernameDisplaySub').text(this.username);
 
@@ -353,7 +353,7 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
                 }
 
             } else {
-                jQuery('#user_menu').hide();
+                jQuery('#user_menu, #user_menu_icons').hide();
                 jQuery('#login_menu, #register_menu').show();
 
                 jQuery('.username').text('Login');
@@ -363,71 +363,96 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
     }
 
-    createSubmitLogin() {
+    login() {
 
-        var self = this;
+        // retrieve the input field values
+        var errorText = jQuery('#login_error');
 
-        return function (error) {
+        errorText.text('');
 
-            // retrieve the input field values
-            var email = jQuery('#login_email').val().toLocaleLowerCase(),
-                password = jQuery('#login_password').val();
-
-            // Trim and validate your fields here....
-
-            // If validation passes, supply the appropriate fields to the
-            // Meteor.loginWithPassword() function.
-            Meteor.loginWithPassword(email, password, function (err) {
-                if (err) {
-                    // Inform the user that account creation failed
-                    jQuery('#login_form .error-message').text('Invalid login');
-                } else {
-                    jQuery('#login_close').click();
-                    jQuery('#login_form .error-message').text('');
-                    self.loadUserInfo();
-                }
-            });
-
+        // Trim and validate your fields here....
+        if (!this.userForm.username || this.userForm.username.trim().length === 0) {
+            errorText.text('Username is required');
+            return;
         }
+
+        if (!this.userForm.password || this.userForm.password.length === 0) {
+            errorText.text('Password is required');
+            return;
+        }
+
+        // If validation passes, supply the appropriate fields to the
+        Meteor.loginWithPassword(this.userForm.username.trim().toLocaleLowerCase(), this.userForm.password, (err) => {
+            if (err) {
+                // Inform the user that account creation failed
+                errorText.text('Invalid login');
+            } else {
+                // Reset the form
+                this.userForm = {
+                    username: '',
+                    password: ''
+                };
+                jQuery('#login_close').click();
+                errorText.text('');
+                this.loadUserInfo();
+            }
+        });
 
     }
 
-    createSubmitRegister() {
+    register() {
 
-        var self = this;
+        var registerError = jQuery('#register_error');
 
-        return function (error) {
+        registerError.text('');
 
-            var username = jQuery('#register_username').val(),
-                email = jQuery('#register_email').val(),
-                password = jQuery('#register_password').val(),
-                confirmPassword = jQuery('#register_confirm_password').val();
+        if (!this.registerForm.username || this.registerForm.username.trim().length === 0) {
+            registerError.text('Username is required');
+            return;
+        }
+        if (!this.registerForm.email || this.registerForm.email.trim().length === 0) {
+            registerError.text('Email is required');
+            return;
+        }
+        if (!this.registerForm.password || this.registerForm.password.length === 0) {
+            registerError.text('Password is required');
+            return;
+        }
+        if (this.registerForm.password !== this.registerForm.confirmPassword) {
+            registerError.text('Passwords do not match');
+            return;
+        }
 
-            if (password !== confirmPassword) {
-                jQuery('.error-message').text('Passwords do not match');
+        var registerObj = {
+            username: this.registerForm.username.trim(),
+            email: this.registerForm.email.trim(),
+            password: this.registerForm.password
+        };
+
+        Accounts.createUser(registerObj, (err, data) => {
+            if (err) {
+                // Inform the user that account creation failed
+                registerError.text(err.reason);
             } else {
-
-                // Trim and validate the input
-                Accounts.createUser({username: username, email: email, password: password}, function (err, data) {
-                    if (err) {
-                        // Inform the user that account creation failed
-                        jQuery('#register_form .error-message').text(err.reason);
-                    } else {
-                        jQuery('#login_close').click();
-                        jQuery('#register_form .error-message').text('');
-                        self.loadUserInfo();
-                    }
-
-                });
-
+                jQuery('#login_close').click();
+                registerError.text('');
+                // Clear the form
+                this.registerForm = {
+                    username: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: ''
+                };
+                this.loadUserInfo();
+                Client.NoFoodz.alert.success('Account created successfully. Welcome to NoFoodz, ' + registerObj.username + '.');
             }
 
-        };
+        });
 
     }
 
 }
 
-enableProdMode();
+//enableProdMode();
 
 bootstrap(MainLayout, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);

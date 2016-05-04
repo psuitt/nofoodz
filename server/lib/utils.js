@@ -13,15 +13,16 @@ NoFoodz.utils = {
 		
 		var sp = l.split(" ");
 		var uniqueArray = [];
-		for (var i = 0, l = sp.length; i < l ; i += 1) {
+		for (var i = 0, len = sp.length; i < len; i += 1) {
 			if (uniqueArray.indexOf(sp[i]) === -1)
-				uniqueArray.push(sp[i]);	
-		};
+				uniqueArray.push(sp[i]);
+		}
 		return uniqueArray;
 	},
 
 	calculateRating: function (item) {
-		return item.ratingtotal_calc > 0 ? (item.ratingtotal_calc / parseFloat(item.ratingcount_calc)).toFixed(2) : 0;
+		var calc = item.ratingtotal_calc > 0 && item.ratingcount_calc > 0 ? item.ratingtotal_calc / parseFloat(item.ratingcount_calc) : 0;
+		return Number(calc);
 	}
 
 };
