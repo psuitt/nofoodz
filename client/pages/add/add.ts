@@ -33,8 +33,6 @@ export class Add implements OnDestroy, AfterViewInit {
 
         this.screenData = Client.NoFoodz.lib.getParameters(true);
 
-
-
     }
 
     ngOnDestroy() {
@@ -52,6 +50,7 @@ export class Add implements OnDestroy, AfterViewInit {
     ngAfterViewInit() {
         this.setup();
         this.loadListeners();
+        window.scrollTo(0, 0);
     }
 
     setup() {

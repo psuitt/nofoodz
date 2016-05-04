@@ -96,6 +96,12 @@ export class Find implements AfterViewInit {
 
                 if (response.data) {
 
+                    if (response.datatype === Client.NoFoodz.consts.BRAND) {
+                        self.processBrandData(self, response.datatype, response);
+                        jQuery('div.loading').addClass('hide');
+                        return;
+                    }
+
                     var count = response.data.length;
 
                     self.results = response.data;
@@ -220,35 +226,7 @@ export class Find implements AfterViewInit {
 
                 if (response.data) {
 
-                    var count = response.data.length;
-
-                    self.results = response.data;
-
-                    if (count < 99) {
-                        jQuery('#findResultsCount').html(count + ' results found');
-                    } else {
-                        jQuery('#findResultsCount').html('100+ results found');
-                    }
-
-                    if (count === 0) {
-
-                        jQuery('#findResultsCount').html('No results found');
-
-                    } else {
-
-                        self.createGetBrandPage()(1);
-
-                        if (self.paging)
-                            self.paging.remove();
-
-                        jQuery('#findContent').append('<div class=\'search-paging\'></div>');
-                        self.paging = jQuery('#findContent .search-paging').nofoodspaging({
-                            max: self.results.length / self.MAX_RESULTS,
-                            select: self.createGetBrandPage(),
-                            data: {url: Client.NoFoodz.consts.urls[type.toUpperCase()]}
-                        });
-
-                    }
+                    self.processBrandData(self, type, response);
 
                 } else {
                     jQuery('#findResultsCount').html('No results found');
@@ -259,6 +237,40 @@ export class Find implements AfterViewInit {
             jQuery('div.loading').addClass('hide');
 
         });
+    }
+
+    processBrandData(self, type, response) {
+
+        var count = response.data.length;
+
+        self.results = response.data;
+
+        if (count < 99) {
+            jQuery('#findResultsCount').html(count + ' results found');
+        } else {
+            jQuery('#findResultsCount').html('100+ results found');
+        }
+
+        if (count === 0) {
+
+            jQuery('#findResultsCount').html('No results found');
+
+        } else {
+
+            self.createGetBrandPage()(1);
+
+            if (self.paging)
+                self.paging.remove();
+
+            jQuery('#findContent').append('<div class=\'search-paging\'></div>');
+            self.paging = jQuery('#findContent .search-paging').nofoodspaging({
+                max: self.results.length / self.MAX_RESULTS,
+                select: self.createGetBrandPage(),
+                data: {url: Client.NoFoodz.consts.urls[type.toUpperCase()]}
+            });
+
+        }
+
     }
 
     createGetBrandPage() {
