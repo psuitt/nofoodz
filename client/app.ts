@@ -43,6 +43,7 @@ import {List} from "./list";
 import {VerifyEmail} from "./verify-email/verify-email";
 import {ResetPassword} from "./reset-password/reset-password";
 
+declare var $:any;
 declare var jQuery:any;
 declare var _:any;
 declare var Client:any;

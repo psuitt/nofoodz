@@ -30,6 +30,7 @@ Client.NoFoodz.consts = function () {
         urls: _urls,
         types: _types,
         PAGE_LIMIT: 2,
+        BRAND: _types.BRAND,
         FOOD: 'food',
         DRINK: 'drink',
         PRODUCT: 'product',

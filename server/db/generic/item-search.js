@@ -40,6 +40,14 @@ Meteor.methods({
         };
 
         response.data = db.find(query, filter).fetch();
+        response.datatype = options.type;
+
+        if (response.data.length === 0 && options.type !== NoFoodz.consts.db.BRAND) {
+            db = NoFoodz.db.typeToDb(NoFoodz.consts.db.BRAND);
+            response.data = db.find(query, filter).fetch();
+            response.datatype = NoFoodz.consts.db.BRAND;
+        }
+
         return response;
 
     },

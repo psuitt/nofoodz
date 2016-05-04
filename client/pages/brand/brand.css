@@ -1,0 +1,17 @@
+#brand_additem {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    color: #FFFFFF;
+    background: #4CAF50;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    line-height: 50px;
+    padding: 0 13px;
+    opacity: 1;
+}
+
+#brand_additem i {
+    vertical-align: middle;
+}
