@@ -1,13 +1,9 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../typings/angular2/angular2.d.ts" />
-/// <reference path="../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {bootstrap} from 'angular2/platform/browser';
-
-import {Component, View, provide, enableProdMode, AfterViewInit} from 'angular2/core';
-
+import {bootstrap} from 'angular2/bootstrap';
+import {Component, provide, enableProdMode, AfterViewInit} from 'angular2/core';
+import {MeteorComponent} from 'angular2-meteor';
 import {RouterLink,
     ROUTER_DIRECTIVES,
     RouterOutlet,
@@ -17,23 +13,17 @@ import {RouterLink,
     LocationStrategy,
     HashLocationStrategy,
     Router,
-    Route,
     Redirect,
     APP_BASE_HREF,
     ComponentInstruction,
     CanReuse} from 'angular2/router';
 
 import {FORM_DIRECTIVES} from 'angular2/common';
-
-import {MeteorComponent} from 'angular2-meteor';
-
 import {Error404} from "./error/404/Error404";
-
-import {Home} from "client/home/home";
+import {Home} from "./home/home";
 import {Wsie} from "./wsie/wsie";
 import {Explore} from "./explore/explore";
 import {Find} from "./find/find";
-
 import {UsersPage} from "./users/users";
 import {PagesPage} from "./pages/pages";
 import {TopPage} from "./top/top";
@@ -51,10 +41,7 @@ declare var Meteor:any;
 declare var Accounts:any;
 
 @Component({
-    selector: 'app'
-})
-
-@View({
+    selector: 'app',
     templateUrl: 'client/app.html',
     directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES, RouterLink, RouterOutlet, MainLayout, UsersPage, Find]
 })

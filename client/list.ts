@@ -1,10 +1,7 @@
 /**
  * Created by Sora on 12/22/2015.
  */
-/// <reference path="../typings/angular2/angular2.d.ts" />
-/// <reference path="../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, Inject} from 'angular2/core';
+import {Component, Inject} from 'angular2/core';
 
 import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -12,10 +9,7 @@ declare var Client:any;
 declare var jQuery:any;
 
 @Component({
-    selector: "list"
-})
-
-@View({
+    selector: "list",
     templateUrl: "client/list.html",
     directives: [List, ROUTER_DIRECTIVES]
 })

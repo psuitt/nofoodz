@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/30/2015.
  */
-/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, AfterViewInit} from 'angular2/core';
+import {Component, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 
@@ -14,10 +12,7 @@ declare var _:any;
 declare var Meteor:any;
 
 @Component({
-    selector: 'gaming'
-})
-
-@View({
+    selector: 'gaming',
     templateUrl: 'client/top/gaming/gaming.html',
     directives: [RouterLink, ROUTER_DIRECTIVES]
 })

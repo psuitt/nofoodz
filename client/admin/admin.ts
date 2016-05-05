@@ -1,6 +1,4 @@
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route, RouterLink} from 'angular2/router';
@@ -17,9 +15,6 @@ declare var jQuery:any;
 
 @Component({
     selector: 'admin',
-})
-
-@View({
     templateUrl: 'client/admin/admin.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, RouterLink]
 })

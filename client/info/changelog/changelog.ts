@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 12/15/2015.
  */
-/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, AfterViewInit} from 'angular2/core';
+import {Component, AfterViewInit} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
@@ -13,10 +11,7 @@ declare var Client:any;
 declare var Meteor:any;
 
 @Component({
-    selector: 'changelog'
-})
-
-@View({
+    selector: 'changelog',
     templateUrl: 'client/info/changelog/changelog.html',
     directives: [RouterLink]
 })

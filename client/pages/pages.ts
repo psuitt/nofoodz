@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/28/2015.
  */
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, AfterViewInit} from 'angular2/core';
+import {Component, AfterViewInit} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route} from 'angular2/router';
@@ -23,9 +21,6 @@ declare var jQuery:any;
 
 @Component({
     selector: 'pages',
-})
-
-@View({
     templateUrl: 'client/pages/pages.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES]
 })

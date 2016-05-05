@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 2/20/2016.
  */
-/// <reference path="../../typings/angular2/angular2.d.ts" />
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-import {Component, View, OnInit} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouteParams, Router} from 'angular2/router';
 import {MeteorComponent} from 'angular2-meteor';
 
@@ -12,13 +10,11 @@ declare var Meteor:any;
 declare var Accounts:any;
 
 @Component({
-    selector: 'verifyemail'
-})
-
-@View({
+    selector: 'verifyemail',
     templateUrl: 'client/verify-email/verify-email.html',
     directives: []
 })
+
 export class VerifyEmail extends MeteorComponent implements OnInit {
 
     token:String;

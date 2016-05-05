@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, OnDestroy} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
@@ -13,10 +11,7 @@ declare var Client:any;
 declare var jQuery:any;
 
 @Component({
-    selector: 'wsie'
-})
-
-@View({
+    selector: 'wsie',
     templateUrl: 'client/wsie/wsie.html',
     directives: [Wsie, RouterLink]
 })

@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, OnDestroy} from 'angular2/core';
+import {Component, OnDestroy} from 'angular2/core';
 
 import {NgFor} from 'angular2/common';
 
@@ -15,10 +13,7 @@ declare var jQuery:any;
 declare var _:any;
 
 @Component({
-    selector: 'home'
-})
-
-@View({
+    selector: 'home',
     templateUrl: 'client/home/home.html',
     directives: [NgFor, RouterLink, RouterOutlet]
 })

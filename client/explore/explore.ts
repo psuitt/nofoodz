@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/23/2015.
  */
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, OnInit} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 
 import {RouterLink} from 'angular2/router';
 
@@ -14,10 +12,7 @@ declare var NoFoodz:any;
 declare var Meteor:any;
 
 @Component({
-    selector: 'home'
-})
-
-@View({
+    selector: 'home',
     templateUrl: 'client/explore/explore.html',
     directives: [Explore, RouterLink]
 })

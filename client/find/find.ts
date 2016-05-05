@@ -1,10 +1,6 @@
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, AfterViewInit} from 'angular2/core';
+import {Component, AfterViewInit} from 'angular2/core';
 
 import {RouterLink, RouteParams} from 'angular2/router';
-
-import {bootstrap} from 'angular2-meteor';
 
 declare var jQuery:any;
 declare var _:any;
@@ -12,10 +8,7 @@ declare var Client:any;
 declare var Meteor:any;
 
 @Component({
-    selector: 'find'
-})
-
-@View({
+    selector: 'find',
     templateUrl: '/client/find/find.html',
     directives: [RouterLink]
 })

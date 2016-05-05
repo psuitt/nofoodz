@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/30/2015.
  */
-/// <reference path="../../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View, Directive, HostListener, OnInit} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 
 import {NgFor} from 'angular2/common';
 
@@ -17,13 +15,11 @@ declare var _:any;
 declare var Meteor:any;
 
 @Component({
-    selector: 'reported'
-})
-
-@View({
+    selector: 'reported',
     templateUrl: 'client/admin/reported/reported.html',
     directives: [Reported, RouterLink, ROUTER_DIRECTIVES, NgFor]
 })
+
 export class Reported extends MeteorComponent implements OnInit {
 
     screenData:any;

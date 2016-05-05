@@ -1,9 +1,7 @@
 /**
  * Created by Sora on 11/28/2015.
  */
-/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
-
-import {Component, View} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES, RouteConfig, Route} from 'angular2/router';
@@ -19,9 +17,6 @@ import {People} from "./people/people";
 
 @Component({
     selector: 'users',
-})
-
-@View({
     template: '<router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, MyFoods]
 })
