@@ -56,7 +56,8 @@ Meteor.methods({
 
         check(options, {
             'tags': TagsArrayCheck,
-            'type': TypeCheck
+            'type': TypeCheck,
+            'city': Match.Optional(NonEmptyStringNoSpecialCharacters)
         });
 
         if (options.tags.length < 1)
@@ -75,7 +76,8 @@ Meteor.methods({
                 brand_id: 1,
                 brand_view: 1,
                 ratingtotal_calc: 1,
-                ratingcount_calc: 1
+                ratingcount_calc: 1,
+                daysofweek: 1
             },
             sort: {
                 brand_view: 1,

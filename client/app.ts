@@ -32,6 +32,7 @@ import {InfoPage} from "./info/info";
 import {List} from "./list";
 import {VerifyEmail} from "./verify-email/verify-email";
 import {ResetPassword} from "./reset-password/reset-password";
+import {MATERIAL_PROVIDERS} from 'ng2-material/all';
 
 declare var $:any;
 declare var jQuery:any;
@@ -443,4 +444,4 @@ class MainLayout extends MeteorComponent implements CanReuse, AfterViewInit {
 
 //enableProdMode();
 
-bootstrap(MainLayout, [ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);
+bootstrap(MainLayout, [MATERIAL_PROVIDERS, ROUTER_PROVIDERS, provide(APP_BASE_HREF, {useValue: '/'}), provide(LocationStrategy, {useClass: HashLocationStrategy})]);

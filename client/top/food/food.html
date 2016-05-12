@@ -1,0 +1,7 @@
+<div class="content">
+    <h3 class="pagetitle">Top: <span class="pagetitle-subtext"> Food</span></h3>
+    <div id="food_list" *ngFor="#brand of brands">
+        <span class='name brand-color myfoods'><a
+                [routerLink]="['/Pages/Brand', {_id: brand._id}]">{{brand.name}}</a></span>
+    </div>
+</div>

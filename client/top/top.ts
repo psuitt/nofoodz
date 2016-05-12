@@ -13,6 +13,7 @@ import {
 } from 'angular2/router';
 
 import {Gaming} from "./gaming/gaming";
+import {Food} from "./food/food";
 
 @Component({
     selector: 'top',
@@ -21,7 +22,8 @@ import {Gaming} from "./gaming/gaming";
 })
 
 @RouteConfig([
-    {path: '/gaming', component: Gaming, as: 'Gaming'}
+    {path: '/gaming', component: Gaming, as: 'Gaming'},
+    {path: '/food', component: Food, as: 'Food'}
 ])
 
 export class TopPage implements CanReuse {
