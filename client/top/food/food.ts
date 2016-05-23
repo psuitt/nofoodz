@@ -25,27 +25,25 @@ declare var Meteor:any;
 
 export class Food extends MeteorComponent implements AfterViewInit {
 
+    title:string;
     screenData:any;
     brands:any;
 
     constructor(private router:Router, params:RouteParams) {
         super();
         this.screenData = Client.NoFoodz.lib.getParameters(true);
+        this.init();
+    }
 
+    init() {
+        if (this.screenData.title) {
+            this.title = Client.NoFoodz.format.camelCase(this.screenData.title);
+        }
     }
 
     ngAfterViewInit() {
-
-        this.screenData.title && jQuery('span.pagetitle-subtext').text(Client.NoFoodz.format.camelCase(this.screenData.title));
+        
         this.loadItems(this.screenData);
-
-    }
-
-    setup() {
-
-    }
-
-    loadListeners() {
 
     }
 
@@ -64,6 +62,10 @@ export class Food extends MeteorComponent implements AfterViewInit {
             });
         });
 
+    }
+
+    filterResults(filter) {
+        
     }
 
 }
